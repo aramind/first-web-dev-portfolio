@@ -190,10 +190,10 @@
 
   .nav__link--lrg-scr:hover, .nav__link--lrg-scr:active{
     background: var(--medium-blue);
-    color: #fff;
+    color: var(--hightlighted-text);
     cursor: pointer;
-    padding: 0.7rem 1.7rem;
-    font-size: 1.2rem;
+    /* padding: 0.7rem 1.7rem; */
+    /* font-size: 1.2rem; */
     transition: 0.5s;
   }
   .checkbtn{
@@ -295,7 +295,8 @@
   /* font-size: 1.1rem; */
   /* padding: 0.8rem auto; */
   background: var(--dark-blue);
-  color: var(--font-primary);
+  color: var(--hightlighted-text);
+  transition: 0.2s;
 }
 
 .hero__image-container{
@@ -411,9 +412,12 @@
   font-weight: lighter;
 }
 
-.card__description--note{
+/* .card__description--note{
   font-style: italic;
   font-weight: lighter;
-}
+} */
 
+.card__footer-item:hover, .card__footer-item:active{
+  color: var(--hightlighted-text);
+}
 
