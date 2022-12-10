@@ -202,6 +202,16 @@
 
 /* HOME / HERO SECTION */
 .hero{
+  /* border: 1px dashed red; */
+  display: grid;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.hero__main{
+  /* border: 2px solid green; */
   /* border-top: 1px solid var(--font-primary); */
   font-family: 'Nunito', 'Roboto';
   background: var(--medium-blue);
@@ -287,4 +297,17 @@
   background: var(--dark-blue);
   color: var(--font-primary);
 }
+
+.hero__image{
+  /* border: 2px solid green; */
+}
+.hero__image-container{
+  width: 100%;
+}
+
+.image--fit-for-sml-scr{
+  width: 100%;
+  height: auto;
+}
+
 /* END OF HOME / HERO SECTION */
