@@ -342,6 +342,7 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
+  gap: 1.5rem;
 }
 
 .card{
@@ -364,6 +365,7 @@
 }
 
 .card__image{
+  /* filter: grayscale(100); */
   border-radius: 1rem 1rem 0 0;
   display: block;
 }
@@ -388,7 +390,7 @@
   font-size: 1.2rem;
   font-family: 'Roboto';
   font-weight: bold;
-  color: white;
+  /* color: white; */
 }
 
 .card__description{
@@ -420,4 +422,26 @@
 .card__footer-item:hover, .card__footer-item:active{
   color: var(--hightlighted-text);
 }
+
+/* .card__main--even{
+  border: 1px solid red;
+  background: var(--font-primary);
+  color: var(--medium-blue);
+
+}
+
+.card__footer--even{
+  background: var(--font-primary);
+}
+
+.card__footer--even > a{
+  color: var(--medium-blue)
+} */
+
+.even{
+  background-color: var(--font-primary);
+  color: var(--medium-blue);
+}
+
+
 
