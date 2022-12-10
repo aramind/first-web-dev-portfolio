@@ -189,8 +189,10 @@
   .nav__link--lrg-scr:hover, .nav__link--lrg-scr:active{
     background: var(--medium-blue);
     color: #fff;
-    transition: 1s;
     cursor: pointer;
+    padding: 0.7rem 1.7rem;
+    font-size: 1.2rem;
+    transition: 0.5s;
   }
   .checkbtn{
     display: none;
