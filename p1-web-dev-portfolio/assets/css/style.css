@@ -443,5 +443,8 @@
   color: var(--medium-blue);
 }
 
-
+.card__image:hover{
+  filter:brightness(120%);
+  transition: 0.5s;
+}
 
