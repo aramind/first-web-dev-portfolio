@@ -17,6 +17,9 @@
 }
 
  /* html elements */
+ img{
+  display: block;
+ }
  a{
   color: var(--font-primary);
  }
@@ -29,6 +32,7 @@
   font-family:'Nunito','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--font-primary);
   min-width: 350px;
+  align-items: center;
  }
 
  /* ids */
@@ -300,6 +304,7 @@
 }
 
 .hero__image-container{
+  /* border: 1px solid red; */
   width: 100%;
 }
 
@@ -310,14 +315,18 @@
 /* END OF HOME / HERO SECTION */
 
 /* START OF PROJECTS SECTION */
-.section--dark{
-  background-color: var(--dark-blue);
-  padding: 1rem 1rem;
+.section{
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
+  padding: 1rem 0;
+}
+
+.section--dark{
+  background-color: var(--dark-blue);
+  padding: 1rem 1rem;
 }
 
 .section__header{
@@ -327,13 +336,19 @@
   align-items: center;
   gap: 0.1rem;
   margin: 0.5rem auto;
+  font-size: 1.5rem;
+  font-family: 'Roboto';
+  color: var(--hightlighted-text);
 }
 
 .section__main-header{
   font-size: 1.5rem;
   font-weight: bold;
-  font-family: 'Roboto';
-  color: var(--hightlighted-text);
+}
+
+.section__sub-header{
+  font-size: 1.2rem;
+  color: var(--font-primary);
 }
 
 .cards__container{
@@ -423,21 +438,6 @@
   color: var(--hightlighted-text);
 }
 
-/* .card__main--even{
-  border: 1px solid red;
-  background: var(--font-primary);
-  color: var(--medium-blue);
-
-}
-
-.card__footer--even{
-  background: var(--font-primary);
-}
-
-.card__footer--even > a{
-  color: var(--medium-blue)
-} */
-
 .even{
   background-color: var(--font-primary);
   color: var(--medium-blue);
@@ -447,4 +447,26 @@
   filter:brightness(120%);
   transition: 0.5s;
 }
+/* END OF PROJECTS SECTION */
 
+/* Start of About Me Section */
+.section--medium{
+  background: var(--medium-blue);
+}
+
+.section__main{
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.section__header--xl{
+  font-size: 2rem;
+  font-weight: bold;
+}
