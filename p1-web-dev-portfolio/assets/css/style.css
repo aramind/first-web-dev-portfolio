@@ -1,0 +1,198 @@
+/* reset */
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* variables for easy reuse*/
+:root{
+  /* colors */
+  --dark-blue: #051923;
+  --medium-blue: #25354C;
+  --font-primary: #d6d0d0;
+}
+
+ /* html elements */
+ a{
+  color: var(--font-primary);
+ }
+
+ a:hover{
+  cursor: pointer;
+ }
+
+ body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--font-primary);
+ }
+
+ /* ids */
+ #logo-primary-text{
+  font-size: 2.4rem;
+  line-height: 0.9;
+ }
+
+ #logo-secondary-text{
+  opacity: 0.8;
+  font-size: 0.8rem;
+  line-height: 0.9;
+  padding-left: 1rem;
+}
+
+/* block */
+.nav{
+  /* border: 1px solid red; */
+  background: var(--dark-blue);
+  height: 80px;
+  width: 100%;
+}
+
+.nav__logo--sml-scr{
+  /* border: 1px solid red; */
+  display: inline-flex;
+  flex-flow: column nowrap;
+  padding: 1rem;
+}
+
+/* block__element */
+
+/* modifiers */
+
+
+/* PARTS OF MY PAGE */
+/* Header */
+
+/* |navbar for small screen only| */
+.nav__link--sml-scr{
+  font-size: 16px;
+}
+
+.ckeckbtn{
+  /* border: 1px solid red; */
+  /* display: inline-block; */
+  margin: 1rem 2rem 0 0;
+  font-size: 2rem;
+  float: right;
+  cursor: pointer;
+}
+
+.nav__links--sml-scr{
+  /* border: 1px solid purple; */
+  border-top: 1px solid var(--medium-blue);
+  position: fixed;
+  width: 100%;
+  background: var(--dark-blue);
+  top: 80px;
+  left: -100%;
+  text-align: center;
+  width: 100%;
+  transition: all .5s;
+}
+
+.nav__link-item--sml-scr{
+  /* border: 1px solid brown; */
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid var(--medium-blue);
+}
+
+.nav__link--sml-scr{
+  color: var(--font-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1rem;
+  font-size: 1.2rem;
+  width: 100%;
+  height: 2.4rem;
+  vertical-align: middle;
+}
+
+.nav__link--sml-scr:hover, .nav__link--sml-scr:active{
+  background: var(--medium-blue);
+  font-weight: bold;
+  color: #fff;
+  transition: 0.2s;
+}
+
+#check{
+  display: none;
+}
+
+#check:checked ~ ul{
+  left: 0;
+  top: 80px;
+}
+
+.nav__link--lrg-scr{
+  display: none;
+}
+
+.checkbtn{
+  float: right;
+  font-size: 2rem;
+  margin: 1rem 2rem 0 0;
+}
+
+  /* for large screens */
+@media screen and (min-width:1024px) {
+  body{
+    /* border: 1px solid red; */
+    min-height: 100vh;
+  }
+
+  .nav--lrg-scr{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* q for reviewer: is it better to display:none or set left or right to negative values if ang goal is hindi sya masasali sa page. Thanks :) */
+  .nav__links--sml-scr{
+    display: none;
+  }
+
+  .nav__links--lrg-scr{
+    border: 1px solic yellow;
+    margin: 0 20px 0 0;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav__link-item--lrg-scr{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 5px; */
+  }
+
+  .nav__link--lrg-scr{
+    /* border: 1px solid red; */
+    color: var(--font-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+
+  .nav__link--lrg-scr:hover, .nav__link--lrg-scr:active{
+    background: var(--medium-blue);
+    color: #fff;
+    transition: 1s;
+    cursor: pointer;
+  }
+  .checkbtn{
+    display: none;
+  }
+}
