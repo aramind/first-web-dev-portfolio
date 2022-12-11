@@ -485,3 +485,24 @@
   font-size: 2rem;
   font-weight: bold;
 }
+
+/* Start of Credentials */
+
+.li__subtitle{
+  font-size: 0.8rem;
+  line-height: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.credential__link{
+  margin-inline: 0.1rem;
+}
+
+.credential__link:hover{
+  color: var(--hightlighted-text);
+}
+
+.fa-star{
+  color: gold;
+}
+/* End of Credentials */
