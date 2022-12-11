@@ -33,6 +33,7 @@
   color: var(--font-primary);
   min-width: 350px;
   align-items: center;
+  background-color: var(--dark-blue);
  }
 
  /* ids */
@@ -162,7 +163,7 @@
   }
 
   .nav__links--lrg-scr{
-    border: 1px solic yellow;
+    /* border: 1px solic yellow; */
     margin: 0 20px 0 0;
     height: 100%;
     display: flex;
@@ -198,7 +199,7 @@
     cursor: pointer;
     /* padding: 0.7rem 1.7rem; */
     /* font-size: 1.2rem; */
-    transition: 0.5s;
+    transition: 0.3s;
   }
   .checkbtn{
     display: none;
@@ -219,7 +220,7 @@
   /* border: 2px solid green; */
   /* border-top: 1px solid var(--font-primary); */
   font-family: 'Nunito', 'Roboto';
-  background: var(--medium-blue);
+  /* background: var(--medium-blue); */
   width: 100%;
   
   display: flex;
@@ -228,6 +229,7 @@
   align-items: flex-start;
 
   padding: 2rem 10%;
+  border-top: 2px solid var(--medium-blue);
 }
 
 .hero__greeting{
@@ -276,10 +278,11 @@
   max-width: 400px;
   padding: 0.5rem;
   font-family: 'Nunito', 'Roboto';
-  color: var(--dark-blue);
+  /* color: var(--font-primary); */
   font-size: 0.9rem;     
-  font-weight: bold;
-  background: var(--font-primary);
+  /* font-weight: bold; */
+  background: var(--medium-blue);
+  /* border: 1px solid var(--font-primary); */
 
   text-align: center;
   border-radius: 0.5rem;
@@ -298,14 +301,24 @@
 .btn-link:hover, .btn-link:active{
   /* font-size: 1.1rem; */
   /* padding: 0.8rem auto; */
-  background: var(--dark-blue);
-  color: var(--hightlighted-text);
+  /* background: var(--medium-blue); */
+  /* color: var(--hightlighted-text); */
+  font-weight: bold;
+  background: #004e7a;
+  /* color: var(--dark-blue); */
   transition: 0.2s;
 }
 
+.hero__image{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: white;
+}
 .hero__image-container{
   /* border: 1px solid red; */
   width: 100%;
+  max-width: 600px;
 }
 
 .image--fit-for-sml-scr{
@@ -316,12 +329,14 @@
 
 /* START OF PROJECTS SECTION */
 .section{
+  /* border: 1px solid yellow; */
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
   padding: 1rem 0;
+  border-bottom: 2px solid var(--medium-blue);
 }
 
 .section--dark{
@@ -451,7 +466,7 @@
 
 /* Start of About Me Section */
 .section--medium{
-  background: var(--medium-blue);
+  /* background: var(--medium-blue); */
 }
 
 .section__main{
