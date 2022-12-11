@@ -28,6 +28,14 @@
   cursor: pointer;
  }
 
+ s{
+  font-size: 0.7rem;
+  padding: 0;
+  margin: 0;
+  line-height: 0.5rem;
+  color: var(--font-primary);
+ }
+
  body{
   font-family:'Nunito','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--font-primary);
@@ -465,9 +473,6 @@
 /* END OF PROJECTS SECTION */
 
 /* Start of About Me Section */
-.section--medium{
-  /* background: var(--medium-blue); */
-}
 
 .section__main{
   width: 90%;
@@ -486,6 +491,81 @@
   font-weight: bold;
 }
 
+/* Start of Tech Stack */
+
+.section__main--tech-stack{
+  /* border: 1px dashed yellow; */
+}
+
+.tech-stack__image-cont{
+  width: 10px;
+  height: 10px;
+}
+
+.tech-stack{
+  /* border: 1px solid var(--medium-blue); */
+  /* padding: 1rem; */
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.list-item{
+  width: 100%;
+}
+.list-item--tech-stack{
+  /* background: yellowgreen; */
+  width: 100%;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tech-stack__item{
+  /* background: #004e7a; */
+  display: flex;
+  gap: 0;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: start;
+}
+.tech-stack__items{
+  /* background-color: pink; */
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem 0 0.5rem 0;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  /* border-bottom: 5px double var(--medium-blue); */
+}
+
+.list-item-title{
+  font-size: 1.1rem;
+  /* font-weight: bold; */
+  padding: 0.3rem;
+  min-width: 100%;
+  /* background: var(--medium-blue); */
+  border-top: 3px dotted var(--medium-blue);
+  border-bottom: 3px dotted var(--medium-blue);
+  /* text-align: left; */
+  text-transform: uppercase;
+}
+
+#react-icon{
+  width: 48px;
+  height: auto;
+  padding-bottom: 1.7px;
+}
+/* End of Tech Stack */
 /* Start of Credentials */
 
 .li__subtitle{
