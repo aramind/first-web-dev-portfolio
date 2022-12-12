@@ -259,9 +259,9 @@
   width:100%;
   /* background-color: yellow; */
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: start;
 
   gap: 1rem
 }
@@ -862,6 +862,28 @@
     height: 81px;
     z-index: 10;
     border-bottom: 2px solid var(--medium-blue);
+  }
+  
+  .hero__greeting-text--small{
+    font-size: 4rem;
+  }
+  
+  .hero__greeting-text--large{
+    font-size: 5rem;
+  }
+
+  .hero__sub-greeting{
+    /* background: white; */
+    font-size: 1rem;
+  }
+
+  .hero__content-main-text{
+    font-size: larger;
+  }
+
+  .btn-link{
+    max-width: 100%;
+    font-size: 1rem; 
   }
 }
 
