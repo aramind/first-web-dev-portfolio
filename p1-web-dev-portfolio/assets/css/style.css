@@ -81,11 +81,23 @@
 
 /* PARTS OF MY PAGE */
 /* Header */
+.header{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  height: 80px;
+}
 
+.blank-space{
+  /* border: 1px solid red; */
+  background: white;
+  height: 80px;
+}
 /* |navbar for small screen only| */
 .nav__link--sml-scr{
   font-size: 16px;
 }
+
 
 .ckeckbtn{
   /* border: 1px solid red; */
@@ -156,68 +168,6 @@
   float: right;
   font-size: 2rem;
   margin: 1rem 2rem 0 0;
-}
-
-  /* for large screens */
-@media screen and (min-width:1024px) {
-  body{
-    /* border: 1px solid red; */
-    min-height: 100vh;
-  }
-
-  .nav--lrg-scr{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  /* q for reviewer: is it better to display:none or set left or right to negative values if ang goal is hindi sya masasali sa page. Thanks :) */
-  .nav__links--sml-scr{
-    display: none;
-  }
-
-  .nav__links--lrg-scr{
-    /* border: 1px solic yellow; */
-    margin: 0 20px 0 0;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .nav__link-item--lrg-scr{
-    /* border: 1px solid red; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border-radius: 5px; */
-  }
-
-  .nav__link--lrg-scr{
-    /* border: 1px solid red; */
-    color: var(--font-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1.5rem;
-    font-size: 1.1rem;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-  }
-
-  .nav__link--lrg-scr:hover, .nav__link--lrg-scr:active{
-    background: var(--medium-blue);
-    color: var(--hightlighted-text);
-    cursor: pointer;
-    /* padding: 0.7rem 1.7rem; */
-    /* font-size: 1.2rem; */
-    transition: 0.3s;
-  }
-  .checkbtn{
-    display: none;
-  }
 }
 
 /* HOME / HERO SECTION */
@@ -350,7 +300,7 @@
   justify-content: flex-start;
   gap: 1rem;
   padding: 1rem 0;
-  border-bottom: 2px solid var(--medium-blue);
+  border-top: 2px solid var(--medium-blue);
 }
 
 .section--dark{
@@ -753,10 +703,13 @@
 }
 /* End for Socials */
 /* Start for footer */
-.footer{
+.main-footer{
+  height: 80px;
   margin-top: 0.5rem;
+  border-top: 1px solid var(--medium-blue);
+  z-index: 10;
 }
-.footer__links{
+.main-footer__links{
   /* background: yellow; */
   display: flex;
   flex-flow: row wrap;
@@ -768,14 +721,14 @@
   border-top: 1px solid var(--medium-blue); */
 }
 
-.footer__link-item{
+.main-footer__link-item{
   font-size: 1rem;
   padding: 0.2rem 0.4rem;
   border-radius: 0.4rem;
   /* line-height: 0.7rem; */
 }
 
-.footer__link-item:hover{
+.main-footer__link-item:hover{
   background-color: var(--medium-blue);
   color: var(--hightlighted-text);
 }
@@ -787,11 +740,11 @@
   right: 1rem;
 }
 
-.footer__link-item>a:hover{
+.main-footer__link-item>a:hover{
   color: var(--hightlighted-text);
 }
 
-.footer__copyright{
+.main-footer__copyright{
   /* display: block; */
   /* background-color: yellow; */
   width: 100%;
@@ -804,3 +757,111 @@
   padding: 1rem;
   /* border-top: 1px solid var(--medium-blue); */
 }
+
+.section--even{
+  background-image: linear-gradient(to bottom, var(--medium-blue), var(--dark-blue));
+}
+
+.section--odd{
+  background-image: linear-gradient(to bottom, var(--dark-blue), var(--medium-blue));
+}
+/* MEDIA QUERIES */
+
+/* FOR LAPTOP SCREENS(769px to 1024px) */
+@media screen and (min-width:769px) {
+  body{
+    /* border: 1px solid red; */
+    min-height: 100vh;
+  }
+
+  .nav--lrg-scr{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* q for reviewer: is it better to display:none or set left or right to negative values if ang goal is hindi sya masasali sa page. Thanks :) */
+  .nav__links--sml-scr{
+    display: none;
+  }
+
+  .nav__links--lrg-scr{
+    /* border: 1px solic yellow; */
+    margin: 0 20px 0 0;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav__link-item--lrg-scr{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 5px; */
+  }
+
+  .nav__link--lrg-scr{
+    /* border: 1px solid red; */
+    color: var(--font-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+
+  .nav__link--lrg-scr:hover, .nav__link--lrg-scr:active{
+    background: var(--medium-blue);
+    color: var(--hightlighted-text);
+    cursor: pointer;
+    /* padding: 0.7rem 1.7rem; */
+    /* font-size: 1.2rem; */
+    transition: 0.3s;
+  }
+  .checkbtn{
+    display: none;
+  }
+
+  /* MAIN */
+  .main-left{
+    position: fixed;
+    width: 40vw;
+  }
+
+  .main-right{
+    width: calc(100% - 40vw);
+    /* border-left: 1px solid var(--medium-blue); */
+    z-index: 2;
+  }
+  .main-right-container{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hero__main{
+    border-top: none;
+    /* border-right: 1px solid var(--medium-blue); */
+    height: calc(100vh - 80px);
+  }
+
+  .header{
+    height: 81px;
+    z-index: 10;
+    border-bottom: 2px solid var(--medium-blue);
+  }
+}
+
+
+
+/* FOR LAPTOP SCREENS(1024px and up) */
+/* @media screen and (min-width:1024px){
+  main{
+    max-width: 1024px;
+  }
+} */
