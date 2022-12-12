@@ -708,3 +708,43 @@
   background-color: var(--light-gold);
 }
 /* End for Contact Me */
+/* Start for Socials */
+.socials__container{
+  /* background: yellow; */
+  width: 90%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2rem;
+}
+
+.icon--large{
+  display: block;
+  font-size: 5rem;
+  color: var(--light-blue);
+}
+.social__link{
+  /* border: 1px solid red; */
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.fa-square-gitlab{
+  color: rgb(202, 65, 15);
+}
+
+.fa-linkedin{
+  color: rgb(34, 34, 221);
+}
+
+.fa-square-rss{
+  color: rgb(129, 70, 129);
+}
+.icon--large:hover{
+  color: var(--hightlighted-text);
+}
+/* End for Socials */
