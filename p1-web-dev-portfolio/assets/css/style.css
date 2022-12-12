@@ -773,6 +773,10 @@
 .section--odd{
   background-image: linear-gradient(to bottom, var(--dark-blue), var(--medium-blue));
 }
+
+.section--odd-even{
+  background-image: linear-gradient(to bottom, var(--dark-blue), var(--medium-blue), var(--dark-blue));
+}
 /* MEDIA QUERIES */
 
 /* FOR LAPTOP SCREENS(769px to 1024px) */
@@ -884,6 +888,11 @@
   .btn-link{
     max-width: 100%;
     font-size: 1rem; 
+  }
+
+  .cont-for-qualifications{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
