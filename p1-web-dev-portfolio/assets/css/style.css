@@ -744,7 +744,59 @@
 .fa-square-rss{
   color: rgb(129, 70, 129);
 }
-.icon--large:hover{
+.icon--large:hover, .home__icon--fixed:hover{
   color: var(--hightlighted-text);
 }
 /* End for Socials */
+/* Start for footer */
+.footer{
+  margin-top: 0.5rem;
+}
+.footer__links{
+  /* background: yellow; */
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: flex-start;
+  gap: 5px;
+  /* border-bottom: 1px solid var(--medium-blue);
+  border-top: 1px solid var(--medium-blue); */
+}
+
+.footer__link-item{
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.4rem;
+  /* line-height: 0.7rem; */
+}
+
+.footer__link-item:hover{
+  background-color: var(--medium-blue);
+  color: var(--hightlighted-text);
+}
+/* End for footer */
+/* fixed elements */
+.home__icon--fixed{
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.footer__link-item>a:hover{
+  color: var(--hightlighted-text);
+}
+
+.footer__copyright{
+  /* display: block; */
+  /* background-color: yellow; */
+  width: 100%;
+  text-align: center;
+  /* color: red; */
+  padding: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  /* border-top: 1px solid var(--medium-blue); */
+}
