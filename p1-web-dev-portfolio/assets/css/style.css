@@ -800,8 +800,40 @@
   color: var(--hightlighted-text);
 }
 /* MEDIA QUERIES */
+/* FOR TABLET SCREENS (481px to 768px) */
+@media screen and (min-width:500px) {
+  .cont-for-qualifications{
+    display: grid;
+    grid-template-columns: 1fr 1fr;;
+    align-items: flex-start;
+    padding-inline: 1rem;
+  }
+  
+  .list-item--tech-stack{
+    align-items: flex-end;
+  }
 
-/* FOR LAPTOP SCREENS(769px to 1024px) */
+  .tech-stack__items{
+    /* background-color: red; */
+    justify-content: flex-start;
+    gap: 2.5rem;
+  }
+
+  .cert-lists{
+    /* background-color: yellow; */
+    margin: 2rem 0;
+    text-align: left;
+    /* text-align: right; */
+  }
+
+  .list-item-title{
+    text-align: start;
+    font-size: 1.3rem;
+    /* font-weight: bold; */
+  }
+
+}
+/* FOR LAPTOP SCREENS(769px and above) */
 @media screen and (min-width:769px) {
   body{
     /* border: 1px solid red; */
@@ -865,11 +897,11 @@
   /* MAIN */
   .main-left{
     position: fixed;
-    width: 40vw;
+    width: 35vw;
   }
 
   .main-right{
-    width: calc(100% - 40vw);
+    width: calc(100% - 35vw);
     /* border-left: 1px solid var(--medium-blue); */
     z-index: 2;
   }
@@ -912,22 +944,6 @@
     font-size: 1rem; 
   }
 
-  .cont-for-qualifications{
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;;
-    align-items: flex-start;
-    padding-inline: 1rem;
-  }
-  
-  .list-item--tech-stack{
-    align-items: flex-end;
-  }
-
-  .tech-stack__items{
-    /* background-color: red; */
-    justify-content: flex-start;
-  }
-
   .section__header{
     font-size: 2.1rem;
   }
@@ -936,17 +952,11 @@
     font-size: 2rem;
   }
 
-  .list-item-title{
-    text-align: start;
-    font-size: 1.3rem;
-    /* font-weight: bold; */
-  }
-
   s{
     font-size: 1rem;
   }
 
-  .tech-stack__item img, #react-icon{
+  .tech-stack__item img{
     width: 60px;
     height: auto;
   }
@@ -971,13 +981,6 @@
   color: gold;  
   }
 
-  .cert-lists{
-    /* background-color: yellow; */
-    margin: 2rem 0;
-    text-align: left;
-    /* text-align: right; */
-  }
-
   .div-for-about-me-contents{
     /* background: red; */
     display: flex;
@@ -998,15 +1001,3 @@
 /* End of Credentials */
 
 }
-
-
-#about-me .section__main{
-  margin-inline: auto;
-  max-width: 800px;
-}
-/* FOR LAPTOP SCREENS(1024px and up) */
-/* @media screen and (min-width:1024px){
-  main{
-    max-width: 1024px;
-  }
-} */
