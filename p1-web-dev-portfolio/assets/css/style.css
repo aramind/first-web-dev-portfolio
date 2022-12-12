@@ -998,6 +998,8 @@
     bottom: 2rem;
     right: 2rem;
   }
-/* End of Credentials */
+}
 
+html {
+  scroll-behavior: smooth;
 }
