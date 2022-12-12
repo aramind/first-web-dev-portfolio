@@ -245,8 +245,10 @@
   /* color: var(--font-primary); */
   font-size: 0.9rem;     
   /* font-weight: bold; */
-  background: var(--medium-blue);
+  /* background: var(--medium-blue); */
+  background-image: linear-gradient(to top, var(--light-blue), var(--medium-blue));
   /* border: 1px solid var(--font-primary); */
+  box-shadow: -1px 2px 8px 1px var(--dark-blue);
 
   text-align: center;
   border-radius: 0.5rem;
@@ -268,9 +270,12 @@
   /* background: var(--medium-blue); */
   /* color: var(--hightlighted-text); */
   font-weight: bold;
-  background: var(--light-blue);
+  /* background: var(--dark-blue); */
+  /* background-image: linear-gradient(to top, var(--medium-blue), var(--dark-blue)); */
+  color: var(--hightlighted-text);
+  box-shadow: -1px 3px 5px -2px var(--hightlighted-text);
   /* color: var(--dark-blue); */
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .hero__image{
