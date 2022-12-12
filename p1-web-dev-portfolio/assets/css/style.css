@@ -697,4 +697,14 @@
   color: var(--hightlighted-text);
   font-weight: bold;
 }
+
+.form__button:hover{
+  color: var(--dark-blue);
+  background: var(--hightlighted-text);
+  box-shadow: -2px 4px 12px -2px var(--dark-blue);
+}
+
+.form__input:focus{
+  background-color: var(--light-gold);
+}
 /* End for Contact Me */
