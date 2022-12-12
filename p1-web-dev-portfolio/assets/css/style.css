@@ -629,4 +629,9 @@
   place-self: center right;
   color: var(--hightlighted-text);
 }
+
+.contact__detail:hover{
+  color: var(--hightlighted-text);
+  cursor: pointer;
+}
 /* End for Contact Me */
