@@ -96,6 +96,10 @@
   cursor: pointer;
 }
 
+/* enable this to fixed the nav show/unshow */
+/* .fa-bars{
+  position: fixed;
+} */
 .nav__links--sml-scr{
   /* border: 1px solid purple; */
   border-top: 1px solid var(--medium-blue);
@@ -379,9 +383,9 @@
 .cards__container{
   width: 90%;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
+  flex-flow: row wrap;
   align-items: center;
+  justify-content: center;
   gap: 1.5rem;
 }
 
