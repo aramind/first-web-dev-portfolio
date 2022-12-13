@@ -740,6 +740,11 @@
   right: 1rem;
 }
 
+.hidden{
+  position: fixed;
+  left: -1000px;
+}
+
 /* different bg effects for diff sections */
 .section--even{
   background-image: linear-gradient(to bottom, var(--medium-blue), var(--dark-blue));
