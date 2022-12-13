@@ -21,7 +21,7 @@
  /* html elements */
  img{
   display: block;
- }
+}
  a{
   color: var(--font-primary);
  }
@@ -46,20 +46,19 @@
   background-color: var(--dark-blue);
  }
 
- /* ids */
- #logo-primary-text{
+/* ids */
+#logo-primary-text{
   font-size: 2.4rem;
   line-height: 0.9;
- }
+}
 
- #logo-secondary-text{
+#logo-secondary-text{
   opacity: 0.8;
   font-size: 0.8rem;
   line-height: 0.9;
   padding-left: 1rem;
 }
 
-/* block */
 .nav{
   /* border: 1px solid red; */
   background: var(--dark-blue);
@@ -74,12 +73,7 @@
   padding: 1rem;
 }
 
-/* block__element */
-
-/* modifiers */
-
-
-/* PARTS OF MY PAGE */
+/* Main */
 /* Header */
 .header{
   width: 100%;
@@ -93,11 +87,11 @@
   background: white;
   height: 80px;
 }
+
 /* |navbar for small screen only| */
 .nav__link--sml-scr{
   font-size: 16px;
 }
-
 
 .ckeckbtn{
   /* border: 1px solid red; */
@@ -108,10 +102,11 @@
   cursor: pointer;
 }
 
-/* enable this to fixed the nav show/unshow */
+/* enable this to fixed the nav show/unshow icon */
 /* .fa-bars{
   position: fixed;
 } */
+
 .nav__links--sml-scr{
   /* border: 1px solid purple; */
   border-top: 1px solid var(--medium-blue);
@@ -170,7 +165,7 @@
   margin: 1rem 2rem 0 0;
 }
 
-/* HOME / HERO SECTION */
+/* Start for Home - Hero Section */
 .hero{
   /* border: 1px dashed red; */
   display: grid;
@@ -186,12 +181,10 @@
   font-family: 'Nunito', 'Roboto';
   /* background: var(--medium-blue); */
   width: 100%;
-  
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: flex-start;
-
   padding: 2rem 10%;
   border-top: 2px solid var(--medium-blue);
 }
@@ -221,7 +214,7 @@
 .hero__sub-greeting{
   /* background: white; */
   font-size: 0.7rem;
-  line-height: 0.;
+  /* line-height: 0.9; */
   margin: 0 0 1.5rem 0;
   text-align: start;
   font-style: italic;
@@ -251,10 +244,10 @@
   /* color: var(--font-primary); */
   font-size: 0.9rem;     
   /* font-weight: bold; */
-  /* background: var(--medium-blue); */
   text-align: center;
   border-radius: 0.5rem;
 }
+
 .hero__button-links{
   width:100%;
   /* background-color: yellow; */
@@ -262,21 +255,13 @@
   flex-flow: row wrap;
   align-items: flex-start;
   justify-content: start;
-
   gap: 1rem
 }
 
-.btn-link:hover, .btn-link:active, .form__button:hover{
-  /* font-size: 1.1rem; */
-  /* padding: 0.8rem auto; */
-  /* background: var(--medium-blue); */
-  /* color: var(--hightlighted-text); */
+.btn-link:hover, .btn-link:active, .form__button:hover, .form__button:active{
   font-weight: bold;
-  /* background: var(--dark-blue); */
-  /* background-image: linear-gradient(to top, var(--medium-blue), var(--dark-blue)); */
   color: var(--hightlighted-text);
   box-shadow: -1px 3px 5px -2px var(--hightlighted-text);
-  /* color: var(--dark-blue); */
   transition: 0.3s;
 }
 
@@ -296,9 +281,9 @@
   width: 100%;
   height: auto;
 }
-/* END OF HOME / HERO SECTION */
+/* End for Home - Hero Section */
 
-/* START OF PROJECTS SECTION */
+/* Start for Project Section */
 .section{
   /* border: 1px solid yellow; */
   display: flex;
@@ -348,15 +333,12 @@
 
 .card{
   /* border: 1px solid yellow; */
-  
   display: grid;
   grid-template: 120px 180px 2.5rem/auto;
   width: 90%;
   max-width: 250px;
-
   align-items: flex-start;
   justify-content: center;
-
 }
 
 .card__image-cont{
@@ -377,7 +359,6 @@
   width: 100%;
   height: 100%;  
   padding: 1rem;
-
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-evenly;
@@ -404,7 +385,6 @@
   border-radius: 0 0 1rem 1rem;
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -414,11 +394,6 @@
   font-size: 1.5rem;
   font-weight: lighter;
 }
-
-/* .card__description--note{
-  font-style: italic;
-  font-weight: lighter;
-} */
 
 .card__footer-item:hover, .card__footer-item:active{
   color: var(--hightlighted-text);
@@ -433,33 +408,27 @@
   filter:brightness(120%);
   transition: 0.5s;
 }
-/* END OF PROJECTS SECTION */
+/* End for Project Section */
 
-/* Start of About Me Section */
-
+/* Start for About Me Section */
 .section__main{
   width: 90%;
   max-width: 500px;
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;
-
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-}
-
-.section__main-img-about-me{
-  display: -100vw;
 }
 
 .section__header--xl{
   font-size: 2rem;
   font-weight: bold;
 }
+/* End for About Me Section */
 
 /* Start of Tech Stack */
-
 /* .section__main--tech-stack{
   border: 1px dashed yellow;
 } */
@@ -482,10 +451,10 @@
 .list-item{
   width: 100%;
 }
+
 .list-item--tech-stack{
   /* background: var(--light-blue); */
   width: 100%;
-
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
@@ -500,6 +469,7 @@
   align-items: center;
   justify-content: start;
 }
+
 .tech-stack__items{
   /* background-color: pink; */
   display: flex;
@@ -524,15 +494,9 @@
   /* text-align: left; */
   text-transform: uppercase;
 }
+/* Start for Tech Stack */
 
-#react-icon{
-  width: 48px;
-  height: auto;
-  padding-bottom: 1.7px;
-}
-/* End of Tech Stack */
-/* Start of Credentials */
-
+/* Start for Credentials */
 .li__subtitle{
   font-size: 0.8rem;
   line-height: 0.8rem;
@@ -550,20 +514,20 @@
 .fa-star{
   color: gold;
 }
-/* End of Credentials */
-/* Start for Contact Me */
+/* End for Credentials */
 
+/* Start for Contact Me */
 .section__main--contact-me{
   background: var(--medium-blue);
   border-radius: 1rem;
 }
+
 .form__header{
   /* border: 1px solid var(--font-primary); */
   width: 100%;
   /* background: var(--medium-blue); */
   display: flex;
   flex-flow: row wrap;
-
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
@@ -597,6 +561,7 @@
   /* justify-self: left; */
   place-self: center left;
 }
+
 .contact__icon{
   place-self: center right;
   color: var(--hightlighted-text);
@@ -612,6 +577,7 @@
   /* border: 1px solid red; */
   margin-top: -1rem;
 }
+
 .form__label{
   display: block;
   text-align: start;
@@ -628,12 +594,10 @@
   padding: 0.5rem 0.25rem; 
 }
 
-
 .form__fields{
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;
-
   margin: 1.5rem 0;
 }
 
@@ -656,24 +620,14 @@
   border: none;
   border-radius: 1rem;
   color: var(--font-primary);
-  /* box-shadow: -1px 3px 5px -2px var(--hightlighted-text);
-  color: var(--hightlighted-text);
-  background: var(--dark-blue); */
-  /* border: 0.5px solid var(--hightlighted-text); */
-  
   font-weight: bold;
 }
-
-/* .form__button:hover{
-  color: var(--dark-blue);
-  background: var(--hightlighted-text);
-  box-shadow: -2px 4px 12px -2px var(--dark-blue);
-} */
 
 .form__input:focus{
   background-color: var(--light-gold);
 }
 /* End for Contact Me */
+
 /* Start for Socials */
 .socials__container{
   /* background: yellow; */
@@ -690,6 +644,7 @@
   font-size: 5rem;
   color: var(--light-blue);
 }
+
 .social__link{
   /* border: 1px solid red; */
   display: flex;
@@ -713,8 +668,8 @@
 .icon--large:hover, .home__icon--fixed:hover{
   color: var(--hightlighted-text);
 }
-
 /* End for Socials */
+
 /* Start for footer */
 .main-footer{
   height: 80px;
@@ -722,12 +677,12 @@
   border-top: 1px solid var(--medium-blue);
   z-index: 10;
   /* border: 1px solid white; */
-
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-end;
   align-items: center;
 }
+
 .main-footer__links{
   /* background: yellow; */
   width: 100%;
@@ -758,13 +713,6 @@
   vertical-align: baseline;
   /* background-color: red; */
 }
-/* End for footer */
-/* fixed elements */
-.home__icon--fixed{
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-}
 
 .main-footer__link-item>a:hover{
   color: var(--hightlighted-text);
@@ -783,7 +731,16 @@
   padding: 1rem;
   /* border-top: 1px solid var(--medium-blue); */
 }
+/* End for footer */
 
+/* For Fixed Position Elements */
+.home__icon--fixed{
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+/* different bg effects for diff sections */
 .section--even{
   background-image: linear-gradient(to bottom, var(--medium-blue), var(--dark-blue));
 }
@@ -799,7 +756,9 @@
 .nav__logo:hover, .nav__logo--sml-scr:hover, .nav__logo--lrg-scr:hover{
   color: var(--hightlighted-text);
 }
+
 /* MEDIA QUERIES */
+
 /* FOR TABLET SCREENS (481px to 768px) */
 @media screen and (min-width:500px) {
   .cont-for-qualifications{
@@ -831,9 +790,9 @@
     font-size: 1.3rem;
     /* font-weight: bold; */
   }
-
 }
-/* FOR LAPTOP SCREENS(769px and above) */
+
+/* FOR LARGE SCREENS(769px and above) */
 @media screen and (min-width:769px) {
   body{
     /* border: 1px solid red; */
@@ -846,7 +805,7 @@
     justify-content: space-between;
   }
 
-  /* q for reviewer: is it better to display:none or set left or right to negative values if ang goal is hindi sya masasali sa page. Thanks :) */
+  /* q for reviewer: is it better to display:none or set left or right to negative values if ang goal is hindi sya masasali sa view ng page. Thanks :) */
   .nav__links--sml-scr{
     display: none;
   }
@@ -890,6 +849,7 @@
     /* font-size: 1.2rem; */
     transition: 0.3s;
   }
+
   .checkbtn{
     display: none;
   }
@@ -969,16 +929,16 @@
   /* Start of Credentials */
 
   .li__subtitle{
-  font-size: 1rem;
-  line-height: 1rem;
-  margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .list-item{
     font-size: 1.2rem;
   }
   .fa-star{
-  color: gold;  
+    color: gold;  
   }
 
   .div-for-about-me-contents{
@@ -1000,6 +960,7 @@
   }
 }
 
+/* for page scrolling */
 html {
   scroll-behavior: smooth;
 }
