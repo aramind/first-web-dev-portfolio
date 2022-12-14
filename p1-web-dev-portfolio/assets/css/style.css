@@ -30,7 +30,7 @@ a:hover{
   cursor: pointer;
  }
 
-s{
+small{
   font-size: 0.7rem;
   padding: 0;
   margin: 0;
@@ -712,7 +712,7 @@ body{
   color: var(--hightlighted-text);
 }
 
-.main-footer__copyright s{
+.main-footer__copyright small{
   font-size: 0.7rem;
   vertical-align: baseline;
   /* background-color: red; */
@@ -921,7 +921,7 @@ body{
     font-size: 2rem;
   }
 
-  s{
+  small{
     font-size: 1rem;
   }
 
