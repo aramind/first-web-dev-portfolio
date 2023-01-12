@@ -1,0 +1,89 @@
+// VARIABLES
+
+// global variables
+let difficulty = 3;
+
+// arrays containing the group for choices
+const easyGroups = [];
+const moderateGroups = [];
+const difficultGroups = [];
+const difficulties = [1,2,3];
+// function for creating the object containing the options for a group and the key for the correct answer
+// - will create the object regardless of the level of the group
+function createGroup(a, b, c, d, key){
+  this.a = a; this.b = b; this.c = c; this.d = d; this.key = key;
+}
+
+// function for creating the groups and sorts them to levels
+function addToGroups(a = 1, b = 0, c = 0, d = 0, key = 1, level = 1){
+  switch(level){
+    case 1: {
+      easyGroups.push(new createGroup(a, b, c, d, key)); break;
+    }
+    case 2: {
+      moderateGroups.push(new createGroup(a, b, c, d, key)); break;
+    }
+    case 3: {
+      difficultGroups.push(new createGroup(a, b, c, d, key)); break;
+    }
+  }
+};
+
+//populating the easyGroups array using the addToGroup and createGroup functions
+// easy groups
+addToGroups(14, 82, 70, 'AG', 'AG', 1);
+addToGroups('🐳', '🐪', '🦓', '🐄', '🐳', 1);
+addToGroups(14, 78, 13, 32, 13, 1);
+addToGroups('toy', 'sea', 'gear', 'bar', 'gear', 1);
+addToGroups('👄', '👀', '👂', '🔧', '🔧', 1);
+
+// moderate groups
+addToGroups('49', '36', '55', '25', '55', 2);
+addToGroups('🌍', '🏀', '🚗', '💍', '🚗', 2);
+
+// difficult groups
+addToGroups('10', '45', '21', '32', '32', 3);
+addToGroups('3', '6', '28', '34', '34', 3);
+
+
+console.log(easyGroups.length);
+console.log(moderateGroups.length);
+console.log(difficultGroups.length);
+
+
+/* DOM MANIPULATIONS */
+
+// selecting a group and displaying it
+let fromDifficulties = Math.ceil(Math.random() * difficulty);
+console.log(`fromDifficulties: ${fromDifficulties}`);
+
+const getAGroup = function(fromDifficulties){
+  switch (fromDifficulties) {
+    case 1: {
+      return easyGroups[Math.floor(Math.random() * easyGroups.length)];
+    }
+    case 2: {
+      return moderateGroups[Math.floor(Math.random() * moderateGroups.length)];
+    }
+    case 3: {
+      return difficultGroups[Math.floor(Math.random() * difficultGroups.length)];
+    }
+    default: {
+      return easyGroups[0];
+    }
+  }
+  
+};
+
+let currentGroup = getAGroup(fromDifficulties);
+console.log(`currentGroup: [${currentGroup['a']}][${currentGroup['b']}][${currentGroup['c']}][${currentGroup['d']}][${currentGroup['key']}]`);
+
+let choicesDisplayedA = document.querySelector('#choice1');
+let choicesDisplayedB = document.querySelector('#choice2');
+let choicesDisplayedC = document.querySelector('#choice3');
+let choicesDisplayedD = document.querySelector('#choice4');
+
+choicesDisplayedA.innerHTML = currentGroup['a'];
+choicesDisplayedB.innerHTML = currentGroup['b'];
+choicesDisplayedC.innerHTML = currentGroup['c'];
+choicesDisplayedD.innerHTML = currentGroup['d'];

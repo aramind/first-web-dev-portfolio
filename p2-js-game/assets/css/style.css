@@ -132,6 +132,7 @@ body {
   background-color: lightgreen;
   height: 100%;
 
+  font-size: 4rem;
 }
 
 .controls{
@@ -151,4 +152,9 @@ body {
 }
 
 
-
+/* centered classes */
+.flex--centered{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
