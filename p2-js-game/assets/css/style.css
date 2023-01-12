@@ -1,0 +1,154 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: antiquewhite;
+}
+
+.main{
+  border: 1px solid blue;
+  width: 800px;
+  height: 550px;
+
+  display: flex;
+  flex-flow: column nowrap;
+
+  overflow: hidden;
+}
+
+.population{
+  border: 1px solid green;
+  height: 50px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.population-bar{
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+
+  padding-inline: 5px;
+}
+
+#human-pop{
+  background-color: lightgreen;
+  align-items: flex-start;
+}
+
+#invader-pop{
+  background-color: lightcoral;
+  align-items: flex-end;
+}
+.main-view{
+  border: 1px solid red;
+  width: 100%;
+  height: 350px;
+
+  background: url(../imgs/sky_background_green_hills.png);
+  background-size: cover;
+  background-position: bottom center;
+
+  display: grid;
+  grid-template-rows: 1fr 90px;
+  grid-template-areas: 
+    "main"
+    "ships";
+
+}
+/* air space */
+
+.air-space{
+  grid-area: main;
+}
+
+.capsule-container{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+
+  height: 100px;
+  border: 1px solid black;
+}
+
+
+.capsule-img{
+  height: 50px;
+}
+/* ship containers */
+.ship-container{
+  border: 1px solid yellow;
+  /* background-color: aquamarine; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: flex-end;
+
+  grid-area: ships;
+}
+
+/* spaceships */
+.ship{
+  border: 1px solid red;
+  height: 70px;
+
+  display: flex;
+  align-items: flex-start;
+}
+
+.ship-img{
+  height: 80px;
+}
+
+.choices{
+  border: 1px solid gray;
+  height: 100px;
+  display: flex;
+  flex-flow: row;
+}
+
+.choice{
+  border: 5px solid gray;
+  width: 100%;
+  background-color: lightgreen;
+  height: 100%;
+
+}
+
+.controls{
+  border: 1px solid orange;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.control{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: darkolivegreen;
+}
+
+
+

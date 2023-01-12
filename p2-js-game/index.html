@@ -4,9 +4,60 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>p2-js-game-robin</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Document</title>
 </head>
 <body>
-  
+  <header class="header">
+    <h1 id="title">Game Title</h1>
+  </header>
+
+  <main class="main">
+    <div class="game-container">
+      <div class="population">
+        <div class="population-bar" id="human-pop">
+          <div class="population-title">Humans</div>
+          <div class="population-number">1,000,000</div>
+        </div>
+        <div class="population-bar" id="invader-pop">
+          <div class="population-title">Invaders</div>
+          <div class="population-number">1,000,000</div>
+        </div>
+      </div>
+      <div class="main-view">
+        <div class="air-space">
+          <div class="capsule-container">
+            <div class="capsule"><img class="capsule-img" src="./assets/imgs/capsules/space-capsule.png" alt="space capsule"></div>
+            <div class="capsule"><img class="capsule-img" src="./assets/imgs/capsules/space-capsule.png" alt="space capsule"></div>
+            <div class="capsule"><img class="capsule-img" src="./assets/imgs/capsules/space-capsule.png" alt="space capsule"></div>
+            <div class="capsule"><img class="capsule-img" src="./assets/imgs/capsules/space-capsule.png" alt="space capsule"></div>
+          </div>
+        </div>
+        <div class="ship-container">
+          <div class="ship" id="ship1"><img class="ship-img" src="./assets/imgs/spaceships/Spaceship_1_NAVY BLUE.png" alt="blue spaceship"></div>
+          <div class="ship" id="ship2"><img class="ship-img" src="./assets/imgs/spaceships/Spaceship_2_GREEN.png" alt="green spaceship"></div>
+          <div class="ship" id="ship3"><img class="ship-img" src="./assets/imgs/spaceships/Spaceship_3_PURPLE.png" alt="purple spaceship"></div>
+          <div class="ship" id="ship4"><img class="ship-img" src="./assets/imgs/spaceships/Spaceship_4_ORANGE.png" alt="orange spaceship"></div>
+        </div>
+      </div>
+      <div class="choices">
+        <div class="choice" id="choice1"></div>
+        <div class="choice" id="choice2"></div>
+        <div class="choice" id="choice3"></div>
+        <div class="choice" id="choice4"></div>
+      </div>
+      <div class="controls">
+        <div class="control" id="home"></div>
+        <div class="control" id="sound"></div>
+        <div class="control" id="pause"></div>
+        <div class="control" id="restart"></div>
+        <div class="control" id="quit"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"></footer>
+
+  <script src="./assets/js/script.js"></script>
 </body>
 </html>
