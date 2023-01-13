@@ -94,39 +94,6 @@ console.log(difficultGroups.length);
 /* DOM MANIPULATIONS */
 
 // selecting a group and displaying it
-let fromDifficulties = Math.ceil(Math.random() * difficulty);
-console.log(`fromDifficulties: ${fromDifficulties}`);
-
-const getAGroup = function(fromDifficulties){
-  switch (fromDifficulties) {
-    case 1: {
-      return easyGroups[Math.floor(Math.random() * easyGroups.length)];
-    }
-    case 2: {
-      return moderateGroups[Math.floor(Math.random() * moderateGroups.length)];
-    }
-    case 3: {
-      return difficultGroups[Math.floor(Math.random() * difficultGroups.length)];
-    }
-    default: {
-      return easyGroups[0];
-    }
-  }
-  
-};
-
-let currentGroup = getAGroup(fromDifficulties);
-console.log(`currentGroup: [${currentGroup['a']}][${currentGroup['b']}][${currentGroup['c']}][${currentGroup['d']}][${currentGroup['key']}]`);
-
-correctAnswer = currentGroup['key'];
-
-choicesDisplayedA.innerHTML = currentGroup['a'];
-choicesDisplayedB.innerHTML = currentGroup['b'];
-choicesDisplayedC.innerHTML = currentGroup['c'];
-choicesDisplayedD.innerHTML = currentGroup['d'];
-
-console.log(`correctAnswer: [${correctAnswer}]`);
-
 
 function updateScore(){
   console.log(`score: ${score}`);
@@ -144,3 +111,43 @@ function updatePopulation() {
 function displayGameOver(){
   alert('Game Over');
 }
+
+function sendGroup(){
+  console.log(`from sendGroup function`);
+
+  let fromDifficulties = Math.ceil(Math.random() * difficulty);
+  console.log(`fromDifficulties: ${fromDifficulties}`);
+
+  const getAGroup = function(fromDifficulties){
+    switch (fromDifficulties) {
+      case 1: {
+        return easyGroups[Math.floor(Math.random() * easyGroups.length)];
+      }
+      case 2: {
+        return moderateGroups[Math.floor(Math.random() * moderateGroups.length)];
+      }
+      case 3: {
+        return difficultGroups[Math.floor(Math.random() * difficultGroups.length)];
+      }
+      default: {
+        return easyGroups[0];
+      }
+    }
+    
+  };
+
+  let currentGroup = getAGroup(fromDifficulties);
+  console.log(`currentGroup: [${currentGroup['a']}][${currentGroup['b']}][${currentGroup['c']}][${currentGroup['d']}][${currentGroup['key']}]`);
+
+  correctAnswer = currentGroup['key'];
+
+  choicesDisplayedA.innerHTML = currentGroup['a'];
+  choicesDisplayedB.innerHTML = currentGroup['b'];
+  choicesDisplayedC.innerHTML = currentGroup['c'];
+  choicesDisplayedD.innerHTML = currentGroup['d'];
+
+  console.log(`correctAnswer: [${correctAnswer}]`);
+
+}
+
+setInterval(sendGroup, 2000);
