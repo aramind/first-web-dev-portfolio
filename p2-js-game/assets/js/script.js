@@ -3,7 +3,7 @@
 let difficulty = 3;
 let correctAnswer;
 let score = 0;
-let cycleTime = 7000;
+let cycleTime = 8000;
 
 // GLOBAL ELEMENTS
 
@@ -18,7 +18,7 @@ console.log(`popOfInvaders: ${popOfInvaders}`);
 
 
 // choices
-let choices = document.querySelectorAll('.choices');
+let choices = document.querySelectorAll('.choice');
 
 // console.log(`choices: ${choices[0]}, ${choices[1]}, ${choices[2]}, ${choices[3]}`);
 let choicesDisplayedA = document.querySelector('#choice1');
@@ -91,9 +91,18 @@ let cycle = setInterval(sendGroup, cycleTime);
 
 // evenlisteners
 
-let getSelected = (e) => {
-  console.log(`${e.target.innerText}`);
+function disableButtons() {
+  choices.forEach( e => e.disabled = true );
+}
 
+function enableButtons() {
+  choices.forEach( e => e.disabled = false );
+}
+
+let getSelected = (e) => {
+
+  e.stopPropagation();
+  console.log(`${e.target.innerText}`);
   if(e.target.innerText != correctAnswer){
     score = score <= 10? 0 : score - 100;
     popOfHumans = popOfHumans <= 900? 0 : popOfHumans - 3000;
@@ -102,9 +111,20 @@ let getSelected = (e) => {
     score += 100;
   }
 
+  disableButtons();
   updatePopulation();
   updateScore();
-  sendGroup();
+  let element = document.querySelector('.capsule-container');
+  element.classList.remove('moving-down');
+  element.classList.add('at-bottom');
+  void element.offsetWidth;
+  setTimeout(function(){
+    element.classList.remove('at-bottom');
+    element.classList.add('moving-down');
+    // clearInterval(cycle);
+    sendGroup();
+  }, 1000);
+  // console.log(element.classList);
 };
 
 choices.forEach((e) => e.addEventListener('click', getSelected));
@@ -133,7 +153,7 @@ function displayGameOver(){
 //starting a new cycle with a new group
 function sendGroup(){
   console.log(`l##### STARTING A NEW CYCLE ###########`);
-
+  enableButtons();
   let fromDifficulties = Math.ceil(Math.random() * difficulty);
   console.log(`fromDifficulties: ${fromDifficulties}`);
 
@@ -167,7 +187,5 @@ function sendGroup(){
   choicesDisplayedD.innerHTML = currentGroup['d'];
 
   console.log(`correctAnswer: [${correctAnswer}]`);
-
-  document.querySelector('.capsule-container').classList.toggle('.moving-down');
 }
 

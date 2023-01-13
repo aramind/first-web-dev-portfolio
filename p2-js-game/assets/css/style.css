@@ -103,6 +103,8 @@ body {
 
   height: 100px;
   border: 1px solid black;
+
+  position: absolute;
 }
 
 
@@ -132,7 +134,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  animation: move-down 7s linear infinite;
+  animation: move-down 8s linear infinite;
 }
 
 @keyframes move-down{
@@ -174,9 +176,12 @@ body {
   cursor: pointer;
 }
 
-btn:disabled{
-  background-color: black;
+button:disabled{
+  background-color: lightgray;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
+
 .controls{
   border: 1px solid orange;
   height: 50px;
@@ -199,4 +204,9 @@ btn:disabled{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.at-bottom{
+  bottom: 10%;
+  width: 100%;
 }
