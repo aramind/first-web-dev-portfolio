@@ -31,10 +31,16 @@ body {
 .population{
   border: 1px solid green;
   height: 50px;
-  display: flex;
+
+  /* display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  align-items: center; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
+  justify-content: center;
 }
 
 .population-bar{

@@ -168,6 +168,14 @@ function updatePopulation() {
     popOfHumansElement.textContent = popOfHumans;
     popOfInvadersElement.textContent = popOfInvaders;
   }
+
+  //updating the population bar
+  let percentOfHumans = popOfHumans/(popOfHumans + popOfInvaders);
+  let bar = document.getElementById('population-bar');
+  let barWidth = bar.offsetWidth;
+  let pxForHumans = Math.floor(percentOfHumans * barWidth);
+  let string = `grid-template-columns: ${pxForHumans}px 1fr`;
+  bar.style.cssText = string;
   console.log(`popOfHumans/popOfInvaders ${popOfHumans} / ${popOfInvaders}`);
 }
 function displayGameOver(){
