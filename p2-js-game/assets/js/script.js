@@ -4,7 +4,7 @@ let difficulty = 3;
 let correctAnswer;
 let score = 0;
 let cycleTime = 7000;
-
+let hasClicked = false;
 // GLOBAL ELEMENTS
 
 // population
@@ -129,9 +129,28 @@ let getSelected = (e) => {
   // console.log(element.classList);
 };
 
+
 choices.forEach((e) => e.addEventListener('click', getSelected));
 
+function applyPenalty(){
+  let element = document.querySelector('.capsule-container');
+  console.log(`applyPenalty is called`);
+  element.classList.remove('moving-down');
+  void element.offsetWidth;
+  element.classList.add('moving-down');
+  if(!hasClicked){
+    score = score <= 10? 0 : score - 100;
+    popOfHumans = popOfHumans <= 900? 0 : popOfHumans - 3000;
+    popOfInvaders = popOfInvaders + 3000;
+    updatePopulation();
+    updateScore();
+  };
+}
+
 /* DOM MANIPULATIONS */
+let element = document.querySelector('.moving-down');
+element.addEventListener('animationend', applyPenalty);
+
 
 function updateScore(){
   console.log(`score: ${score}`);

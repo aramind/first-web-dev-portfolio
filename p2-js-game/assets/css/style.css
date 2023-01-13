@@ -134,7 +134,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  animation: move-down 7s linear infinite;
+  animation: move-down 7s linear;
 }
 
 @keyframes move-down{
