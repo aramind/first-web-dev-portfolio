@@ -1,7 +1,47 @@
-// VARIABLES
+// GLOBAL VARIABLES
 
-// global variables
 let difficulty = 3;
+let correctAnswer;
+let score = 0;
+// GLOBAL ELEMENTS
+
+// population
+let popOfHumansElement = document.querySelector('#pop-of-humans');
+let popOfHumans = Number(popOfHumansElement.innerText);
+console.log(`popOfHumans: ${popOfHumans}`);
+let popOfInvadersElement = document.querySelector('#pop-of-invaders');
+let popOfInvaders = Number(popOfInvadersElement.innerText);
+console.log(`popOfInvaders: ${popOfInvaders}`);
+
+
+
+// choices
+let choicesDisplayedA = document.querySelector('#choice1');
+let choicesDisplayedB = document.querySelector('#choice2');
+let choicesDisplayedC = document.querySelector('#choice3');
+let choicesDisplayedD = document.querySelector('#choice4');
+
+
+// evenlisteners
+
+let getSelected = (e) => {
+  console.log(`${e.target.innerText}`);
+  if(e.target.innerText != correctAnswer){
+    score = score <= 10? 0 : score - 100;
+    popOfHumans = popOfHumans <= 900? 0 : popOfHumans - 3000;
+    popOfInvaders = popOfInvaders + 3000;
+  } else {
+    score += 100;
+  }
+
+  updatePopulation();
+  updateScore();
+};
+
+choicesDisplayedA.addEventListener('click', getSelected);
+choicesDisplayedB.addEventListener('click', getSelected);
+choicesDisplayedC.addEventListener('click', getSelected);
+choicesDisplayedD.addEventListener('click', getSelected);
 
 // arrays containing the group for choices
 const easyGroups = [];
@@ -78,12 +118,29 @@ const getAGroup = function(fromDifficulties){
 let currentGroup = getAGroup(fromDifficulties);
 console.log(`currentGroup: [${currentGroup['a']}][${currentGroup['b']}][${currentGroup['c']}][${currentGroup['d']}][${currentGroup['key']}]`);
 
-let choicesDisplayedA = document.querySelector('#choice1');
-let choicesDisplayedB = document.querySelector('#choice2');
-let choicesDisplayedC = document.querySelector('#choice3');
-let choicesDisplayedD = document.querySelector('#choice4');
+correctAnswer = currentGroup['key'];
 
 choicesDisplayedA.innerHTML = currentGroup['a'];
 choicesDisplayedB.innerHTML = currentGroup['b'];
 choicesDisplayedC.innerHTML = currentGroup['c'];
 choicesDisplayedD.innerHTML = currentGroup['d'];
+
+console.log(`correctAnswer: [${correctAnswer}]`);
+
+
+function updateScore(){
+  console.log(`score: ${score}`);
+}
+
+function updatePopulation() {
+  if(popOfHumans <= 0){
+    displayGameOver();
+  } else{
+    popOfHumans = popOfHumans;
+    popOfInvaders = popOfInvaders;
+  }
+  console.log(`popOfHumans/popOfInvaders ${popOfHumans} / ${popOfInvaders}`);
+}
+function displayGameOver(){
+  alert('Game Over');
+}
