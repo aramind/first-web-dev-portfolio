@@ -57,7 +57,7 @@ body {
   align-items: flex-end;
 }
 .main-view{
-  border: 1px solid red;
+  border: 3px solid red;
   width: 100%;
   height: 350px;
 
@@ -65,17 +65,32 @@ body {
   background-size: cover;
   background-position: bottom center;
 
-  display: grid;
+  position: relative;
+  /* display: grid;
   grid-template-rows: 1fr 90px;
   grid-template-areas: 
     "main"
-    "ships";
-
+    "ships"; */
+  overflow: hidden;;
 }
 /* air space */
 
+.backgrounds{
+  border: 2px solid green;
+  width: 100%;
+}
+
+.backgrounds img{
+  position: absolute;
+  bottom: -20px;
+  z-index: 10; 
+  width: 1200px;
+  height: auto;
+}
+
 .air-space{
-  grid-area: main;
+  /* grid-area: main; */
+  background-color: aqua;
 }
 
 .capsule-container{
@@ -102,8 +117,29 @@ body {
   flex-flow: row nowrap;
   justify-content: space-around;
   align-items: flex-end;
-
+  z-index: 20;
   grid-area: ships;
+
+  position: absolute;
+  bottom: 0;
+  /* background-color: red; */
+}
+
+.moving-down{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: move-down 7s linear infinite;
+}
+
+@keyframes move-down{
+  from{
+    top: -50px;
+  }
+  to{
+    top: 75%;
+  }
 }
 
 /* spaceships */

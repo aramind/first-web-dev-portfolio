@@ -3,7 +3,7 @@
 let difficulty = 3;
 let correctAnswer;
 let score = 0;
-let cycleTime = 3000;
+let cycleTime = 7000;
 
 // GLOBAL ELEMENTS
 
