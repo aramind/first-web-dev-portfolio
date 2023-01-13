@@ -3,7 +3,7 @@
 let difficulty = 3;
 let correctAnswer;
 let score = 0;
-let cycleTime = 50000;
+let cycleTime = 3000;
 
 // GLOBAL ELEMENTS
 
@@ -58,14 +58,28 @@ addToGroups('🐳', '🐪', '🦓', '🐄', '🐳', 1);
 addToGroups(14, 78, 13, 32, 13, 1);
 addToGroups('toy', 'sea', 'gear', 'bar', 'gear', 1);
 addToGroups('👄', '👀', '👂', '🔧', '🔧', 1);
+addToGroups('🚲', '🚕', '🚌', '🚒', '🚲', 1);
+addToGroups('🚲', '✈️', '🚌', '🏍', '✈️', 1);
 
 // moderate groups
 addToGroups('49', '36', '55', '25', '55', 2);
 addToGroups('🌍', '🏀', '🚗', '💍', '🚗', 2);
+addToGroups('🧤', '💼', '🩲', '👖', '💼', 2);
+addToGroups('24', '15', '11', '48', '11', 2);
+addToGroups('gin', 'ego', 'owl', 'boy', 'gin', 2);
+addToGroups('kg', 'lb', 'oz', 'cm', 'cm', 2);
+addToGroups('Japan', 'China', 'France', 'Korea', 'Korea', 2);
+addToGroups('Caracas', 'Madrid', 'Sydney', 'Manila', 'Sydney', 2);
 
 // difficult groups
 addToGroups('10', '45', '21', '32', '32', 3);
 addToGroups('3', '6', '28', '34', '34', 3);
+addToGroups('Si', 'C', 'Ge', 'Au', 'Au', 3);
+addToGroups('Fe', 'Cl', 'Ag', 'Au', 'Cl', 3);
+addToGroups('🐍', '🐠', '🐄', '🐓', '🐄', 3);
+addToGroups('Java', 'React', 'Python', 'Ruby', 'React', 3);
+addToGroups('proton', 'cation', 'electron', 'neutron', 'neutron', 3);
+addToGroups('Italy', 'Poland', 'Japan', 'Canada', 'Italy', 3);
 
 console.log(easyGroups.length);
 console.log(moderateGroups.length);
@@ -107,7 +121,6 @@ choices.forEach((e) => e.addEventListener('click', getSelected));
 // choicesDisplayedB.addEventListener('click', getSelected);
 // choicesDisplayedC.addEventListener('click', getSelected);
 // choicesDisplayedD.addEventListener('click', getSelected);
-
 
 /* DOM MANIPULATIONS */
 
@@ -161,6 +174,7 @@ function sendGroup(){
 
   correctAnswer = currentGroup['key'];
 
+  // thinking to convert the following assignments to forEach for lesser lines of code but might affect the other calls to the elements in the displayed page plus the additional complexity of looping through the properties of the object to be assigned....so decided not to, violating DRY principle but i think it easier to understand
   choicesDisplayedA.innerHTML = currentGroup['a'];
   choicesDisplayedB.innerHTML = currentGroup['b'];
   choicesDisplayedC.innerHTML = currentGroup['c'];
