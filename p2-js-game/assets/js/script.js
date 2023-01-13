@@ -154,6 +154,7 @@ element.addEventListener('animationend', applyPenalty);
 
 function updateScore(){
   console.log(`score: ${score}`);
+  document.getElementById('score-value').textContent = score;
 }
 
 function updatePopulation() {
