@@ -152,4 +152,5 @@ function sendGroup(){
 
 }
 
-setInterval(sendGroup, 3000);
+sendGroup();
+setInterval(sendGroup, 5000);
