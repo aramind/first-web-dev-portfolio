@@ -18,9 +18,10 @@ body {
 
 .main{
   border: 1px solid blue;
-  width: 800px;
-  height: 550px;
-
+  width: 95vw;
+  max-width: 1000px;
+  height: 95vh;
+  max-height: 550px;
   display: flex;
   flex-flow: column nowrap;
 
@@ -172,7 +173,7 @@ body {
   background-color: lightgreen;
   height: 100%;
 
-  font-size: 4rem;
+  font-size: 3rem;
   cursor: pointer;
 }
 

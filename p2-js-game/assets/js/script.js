@@ -69,8 +69,8 @@ addToGroups('🧤', '💼', '🩲', '👖', '💼', 2);
 addToGroups('24', '15', '11', '48', '11', 2);
 addToGroups('gin', 'ego', 'owl', 'boy', 'gin', 2);
 addToGroups('kg', 'lb', 'oz', 'cm', 'cm', 2);
-addToGroups('Japan', 'China', 'France', 'Korea', 'Korea', 2);
-addToGroups('Caracas', 'Madrid', 'Sydney', 'Manila', 'Sydney', 2);
+// addToGroups('Japan', 'China', 'France', 'Korea', 'Korea', 2);
+// addToGroups('Caracas', 'Madrid', 'Sydney', 'Manila', 'Sydney', 2);
 
 // difficult groups
 addToGroups('10', '45', '21', '32', '32', 3);
@@ -78,9 +78,9 @@ addToGroups('3', '6', '28', '34', '34', 3);
 addToGroups('Si', 'C', 'Ge', 'Au', 'Au', 3);
 addToGroups('Fe', 'Cl', 'Ag', 'Au', 'Cl', 3);
 addToGroups('🐍', '🐠', '🐄', '🐓', '🐄', 3);
-addToGroups('Java', 'React', 'Python', 'Ruby', 'React', 3);
-addToGroups('proton', 'cation', 'electron', 'neutron', 'neutron', 3);
-addToGroups('Italy', 'Poland', 'Japan', 'Canada', 'Italy', 3);
+// addToGroups('Java', 'React', 'Python', 'Ruby', 'React', 3);
+// addToGroups('proton', 'cation', 'electron', 'neutron', 'neutron', 3);
+// addToGroups('Italy', 'Poland', 'Japan', 'Canada', 'Italy', 3);
 
 console.log(easyGroups.length);
 console.log(moderateGroups.length);
@@ -106,7 +106,7 @@ let getSelected = (e) => {
   console.log(`${e.target.innerText}`);
   if(e.target.innerText != correctAnswer){
     score = score <= 10? 0 : score - 100;
-    popOfHumans = popOfHumans <= 900? 0 : popOfHumans - 3000;
+    popOfHumans = popOfHumans <= 3000? 0 : popOfHumans - 3000;
     popOfInvaders = popOfInvaders + 3000;
   } else {
     score += 100;
@@ -140,7 +140,7 @@ function applyPenalty(){
   element.classList.add('moving-down');
   if(!hasClicked){
     score = score <= 10? 0 : score - 100;
-    popOfHumans = popOfHumans <= 900? 0 : popOfHumans - 3000;
+    popOfHumans = popOfHumans <= 3000? 0 : popOfHumans - 3000;
     popOfInvaders = popOfInvaders + 3000;
     updatePopulation();
     updateScore();
@@ -158,6 +158,8 @@ function updateScore(){
 
 function updatePopulation() {
   if(popOfHumans <= 0){
+    popOfInvaders += popOfHumans; 
+    popOfHumans = 0;
     displayGameOver();
   } else{
     // popOfHumans = popOfHumans;
