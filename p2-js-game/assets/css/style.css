@@ -77,6 +77,27 @@ body {
   width: 100%;
 }
 
+.timer{
+  margin: 0.3rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-align: right;
+}
+
+.score{
+  margin: 0.3rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: left;
+}
+
+.indicator--value{
+  font-size: 2rem;
+  color: rebeccapurple;
+}
+
 .backgrounds img{
   position: absolute;
   bottom: -20px;
