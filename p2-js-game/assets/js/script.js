@@ -19,6 +19,7 @@ console.log(`popOfInvaders: ${popOfInvaders}`);
 
 // choices
 let choices = document.querySelectorAll('.choices');
+
 // console.log(`choices: ${choices[0]}, ${choices[1]}, ${choices[2]}, ${choices[3]}`);
 let choicesDisplayedA = document.querySelector('#choice1');
 let choicesDisplayedB = document.querySelector('#choice2');
@@ -86,22 +87,13 @@ console.log(moderateGroups.length);
 console.log(difficultGroups.length);
 
 
-let cycle = '';
-sendGroup();
-doCycle();
+let cycle = setInterval(sendGroup, cycleTime);
 
-function doCycle() {
-  cycle = setInterval(sendGroup, cycleTime);
-}
-
-function getNextCycle() {
-  clearInterval(cycle);
-  doCycle();
-}
 // evenlisteners
 
 let getSelected = (e) => {
   console.log(`${e.target.innerText}`);
+
   if(e.target.innerText != correctAnswer){
     score = score <= 10? 0 : score - 100;
     popOfHumans = popOfHumans <= 900? 0 : popOfHumans - 3000;
@@ -112,19 +104,12 @@ let getSelected = (e) => {
 
   updatePopulation();
   updateScore();
-  getNextCycle();
+  sendGroup();
 };
 
 choices.forEach((e) => e.addEventListener('click', getSelected));
 
-// choicesDisplayedA.addEventListener('click', getSelected);
-// choicesDisplayedB.addEventListener('click', getSelected);
-// choicesDisplayedC.addEventListener('click', getSelected);
-// choicesDisplayedD.addEventListener('click', getSelected);
-
 /* DOM MANIPULATIONS */
-
-// selecting a group and displaying it
 
 function updateScore(){
   console.log(`score: ${score}`);
@@ -145,8 +130,9 @@ function displayGameOver(){
   alert('Game Over');
 }
 
+//starting a new cycle with a new group
 function sendGroup(){
-  console.log(`from sendGroup function`);
+  console.log(`l##### STARTING A NEW CYCLE ###########`);
 
   let fromDifficulties = Math.ceil(Math.random() * difficulty);
   console.log(`fromDifficulties: ${fromDifficulties}`);
@@ -182,5 +168,6 @@ function sendGroup(){
 
   console.log(`correctAnswer: [${correctAnswer}]`);
 
+  document.querySelector('.capsule-container').classList.toggle('.moving-down');
 }
 
