@@ -176,6 +176,10 @@ body {
   cursor: pointer;
 }
 
+button.choice:hover{
+  background-color: aqua;
+}
+
 button:disabled{
   background-color: lightgray;
   opacity: 0.5;
