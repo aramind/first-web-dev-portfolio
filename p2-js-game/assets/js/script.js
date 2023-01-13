@@ -3,6 +3,8 @@
 let difficulty = 3;
 let correctAnswer;
 let score = 0;
+let cycleTime = 50000;
+
 // GLOBAL ELEMENTS
 
 // population
@@ -16,32 +18,12 @@ console.log(`popOfInvaders: ${popOfInvaders}`);
 
 
 // choices
+let choices = document.querySelectorAll('.choices');
+// console.log(`choices: ${choices[0]}, ${choices[1]}, ${choices[2]}, ${choices[3]}`);
 let choicesDisplayedA = document.querySelector('#choice1');
 let choicesDisplayedB = document.querySelector('#choice2');
 let choicesDisplayedC = document.querySelector('#choice3');
 let choicesDisplayedD = document.querySelector('#choice4');
-
-
-// evenlisteners
-
-let getSelected = (e) => {
-  console.log(`${e.target.innerText}`);
-  if(e.target.innerText != correctAnswer){
-    score = score <= 10? 0 : score - 100;
-    popOfHumans = popOfHumans <= 900? 0 : popOfHumans - 3000;
-    popOfInvaders = popOfInvaders + 3000;
-  } else {
-    score += 100;
-  }
-
-  updatePopulation();
-  updateScore();
-};
-
-choicesDisplayedA.addEventListener('click', getSelected);
-choicesDisplayedB.addEventListener('click', getSelected);
-choicesDisplayedC.addEventListener('click', getSelected);
-choicesDisplayedD.addEventListener('click', getSelected);
 
 // arrays containing the group for choices
 const easyGroups = [];
@@ -85,10 +67,46 @@ addToGroups('🌍', '🏀', '🚗', '💍', '🚗', 2);
 addToGroups('10', '45', '21', '32', '32', 3);
 addToGroups('3', '6', '28', '34', '34', 3);
 
-
 console.log(easyGroups.length);
 console.log(moderateGroups.length);
 console.log(difficultGroups.length);
+
+
+let cycle = '';
+sendGroup();
+doCycle();
+
+function doCycle() {
+  cycle = setInterval(sendGroup, cycleTime);
+}
+
+function getNextCycle() {
+  clearInterval(cycle);
+  doCycle();
+}
+// evenlisteners
+
+let getSelected = (e) => {
+  console.log(`${e.target.innerText}`);
+  if(e.target.innerText != correctAnswer){
+    score = score <= 10? 0 : score - 100;
+    popOfHumans = popOfHumans <= 900? 0 : popOfHumans - 3000;
+    popOfInvaders = popOfInvaders + 3000;
+  } else {
+    score += 100;
+  }
+
+  updatePopulation();
+  updateScore();
+  getNextCycle();
+};
+
+choices.forEach((e) => e.addEventListener('click', getSelected));
+
+// choicesDisplayedA.addEventListener('click', getSelected);
+// choicesDisplayedB.addEventListener('click', getSelected);
+// choicesDisplayedC.addEventListener('click', getSelected);
+// choicesDisplayedD.addEventListener('click', getSelected);
 
 
 /* DOM MANIPULATIONS */
@@ -152,5 +170,3 @@ function sendGroup(){
 
 }
 
-sendGroup();
-setInterval(sendGroup, 5000);
