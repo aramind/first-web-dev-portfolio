@@ -103,8 +103,10 @@ function updatePopulation() {
   if(popOfHumans <= 0){
     displayGameOver();
   } else{
-    popOfHumans = popOfHumans;
-    popOfInvaders = popOfInvaders;
+    // popOfHumans = popOfHumans;
+    // popOfInvaders = popOfInvaders;
+    popOfHumansElement.textContent = popOfHumans;
+    popOfInvadersElement.textContent = popOfInvaders;
   }
   console.log(`popOfHumans/popOfInvaders ${popOfHumans} / ${popOfInvaders}`);
 }
@@ -150,4 +152,4 @@ function sendGroup(){
 
 }
 
-setInterval(sendGroup, 2000);
+setInterval(sendGroup, 3000);
