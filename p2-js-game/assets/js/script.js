@@ -3,7 +3,7 @@
 let difficulty = 3;
 let correctAnswer;
 let score = 0;
-let cycleTime = 8000;
+let cycleTime = 7000;
 
 // GLOBAL ELEMENTS
 
@@ -102,6 +102,7 @@ function enableButtons() {
 let getSelected = (e) => {
 
   e.stopPropagation();
+
   console.log(`${e.target.innerText}`);
   if(e.target.innerText != correctAnswer){
     score = score <= 10? 0 : score - 100;
@@ -121,7 +122,8 @@ let getSelected = (e) => {
   setTimeout(function(){
     element.classList.remove('at-bottom');
     element.classList.add('moving-down');
-    // clearInterval(cycle);
+    clearInterval(cycle);
+    cycle = setInterval(sendGroup, cycleTime);
     sendGroup();
   }, 1000);
   // console.log(element.classList);
