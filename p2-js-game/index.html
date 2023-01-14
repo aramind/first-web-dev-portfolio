@@ -13,7 +13,7 @@
   </header>
 
   <main class="main">
-    <div class="game-container">
+    <div class="game-container hide">
       <div class="population" id="population-bar">
         <div class="population-bar" id="human-pop">
           <div class="population-title">Humans</div>
@@ -33,7 +33,7 @@
             </div>
             <div class="timer">
               <div class="indicator--label">TIME REMAINING</div>
-              <div class="indicator--value">0 s</div>
+              <div class="indicator--value" id="timer-value">0 s</div>
             </div>
           </div>
           <img src="./assets/imgs/bgs/farground_mountains.png" alt="far ground mountains">
@@ -41,7 +41,7 @@
           <img src="./assets/imgs/bgs/foreground_mountains.png" alt="fore ground mountains">
         </div>
         <div class="air-space">
-          <div class="capsule-container moving-down">
+          <div class="capsule-container">
             <div class="capsule"><img class="capsule-img" src="./assets/imgs/capsules/space-capsule.png" alt="space capsule"></div>
             <div class="capsule"><img class="capsule-img" src="./assets/imgs/capsules/space-capsule.png" alt="space capsule"></div>
             <div class="capsule"><img class="capsule-img" src="./assets/imgs/capsules/space-capsule.png" alt="space capsule"></div>
@@ -70,7 +70,10 @@
       </div>
     </div>
   </main>
-
+  <br>
+  <div class="temp-buttons">
+    <button class="btn--start" id="start-btn">START GAME</button>
+  </div>
   <footer class="footer"></footer>
 
   <script src="./assets/js/script.js"></script>

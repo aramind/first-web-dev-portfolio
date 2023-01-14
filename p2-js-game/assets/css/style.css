@@ -17,8 +17,8 @@ body {
 }
 
 .main{
-  border: 1px solid gray;
-  border-radius: 0 30px;
+  outline: 1px solid gray;
+  /* border-radius: 0 30px; */
   width: 95vw;
   max-width: 1000px;
   height: 95vh;
@@ -249,4 +249,8 @@ button:disabled{
 .at-bottom{
   bottom: 10%;
   width: 100%;
+}
+
+.hide{
+  display: none;
 }
