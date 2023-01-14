@@ -1,61 +1,3 @@
-// ======================================
-/*                 DATA                */
-// ======================================
-// arrays containing the group for choices
-const easyGroups = [];
-const moderateGroups = [];
-const difficultGroups = [];
-const difficulties = [1,2,3];
-
-// function for creating the object containing the options for a group and the key for the correct answer
-// - will create the object regardless of the level of the group
-function createGroup(a, b, c, d, key){
-  this.a = a; this.b = b; this.c = c; this.d = d; this.key = key;
-}
-
-// function for creating the groups and sorts them to levels
-function addToGroups(a = 1, b = 0, c = 0, d = 0, key = 1, level = 1){
-  switch(level){
-    case 1: {
-      easyGroups.push(new createGroup(a, b, c, d, key)); break;
-    }
-    case 2: {
-      moderateGroups.push(new createGroup(a, b, c, d, key)); break;
-    }
-    case 3: {
-      difficultGroups.push(new createGroup(a, b, c, d, key)); break;
-    }
-  }
-};
-
-//populating the groups
-  // easy groups
-addToGroups(14, 82, 70, 'AG', 'AG', 1);
-addToGroups('🐳', '🐪', '🦓', '🐄', '🐳', 1);
-addToGroups(14, 78, 13, 32, 13, 1);
-addToGroups('toy', 'sea', 'gear', 'bar', 'gear', 1);
-addToGroups('👄', '👀', '👂', '🔧', '🔧', 1);
-addToGroups('🚲', '🚕', '🚌', '🚒', '🚲', 1);
-addToGroups('🚲', '✈️', '🚌', '🏍', '✈️', 1);
-
-  // moderate groups
-addToGroups('49', '36', '55', '25', '55', 2);
-addToGroups('🌍', '🏀', '🚗', '💍', '🚗', 2);
-addToGroups('🧤', '💼', '🩲', '👖', '💼', 2);
-addToGroups('24', '15', '11', '48', '11', 2);
-addToGroups('gin', 'ego', 'owl', 'boy', 'gin', 2);
-addToGroups('kg', 'lb', 'oz', 'cm', 'cm', 2);
-
-  // difficult groups
-addToGroups('10', '45', '21', '32', '32', 3);
-addToGroups('3', '6', '28', '34', '34', 3);
-addToGroups('Si', 'C', 'Ge', 'Au', 'Au', 3);
-addToGroups('Fe', 'Cl', 'Ag', 'Au', 'Cl', 3);
-addToGroups('🐍', '🐠', '🐄', '🐓', '🐄', 3);
-
-// =================================================
-
-
 // GLOBAL VARIABLES
 
 let difficulty = 3;
@@ -64,6 +6,13 @@ let score = 0;
 let cycleTime = 7000;
 let hasClicked = false;
 let cycle;
+
+
+// arrays containing the group for choices
+const easyGroups = [];
+const moderateGroups = [];
+const difficultGroups = [];
+const difficulties = [1,2,3];
 
 /*================================================================
 |                 GLOBAL ELEMENTS                                 |
@@ -98,7 +47,7 @@ function enableButton(btn) {
   btn.disabled = false;
 }
 
-// adding of eventlisteners
+// adding of event listeners
 
 startBtn.addEventListener('click',startGame);
 
@@ -207,7 +156,7 @@ function sendGroup(){
 
 // applies penalty if no choice was selected in a round
 function applyPenalty(){
-  console.log(`--- applying ---`);
+  console.log(`--- applying penalty---`);
   capsuleContainer.classList.remove('moving-down');
   void capsuleContainer.offsetWidth;
   capsuleContainer.classList.add('moving-down');
@@ -228,7 +177,7 @@ function displayGameOver(){
 }
 
 // loads the necessary things needed to run the game
-function loadGame(){
+function loadGameElements(){
   document.querySelector('.game-container').classList.remove('hide');
   choices.forEach((e) => e.addEventListener('click', getSelected));
   document.querySelector('.capsule-container').classList.add('moving-down');
@@ -238,11 +187,67 @@ function loadGame(){
   element.addEventListener('animationend', applyPenalty);
 }
 
-/**++++++++++++++++++++++++++++++++++++ */
+//builds and populate the data needed to run the game
+//thinking of dividing this large function but since all these will be called
+//just a single time and only on the creation of the game data, decided in the end
+//not to break it down into smaller functions
+function loadGameData(){
+
+// function for creating the object containing the options for a group and the key for the correct answer
+// - will create the object regardless of the level of the group
+function createGroup(a, b, c, d, key){
+  this.a = a; this.b = b; this.c = c; this.d = d; this.key = key;
+}
+
+// function for creating the groups and sorts them to levels
+function addToGroups(a = 1, b = 0, c = 0, d = 0, key = 1, level = 1){
+  switch(level){
+    case 1: {
+      easyGroups.push(new createGroup(a, b, c, d, key)); break;
+    }
+    case 2: {
+      moderateGroups.push(new createGroup(a, b, c, d, key)); break;
+    }
+    case 3: {
+      difficultGroups.push(new createGroup(a, b, c, d, key)); break;
+    }
+  }
+};
+
+//populating the groups
+  // easy groups
+addToGroups(14, 82, 70, 'AG', 'AG', 1);
+addToGroups('🐳', '🐪', '🦓', '🐄', '🐳', 1);
+addToGroups(14, 78, 13, 32, 13, 1);
+addToGroups('toy', 'sea', 'gear', 'bar', 'gear', 1);
+addToGroups('👄', '👀', '👂', '🔧', '🔧', 1);
+addToGroups('🚲', '🚕', '🚌', '🚒', '🚲', 1);
+addToGroups('🚲', '✈️', '🚌', '🏍', '✈️', 1);
+
+  // moderate groups
+addToGroups('49', '36', '55', '25', '55', 2);
+addToGroups('🌍', '🏀', '🚗', '💍', '🚗', 2);
+addToGroups('🧤', '💼', '🩲', '👖', '💼', 2);
+addToGroups('24', '15', '11', '48', '11', 2);
+addToGroups('gin', 'ego', 'owl', 'boy', 'gin', 2);
+addToGroups('kg', 'lb', 'oz', 'cm', 'cm', 2);
+
+  // difficult groups
+addToGroups('10', '45', '21', '32', '32', 3);
+addToGroups('3', '6', '28', '34', '34', 3);
+addToGroups('Si', 'C', 'Ge', 'Au', 'Au', 3);
+addToGroups('Fe', 'Cl', 'Ag', 'Au', 'Cl', 3);
+addToGroups('🐍', '🐠', '🐄', '🐓', '🐄', 3);
+
+}
+
+/*==================================================/
+|          FUNCTION TO START THE GAME               |
+/==================================================*/
 function startGame(){
-  loadGame();
+  loadGameData();
+  loadGameElements();
   cycle = setInterval(sendGroup, cycleTime);
 }
-// game-controller
 
 
