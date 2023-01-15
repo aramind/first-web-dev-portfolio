@@ -64,6 +64,7 @@ const prePlayBtnLvl3 = document.getElementById('btn-lvl-3');
 
 // audio
 const bgMusic = document.getElementById('bg-music');
+const prePlayBtnSound = document.getElementById('btn-preplay--sound');
 
 /*================================================================
 |                 EVENT LISTENERS                                 |
@@ -129,9 +130,11 @@ function goHome(){
 function toggleSound(){
   console.log(`toggleSound btn was clicked`);
   if(bgMusic.muted){
-    unmuteBgMusic();
+    bgMusic.muted = false;
+    soundBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
   } else {
     muteBgMusic();
+    soundBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
   } 
 };
 
@@ -157,7 +160,7 @@ function resumeGame(){
   capsuleContainer.classList.add('moving-down');
   round = setInterval(() => playRound(currentState),landingTime);
   currentState = 1;
-  pauseResumeBtn.textContent = 'Pause';
+  pauseResumeBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
 };
 
 function pauseResumeGame(){
@@ -241,6 +244,7 @@ prePlayBtnLvl1.addEventListener('click', () => difficulty = 1);
 prePlayBtnLvl2.addEventListener('click', () => difficulty = 2);
 prePlayBtnLvl3.addEventListener('click', () => difficulty = 3);
 
+
 //updating the style of selected buttons
 prePlayLvlBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
@@ -265,6 +269,7 @@ function cleanUp(){
 // music 
 function unmuteBgMusic(){
   bgMusic.muted = false;
+  
 }
 
 function muteBgMusic(){

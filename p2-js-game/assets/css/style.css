@@ -322,15 +322,8 @@ button:disabled{
   width: 100%;  
 }
 
-.pre-play__sounds{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.radio-labels--horizontal{
-  /* outline: solid 1px red; */
-  margin-right: 2rem;
+.btn__pre-play--sound{
+  height: 2rem;
 }
 
 button{

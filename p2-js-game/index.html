@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./assets/css/style.css">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Document</title>
 </head>
 <body id="body">
@@ -66,9 +68,9 @@
         <button class="choice flex--centered" id="choice4"></button>
       </div>
       <div class="controls">
-        <div class="control control__home flex--centered" id="home-btn">Home</div>
-        <div class="control control__sound flex--centered" id="sound-btn">Sound</div>
-        <div class="control control__pause-resume flex--centered" id="pause-resume-btn">Pause</div>
+        <div class="control control__home flex--centered" id="home-btn"><i class="fa-solid fa-house"></i></div>
+        <div class="control control__sound flex--centered" id="sound-btn"><i class="fa-solid fa-volume-high"></i></div>
+        <div class="control control__pause-resume flex--centered" id="pause-resume-btn"><i class="fa-solid fa-pause"></i></div>
         <div class="control control__restart flex--centered" id="restart-btn">Restart</div>
         <div class="control control__stop flex--centered" id="stop-btn">Stop</div>
         <div class="control control__quit flex--centered" id="quit-btn">Quit</div>
@@ -87,7 +89,10 @@
       <button class="btn btn__pre-play btn__pre-play--lvl" id="btn-lvl-2">normal</button>
       <button class="btn btn__pre-play btn__pre-play--lvl" id="btn-lvl-3">expert</button>
     </div>
-    <div class="pre-play__sounds">
+    <!-- <div class="pre-play__sound flex--centered">
+      <button class="btn btn__pre-play btn__pre-play--sound" id="btn-preplay--sound">music : <i class="fa-solid fa-volume-xmark"></i></button>
+    </div> -->
+    <!-- <div class="pre-play__sounds">
       <form class="pre-play__toggleSound-cont flex--centered">
         <div class="pre-play__toggleSound">
           <input type="radio" id="sound-on-radioBtn" name="sounds" value="on">
@@ -98,7 +103,7 @@
           <label class="radio-labels--horizontal" for="on">Sounds Off</label>
         </div>
       </form>
-    </div>
+    </div> -->
     <div>
       <button class="btn__pre-play btn__pre-play--play" id="pre-play-play-btn">PLAY 🚀</button>
     </div>
