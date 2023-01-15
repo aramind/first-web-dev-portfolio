@@ -125,9 +125,14 @@ function goHome(){
   cleanUp();
   run();
 };
-// todo: implement
+
 function toggleSound(){
   console.log(`toggleSound btn was clicked`);
+  if(bgMusic.muted){
+    unmuteBgMusic();
+  } else {
+    muteBgMusic();
+  } 
 };
 
 function pauseGame(){
@@ -250,12 +255,21 @@ prePlayLvlBtns.forEach((btn) => {
 /*================================================================
 |                 HELPER FUNCTIONS                                |
 /================================================================*/
-// clean up
 
+// clean up
 function cleanUp(){
   prePlayOptions.classList.add('hide');
   document.querySelector('.game-container').classList.add('hide');
 }
+
+// music 
+function unmuteBgMusic(){
+  bgMusic.muted = false;
+}
+
+function muteBgMusic(){
+  bgMusic.muted = true;
+};
 
 // recreating the page to be displayed after quitting
 function createByePage(){
@@ -388,7 +402,6 @@ function playRound(currentState){
     case 4: console.log(`isGameOver`); break;
     default: console.log(`onResume`);
   }
-
 };
 
 function hidePrePlayOptions(){
