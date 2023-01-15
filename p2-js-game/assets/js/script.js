@@ -5,20 +5,24 @@
 let difficulty = 3;
 let correctAnswer;
 let score = 0;
-let cycleTime = 7000;
+let landingTime = 7000;
 let hasClicked = false;
-let cycle;
+let round;
 let popOfHumans = 10000;
 let popOfInvaders = 0;
-let isGameOver = false;
-let isOnPause = false;
-let isOnResume = true;
 
 const easyGroups = [];
 const moderateGroups = [];
 const difficultGroups = [];
 const difficulties = [1,2,3];
 
+// for creating an game instance with difficulty set and state 
+// variable for tracking 
+// decided not to use boolean para sure hindi maging currently in 2 or more states
+// like onResume pero onPause rin
+function GameInstance (state) {
+  this.state = state; // 1 - onResume, 2 - onPause, 3 - stopped, 4 - isGameOver
+};
 /*================================================================
 |                 GLOBAL ELEMENTS                                 |
 /================================================================*/
@@ -60,6 +64,13 @@ function enableButton(btn) {
   btn.disabled = false;
 }
 
+function disableChoices(){
+  choices.forEach((e) => disableButton(e));
+}
+
+function enableChoices(){
+  choices.forEach((e) => enableButton(e));
+}
 // adding of event listeners
 
 startBtn.addEventListener('click', startGame);
@@ -68,16 +79,20 @@ prePlayPlayButton.addEventListener('click', playGame)
 |                 MAIN FUNCTIONS                                  |
 /================================================================*/
 
+function playRound(gameInstance){
+
+};
+
 function playGame() {
   //hide the preplay options
   prePlayOptions.classList.add('hide');
-
-  
+  enableChoices();
+  round = setInterval(() => playRound(new GameInstance(1)), landingTime);
 };
 
 function renderInitialDisplay(){
 
-  choices.forEach((e) => disableButton(e));
+  disableChoices();
 
   document.querySelector('.game-container').classList.remove('hide');
   
