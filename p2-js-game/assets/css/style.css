@@ -407,3 +407,15 @@ button{
   width: 7rem;
   margin-inline: 0.5rem;
 }
+
+
+/*for the ending page */
+.endPage{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  gap: 3rem;
+  font-size: 1.5rem;
+}

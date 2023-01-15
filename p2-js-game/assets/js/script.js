@@ -127,29 +127,37 @@ function toggleSound(){
   console.log(`toggleSound btn was clicked`);
 };
 
+function pauseGame(){
+  choices.forEach((e) => e.textContent = `?`);
+  if(capsuleContainer.classList.contains('moving-down')){
+    capsuleContainer.classList.remove('moving-down');
+  }
+  disableChoices();
+  clearInterval(round);
+  currentState = 2; // 1 - on resume , 2 - on paused
+  pauseResumeBtn.textContent = 'Resume';
+}
+
+function resumeGame(){
+  setTimeout(function() {
+    choicesDisplayedA.innerHTML = currentGroup['a'];
+    choicesDisplayedB.innerHTML = currentGroup['b'];
+    choicesDisplayedC.innerHTML = currentGroup['c'];
+    choicesDisplayedD.innerHTML = currentGroup['d'];
+  }, 1000);
+  enableChoices();
+  capsuleContainer.classList.add('moving-down');
+  round = setInterval(() => playRound(currentState),landingTime);
+  currentState = 1;
+  pauseResumeBtn.textContent = 'Pause';
+};
+
 function pauseResumeGame(){
   console.log(`pauseResume btn was clicked`);
   if(currentState === 1){
-    choices.forEach((e) => e.textContent = `?`);
-    if(capsuleContainer.classList.contains('moving-down')){
-      capsuleContainer.classList.remove('moving-down');
-    }
-    disableChoices();
-    clearInterval(round);
-    currentState = 2; // 1 - on resume , 2 - on paused
-    pauseResumeBtn.textContent = 'Resume';
+    pauseGame();
   } else if(currentState === 2){
-    setTimeout(function() {
-      choicesDisplayedA.innerHTML = currentGroup['a'];
-      choicesDisplayedB.innerHTML = currentGroup['b'];
-      choicesDisplayedC.innerHTML = currentGroup['c'];
-      choicesDisplayedD.innerHTML = currentGroup['d'];
-    }, 1000);
-    enableChoices();
-    capsuleContainer.classList.add('moving-down');
-    round = setInterval(() => playRound(currentState),landingTime);
-    currentState = 1;
-    pauseResumeBtn.textContent = 'Pause';
+    resumeGame();
   }
 };
 
@@ -185,7 +193,13 @@ function stopGame(){
 };
 
 function quitGame(){
+  
   console.log(`quit game btn was clicked`);
+  let confirmQuit = prompt('Are you sure you want to quit?<y/n>');
+  if(confirmQuit.trim().toLowerCase() == 'y'){
+    createByePage();
+
+  }
 };
 
 /*================================================================
@@ -226,6 +240,26 @@ prePlayLvlBtns.forEach((btn) => {
 /*================================================================
 |                 HELPER FUNCTIONS                                |
 /================================================================*/
+
+// recreating the page to be displayed after quitting
+function createByePage(){
+  stopGame();
+  restartGame();
+  let oldPage = document.querySelector('.game-container');
+  oldPage.classList.add('hide');
+  document.querySelector('.pre-play-options').classList.add('hide');
+  document.querySelector('.btn--start').classList.add('hide');
+  document.querySelector('#title').classList.add('hide');
+  let newContent = document.createElement('div');
+  newContent.textContent = 'I hope you enjoyed playing the game! :)';
+  let newContent2 = document.createElement('div');
+  newContent2.textContent = `-- Mon`;
+  let containerPage = document.querySelector('.main');
+  containerPage.appendChild(newContent);
+  containerPage.appendChild(newContent2);
+  containerPage.classList.add('endPage');
+}
+
 // stop falling of capsules
 // function stopFalling() {
 //   if(capsuleContainer.classlist.contains('moving-down')){
