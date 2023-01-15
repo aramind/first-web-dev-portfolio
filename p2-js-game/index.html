@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="./assets/css/style.css">
   <title>Document</title>
 </head>
-<body>
+<body id="body">
   <header class="header">
     <h1 id="title">Game Title</h1>
   </header>
@@ -15,14 +15,18 @@
   <main class="main">
     <div class="game-container hide">
       <div class="population" id="population-bar">
-        <div class="population-bar" id="human-pop">
-          <div class="population-title">Humans</div>
-          <div class="population-number" id="pop-of-humans">100000</div>
+        <div class="on-top">
+          <div id="human-pop-details">
+            <div class="population-title">Humans</div>
+            <div class="population-number" id="pop-of-humans"></div>
+          </div>
+          <div id="invader-pop-details">
+            <div class="population-title">Invaders</div>
+            <div class="population-number" id="pop-of-invaders"></div>
+          </div>
         </div>
-        <div class="population-bar" id="invader-pop">
-          <div class="population-title">Invaders</div>
-          <div class="population-number" id="pop-of-invaders">100000</div>
-        </div>
+        <div class="population-bar" id="human-pop"></div>
+        <div class="population-bar" id="invader-pop"></div>
       </div>
       <div class="main-view">
         <div class="backgrounds">
@@ -74,6 +78,27 @@
   <div class="temp-buttons">
     <button class="btn--start" id="start-btn">START GAME</button>
   </div>
+
+  <div class="pre-play-options hide">
+    <div class="pre-play__levels">
+      <div class="pre-play__levels--title">Choose a Mode</div>
+      <button class="btn btn__pre-play btn__pre-play--lvl" id="btn-lvl-1">beginner</button>
+      <button class="btn btn__pre-play btn__pre-play--lvl" id="btn-lvl-2">normal</button>
+      <button class="btn btn__pre-play btn__pre-play--lvl" id="btn-lvl-3">expert</button>
+    </div>
+    <div class="pre-play__sounds">
+      <form>
+        <input type="radio" id="sound-on-radioBtn" name="sounds" value="on">
+        <label class="radio-labels--horizontal"  for="on">Sounds On</label>
+        <input type="radio" id="sound-off-radioBtn" name="sounds" value="off">
+        <label class="radio-labels--horizontal" for="on">Sounds Off</label>
+      </form>
+    </div>
+    <div>
+      <button class="btn__pre-play btn__pre-play--play" id="pre-play-play-btn">PLAY 🚀</button>
+    </div>
+  </div>
+  
   <footer class="footer"></footer>
 
   <script src="./assets/js/script.js"></script>
