@@ -62,6 +62,8 @@ const prePlayBtnLvl1 = document.getElementById('btn-lvl-1');
 const prePlayBtnLvl2 = document.getElementById('btn-lvl-2'); 
 const prePlayBtnLvl3 = document.getElementById('btn-lvl-3');
 
+// audio
+const bgMusic = document.getElementById('bg-music');
 
 /*================================================================
 |                 EVENT LISTENERS                                 |
@@ -481,6 +483,7 @@ function runIntro(){
 
 function run(){
   runIntro();
+  bgMusic.play();
 }
 
 run();
