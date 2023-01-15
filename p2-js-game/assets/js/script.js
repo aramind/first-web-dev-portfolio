@@ -22,8 +22,8 @@ const difficulties = [1,2,3];
 |                 GLOBAL ELEMENTS                                 |
 /================================================================*/
 // population
-let popOfHumansElement = document.querySelector('#pop-of-humans');
-let popOfInvadersElement = document.querySelector('#pop-of-invaders');
+const popOfHumansElement = document.querySelector('#pop-of-humans');
+const popOfInvadersElement = document.querySelector('#pop-of-invaders');
 popOfHumansElement.textContent = popOfHumans;
 popOfInvadersElement.textContent = popOfInvaders;
 // //population variables
@@ -31,21 +31,27 @@ popOfInvadersElement.textContent = popOfInvaders;
 // let popOfInvaders = Number(popOfInvadersElement.innerText);
 
 // capsules
-let capsuleContainer = document.querySelector('.capsule-container');
+const capsuleContainer = document.querySelector('.capsule-container');
 // choices
-let choices = document.querySelectorAll('.choice');
+const choices = document.querySelectorAll('.choice');
 
-let choicesDisplayedA = document.querySelector('#choice1');
-let choicesDisplayedB = document.querySelector('#choice2');
-let choicesDisplayedC = document.querySelector('#choice3');
-let choicesDisplayedD = document.querySelector('#choice4');
+const choicesDisplayedA = document.querySelector('#choice1');
+const choicesDisplayedB = document.querySelector('#choice2');
+const choicesDisplayedC = document.querySelector('#choice3');
+const choicesDisplayedD = document.querySelector('#choice4');
 
 // controls
-let startBtn = document.getElementById('start-btn');
+const startBtn = document.getElementById('start-btn');
+const homeBtn = document.getElementById('home-btn');
+const soundBtn = document.getElementById('sound-btn');
+const pauseResumeBtn = document.getElementById('pause-resume-btn');
+const restartBtn = document.getElementById('restart-btn');
+const stopBtn = document.getElementById('stop-btn');
+const quitBtn = document.getElementById('quit-btn');
 
 //pre-play controls
-let prePlayOptions = document.querySelector('.pre-play-options');
-let prePlayPlayButton = document.getElementById('pre-play-play-btn');
+const prePlayOptions = document.querySelector('.pre-play-options');
+const prePlayPlayButton = document.getElementById('pre-play-play-btn');
 
 /*================================================================
 |                 EVENT LISTENERS                                 |
@@ -101,9 +107,43 @@ function getSelected(e) {
 function enableChoices(){
   choices.forEach((e) => enableButton(e));
 }
+
+// todo: implement
+function goHome(){
+  console.log(`go home btn was clicked`);
+};
+
+function toggleSound(){
+  console.log(`toggleSound btn was clicked`);
+}''
+
+function pauseResumeGame(){
+  console.log(`pauseResume btn was clicked`);
+};
+
+function restartGame(){
+  console.log(`restart btn was clicked`);
+};
+
+function stopGame(){
+  console.log('stop game btn was clicked');
+};
+
+function quitGame(){
+  console.log(`quit game btn was clicked`);
+};
+
 // adding of event listeners
 
+// controls
 startBtn.addEventListener('click', startGame);
+homeBtn.addEventListener('click', goHome);
+soundBtn.addEventListener('click', toggleSound);
+pauseResumeBtn.addEventListener('click', pauseResumeGame);
+restartBtn.addEventListener('click', restartGame);
+stopBtn.addEventListener('click', stopGame);
+quitBtn.addEventListener('click', quitGame);
+
 prePlayPlayButton.addEventListener('click', playGame)
 prePlayPlayButton.addEventListener('click', hidePrePlayOptions)
 prePlayPlayButton.addEventListener('click', initializeGame)
