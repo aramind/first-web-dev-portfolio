@@ -128,17 +128,17 @@ function goHome(){
 };
 
 function toggleSound(){
-  console.log(`toggleSound btn was clicked`);
+  console.log(`toggleSound btn was called`);
+  muteBgMusic();
   if(bgMusic.muted){
-    bgMusic.muted = false;
-    soundBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+    unmuteBgMusic();
   } else {
     muteBgMusic();
-    soundBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
   } 
 };
 
 function pauseGame(){
+  muteBgMusic();
   choices.forEach((e) => e.textContent = `?`);
   if(capsuleContainer.classList.contains('moving-down')){
     capsuleContainer.classList.remove('moving-down');
@@ -146,7 +146,7 @@ function pauseGame(){
   disableChoices();
   clearInterval(round);
   currentState = 2; // 1 - on resume , 2 - on paused
-  pauseResumeBtn.textContent = 'Resume';
+  pauseResumeBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
 }
 
 function resumeGame(){
@@ -175,6 +175,7 @@ function pauseResumeGame(){
 function restartGame(){
   console.log(`restart btn was clicked`);
   //resetting the variables
+  muteBgMusic();
   currentState = 1;
   score = 0;
   popOfHumans = 900000;
@@ -194,7 +195,7 @@ function restartGame(){
 
 function stopGame(){
   console.log('stop game btn was clicked');
-
+  muteBgMusic();
   if(capsuleContainer.classList.contains('moving-down')){
     capsuleContainer.classList.remove('moving-down');
   }
@@ -210,6 +211,7 @@ function quitGame(){
   do{
     let confirmQuit = prompt('Are you sure you want to quit?<y/n>');
     if(confirmQuit.trim().toLowerCase() == 'y'){
+      muteBgMusic();
       restartGame();
       createByePage();
       askAgain = false;
@@ -269,11 +271,12 @@ function cleanUp(){
 // music 
 function unmuteBgMusic(){
   bgMusic.muted = false;
-  
+  soundBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
 }
 
 function muteBgMusic(){
   bgMusic.muted = true;
+  soundBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
 };
 
 // recreating the page to be displayed after quitting
@@ -492,6 +495,8 @@ function loadGameData() {
 function startGame(){
   loadGameData();
   renderInitialDisplay();
+  
+  bgMusic.play();
   // playGame();// to remove if nailagay na sa button
 };
 // TODO
@@ -501,7 +506,6 @@ function runIntro(){
 
 function run(){
   runIntro();
-  bgMusic.play();
 }
 
 run();
