@@ -8,7 +8,7 @@ let score = 0;
 let landingTime = 7000;
 let hasClicked = false;
 let round;
-let popOfHumans = 10000;
+let popOfHumans = 90000;
 let popOfInvaders = 0;
 let gameInstance;
 let currentState = 1; // 1 - onResume, 2 - onPause, 3 - stopped, 4 - isGameOver
@@ -112,23 +112,47 @@ function enableChoices(){
 function goHome(){
   console.log(`go home btn was clicked`);
 };
-
+// todo: implement
 function toggleSound(){
   console.log(`toggleSound btn was clicked`);
-}''
-
+};
+// todo: implement
 function pauseResumeGame(){
   console.log(`pauseResume btn was clicked`);
 };
-
+// todo: implement
 function restartGame(){
   console.log(`restart btn was clicked`);
-};
+  //resetting the variables
+  currentState = 1;
+  score = 0;
+  popOfHumans = 900000;
+  popOfInvaders = 0;
 
+  //updates score and population 
+  updatePopulation();
+  updateScore();
+
+  if(prePlayOptions.classList.contains('hide')){
+    prePlayOptions.classList.remove('hide');
+  };
+  
+  //starts the game again
+  playGame();
+};
+// todo: implement
 function stopGame(){
   console.log('stop game btn was clicked');
-};
 
+  if(capsuleContainer.classList.contains('moving-down')){
+    capsuleContainer.classList.remove('moving-down');
+  }
+  clearInterval(round);
+  currentState = 3;
+  disableChoices();
+  // stopFalling();
+};
+// todo: implement
 function quitGame(){
   console.log(`quit game btn was clicked`);
 };
@@ -153,7 +177,12 @@ prePlayPlayButton.addEventListener('click', initializeGame)
 /*================================================================
 |                 HELPER FUNCTIONS                                |
 /================================================================*/
-
+// stop falling of capsules
+// function stopFalling() {
+//   if(capsuleContainer.classlist.contains('moving-down')){
+//     capsuleContainer.classList.remove('moving-down');
+//   }
+// };
 // need pa ba or update nalang using object properties?
 function getCurrentState(){
   return currentState;
@@ -254,9 +283,7 @@ function playRound(currentState){
       console.log(`onResume`);
 
       updatePopulation();
-      console.log(`updating scoressssssssssssssssssss`);
       updateScore();
-      console.log(`scoressssssssssssssss updated`);
       break;
     }
     case 2: console.log(`onPause`); break;
