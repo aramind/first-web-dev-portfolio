@@ -16,7 +16,43 @@ const moderateGroups = [];
 const difficultGroups = [];
 const difficulties = [1,2,3];
 
+/*================================================================
+|                 GLOBAL ELEMENTS                                 |
+/================================================================*/
+// population
+let popOfHumansElement = document.querySelector('#pop-of-humans');
+let popOfInvadersElement = document.querySelector('#pop-of-invaders');
+popOfHumansElement.textContent = popOfHumans;
+popOfInvadersElement.textContent = popOfInvaders;
+// //population variables
+// let popOfHumans = Number(popOfHumansElement.innerText);
+// let popOfInvaders = Number(popOfInvadersElement.innerText);
 
+// capsules
+let capsuleContainer = document.querySelector('.capsule-container');
+// choices
+let choices = document.querySelectorAll('.choice');
+
+let choicesDisplayedA = document.querySelector('#choice1');
+let choicesDisplayedB = document.querySelector('#choice2');
+let choicesDisplayedC = document.querySelector('#choice3');
+let choicesDisplayedD = document.querySelector('#choice4');
+
+// controls
+let startBtn = document.getElementById('start-btn');
+
+// EVENT LISTENERS
+function disableButton(btn) {
+  btn.disabled = true;
+}
+
+function enableButton(btn) {
+  btn.disabled = false;
+}
+
+// adding of event listeners
+
+startBtn.addEventListener('click',startGame);
 
 // even listener for choices buttons
 let getSelected = (e) => {

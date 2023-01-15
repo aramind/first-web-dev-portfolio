@@ -10,19 +10,14 @@ let hasClicked = false;
 let round;
 let popOfHumans = 10000;
 let popOfInvaders = 0;
+let gameInstance;
+let currentState = 1; // 1 - onResume, 2 - onPause, 3 - stopped, 4 - isGameOver
 
 const easyGroups = [];
 const moderateGroups = [];
 const difficultGroups = [];
 const difficulties = [1,2,3];
 
-// for creating an game instance with difficulty set and state 
-// variable for tracking 
-// decided not to use boolean para sure hindi maging currently in 2 or more states
-// like onResume pero onPause rin
-function GameInstance (state) {
-  this.state = state; // 1 - onResume, 2 - onPause, 3 - stopped, 4 - isGameOver
-};
 /*================================================================
 |                 GLOBAL ELEMENTS                                 |
 /================================================================*/
@@ -58,14 +53,49 @@ let prePlayPlayButton = document.getElementById('pre-play-play-btn');
 // callbacks
 function disableButton(btn) {
   btn.disabled = true;
-}
+};
 
 function enableButton(btn) {
   btn.disabled = false;
-}
+};
 
 function disableChoices(){
   choices.forEach((e) => disableButton(e));
+};
+
+function getSelected(e) {
+  hasClicked = true;
+  if(e.target.innerText != correctAnswer){
+    score = score <= 100 ? 0 : score - 100;
+    popOfInvaders = popOfHumans <= 3000 ? popOfInvaders + popOfHumans : popOfInvaders + 3000;
+    popOfHumans = popOfHumans <= 3000 ? 0 : popOfHumans - 3000;
+  } else {
+    score += 100;
+  }
+
+  disableChoices();
+  updatePopulation();
+  updateScore();
+  // NEED TO SET VARIABLE FOR GAME STATE?
+  
+  // the hardest part of my code to code :(
+  // this enables the functionality that when an option is clicked
+  // the capsules will immediately landed, there will be a short pause, 
+  // and then a new group will be sent falling
+  capsuleContainer.classList.remove('moving-down');
+  console.log(`reached line 90`);
+  capsuleContainer.classList.add('at-bottom');
+  void capsuleContainer.offsetWidth;
+  console.log(`reached line 93`);
+  setTimeout(() =>{
+    capsuleContainer.classList.remove('at-bottom');
+    capsuleContainer.classList.add('moving-down');
+    clearInterval(round);
+    round = setInterval(() => playRound(currentState), landingTime);
+    console.log(`reached line 99`);
+    sendAGroup();
+  },1000);
+  hasClicked = false;
 }
 
 function enableChoices(){
@@ -75,19 +105,134 @@ function enableChoices(){
 
 startBtn.addEventListener('click', startGame);
 prePlayPlayButton.addEventListener('click', playGame)
+prePlayPlayButton.addEventListener('click', hidePrePlayOptions)
+prePlayPlayButton.addEventListener('click', initializeGame)
+
+
+
+/*================================================================
+|                 HELPER FUNCTIONS                                |
+/================================================================*/
+
+// need pa ba or update nalang using object properties?
+function getCurrentState(){
+  return currentState;
+}
+// applies penalty if no choice was selected in a round
+function applyPenalty(){
+  console.log(`--- applying penalty---`);
+  capsuleContainer.classList.remove('moving-down');
+  void capsuleContainer.offsetWidth;
+  capsuleContainer.classList.add('moving-down');
+  if(!hasClicked){
+
+    score = score <= 100? 0 : score - 100;
+    popOfInvaders = popOfHumans <= 3000? popOfInvaders + popOfHumans : popOfInvaders + 3000;
+    popOfHumans = popOfHumans <= 3000? 0 : popOfHumans - 3000;
+  };
+}
+
+// updates the population number and bar
+function updatePopulation() {
+
+  popOfHumansElement.textContent = popOfHumans;
+  popOfInvadersElement.textContent = popOfInvaders;
+
+  //updating the population bar
+  let percentOfHumans = popOfHumans/(popOfHumans + popOfInvaders);
+  let bar = document.getElementById('population-bar');
+  let barWidth = bar.offsetWidth;
+  let pxForHumans = Math.floor(percentOfHumans * barWidth);
+  let string = `grid-template-columns: ${pxForHumans}px 1fr`;
+  bar.style.cssText = string;
+  console.log(`popOfHumans/popOfInvaders ${popOfHumans} / ${popOfInvaders}`);
+}
+
+// updates the score 
+function updateScore(){
+  console.log(`score: ${score}`);
+  document.getElementById('score-value').innerHTML = score;
+}
+
 /*================================================================
 |                 MAIN FUNCTIONS                                  |
 /================================================================*/
 
-function playRound(gameInstance){
+// gets a group from the groups created
+function getAGroup(fromDifficulties){
+  switch (fromDifficulties) {
+    case 1: {
+      return easyGroups[Math.floor(Math.random() * easyGroups.length)];
+    }
+    case 2: {
+      return moderateGroups[Math.floor(Math.random() * moderateGroups.length)];
+    }
+    case 3: {
+      return difficultGroups[Math.floor(Math.random() * difficultGroups.length)];
+    }
+    default: {
+      return easyGroups[0];
+    }
+  }  
+};
+
+//sending the selected group to be displayed on choices buttons
+function sendAGroup(){
+
+  console.log(`--- STARTING A NEW ROUND ---`);
+
+  enableChoices();
+
+  let fromDifficulties = Math.ceil(Math.random() * difficulty);
+  // console.log(`fromDifficulties: ${fromDifficulties}`);
+  let currentGroup = getAGroup(fromDifficulties);
+  console.log(`currentGroup: [${currentGroup['a']}][${currentGroup['b']}][${currentGroup['c']}][${currentGroup['d']}][${currentGroup['key']}]`);
+
+  correctAnswer = currentGroup['key'];
+
+  // thinking to convert the following assignments to forEach for lesser lines of code but might affect the other calls to the elements in the displayed page plus the additional complexity of looping through the properties of the object to be assigned....so decided not to, violating DRY principle but i think it easier to understand
+  choicesDisplayedA.innerHTML = currentGroup['a'];
+  choicesDisplayedB.innerHTML = currentGroup['b'];
+  choicesDisplayedC.innerHTML = currentGroup['c'];
+  choicesDisplayedD.innerHTML = currentGroup['d'];
+
+  console.log(`correctAnswer: [${correctAnswer}]`);
+}
+
+function initializeGame(){
+  choices.forEach((e) => e.addEventListener('click', getSelected));
+  document.querySelector('.capsule-container').classList.add('moving-down'); 
+  sendAGroup();
+  let element = document.querySelector('.moving-down');
+  element.addEventListener('animationend', applyPenalty);
+}
+
+function playRound(currentState){
+  // gameState 1 - resume, 2 - paused, 3  - stopped, 4 - game over
+  switch (currentState){
+    case 1: {
+      console.log(`onResume`);
+
+      updatePopulation();
+      console.log(`updating scoressssssssssssssssssss`);
+      updateScore();
+      console.log(`scoressssssssssssssss updated`);
+      break;
+    }
+    case 2: console.log(`onPause`); break;
+    case 3: console.log(`stopped`); break;
+    case 4: console.log(`isGameOver`); break;
+    default: console.log(`onResume`);
+  }
 
 };
 
-function playGame() {
+function hidePrePlayOptions(){
   //hide the preplay options
   prePlayOptions.classList.add('hide');
-  enableChoices();
-  round = setInterval(() => playRound(new GameInstance(1)), landingTime);
+}
+function playGame() {
+  round = setInterval(() => playRound(currentState), landingTime);
 };
 
 function renderInitialDisplay(){
@@ -106,7 +251,7 @@ function renderInitialDisplay(){
     console.log(`loading game...`);
     loading.classList.add('hide');
     document.querySelector('.pre-play-options').classList.remove('hide');
-  },3000);
+  },400);
 };
 
 function loadGameData() {
