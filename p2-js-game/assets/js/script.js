@@ -117,10 +117,11 @@ function enableChoices(){
   choices.forEach((e) => enableButton(e));
 }
 
-// todo: implement
 function goHome(){
   console.log(`go home btn was clicked`);
-
+  restartGame();
+  cleanUp();
+  run();
 };
 // todo: implement
 function toggleSound(){
@@ -247,6 +248,12 @@ prePlayLvlBtns.forEach((btn) => {
 /*================================================================
 |                 HELPER FUNCTIONS                                |
 /================================================================*/
+// clean up
+
+function cleanUp(){
+  prePlayOptions.classList.add('hide');
+  document.querySelector('.game-container').classList.add('hide');
+}
 
 // recreating the page to be displayed after quitting
 function createByePage(){
