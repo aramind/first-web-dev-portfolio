@@ -69,10 +69,16 @@ prePlayPlayButton.addEventListener('click', playGame)
 /================================================================*/
 
 function playGame() {
+  //hide the preplay options
   prePlayOptions.classList.add('hide');
+
+  
 };
 
 function renderInitialDisplay(){
+
+  choices.forEach((e) => disableButton(e));
+
   document.querySelector('.game-container').classList.remove('hide');
   
   //creates a loading indicator
@@ -80,20 +86,20 @@ function renderInitialDisplay(){
   loading.textContent = 'Loading Game...';
   loading.style.cssText = 'font-size: 2rem; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; text-align: center;';
   document.querySelector('main').appendChild(loading);
-
+  
   setTimeout(function(){
     console.log(`loading game...`);
     loading.classList.add('hide');
     document.querySelector('.pre-play-options').classList.remove('hide');
   },3000);
-  
 };
 
-//builds and populate the data needed to run the game
-//thinking of dividing this large function but since all these will be called
-//just a single time and only on the creation of the game data, decided in the end
-//not to break it down into smaller functions
 function loadGameData() {
+  //builds and populate the data needed to run the game
+  //thinking of dividing this large function but since all these will be called
+  //just a single time and only on the creation of the game data, decided in the end
+  //not to break it down into smaller functions
+
   // function for creating the object containing the options for a group and the key for the correct answer
   // - will create the object regardless of the level of the group
   function createGroup(a, b, c, d, key){
