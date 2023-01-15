@@ -8,10 +8,12 @@ let score = 0;
 let landingTime = 7000;
 let hasClicked = false;
 let round;
-let popOfHumans = 90000;
+let popOfHumans = 15000;
 let popOfInvaders = 0;
 let gameInstance;
 let currentState = 1; // 1 - onResume, 2 - onPause, 3 - stopped, 4 - isGameOver
+
+let selectedButton;
 
 const easyGroups = [];
 const moderateGroups = [];
@@ -58,7 +60,6 @@ const prePlayLvlBtns = document.querySelectorAll('.btn__pre-play--lvl');
 const prePlayBtnLvl1 = document.getElementById('btn-lvl-1'); 
 const prePlayBtnLvl2 = document.getElementById('btn-lvl-2'); 
 const prePlayBtnLvl3 = document.getElementById('btn-lvl-3');
-
 
 
 /*================================================================
@@ -118,16 +119,16 @@ function enableChoices(){
 // todo: implement
 function goHome(){
   console.log(`go home btn was clicked`);
+
 };
 // todo: implement
 function toggleSound(){
   console.log(`toggleSound btn was clicked`);
 };
-// todo: implement
+
 function pauseResumeGame(){
-  console.log(`pauseResume btn was clicked`);
 };
-// todo: implement
+
 function restartGame(){
   console.log(`restart btn was clicked`);
   //resetting the variables
@@ -164,7 +165,9 @@ function quitGame(){
   console.log(`quit game btn was clicked`);
 };
 
-// adding of event listeners
+/*================================================================
+|                 ATTACHING EVENT LISTENERS                       |
+/================================================================*/
 
 // controls
 startBtn.addEventListener('click', startGame);
@@ -185,6 +188,17 @@ prePlayPlayButton.addEventListener('click', initializeGame)
 prePlayBtnLvl1.addEventListener('click', () => difficulty = 1);
 prePlayBtnLvl2.addEventListener('click', () => difficulty = 2);
 prePlayBtnLvl3.addEventListener('click', () => difficulty = 3);
+
+//updating the style of selected buttons
+prePlayLvlBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    if(selectedButton) {
+      selectedButton.classList.remove('selected');
+    }
+    e.target.classList.add('selected');
+    selectedButton = e.target;
+  });
+});
 
 /*================================================================
 |                 HELPER FUNCTIONS                                |
