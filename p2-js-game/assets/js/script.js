@@ -13,6 +13,7 @@ let popOfInvaders = 0;
 let gameInstance;
 let currentState = 1; // 1 - onResume, 2 - onPause, 3 - stopped, 4 - isGameOver
 
+let currentGroup;
 let selectedButton;
 
 const easyGroups = [];
@@ -127,6 +128,29 @@ function toggleSound(){
 };
 
 function pauseResumeGame(){
+  console.log(`pauseResume btn was clicked`);
+  if(currentState === 1){
+    choices.forEach((e) => e.textContent = `?`);
+    if(capsuleContainer.classList.contains('moving-down')){
+      capsuleContainer.classList.remove('moving-down');
+    }
+    disableChoices();
+    clearInterval(round);
+    currentState = 2; // 1 - on resume , 2 - on paused
+    pauseResumeBtn.textContent = 'Resume';
+  } else if(currentState === 2){
+    setTimeout(function() {
+      choicesDisplayedA.innerHTML = currentGroup['a'];
+      choicesDisplayedB.innerHTML = currentGroup['b'];
+      choicesDisplayedC.innerHTML = currentGroup['c'];
+      choicesDisplayedD.innerHTML = currentGroup['d'];
+    }, 1000);
+    enableChoices();
+    capsuleContainer.classList.add('moving-down');
+    round = setInterval(() => playRound(currentState),landingTime);
+    currentState = 1;
+    pauseResumeBtn.textContent = 'Pause';
+  }
 };
 
 function restartGame(){
@@ -148,7 +172,7 @@ function restartGame(){
   //starts the game again
   playGame();
 };
-// todo: implement
+
 function stopGame(){
   console.log('stop game btn was clicked');
 
@@ -158,9 +182,8 @@ function stopGame(){
   clearInterval(round);
   currentState = 3;
   disableChoices();
-  // stopFalling();
 };
-// todo: implement
+
 function quitGame(){
   console.log(`quit game btn was clicked`);
 };
@@ -280,7 +303,7 @@ function sendAGroup(){
 
   let fromDifficulties = Math.ceil(Math.random() * difficulty);
   // console.log(`fromDifficulties: ${fromDifficulties}`);
-  let currentGroup = getAGroup(fromDifficulties);
+  currentGroup = getAGroup(fromDifficulties);
   console.log(`currentGroup: [${currentGroup['a']}][${currentGroup['b']}][${currentGroup['c']}][${currentGroup['d']}][${currentGroup['key']}]`);
 
   correctAnswer = currentGroup['key'];
