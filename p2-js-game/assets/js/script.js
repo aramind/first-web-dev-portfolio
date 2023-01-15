@@ -193,13 +193,20 @@ function stopGame(){
 };
 
 function quitGame(){
-  
   console.log(`quit game btn was clicked`);
-  let confirmQuit = prompt('Are you sure you want to quit?<y/n>');
-  if(confirmQuit.trim().toLowerCase() == 'y'){
-    createByePage();
-
-  }
+  pauseGame();
+  let askAgain = true;
+  do{
+    let confirmQuit = prompt('Are you sure you want to quit?<y/n>');
+    if(confirmQuit.trim().toLowerCase() == 'y'){
+      restartGame();
+      createByePage();
+      askAgain = false;
+    } else if(confirmQuit.trim().toLowerCase() == 'n'){
+      askAgain = false;
+      resumeGame();
+    }
+  } while(askAgain);
 };
 
 /*================================================================
@@ -243,8 +250,6 @@ prePlayLvlBtns.forEach((btn) => {
 
 // recreating the page to be displayed after quitting
 function createByePage(){
-  stopGame();
-  restartGame();
   let oldPage = document.querySelector('.game-container');
   oldPage.classList.add('hide');
   document.querySelector('.pre-play-options').classList.add('hide');
