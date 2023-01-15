@@ -176,6 +176,7 @@ function restartGame(){
   console.log(`restart btn was clicked`);
   //resetting the variables
   muteBgMusic();
+  disableChoices();
   currentState = 1;
   score = 0;
   popOfHumans = 900000;
