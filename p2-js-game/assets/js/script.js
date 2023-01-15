@@ -53,6 +53,14 @@ const quitBtn = document.getElementById('quit-btn');
 const prePlayOptions = document.querySelector('.pre-play-options');
 const prePlayPlayButton = document.getElementById('pre-play-play-btn');
 
+// pre-play level buttons
+const prePlayLvlBtns = document.querySelectorAll('.btn__pre-play--lvl');
+const prePlayBtnLvl1 = document.getElementById('btn-lvl-1'); 
+const prePlayBtnLvl2 = document.getElementById('btn-lvl-2'); 
+const prePlayBtnLvl3 = document.getElementById('btn-lvl-3');
+
+
+
 /*================================================================
 |                 EVENT LISTENERS                                 |
 /================================================================*/
@@ -70,6 +78,7 @@ function disableChoices(){
 };
 
 function getSelected(e) {
+  console.log(`difficulty: ${difficulty}`);
   hasClicked = true;
   if(e.target.innerText != correctAnswer){
     score = score <= 100 ? 0 : score - 100;
@@ -92,13 +101,11 @@ function getSelected(e) {
   console.log(`reached line 90`);
   capsuleContainer.classList.add('at-bottom');
   void capsuleContainer.offsetWidth;
-  console.log(`reached line 93`);
   setTimeout(() =>{
     capsuleContainer.classList.remove('at-bottom');
     capsuleContainer.classList.add('moving-down');
     clearInterval(round);
     round = setInterval(() => playRound(currentState), landingTime);
-    console.log(`reached line 99`);
     sendAGroup();
   },1000);
   hasClicked = false;
@@ -172,7 +179,12 @@ prePlayPlayButton.addEventListener('click', playGame)
 prePlayPlayButton.addEventListener('click', hidePrePlayOptions)
 prePlayPlayButton.addEventListener('click', initializeGame)
 
+// pre-play buttons
 
+// updates the difficulty based on the level selected
+prePlayBtnLvl1.addEventListener('click', () => difficulty = 1);
+prePlayBtnLvl2.addEventListener('click', () => difficulty = 2);
+prePlayBtnLvl3.addEventListener('click', () => difficulty = 3);
 
 /*================================================================
 |                 HELPER FUNCTIONS                                |
