@@ -1,17 +1,24 @@
 /*================================================================
 |                 GLOBAL GAME VARIABLE                            |
 /================================================================*/
+// default value 
+const defaultDifficulty = 3
+const defaultLandingTime = 7000;
+const defaultPopulation = 9000;
 
-let difficulty = 3;
+
+// initialization of variables
+let difficulty = defaultDifficulty;
 let correctAnswer;
 let score = 0;
-let landingTime = 7000;
+let landingTime = defaultLandingTime;
 let hasClicked = false;
 let round;
-let popOfHumans = 15000;
+let popOfHumans = defaultPopulation;
 let popOfInvaders = 0;
 let gameInstance;
-let currentState = 1; // 1 - onResume, 2 - onPause, 3 - stopped, 4 - isGameOver
+let currentState = 1; // 1 - onResume, 2 - onPause, 3 - stopped
+let gameIsEnded = false;
 
 let currentGroup;
 let selectedButton;
@@ -66,6 +73,10 @@ const prePlayBtnLvl3 = document.getElementById('btn-lvl-3');
 const bgMusic = document.getElementById('bg-music');
 const prePlayBtnSound = document.getElementById('btn-preplay--sound');
 
+// temporary message
+// const tempMessageContainer = document.querySelector('.temp-display-message');
+let msg = document.createElement('div');
+msg.className = 'temp-display-msg';
 /*================================================================
 |                 EVENT LISTENERS                                 |
 /================================================================*/
@@ -83,9 +94,9 @@ function disableChoices(){
 };
 
 function getSelected(e) {
-  console.log(`difficulty: ${difficulty}`);
+  console.log(`---you selected ${e.target.innerText}---`);
   hasClicked = true;
-  if(e.target.innerText != correctAnswer){
+  if(e.target.innerText != correctAnswer && !gameIsEnded){
     score = score <= 100 ? 0 : score - 100;
     popOfInvaders = popOfHumans <= 3000 ? popOfInvaders + popOfHumans : popOfInvaders + 3000;
     popOfHumans = popOfHumans <= 3000 ? 0 : popOfHumans - 3000;
@@ -96,14 +107,14 @@ function getSelected(e) {
   disableChoices();
   updatePopulation();
   updateScore();
-  // NEED TO SET VARIABLE FOR GAME STATE?
   
   // the hardest part of my code to code :(
   // this enables the functionality that when an option is clicked
   // the capsules will immediately landed, there will be a short pause, 
   // and then a new group will be sent falling
-  capsuleContainer.classList.remove('moving-down');
-  console.log(`reached line 90`);
+  // capsuleContainer.classList.remove('moving-down');
+  stopFalling();
+  console.log('HEY!')
   capsuleContainer.classList.add('at-bottom');
   void capsuleContainer.offsetWidth;
   setTimeout(() =>{
@@ -111,9 +122,9 @@ function getSelected(e) {
     capsuleContainer.classList.add('moving-down');
     clearInterval(round);
     round = setInterval(() => playRound(currentState), landingTime);
+    console.log(`HEY AGAIN 3`);
     sendAGroup();
   },1000);
-  hasClicked = false;
 }
 
 function enableChoices(){
@@ -129,7 +140,6 @@ function goHome(){
 
 function toggleSound(){
   console.log(`toggleSound btn was called`);
-  muteBgMusic();
   if(bgMusic.muted){
     unmuteBgMusic();
   } else {
@@ -140,16 +150,16 @@ function toggleSound(){
 function pauseGame(){
   muteBgMusic();
   choices.forEach((e) => e.textContent = `?`);
-  if(capsuleContainer.classList.contains('moving-down')){
-    capsuleContainer.classList.remove('moving-down');
-  }
+  stopFalling();
   disableChoices();
   clearInterval(round);
   currentState = 2; // 1 - on resume , 2 - on paused
   pauseResumeBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+  round = setInterval(() => playRound(currentState), landingTime);
 }
 
 function resumeGame(){
+  removeTempDisplayMsg();
   setTimeout(function() {
     choicesDisplayedA.innerHTML = currentGroup['a'];
     choicesDisplayedB.innerHTML = currentGroup['b'];
@@ -158,8 +168,8 @@ function resumeGame(){
   }, 1000);
   enableChoices();
   capsuleContainer.classList.add('moving-down');
-  round = setInterval(() => playRound(currentState),landingTime);
   currentState = 1;
+  round = setInterval(() => playRound(currentState),landingTime);
   pauseResumeBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
 };
 
@@ -167,6 +177,7 @@ function pauseResumeGame(){
   console.log(`pauseResume btn was clicked`);
   if(currentState === 1){
     pauseGame();
+    showTempDisplayMsg('Game is Paused. Press play to continue.');
   } else if(currentState === 2){
     resumeGame();
   }
@@ -175,17 +186,21 @@ function pauseResumeGame(){
 function restartGame(){
   console.log(`restart btn was clicked`);
   //resetting the variables
+  stopGame();
+  removeTempDisplayMsg();
+  console.log(gameIsEnded);
+  gameIsEnded = false;
+  console.log(gameIsEnded);
   muteBgMusic();
   disableChoices();
   currentState = 1;
   score = 0;
-  popOfHumans = 900000;
+  popOfHumans = defaultPopulation;
   popOfInvaders = 0;
 
   //updates score and population 
   updatePopulation();
   updateScore();
-
   if(prePlayOptions.classList.contains('hide')){
     prePlayOptions.classList.remove('hide');
   };
@@ -196,12 +211,12 @@ function restartGame(){
 
 function stopGame(){
   console.log('stop game btn was clicked');
+  showTempDisplayMsg('Game is stopped. Press reset to start again.');
   muteBgMusic();
-  if(capsuleContainer.classList.contains('moving-down')){
-    capsuleContainer.classList.remove('moving-down');
-  }
+  stopFalling();
   clearInterval(round);
   currentState = 3;
+  round = setInterval(() => playRound(currentState), landingTime);
   disableChoices();
 };
 
@@ -262,13 +277,70 @@ prePlayLvlBtns.forEach((btn) => {
 /*================================================================
 |                 HELPER FUNCTIONS                                |
 /================================================================*/
+// removing the temporary display message
+function removeTempDisplayMsg(){
+  document.querySelector('main').removeChild(msg);
+}
+
+// adding a temporary display message
+function showTempDisplayMsg(string){
+  msg.innerHTML = string;
+  document.querySelector('main').appendChild(msg);
+}
+
+// creating the temporary message after the game has finished
+function displayEndGameMessage(x){
+  let string = ``;
+  if(x== 0){
+    // message1.textContent = `Game Over!`;
+    string = `Sorry, you have lost! 💔`;
+  } else{
+    // message1.textContent = `Congratulations!`;
+    string = `You won! 🥳🎊🎉 `;
+  }
+  showTempDisplayMsg(string);
+}
+
+// function to call if won or lost
+function endGame(x){
+  clearInterval(round);
+  round = setInterval(() => playRound(currentState), landingTime);
+  capsuleContainer.classList.add('at-bottom');
+  displayEndGameMessage(x);
+  console.log('game was ended');
+  capsuleContainer.removeEventListener('animationend', applyPenalty);
+}
 
 // clean up
 function cleanUp(){
   prePlayOptions.classList.add('hide');
   document.querySelector('.game-container').classList.add('hide');
 }
+// to check the game status
+function checkGameStatus(){
+  if(score >= 1000 && popOfHumans > 0){
+    gameIsEnded = true;
+    stopGame()
+    clearInterval(round);
+    console.log(`Congratulations! You won!`);
+    currentState = 4;
+    endGame(1);
+  } else if(popOfHumans <= 0){
+    gameIsEnded = true;
+    stopGame()
+    clearInterval(round);
+    currentState = 4;
+    console.log(`Game Over! You lost.`)
+    endGame(0);
+  }
+}
 
+// stops the animation of falling down
+function stopFalling(){
+  if(capsuleContainer.classList.contains('moving-down')){
+    capsuleContainer.classList.remove('moving-down');
+  }
+}
 // music 
 function unmuteBgMusic(){
   bgMusic.muted = false;
@@ -295,6 +367,7 @@ function createByePage(){
   containerPage.appendChild(newContent);
   containerPage.appendChild(newContent2);
   containerPage.classList.add('endPage');
+  // containerPage.classList.add('temp-display-msg');
 }
 
 // stop falling of capsules
@@ -310,14 +383,22 @@ function getCurrentState(){
 // applies penalty if no choice was selected in a round
 function applyPenalty(){
   console.log(`--- applying penalty---`);
-  capsuleContainer.classList.remove('moving-down');
+  // capsuleContainer.classList.remove('moving-down');
+  stopFalling();
   void capsuleContainer.offsetWidth;
   capsuleContainer.classList.add('moving-down');
-  if(!hasClicked){
+  if(!hasClicked && !gameIsEnded){
 
-    score = score <= 100? 0 : score - 100;
+    score = score <= 100 ? 0 : score - 100;
     popOfInvaders = popOfHumans <= 3000? popOfInvaders + popOfHumans : popOfInvaders + 3000;
     popOfHumans = popOfHumans <= 3000? 0 : popOfHumans - 3000;
+
+    updatePopulation();
+    updateScore();
+
+    clearInterval(round);
+    round = setInterval(() => playRound(currentState), landingTime);
+    sendAGroup();
   };
 }
 
@@ -335,12 +416,14 @@ function updatePopulation() {
   let string = `grid-template-columns: ${pxForHumans}px 1fr`;
   bar.style.cssText = string;
   console.log(`popOfHumans/popOfInvaders ${popOfHumans} / ${popOfInvaders}`);
+  checkGameStatus();
 }
 
 // updates the score 
 function updateScore(){
   console.log(`score: ${score}`);
   document.getElementById('score-value').innerHTML = score;
+  checkGameStatus();
 }
 
 /*================================================================
@@ -369,7 +452,7 @@ function getAGroup(fromDifficulties){
 function sendAGroup(){
 
   console.log(`--- STARTING A NEW ROUND ---`);
-
+  hasClicked = false;
   enableChoices();
 
   let fromDifficulties = Math.ceil(Math.random() * difficulty);
@@ -397,19 +480,17 @@ function initializeGame(){
 }
 
 function playRound(currentState){
-  // gameState 1 - resume, 2 - paused, 3  - stopped, 4 - game over
+  console.log(`---status update ---`);
+  // gameState 1 - resume, 2 - paused, 3  - stopped
   switch (currentState){
     case 1: {
-      console.log(`onResume`);
-
-      updatePopulation();
-      updateScore();
+      console.log(`game state: onResume`);
       break;
     }
-    case 2: console.log(`onPause`); break;
-    case 3: console.log(`stopped`); break;
-    case 4: console.log(`isGameOver`); break;
-    default: console.log(`onResume`);
+    case 2: console.log(`game state: onPause`); break;
+    case 3: console.log(`game state: stopped`); break;
+    case 4: console.log(`game state: ended`); break;
+    default: console.log(`game state: onResume`);
   }
 };
 
@@ -418,6 +499,8 @@ function hidePrePlayOptions(){
   prePlayOptions.classList.add('hide');
 }
 function playGame() {
+  console.log(`difficulty: ${difficulty}`);
+  // removeTempDisplayMsg();
   round = setInterval(() => playRound(currentState), landingTime);
 };
 
@@ -427,17 +510,19 @@ function renderInitialDisplay(){
 
   document.querySelector('.game-container').classList.remove('hide');
   
-  //creates a loading indicator
-  let loading = document.createElement('div')
-  loading.textContent = 'Loading Game...';
-  loading.style.cssText = 'font-size: 2rem; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; text-align: center;';
-  document.querySelector('main').appendChild(loading);
+  //creates a display indicator
+  // msg = document.createElement('div')
+  // msg.textContent = 'Loading Game...';
+  // loading.style.cssText = 'font-size: 2rem; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; text-align: center;';
+  // document.querySelector('main').appendChild(msg);
+  showTempDisplayMsg(`Loading Game...`);
   
   setTimeout(function(){
     console.log(`loading game...`);
-    loading.classList.add('hide');
+    // loading.classList.add('hide');
+    document.querySelector('main').removeChild(msg);
     document.querySelector('.pre-play-options').classList.remove('hide');
-  },400);
+  },2000);
 };
 
 function loadGameData() {
