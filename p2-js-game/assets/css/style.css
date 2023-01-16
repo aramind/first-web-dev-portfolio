@@ -35,7 +35,9 @@ button{
   color: #333;
   text-shadow: darkslategray -2px 5px 5px;
 }
+
 body {
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +45,6 @@ body {
 
   width: 100vw;
   height: 100vh;
-
   /* background-color: antiquewhite; */
 }
 
@@ -494,6 +495,14 @@ button{
 
 #start-btn {
   display: none;
+  height: 1.5rem;
+  margin: 0;
+  background-color: #D5F8FE;
+}
+
+#start-btn:hover {
+  background-color: #eb4f4f;
+  color: white;
 }
 
 .removed{
@@ -505,4 +514,13 @@ button{
   height: auto;
   width: 800px;
   object-fit: contain;
+}
+
+.blog{
+  position: absolute;
+  /* outline: 1px solid gray; */
+  top: 0;
+  left: 0;
+  padding: 0.5rem;
+
 }

@@ -568,6 +568,10 @@ function loadGameData() {
   addToGroups('👄', '👀', '👂', '🔧', '🔧', 1);
   addToGroups('🚲', '🚕', '🚌', '🚒', '🚲', 1);
   addToGroups('🚲', '✈️', '🚌', '🏍', '✈️', 1);
+  addToGroups('🍌', '🍇', '🥑', '🥬', '🥬', 1);
+  addToGroups('🦢', '🦋', '🐀', '🦜', '🐀', 1);
+  addToGroups('🐋', '🦈', '🦑', '🐇', '🐇', 1);
+  addToGroups('2️⃣', '6️⃣', '8️⃣', '4️⃣', '2️⃣', 1);
 
     // moderate groups
   addToGroups('49', '36', '55', '25', '55', 2);
@@ -576,6 +580,8 @@ function loadGameData() {
   addToGroups('24', '15', '11', '48', '11', 2);
   addToGroups('gin', 'ego', 'owl', 'boy', 'gin', 2);
   addToGroups('kg', 'lb', 'oz', 'cm', 'cm', 2);
+  addToGroups('33', '66', '99', '22', '22', 2);
+  addToGroups('5', '11', '7', '14', '14', 2);
 
     // difficult groups
   addToGroups('10', '45', '21', '32', '32', 3);

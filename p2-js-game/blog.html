@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=DM+Mono&family=Gloria+Hallelujah&family=Roboto&display=swap" rel="stylesheet">
+  <title>Blog - How I Created My First Browser Game</title>
+  <link rel="stylesheet" href="./assets/css/blogStyle.css">
+</head>
+<body>
+  <header class="head">
+    <h1 class="head__title">How I Create My First Browser Game Using Vanilla Javascript</h1>
+    <h4 class="head__author">by Robin Mon R. Miranda</h4>
+    <h5 class="head__date">January 16, 2023</h5>
+  </header>
+  <br>
+  <br>
+  <main>
+    <p class="p__bold">
+      Hi, I’m Robin Mon Miranda, an aspiring web developer student enrolled in Uplift Code Camp. In this blog, I’ll briefly share how I created my very first browser game using my previous learnings of HTML, CSS, and basic Javascript from Uplift Code Camp. 
+    </p>
+    <br>
+    <p>
+      My first day is of course for ideas. For me to gather ideas on different styles, mechanics, and concepts of most browser games available I spent hours browsing the internet for different games. Upon browsing and briefly playing different games I realized that almost all the games I can think of have already a browser version. 
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f1.jpg" alt="">
+    <p>
+      Since I want my game to be not that common, I spent another couple of hours thinking of ideas after browsing online. Finally, after almost an entire day I decided to make a variation of the game Odd-One-Out after noticing one child answering a similar question but on paper.
+    </p>
+    <br>
+    <p>
+      After deciding on the game I want to create, I started sketching to have a general idea of what the UI will look like. 
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f2.jpg" alt="">
+    <p>
+      For me to also decide on the dimensions, placements, figures, and the likes…
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f3.jpg" alt="">
+    <p>
+      After the initial sketches, I spent two nights learning about different JavaScript, html, and css concepts I think I might be needing to code the different functionalities of the game. Some of the topics I studied include animations in Javascript and CSS, creating objects, embedding audio, and making background images move. 
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f4.jpg" alt="w3 webpage screenshot">
+    <p>
+      Since I have a deadline, after learning those concepts I now opened my laptop and started writing codes. For the first phase, I focus on HTML and CSS and code the general layout. 
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f6.jpg" alt="game screenshot">
+    <p>
+      I then added some game elements. At this phase, all elements are just static. I just wanted to see what will be the general look of the display.
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f7.jpg" alt="game screenshot">
+    <p>
+      When I started coding some logic in Javascript, console log is my bestfriend. At this early stage, as I build the codes I monitored what happens to variables for every function calls.
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f8.jpg" alt="game screenshot with console log">
+    <p>
+      Then, there comes the point where in I must implement animations to make the assets inside my game move. I can say that this is the start where I felt very challenged since it took me multiple tries and readings before I can implement even a very simple implementation needed. But this is also the start of the part, where I can say I learned so much since I have to. 
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f9.jpg" alt="game screenshot">
+    <p>
+      Finally, I make the capsules fall. 😊 
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f10.jpg" alt="game screenshot">
+    <p>
+      The next thing I want to implement is to make them land at the back of the mountains. It’s the reason why I used a layered background image. By manipulating their z-indexes in css I made the capsule land on the back of the mountains in the background.
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f11.jpg" alt="game screenshot">
+    <p>
+      I then started designing the display, deciding on colors, shapes, etc…
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f12.jpg" alt="game screenshot">
+    <p>
+      Up to this point, I think I will be able to finish the project without any more major difficulties. But 1 day before the deadline this was proven wrong. I have difficulty updating the major functionalities, like making the elements coordinate with each other, updating the UI displays, and the functionality for each control. 
+    </p>
+    <p>
+      That’s why...
+    </p>
+    <p>
+      I decided to rewrite my Javascript code….from line 1. ☹
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f13.jpg" alt="blank game screenshot">
+    <img src="./assets/imgsForBlogCompressed/f14.jpg" alt="blank vs code">
+    <p>
+      To avoid my previous mistakes, I then decided to start with a more clear program flow. And for this, I came up with this diagram.
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f15.jpg" alt="program flow diagram">
+    <p>
+      After coding continuously for hours, while simultaneously learning how to implement certain functionalities, and searching for different methods that I can use to implement the functionalities I wanted….I finally able to code up to the point where I decided changing my implementations.
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f16.jpg" alt="game screenshot">
+    <p>
+      After implementing some of the important functionalities, but without sufficient testing and validations. I decided to switch from designing the logic to designing the looks. I finalized the colors that I will be using, using the different colors in the background and this <a href="https://coolors.co/">website</a>.
+    </p>
+    <p>
+      It’s the final set of colors I’ve decided to use.
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f17.jpg" alt="palette of colors">
+    <p>
+      Then I started designing the elements in my game.
+    </p>
+    <p>
+      After setting the colors and looks for majority of the elements in the display. I started searching for audio files. 
+    </p>
+    <p>
+      Before I started this project, I learned how to embed audio files to html so the only thing that needs to be done was to have an audio file. And I got the one I used from this <a href="https://pixabay.com/music/">website</a>.
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f19.jpg" alt="screenshot from internet">
+    <p>
+      After the audio files, I then started thinking of a story related to my game for me to create the introduction. 
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f20.jpg" alt="screenshot of game project">
+    <p>
+      Then, I integrate the introduction game together with the instructions. 
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f21.jpg" alt="screenshot of game project">
+    <img src="./assets/imgsForBlogCompressed/f22.jpg" alt="screenshot of instructions from project">
+    <p>
+      Then comes the day of the deadline. For me there’s still more that I want to check, test, implement, and improve but I have to leave it to what it can do for now since I still have things to prepare for submission like hosting it on a hosting page, making a blog, etc. 
+    </p>
+    <p>
+      At the time of writing this post, here is status of my very first browser game
+    </p>
+    <img src="./assets/imgsForBlogCompressed/f23.jpg" alt="screenshot from game project">
+    <img src="./assets/imgsForBlogCompressed/f24.jpg" alt="screenshot from game project">
+    <img src="./assets/imgsForBlogCompressed/f25.jpg" alt="screenshot from game project">
+    <img src="./assets/imgsForBlogCompressed/f26.jpg" alt="screenshot from game project">
+    <br>
+    <p>
+      You can experience it live at
+    </p>
+    <br>
+    <hr>
+    <br>
+    <div class="link__section"><a href="https://aramind.github.io/OOO---Outsmarting-Offworld-Oppressors-Game/">OOO - Outsmarting Offworld Oppressors Game</a></div>
+    <br>
+    <hr>
+    <br>
+    <p>
+      In making this game, I encountered many challenging tasks. But those challenges tasks also thought me so many things and increased by so much my current knowledge in programming and web development. 😊 
+    </p>    
+  </main>
+  <footer>
+    by R.M.Miranda 2022/footer>
+  </footer>
+  
+
+  
+</body>
+</html>
