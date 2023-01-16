@@ -452,3 +452,57 @@ button{
   color: red;
   text-shadow: darkslategray -2px 5px 5px;
 }
+
+/* INTRODUCTION */
+.intro-container {
+  position: relative;
+  min-height: 100%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s;
+  
+  /* font-weight: bold; */
+  color: #333;
+  /* text-shadow: darkslategray -1px 3px 3px; */
+
+  font-size: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.current-slide {
+  opacity: 1;
+}
+
+.slide {
+  text-align: center;
+}
+
+#start-btn {
+  display: none;
+}
+
+.removed{
+  display: none;
+  z-index: -88888;
+}
+
+#ins-img{
+  height: auto;
+  width: 800px;
+  object-fit: contain;
+}

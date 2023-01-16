@@ -4,7 +4,7 @@
 // default value 
 const defaultDifficulty = 3
 const defaultLandingTime = 7000;
-const defaultPopulation = 9000;
+const defaultPopulation = 15000;
 
 
 // initialization of variables
@@ -28,6 +28,9 @@ const moderateGroups = [];
 const difficultGroups = [];
 const difficulties = [1,2,3];
 
+// INTRO
+const container = document.querySelector('.intro-container');
+const slides = document.querySelectorAll('.slide');
 /*================================================================
 |                 GLOBAL ELEMENTS                                 |
 /================================================================*/
@@ -133,6 +136,7 @@ function enableChoices(){
 
 function goHome(){
   console.log(`go home btn was clicked`);
+  container.style.display = 'flex';
   restartGame();
   cleanUp();
   run();
@@ -367,6 +371,9 @@ function createByePage(){
   containerPage.appendChild(newContent);
   containerPage.appendChild(newContent2);
   containerPage.classList.add('endPage');
+
+  startBtn.style.display = 'none';
+  document.querySelector('#subtitle').style.display = 'none';
   // containerPage.classList.add('temp-display-msg');
 }
 
@@ -578,7 +585,11 @@ function loadGameData() {
   addToGroups('🐍', '🐠', '🐄', '🐓', '🐄', 3);
 };
 
+function hideElement(element) {
+  element.style.display = 'none';
+}
 function startGame(){
+  hideElement(container);
   loadGameData();
   renderInitialDisplay();
   
@@ -595,3 +606,20 @@ function run(){
 }
 
 run();
+
+
+// const startBtn = document.querySelector('.start-btn');
+let currentSlide = 0;
+// intro
+function nextSlide() {
+  slides[currentSlide].classList.remove('current-slide');
+  currentSlide = (currentSlide + 1) % slides.length;
+  slides[currentSlide].classList.add('current-slide');
+  if (currentSlide === 0) {
+    startBtn.style.display = 'block';
+  } else {
+    startBtn.style.display = 'none';
+  }
+}
+
+container.addEventListener('click', nextSlide);
