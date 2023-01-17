@@ -9,6 +9,20 @@
 button{
   border: none;
   cursor: pointer;
+  background-color: lightgray;
+  border-radius: 0.75rem;
+  color: #333;
+  box-shadow: inset 0 0 5px #333;
+}  
+
+button.choice:hover{
+  background-color: #adec2b;
+}
+
+button:disabled{
+  background-color: lightgray;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .header{
@@ -34,6 +48,7 @@ button{
   font-weight: bold;
   color: #333;
   text-shadow: darkslategray -2px 5px 5px;
+  text-align: center;
 }
 
 body {
@@ -61,10 +76,12 @@ body {
   overflow: hidden;
 }
 
+/* game container */
 .game-container{
   position: relative;
 }
 
+/* POPULATION */
 .population{
   /* border: 1px solid green; */
   width: 100%;
@@ -122,6 +139,10 @@ body {
   align-items: flex-end;
   border: 3px solid #eb4f4f;
 }
+
+/* end for population-related styling */
+
+/* air space section styling */
 .main-view{
   /* border: 3px solid red; */
   width: 100%;
@@ -152,6 +173,7 @@ body {
   z-index: 3000;
 }
 
+/* Indicators */
 .indicator--label{
   font-size: 1.5rem;
   font-weight: bold;
@@ -183,6 +205,7 @@ body {
   position: relative;
 }
 
+/* styling for the capsules */
 .capsule-container{
   display: flex;
   flex-flow: row nowrap;
@@ -190,33 +213,15 @@ body {
   align-items: center;
   width: 100%;
   height: 100px;
-
   position: absolute;
   top: 0%;
 }
 
-
 .capsule-img{
   height: 50px;
 }
-/* ship containers */
-.ship-container{
-  /* border: 1px solid yellow; */
-  /* background-color: aquamarine; */
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  align-items: flex-end;
-  z-index: 20;
-  grid-area: ships;
 
-  position: absolute;
-  bottom: 0;
-  /* background-color: red; */
-}
-
+/* falling down animation for the capsules */
 .moving-down{
   width: 100%;
   position: absolute;
@@ -234,7 +239,22 @@ body {
   }
 }
 
-/* spaceships */
+/* styling for ship-related elements */
+
+.ship-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: flex-end;
+  z-index: 20;
+  grid-area: ships;
+
+  position: absolute;
+  bottom: 0;
+}
+
 .ship{
   /* border: 1px solid red; */
   height: 70px;
@@ -247,6 +267,7 @@ body {
   height: 80px;
 }
 
+/* for choices panel */
 .choices{
   /* border: 1px solid gray; */
   height: 100px;
@@ -273,16 +294,7 @@ body {
   box-shadow: inset 5px 1px 30px #246790;
 }
 
-button.choice:hover{
-  background-color: #adec2b;
-}
-
-button:disabled{
-  background-color: lightgray;
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
+/* for the control buttons */
 .controls{
   /* border: 1px solid orange; */
   height: 50px;
@@ -307,6 +319,8 @@ button:disabled{
 }
 
 
+/* helper styling */
+
 /* centered classes */
 .flex--centered{
   display: flex;
@@ -314,12 +328,13 @@ button:disabled{
   align-items: center;
 }
 
+/* to place something at the bottom */
 .at-bottom{
   top: 60%;
   width: 100%;
 }
 
-/* TEMPORARY DISPLAYED */
+/* for temporary displayed elements */
 .pre-play-options{
   position: absolute;
   top: center;
@@ -350,13 +365,6 @@ button:disabled{
 
 .btn__pre-play--sound{
   height: 2rem;
-}
-
-button{
-  background-color: lightgray;
-  border-radius: 0.75rem;
-  color: #333;
-  box-shadow: inset 0 0 5px #333;
 }
 
 .btn__pre-play{
@@ -401,6 +409,7 @@ button{
   height: 1.2rem;
   padding: 0.5rem;
 }
+
 .radio-labels--horizontal{
   font-family: 'Courier New', Courier, monospace;
 }
@@ -428,7 +437,6 @@ button{
   margin-inline: 0.5rem;
 }
 
-
 /*for the ending page */
 .endPage{
   display: flex;
@@ -454,7 +462,7 @@ button{
   text-shadow: darkslategray -2px 5px 5px;
 }
 
-/* INTRODUCTION */
+/* for introduction section */
 .intro-container {
   position: relative;
   min-height: 100%;

@@ -6,8 +6,6 @@ const defaultDifficulty = 3
 const defaultLandingTime = 7000;
 const defaultPopulation = 15000;
 
-
-// initialization of variables
 let difficulty = defaultDifficulty;
 let correctAnswer;
 let score = 0;
@@ -28,9 +26,11 @@ const moderateGroups = [];
 const difficultGroups = [];
 const difficulties = [1,2,3];
 
-// INTRO
+// introduction section variables
 const container = document.querySelector('.intro-container');
 const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+
 /*================================================================
 |                 GLOBAL ELEMENTS                                 |
 /================================================================*/
@@ -45,6 +45,7 @@ popOfInvadersElement.textContent = popOfInvaders;
 
 // capsules
 const capsuleContainer = document.querySelector('.capsule-container');
+
 // choices
 const choices = document.querySelectorAll('.choice');
 
@@ -77,12 +78,13 @@ const bgMusic = document.getElementById('bg-music');
 const prePlayBtnSound = document.getElementById('btn-preplay--sound');
 
 // temporary message
-// const tempMessageContainer = document.querySelector('.temp-display-message');
 let msg = document.createElement('div');
 msg.className = 'temp-display-msg';
+
 /*================================================================
 |                 EVENT LISTENERS                                 |
 /================================================================*/
+
 // callbacks
 function disableButton(btn) {
   btn.disabled = true;
@@ -111,10 +113,10 @@ function getSelected(e) {
   updatePopulation();
   updateScore();
   
-  // the hardest part of my code to code :(
-  // this enables the functionality that when an option is clicked
-  // the capsules will immediately landed, there will be a short pause, 
-  // and then a new group will be sent falling
+  // the hardest part? :(
+  // this enables the functionality that when an option was clicked
+  // the capsules will immediately land, there will be a short pause, 
+  // and then a new group will be sent
   // capsuleContainer.classList.remove('moving-down');
   stopFalling();
   console.log('HEY!')
@@ -157,7 +159,7 @@ function pauseGame(){
   stopFalling();
   disableChoices();
   clearInterval(round);
-  currentState = 2; // 1 - on resume , 2 - on paused
+  currentState = 2; // 1 - on resume , 2 - on pause
   pauseResumeBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
   round = setInterval(() => playRound(currentState), landingTime);
 }
@@ -246,7 +248,7 @@ function quitGame(){
 |                 ATTACHING EVENT LISTENERS                       |
 /================================================================*/
 
-// controls
+//on controls
 startBtn.addEventListener('click', startGame);
 homeBtn.addEventListener('click', goHome);
 soundBtn.addEventListener('click', toggleSound);
@@ -259,9 +261,7 @@ prePlayPlayButton.addEventListener('click', playGame)
 prePlayPlayButton.addEventListener('click', hidePrePlayOptions)
 prePlayPlayButton.addEventListener('click', initializeGame)
 
-// pre-play buttons
-
-// updates the difficulty based on the level selected
+// on pre-play buttons
 prePlayBtnLvl1.addEventListener('click', () => difficulty = 1);
 prePlayBtnLvl2.addEventListener('click', () => difficulty = 2);
 prePlayBtnLvl3.addEventListener('click', () => difficulty = 3);
@@ -278,21 +278,29 @@ prePlayLvlBtns.forEach((btn) => {
   });
 });
 
+//intro section elements
+container.addEventListener('click', nextSlide);
 /*================================================================
 |                 HELPER FUNCTIONS                                |
 /================================================================*/
-// removing the temporary display message
+
+// hides the preplay options
+function hidePrePlayOptions(){
+  prePlayOptions.classList.add('hide');
+}
+
+// removes the temporary display message
 function removeTempDisplayMsg(){
   document.querySelector('main').removeChild(msg);
 }
 
-// adding a temporary display message
+// adds a temporary display message
 function showTempDisplayMsg(string){
   msg.innerHTML = string;
   document.querySelector('main').appendChild(msg);
 }
 
-// creating the temporary message after the game has finished
+// creates the temporary message after the game finishes
 function displayEndGameMessage(x){
   let string = ``;
   if(x== 0){
@@ -305,7 +313,7 @@ function displayEndGameMessage(x){
   showTempDisplayMsg(string);
 }
 
-// function to call if won or lost
+// function to call if game finishes 
 function endGame(x){
   clearInterval(round);
   round = setInterval(() => playRound(currentState), landingTime);
@@ -315,12 +323,12 @@ function endGame(x){
   capsuleContainer.removeEventListener('animationend', applyPenalty);
 }
 
-// clean up
+// clean up to prepare for the closing page
 function cleanUp(){
   prePlayOptions.classList.add('hide');
   document.querySelector('.game-container').classList.add('hide');
 }
-// to check the game status
+// checks the game status 
 function checkGameStatus(){
   if(score >= 1000 && popOfHumans > 0){
     gameIsEnded = true;
@@ -345,7 +353,8 @@ function stopFalling(){
     capsuleContainer.classList.remove('moving-down');
   }
 }
-// music 
+
+// toggle music 
 function unmuteBgMusic(){
   bgMusic.muted = false;
   soundBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
@@ -356,17 +365,22 @@ function muteBgMusic(){
   soundBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
 };
 
-// recreating the page to be displayed after quitting
+// recreates the page to be displayed after quitting
 function createByePage(){
+
   let oldPage = document.querySelector('.game-container');
   oldPage.classList.add('hide');
+  
   document.querySelector('.pre-play-options').classList.add('hide');
   document.querySelector('.btn--start').classList.add('hide');
   document.querySelector('#title').classList.add('hide');
+  
   let newContent = document.createElement('div');
   newContent.textContent = 'I hope you enjoyed playing the game! :)';
+  
   let newContent2 = document.createElement('div');
   newContent2.textContent = `-- Mon`;
+  
   let containerPage = document.querySelector('.main');
   containerPage.appendChild(newContent);
   containerPage.appendChild(newContent2);
@@ -374,19 +388,12 @@ function createByePage(){
 
   startBtn.style.display = 'none';
   document.querySelector('#subtitle').style.display = 'none';
-  // containerPage.classList.add('temp-display-msg');
 }
 
-// stop falling of capsules
-// function stopFalling() {
-//   if(capsuleContainer.classlist.contains('moving-down')){
-//     capsuleContainer.classList.remove('moving-down');
-//   }
-// };
-// need pa ba or update nalang using object properties?
 function getCurrentState(){
   return currentState;
 }
+
 // applies penalty if no choice was selected in a round
 function applyPenalty(){
   console.log(`--- applying penalty---`);
@@ -433,6 +440,22 @@ function updateScore(){
   checkGameStatus();
 }
 
+function hideElement(element) {
+  element.style.display = 'none';
+}
+
+// introduction section
+function nextSlide() {
+  slides[currentSlide].classList.remove('current-slide');
+  currentSlide = (currentSlide + 1) % slides.length;
+  slides[currentSlide].classList.add('current-slide');
+  if (currentSlide === 0) {
+    startBtn.style.display = 'block';
+  } else {
+    startBtn.style.display = 'none';
+  }
+}
+
 /*================================================================
 |                 MAIN FUNCTIONS                                  |
 /================================================================*/
@@ -469,7 +492,7 @@ function sendAGroup(){
 
   correctAnswer = currentGroup['key'];
 
-  // thinking to convert the following assignments to forEach for lesser lines of code but might affect the other calls to the elements in the displayed page plus the additional complexity of looping through the properties of the object to be assigned....so decided not to, violating DRY principle but i think it easier to understand
+  // thinking to convert the following assignments to forEach for lesser lines of code but might affect the other calls to the elements in the displayed page plus the additional complexity of looping through the properties of the object to be assigned....so decided not to, violating DRY principle but i think it easier to understand this way..
   choicesDisplayedA.innerHTML = currentGroup['a'];
   choicesDisplayedB.innerHTML = currentGroup['b'];
   choicesDisplayedC.innerHTML = currentGroup['c'];
@@ -494,17 +517,24 @@ function playRound(currentState){
       console.log(`game state: onResume`);
       break;
     }
-    case 2: console.log(`game state: onPause`); break;
-    case 3: console.log(`game state: stopped`); break;
-    case 4: console.log(`game state: ended`); break;
-    default: console.log(`game state: onResume`);
+    case 2:{
+      console.log(`game state: onPause`); 
+      break;
+    }
+    case 3: {
+      console.log(`game state: stopped`); 
+      break;
+    }
+    case 4:{
+      console.log(`game state: ended`); 
+      break;
+    }
+    default:{
+      console.log(`game state: onResume`);
+    }
   }
 };
 
-function hidePrePlayOptions(){
-  //hide the preplay options
-  prePlayOptions.classList.add('hide');
-}
 function playGame() {
   console.log(`difficulty: ${difficulty}`);
   // removeTempDisplayMsg();
@@ -514,9 +544,10 @@ function playGame() {
 function renderInitialDisplay(){
 
   disableChoices();
-
-  document.querySelector('.game-container').classList.remove('hide');
   
+  document.querySelector('.game-container').classList.remove('hide');
+  startBtn.style.display = 'none';
+
   //creates a display indicator
   // msg = document.createElement('div')
   // msg.textContent = 'Loading Game...';
@@ -526,7 +557,6 @@ function renderInitialDisplay(){
   
   setTimeout(function(){
     console.log(`loading game...`);
-    // loading.classList.add('hide');
     document.querySelector('main').removeChild(msg);
     document.querySelector('.pre-play-options').classList.remove('hide');
   },2000);
@@ -591,9 +621,6 @@ function loadGameData() {
   addToGroups('🐍', '🐠', '🐄', '🐓', '🐄', 3);
 };
 
-function hideElement(element) {
-  element.style.display = 'none';
-}
 function startGame(){
   hideElement(container);
   loadGameData();
@@ -602,30 +629,4 @@ function startGame(){
   bgMusic.play();
   // playGame();// to remove if nailagay na sa button
 };
-// TODO
-function runIntro(){
-  // startGame(); // to remove kapag nalagay na sa button
-};
 
-function run(){
-  runIntro();
-}
-
-run();
-
-
-// const startBtn = document.querySelector('.start-btn');
-let currentSlide = 0;
-// intro
-function nextSlide() {
-  slides[currentSlide].classList.remove('current-slide');
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].classList.add('current-slide');
-  if (currentSlide === 0) {
-    startBtn.style.display = 'block';
-  } else {
-    startBtn.style.display = 'none';
-  }
-}
-
-container.addEventListener('click', nextSlide);
