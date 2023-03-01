@@ -6,6 +6,7 @@ import MainLayout from "./layout/MainLayout";
 import HomePage from "./pages/HomePage";
 import SummaryPage from "./pages/SummaryPage";
 import AddPage from "./pages/AddPage";
+import ChartsPage from "./pages/ChartsPage";
 
 // Router
 const router = createBrowserRouter([
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
         errorElement: <NotFound />,
       },
       { path: "add", element: <AddPage />, errorElement: <NotFound /> },
+      { path: "charts", element: <ChartsPage />, errorElement: <NotFound /> },
     ],
   },
 ]);

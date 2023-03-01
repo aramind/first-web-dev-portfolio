@@ -5,14 +5,45 @@ const NavigationBar = () => {
   return (
     <nav className="nav--ls">
       <div className="nav__logo">
-        <Link>MONitime App</Link>
+        <Link to="/monitimeapp">MONitime App</Link>
       </div>
       <div className="nav__links">
-        <NavLink className="nav__link">Home</NavLink>
-        <NavLink className="nav__link">Summary</NavLink>
-        <NavLink className="nav__link">Charts</NavLink>
-        <NavLink className="nav__link">Add</NavLink>
-        <NavLink className="nav__link">Blog</NavLink>
+        <NavLink
+          className="nav__link"
+          to="/monitimeapp"
+        >
+          Home
+        </NavLink>
+        <NavLink
+          className="nav__link"
+          to="/monitimeapp/summary"
+        >
+          Summary
+        </NavLink>
+        <NavLink
+          className="nav__link"
+          to="/monitimeapp/Charts"
+        >
+          Charts
+        </NavLink>
+        <NavLink
+          className="nav__link"
+          to="/monitimeapp/Add"
+        >
+          Add
+        </NavLink>
+        <NavLink
+          className="nav__link"
+          to="/monitimeapp/blog"
+        >
+          Blog
+        </NavLink>
+        <NavLink
+          className="nav__link"
+          to="/"
+        >
+          Exit App
+        </NavLink>
       </div>
     </nav>
   );

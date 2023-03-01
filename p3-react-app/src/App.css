@@ -1,3 +1,54 @@
-.App {
+/* PAGES */
+.page {
+  width: 100%;
+  min-height: 100%;
+  color: #eee;
+}
+
+.page--title {
+  /* background-color: blue; */
+  min-height: 100vh;
   text-align: center;
+}
+
+#app-title {
+  padding-top: 30vh;
+  /* outline: 1px solid black; */
+  min-width: 100%;
+  font-size: 4rem;
+}
+
+#title-subtext {
+  color: #00e1ff;
+  font-size: 1.5rem;
+  margin-bottom: 6rem;
+  margin-top: -1rem;
+}
+
+/* BUTTON  */
+.btn {
+  font-weight: bold;
+  color: #eee;
+  border: none;
+  background-image: linear-gradient(180deg, #4ab07e, #2b80b9);
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.btn--start {
+  font-size: 2rem;
+  padding: 1rem;
+  width: 30rem;
+  border-radius: 4rem;
+  margin: 1rem;
+}
+
+/* LINKS */
+#donate {
+  color: #00e1ff;
+  text-decoration: none;
+}
+
+#donate:hover {
+  color: #0077ff;
 }
