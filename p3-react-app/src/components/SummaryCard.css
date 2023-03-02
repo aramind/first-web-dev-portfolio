@@ -1,7 +1,8 @@
 .card {
   width: 280px;
   height: 200px;
-  background-image: linear-gradient(180deg, #2b337b, #090a11);
+  /* background-image: linear-gradient(180deg, #2b337b, #090a11); */
+  background-color: #202632;
 
   border-radius: 2rem;
 
