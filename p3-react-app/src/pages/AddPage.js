@@ -1,4 +1,6 @@
+import "./AddPage.css";
 import React from "react";
+import AddPageInputForm from "../components/AddPageInputForm";
 import DropdownList from "../components/DropdownList";
 
 const AddPage = () => {
@@ -18,12 +20,23 @@ const AddPage = () => {
   };
 
   return (
-    <div>
-      <DropdownList
-        placeHolder="Select..."
-        options={options}
-        onChange={(value) => handleSelect(value)}
-      />
+    <div className="page add-page">
+      <div className="add-page__inputs">
+        <DropdownList
+          placeHolder="Select..."
+          options={options}
+          onChange={(value) => handleSelect(value)}
+        />
+
+        <AddPageInputForm
+          className="add-page__input input--hr"
+          max={24}
+        />
+        <AddPageInputForm
+          className="add-page__input input--min"
+          max={60}
+        />
+      </div>
     </div>
   );
 };

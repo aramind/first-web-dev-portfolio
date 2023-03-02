@@ -1,5 +1,6 @@
 .dropdown-container {
-  width: 30%;
+  width: 300px;
+  max-width: 90%;
   text-align: left;
   border: 1px solid #ccc;
   position: relative;

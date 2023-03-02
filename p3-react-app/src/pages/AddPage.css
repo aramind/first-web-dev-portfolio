@@ -1,0 +1,12 @@
+.add-page__inputs {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  /* background-color: aquamarine; */
+  border: 1px solid black;
+}
+
+.add-page__input {
+  width: 5rem;
+}
