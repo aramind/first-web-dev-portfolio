@@ -1,20 +1,20 @@
 .add-page {
   padding-top: 20px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .add-page__inputs {
   display: flex;
   justify-content: center;
-  align-items: stretch;
-
+  align-items: center;
+  flex-wrap: wrap;
   /* background-color: aquamarine; */
   /* border: 1px solid black; */
   gap: 2rem;
-
-  height: 3.3rem;
 }
 
 .add-page__buttons {

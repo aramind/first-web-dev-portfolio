@@ -1,15 +1,6 @@
-import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import TitlePage from "./pages/TitlePage";
-import NotFound from "./pages/NotFound";
-import MainLayout from "./layout/MainLayout";
-import HomePage from "./pages/HomePage";
-import SummaryPage from "./pages/SummaryPage";
-import AddPage from "./pages/AddPage";
-import ChartsPage from "./pages/ChartsPage";
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 
-const initialRecords = [
+const records = [
   {
     id: "2023-2-28-sleep",
     yr: "2023",
@@ -596,41 +587,14 @@ const initialRecords = [
   },
 ];
 
-// Router
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <TitlePage />,
-    errorElement: <NotFound />,
-  },
-  {
-    path: "/monitimeapp",
-    element: <MainLayout />,
-    errorElement: <NotFound />,
-    children: [
-      { path: "", element: <HomePage />, errorElement: <NotFound /> },
-      {
-        path: "summary",
-        element: <SummaryPage />,
-        errorElement: <NotFound />,
-      },
-      { path: "add", element: <AddPage />, errorElement: <NotFound /> },
-      { path: "charts", element: <ChartsPage />, errorElement: <NotFound /> },
-    ],
-  },
-]);
+const DataContext = createContext();
 
-function App() {
-  const [records, setRecords] = useState(initialRecords);
+const DataProvider = (props) => {
+  const [data, setData] = useState(records);
 
   return (
-    <RouterProvider router={router}>
-      <MainLayout
-        records={records}
-        setRecords={setRecords}
-      />
-    </RouterProvider>
+    <DataContext.Provider value={data}>{props.children}</DataContext.Provider>
   );
-}
+};
 
-export default App;
+export { DataContext, DataProvider };

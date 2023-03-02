@@ -1,64 +1,160 @@
 import "./AddPage.css";
-import React from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import AddPageInputForm from "../components/AddPageInputForm";
 import DropdownList from "../components/DropdownList";
 import Button from "../components/Button";
 import TableDetail from "../components/TableDetail";
 
-const AddPage = () => {
-  const options = [
-    { value: "sleep", label: "sleep" },
-    { value: "work", label: "work" },
-    { value: "learn", label: "learn" },
-    { value: "self", label: "self" },
-    { value: "social", label: "social" },
-    { value: "play", label: "play" },
-    { value: "h&fitness", label: "h&fitness" },
-    { value: "others", label: "others" },
-  ];
+const initialTodaysRecord = {
+  sleep: 0,
+  work: 0,
+  learn: 0,
+  self: 0,
+  social: 0,
+  play: 0,
+  fitness: 0,
+  others: 0,
+};
 
-  const handleSelect = (value) => {
-    console.log(`You selected ${value.value}`);
+const initialOptions = [
+  { value: "sleep", label: "sleep" },
+  { value: "work", label: "work" },
+  { value: "learn", label: "learn" },
+  { value: "self", label: "self" },
+  { value: "social", label: "social" },
+  { value: "play", label: "play" },
+  { value: "fitness", label: "fitness" },
+  { value: "others", label: "others" },
+];
+
+const AddPage = ({ records, setRecords }) => {
+  const [todaysRecord, setTodaysRecord] = useState(initialTodaysRecord);
+  const [options, setOptions] = useState(initialOptions);
+  const [newAct, setNewAct] = useState({});
+  const [activity, setActivity] = useState(" ");
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+
+  console.log("rendering");
+  console.log(activity);
+  console.log(hours);
+  console.log(minutes);
+  console.log(newAct);
+
+  const newRecord = {
+    activity: activity,
+    hours: hours,
+    minutes: minutes,
+  };
+
+  const getRemainingTime = () => {
+    let mins =
+      (24 -
+        todaysRecord.sleep -
+        todaysRecord.work -
+        todaysRecord.learn -
+        todaysRecord.self -
+        todaysRecord.social -
+        todaysRecord.play -
+        todaysRecord.fitness -
+        todaysRecord.others) *
+      60;
+    return `${Math.floor(mins / 60)} hr(s) and ${mins % 60} min(s)`;
   };
 
   const tds = [
-    { label: "sleep", hrs: 5, percent: 3 },
-    { label: "word", hrs: 4.5, percent: 13 },
-    { label: "learn", hrs: 11, percent: 23 },
-    { label: "self", hrs: 3, percent: 5 },
-    { label: "social", hrs: 2.5, percent: 10 },
-    { label: "play", hrs: 0, percent: 5 },
-    { label: "h&fitness", hrs: 1, percent: 2 },
-    { label: "others", hrs: 1, percent: 1 },
+    {
+      label: "sleep",
+      hrs: `${(+todaysRecord.sleep).toFixed(1)}`,
+      percent: `${((todaysRecord.sleep / 24) * 100).toFixed(2)}`,
+    },
+    {
+      label: "work",
+      hrs: `${(+todaysRecord.work).toFixed(1)}`,
+      percent: `${((todaysRecord.work / 24) * 100).toFixed(2)}`,
+    },
+    {
+      label: "learn",
+      hrs: `${(+todaysRecord.learn).toFixed(1)}`,
+      percent: `${((todaysRecord.learn / 24) * 100).toFixed(2)}`,
+    },
+    {
+      label: "self",
+      hrs: `${(+todaysRecord.self).toFixed(1)}`,
+      percent: `${((todaysRecord.self / 24) * 100).toFixed(2)}`,
+    },
+    {
+      label: "social",
+      hrs: `${(+todaysRecord.social).toFixed(1)}`,
+      percent: `${((todaysRecord.social / 24) * 100).toFixed(2)}`,
+    },
+    {
+      label: "play",
+      hrs: `${(+todaysRecord.play).toFixed(1)}`,
+      percent: `${((todaysRecord.play / 24) * 100).toFixed(2)}`,
+    },
+    {
+      label: "fitness",
+      hrs: `${(+todaysRecord.fitness).toFixed(1)}`,
+      percent: `${((todaysRecord.fitness / 24) * 100).toFixed(2)}`,
+    },
+    {
+      label: "others",
+      hrs: `${(+todaysRecord.others).toFixed(1)}`,
+      percent: `${((todaysRecord.others / 24) * 100).toFixed(2)}`,
+    },
   ];
+
   return (
     <div className="page add-page">
       <div className="add-page__inputs">
         <DropdownList
           placeHolder="Select..."
           options={options}
-          onChange={(value) => handleSelect(value)}
+          onChange={(value) => setActivity(value.value)}
         />
 
         <AddPageInputForm
           className="add-page__input input--hr"
           max={24}
           label="hrs and"
+          value={hours}
+          onChange={(e) => setHours(e.target.value)}
         />
         <AddPageInputForm
           className="add-page__input input--min"
           max={60}
           label="mins"
+          value={minutes}
+          onChange={(e) => setMinutes(e.target.value)}
         />
 
         <div className="add-page__buttons">
           <Button
             label="Add"
             className="add-page__button"
+            onClick={() => {
+              console.log("hey");
+              setNewAct(newRecord);
+              setTodaysRecord((prevState) => ({
+                ...prevState,
+                [activity]:
+                  prevState[activity] + Number(hours) + Number(minutes / 60),
+              }));
+            }}
           />
           <Button
             label="Subtract"
             className="add-page__button"
+            onClick={() => {
+              console.log("hey");
+              setNewAct(newRecord);
+              setTodaysRecord((prevState) => ({
+                ...prevState,
+                [activity]:
+                  prevState[activity] - Number(hours) - Number(minutes / 60),
+              }));
+            }}
           />
           <Button
             label="Clear"
@@ -118,7 +214,7 @@ const AddPage = () => {
       </div>
 
       <div className="add-page__status">
-        <p>Remaining Time : 5.5 hrs</p>
+        <p>Remaining Time : {`${getRemainingTime()}`}</p>
       </div>
 
       <div className="add-page__controls">
