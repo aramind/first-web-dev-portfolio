@@ -1,0 +1,49 @@
+.page--home {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page--home__text {
+  font-size: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-left: 5rem;
+}
+
+.page--home__img {
+  margin-right: 5rem;
+}
+.page--home__greet {
+  font-size: 3rem;
+}
+
+.page--home__img {
+  height: 30vw;
+}
+
+.page--home__img img {
+  height: 100%;
+  opacity: 0.5;
+}
+
+.qoute {
+  width: 50vw;
+  font-size: 2rem;
+  font-style: italic;
+  padding: 2rem;
+}
+
+.qoute__text {
+  text-align: center;
+}
+
+.qoute__auth {
+  font-size: 1.5rem;
+  text-align: right;
+  padding-right: 3rem;
+}

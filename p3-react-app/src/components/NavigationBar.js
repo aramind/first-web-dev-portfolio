@@ -1,11 +1,17 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import "./NavigationBar.css";
 
 const NavigationBar = () => {
   return (
     <nav className="nav--ls">
       <div className="nav__logo">
-        <Link to="/monitimeapp">MONitime App</Link>
+        <Link
+          to="/monitimeapp"
+          className="nav__link nav__link--logo"
+        >
+          MONitime App
+        </Link>
       </div>
       <div className="nav__links">
         <NavLink
@@ -42,7 +48,7 @@ const NavigationBar = () => {
           className="nav__link"
           to="/"
         >
-          Exit App
+          Log out
         </NavLink>
       </div>
     </nav>

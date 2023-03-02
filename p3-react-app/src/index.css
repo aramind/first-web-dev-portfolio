@@ -2,23 +2,17 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  /* font-family: "Exo 2", sans-serif; */
+  font-family: "Prompt", sans-serif;
+  /* font-family: "Work Sans", sans-serif; */
+  color: #ddd;
 }
 
 body {
   background-color: lightgray;
-
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   min-height: 100vh;
 
   background-image: linear-gradient(180deg, #15664f, #1e4363);
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+/* MY STYLING */

@@ -1,0 +1,38 @@
+.nav--ls {
+  height: 80px;
+  /* border-bottom: 1px solid gray; */
+  color: #ddd;
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-inline: 1rem;
+  padding-top: 0.5rem;
+}
+
+.nav__link {
+  text-decoration: none;
+  /* border: 1px solid red; */
+  padding-inline: 1rem;
+  font-family: "Exo 2", sans-serif;
+  font-size: 1.25rem;
+}
+
+.nav__link:hover {
+  color: #00ffff;
+}
+
+.nav__link:visited {
+  text-decoration: blue;
+}
+
+.nav__link--logo {
+  font-size: 2.5rem;
+  font-family: "Prompt", sans-serif;
+  font-weight: bold;
+}
+
+.nav__links {
+  display: flex;
+  gap: 2rem;
+}
