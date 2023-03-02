@@ -7,11 +7,12 @@
 }
 
 .dropdown-input {
-  padding: 5px;
+  padding-inline: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   user-select: none;
+  font-size: 2rem;
 }
 
 .dropdown-menu {
@@ -21,13 +22,17 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: auto;
-  max-height: 350px;
+  max-height: 500px;
   background-color: #fff;
+
+  font-size: 1.5rem;
 }
 
 .dropdown-item {
   padding: 5px;
   cursor: pointer;
+  color: #222;
+  text-align: center;
 }
 
 .dropdown-item:hover {
