@@ -18,3 +18,21 @@
   align-items: center;
   gap: 2rem;
 }
+
+#add-page-table {
+  width: 30%;
+}
+
+.table-head {
+  text-align: center;
+  font-size: 2rem;
+  padding: 1.5rem;
+}
+
+.add-page__visuals {
+  /* border: 1px solid black; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

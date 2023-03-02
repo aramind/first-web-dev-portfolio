@@ -1,7 +1,7 @@
 button {
   height: 100%;
   width: 120px;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
 
   background-image: linear-gradient(180deg, #4ab07e, #2b80b9);
   border: none;
