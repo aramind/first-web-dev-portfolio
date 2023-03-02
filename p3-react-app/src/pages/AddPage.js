@@ -52,17 +52,32 @@ const AddPage = () => {
         />
 
         <div className="add-page__buttons">
-          <Button label="Add" />
-          <Button label="Subtract" />
-          <Button label="Clear" />
+          <Button
+            label="Add"
+            className="add-page__button"
+          />
+          <Button
+            label="Subtract"
+            className="add-page__button"
+          />
+          <Button
+            label="Clear"
+            className="add-page__button"
+          />
         </div>
       </div>
+
       <div className="add-page__visuals">
         <div
           id="add-page-table"
           className="add-page-visual"
         >
-          <div className="table-head">Summary for Today</div>
+          <p className="table-title">Summary for Today</p>
+          <div className="table-head">
+            <p>Activity</p>
+            <p>Total (hrs)</p>
+            <p>% of the Day</p>
+          </div>
           <div className="table-details">
             {tds.map((e, index) => (
               <TableDetail
@@ -74,10 +89,47 @@ const AddPage = () => {
             ))}
           </div>
         </div>
+
         <div
+          id="add-page-table"
+          className="add-page-visual"
+        >
+          <p className="table-title">Summary for Today</p>
+          <div className="table-head">
+            <p>Activity</p>
+            <p>Total (hrs)</p>
+            <p>% of the Day</p>
+          </div>
+          <div className="table-details">
+            {tds.map((e, index) => (
+              <TableDetail
+                key={index}
+                label={e.label}
+                hrs={e.hrs}
+                percent={e.percent}
+              />
+            ))}
+          </div>
+        </div>
+        {/* <div
           id="add-page-chart"
           className="add-page-visual"
-        ></div>
+        ></div> */}
+      </div>
+
+      <div className="add-page__status">
+        <p>Remaining Time : 5.5 hrs</p>
+      </div>
+
+      <div className="add-page__controls">
+        <Button
+          label="Save Record"
+          className="add-page__control add-page__control--save"
+        />
+        <Button
+          label="Clear"
+          className="add-page__control add-page__control--clear"
+        />
       </div>
     </div>
   );

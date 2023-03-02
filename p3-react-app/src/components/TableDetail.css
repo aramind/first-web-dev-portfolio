@@ -1,10 +1,15 @@
 .table-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  align-content: center;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
+
   gap: 2rem;
   font-size: 1.2rem;
   width: 100%;
 
   padding-inline: 1.5rem;
+  text-align: center;
 }

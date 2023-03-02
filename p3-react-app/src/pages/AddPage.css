@@ -1,3 +1,10 @@
+.add-page {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .add-page__inputs {
   display: flex;
   justify-content: center;
@@ -23,10 +30,26 @@
   width: 30%;
 }
 
-.table-head {
+.table-title {
   text-align: center;
   font-size: 2rem;
-  padding: 1.5rem;
+}
+
+.table-head {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
+  gap: 2rem;
+  font-size: 1.2rem;
+  width: 100%;
+
+  padding-inline: 1.5rem;
+  text-align: center;
 }
 
 .add-page__visuals {
@@ -35,4 +58,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  gap: 2rem;
+}
+
+.add-page-visual {
+  background-color: white;
+  padding: 1rem;
+}
+
+.add-page-visual p {
+  color: black;
+}
+
+.add-page__controls {
+  height: 3.3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+
+  margin: auto;
+}
+
+.add-page__status {
+  font-size: 1.5rem;
+  margin-inline: auto;
+  margin-top: -1rem;
 }

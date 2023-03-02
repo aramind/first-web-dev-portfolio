@@ -1,11 +1,23 @@
-button {
+.add-page__button,
+.add-page__control {
   height: 100%;
-  width: 120px;
   border-radius: 1rem;
 
   background-image: linear-gradient(180deg, #4ab07e, #2b80b9);
   border: none;
+  cursor: pointer;
 
   font-size: 1.5rem;
-  cursor: pointer;
+}
+
+.add-page__button {
+  width: 120px;
+}
+
+.add-page__control--save {
+  width: 400px;
+}
+
+.add-page__control--clear {
+  width: 120px;
 }
