@@ -5,4 +5,10 @@
   color: black;
   border-radius: 5px;
   border: none;
+  height: 100%;
+}
+
+.add-page-input-form__label {
+  font-size: 2rem;
+  height: 100%;
 }

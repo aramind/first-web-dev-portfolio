@@ -1,12 +1,20 @@
 .add-page__inputs {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: stretch;
 
   /* background-color: aquamarine; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  gap: 2rem;
+
+  height: 3.3rem;
 }
 
-.add-page__input {
-  width: 5rem;
+.add-page__buttons {
+  /* background-color: aqua; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }

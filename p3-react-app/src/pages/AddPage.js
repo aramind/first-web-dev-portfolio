@@ -2,6 +2,7 @@ import "./AddPage.css";
 import React from "react";
 import AddPageInputForm from "../components/AddPageInputForm";
 import DropdownList from "../components/DropdownList";
+import Button from "../components/Button";
 
 const AddPage = () => {
   const options = [
@@ -31,11 +32,19 @@ const AddPage = () => {
         <AddPageInputForm
           className="add-page__input input--hr"
           max={24}
+          label="hrs and"
         />
         <AddPageInputForm
           className="add-page__input input--min"
           max={60}
+          label="mins"
         />
+
+        <div className="add-page__buttons">
+          <Button label="Add" />
+          <Button label="Subtract" />
+          <Button label="Clear" />
+        </div>
       </div>
     </div>
   );
