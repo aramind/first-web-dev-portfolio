@@ -1,6 +1,17 @@
 import "./SummaryPage.css";
-import React, { useReducer } from "react";
+import React, { useState } from "react";
 import SummaryCard from "../components/SummaryCard";
+
+const labels = [
+  "sleep",
+  "work",
+  "learn",
+  "self",
+  "social",
+  "play",
+  "h&fitness",
+  "others",
+];
 
 const initialState = {
   dailySummary: [],
@@ -8,14 +19,18 @@ const initialState = {
   monthlySummary: [],
 };
 
-const reducer = (state, { type, payload }) => {};
-
 const SummaryPage = ({ records, setRecords }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [range, setRange] = useState("");
 
-  const handleDisplayDaily = () => {};
-  const handleDisplayWeekly = () => {};
-  const handleDisplayMonthly = () => {};
+  const handleDisplayDaily = () => {
+    setRange("day");
+  };
+  const handleDisplayWeekly = () => {
+    setRange("week");
+  };
+  const handleDisplayMonthly = () => {
+    setRange("Month");
+  };
 
   return (
     <div className="page page--summary">
@@ -49,14 +64,12 @@ const SummaryPage = ({ records, setRecords }) => {
         </div>
       </div>
       <div className="page--summary__cards">
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
+        {labels.map((label) => (
+          <SummaryCard
+            label={label}
+            range={range}
+          />
+        ))}
       </div>
     </div>
   );

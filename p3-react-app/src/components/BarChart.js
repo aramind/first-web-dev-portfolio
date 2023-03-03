@@ -1,5 +1,6 @@
 import { Bar } from "react-chartjs-2";
 import React, { useState, useEffect } from "react";
+import "./Charts.css";
 
 const BarChart = ({ todaysRecord }) => {
   const [data, setData] = useState({
@@ -54,7 +55,7 @@ const BarChart = ({ todaysRecord }) => {
   };
 
   return (
-    <div style={{}}>
+    <div id="barChart">
       <Bar
         data={data}
         options={options}

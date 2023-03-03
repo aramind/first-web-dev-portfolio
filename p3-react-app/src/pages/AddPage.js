@@ -130,27 +130,6 @@ const AddPage = () => {
 
       <ErrorMessage message={errorMsg} />
       <div className="add-page__visuals">
-        {/* <div
-          id="add-page-table"
-          className="add-page-visual"
-        >
-          <p className="table-title">Summary for Today</p>
-          <div className="table-head">
-            <p>Activity</p>
-            <p>Total (hrs)</p>
-            <p>% of the Day</p>
-          </div>
-          <div className="table-details">
-            {tds.map((e, index) => (
-              <TableDetail
-                key={index}
-                label={e.label}
-                hrs={e.hrs}
-                percent={e.percent}
-              />
-            ))}
-          </div>
-        </div> */}
         <div
           id="add-page-chart2"
           className="add-page-visual"
