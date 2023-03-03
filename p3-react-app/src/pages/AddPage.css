@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  color: #ddd;
   /* background-color: aquamarine; */
   /* border: 1px solid black; */
   gap: 2rem;
@@ -83,5 +84,6 @@
 .add-page__status {
   font-size: 1.5rem;
   margin-inline: auto;
-  margin-top: -1rem;
+  margin-top: 1rem;
+  color: #ddd;
 }

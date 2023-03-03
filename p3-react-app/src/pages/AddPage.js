@@ -81,7 +81,7 @@ const AddPage = () => {
     <div className="page add-page">
       <div className="add-page__inputs">
         <DropdownList
-          placeHolder="Select..."
+          placeHolder="Select Activity . . ."
           options={options}
           onChange={(value) => setActivity(value.value)}
         />
@@ -112,6 +112,9 @@ const AddPage = () => {
                   prevState[activity] + Number(hours) + Number(minutes / 60),
               }));
               localStorage.setItem("records", JSON.stringify(todaysRecord));
+              setMinutes(0);
+              setHours(0);
+              setActivity("");
             }}
           />
           <Button
@@ -123,6 +126,7 @@ const AddPage = () => {
                 [activity]:
                   prevState[activity] - Number(hours) - Number(minutes / 60),
               }));
+              localStorage.setItem("records", JSON.stringify(todaysRecord));
             }}
           />
         </div>

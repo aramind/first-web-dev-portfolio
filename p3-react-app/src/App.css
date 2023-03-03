@@ -2,7 +2,7 @@
 .page {
   width: 100%;
   height: 100%;
-  color: #eee;
+  /* color: #eee; */
 }
 
 .page--title {
@@ -16,13 +16,16 @@
   /* outline: 1px solid black; */
   min-width: 100%;
   font-size: 4rem;
+  color: #ddd;
+  transform: translateY(-30px);
 }
 
 #title-subtext {
   color: #00e1ff;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-bottom: 6rem;
-  margin-top: -1rem;
+  /* margin-top: 2rem; */
+  transform: translateY(-70px);
 }
 
 /* BUTTON  */
@@ -45,6 +48,7 @@
 
 .small {
   font-family: "Exo 2", sans-serif;
+  color: #ddd;
 }
 /* LINKS */
 #donate {
@@ -54,4 +58,20 @@
 
 #donate:hover {
   color: #0077ff;
+}
+
+button {
+  color: #ddd;
+}
+
+button:hover {
+  color: #00e1ff;
+  transform: translateY(-5px);
+  transition: 1s;
+}
+
+#app-title:hover {
+  transform: translateY(-45px);
+  transition: 1.5s;
+  transition-timing-function: ease-in-out;
 }

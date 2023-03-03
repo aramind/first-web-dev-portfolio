@@ -22,22 +22,24 @@ const NavigationBar = () => {
         </NavLink>
         <NavLink
           className="nav__link"
+          to="/monitimeapp/Add"
+        >
+          Add
+        </NavLink>
+        <NavLink
+          className="nav__link"
           to="/monitimeapp/summary"
         >
           Summary
         </NavLink>
+
         <NavLink
           className="nav__link"
           to="/monitimeapp/Charts"
         >
           Charts
         </NavLink>
-        <NavLink
-          className="nav__link"
-          to="/monitimeapp/Add"
-        >
-          Add
-        </NavLink>
+
         <NavLink
           className="nav__link"
           to="/monitimeapp/blog"

@@ -17,7 +17,7 @@
   height: 100%;
   width: 100%;
   border-radius: 2rem;
-  background-image: linear-gradient(180deg, #5f59df, #2b337b);
+  background-image: linear-gradient(225deg, #5f59df, #1d235a);
 
   padding: 1.5rem;
   position: relative;
@@ -55,9 +55,10 @@
 }
 
 .card__option:hover {
-  color: #7fffd4;
+  color: #00e1ff;
   font-weight: bold;
   text-decoration: underline;
+  transform: translateX(10px);
 }
 
 /* SUMMARY CARDS */

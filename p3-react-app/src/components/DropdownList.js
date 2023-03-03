@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./DropdownList.css";
-import down from "./";
 
 const DropdownList = ({ placeHolder, options, onChange }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -51,7 +50,7 @@ const DropdownList = ({ placeHolder, options, onChange }) => {
       >
         <div className="dropdown-selected-value">{getDisplay()}</div>
         <div className="dropdown-tools">
-          <div className="dropdown-tool">arrDown</div>
+          <div className="dropdown-tool">V</div>
         </div>
       </div>
       {showMenu && (

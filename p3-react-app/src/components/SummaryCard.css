@@ -1,9 +1,9 @@
 .card {
   width: 250px;
   height: 180px;
-  /* background-image: linear-gradient(180deg, #2b337b, #090a11); */
-  background-color: #202632;
-
+  background-image: linear-gradient(225deg, #342ea1, #070a20);
+  /* background-color: #202632; */
+  color: #ddd;
   border-radius: 2rem;
 
   padding: 0.75rem;
@@ -14,9 +14,8 @@
 }
 
 .card__head {
-  display: flex;
-  flex-flow: row nowrap;
-  gap: 2rem;
+  text-align: center;
+  text-transform: capitalize;
 }
 
 .card__values,
@@ -46,4 +45,9 @@
 .card__labels {
   align-content: flex-start;
   margin-top: -1rem;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  transition: 0.5s ease-in-out;
 }

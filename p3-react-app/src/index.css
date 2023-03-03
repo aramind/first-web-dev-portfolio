@@ -6,11 +6,10 @@
   /* font-family: "Exo 2", sans-serif; */
   font-family: "Prompt", sans-serif;
   /* font-family: "Work Sans", sans-serif; */
-  color: #ddd;
 }
 
 body {
-  background-color: lightgray;
+  /* background-color: lightgray; */
   min-height: 100vh;
 
   background-image: linear-gradient(180deg, #15664f, #1e4363);

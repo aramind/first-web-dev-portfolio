@@ -1,6 +1,7 @@
 .page--chart {
   max-height: calc(100vh - 80px);
   transform: translateY(100px);
+  color: #ddd;
 }
 
 .message {

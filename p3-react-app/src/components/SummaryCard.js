@@ -21,7 +21,7 @@ const SummaryCard = ({ label, range }) => {
         <p className="card__label">%</p>
       </div>
       <div className="card_previous">
-        Prev/ {range} - {fetchDummyRandomData(24)} -{fetchDummyRandomData(15)} -{" "}
+        Prev. {range} - {fetchDummyRandomData(24)} -{fetchDummyRandomData(15)} -{" "}
         {fetchDummyRandomData(50)}%
       </div>
     </div>

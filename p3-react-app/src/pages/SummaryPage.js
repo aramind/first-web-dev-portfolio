@@ -23,10 +23,10 @@ const SummaryPage = ({ records, setRecords }) => {
   const [range, setRange] = useState("");
 
   const handleDisplayDaily = () => {
-    setRange("day");
+    setRange("Day");
   };
   const handleDisplayWeekly = () => {
-    setRange("week");
+    setRange("Week");
   };
   const handleDisplayMonthly = () => {
     setRange("Month");
