@@ -83,20 +83,11 @@ const AddPage = () => {
 
   const handleClear = () => {
     localStorage.setItem("records", JSON.stringify(initialTodaysRecord));
+    setTodaysRecord(initialTodaysRecord);
     setMinutes(0);
     setHours(0);
     setActivity("");
   };
-  // const getRemainingTime = () => {
-  //   let totalHrs = labels.reduce(
-  //     (total, activity) => total + todaysRecord[activity],
-  //     0
-  //   );
-  //   let minsRemaining = (24 - totalHrs) * 60;
-  //   return `${Math.floor(minsRemaining / 60)} hr(s) and ${Math.floor(
-  //     minsRemaining % 60
-  //   )} min(s)`;
-  // };
 
   let totalHrsRemaining =
     24 - labels.reduce((total, activity) => total + todaysRecord[activity], 0);
