@@ -65,29 +65,70 @@ const AddPage = () => {
     setActivity("");
   };
 
-  const handleAdd = () => {
-    setTodaysRecord((prevState) => ({
+  const updateTodaysRecord = (prevState, activity, hours, minutes) => {
+    return {
       ...prevState,
       [activity]: prevState[activity] + Number(hours) + Number(minutes / 60),
-    }));
+    };
+  };
+
+  const handleAdd = () => {
+    setTodaysRecord((prevState) =>
+      updateTodaysRecord(prevState, activity, hours, minutes)
+    );
     updateRecord();
   };
 
   const handleSubtract = () => {
-    setTodaysRecord((prevState) => ({
-      ...prevState,
-      [activity]: prevState[activity] - Number(hours) - Number(minutes / 60),
-    }));
+    setTodaysRecord((prevState) =>
+      updateTodaysRecord(prevState, activity, -hours, -minutes)
+    );
     updateRecord();
   };
 
-  const handleClear = () => {
-    localStorage.setItem("records", JSON.stringify(initialTodaysRecord));
+  const resetState = () => {
     setTodaysRecord(initialTodaysRecord);
     setMinutes(0);
     setHours(0);
     setActivity("");
   };
+
+  const handleClear = () => {
+    localStorage.setItem("records", JSON.stringify(initialTodaysRecord));
+    resetState();
+  };
+
+  // const handleClear = () => {
+  //   localStorage.setItem("records", JSON.stringify(initialTodaysRecord));
+  //   setTodaysRecord(initialTodaysRecord);
+  //   setMinutes(0);
+  //   setHours(0);
+  //   setActivity("");
+  // };
+
+  // const handleAdd = () => {
+  //   setTodaysRecord((prevState) => ({
+  //     ...prevState,
+  //     [activity]: prevState[activity] + Number(hours) + Number(minutes / 60),
+  //   }));
+  //   updateRecord();
+  // };
+
+  // const handleSubtract = () => {
+  //   setTodaysRecord((prevState) => ({
+  //     ...prevState,
+  //     [activity]: prevState[activity] - Number(hours) - Number(minutes / 60),
+  //   }));
+  //   updateRecord();
+  // };
+
+  // const handleClear = () => {
+  //   localStorage.setItem("records", JSON.stringify(initialTodaysRecord));
+  //   setTodaysRecord(initialTodaysRecord);
+  //   setMinutes(0);
+  //   setHours(0);
+  //   setActivity("");
+  // };
 
   let totalHrsRemaining =
     24 - labels.reduce((total, activity) => total + todaysRecord[activity], 0);
