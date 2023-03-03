@@ -65,6 +65,11 @@
 .add-page-visual {
   background-color: white;
   padding: 1rem;
+  width: 400px;
+  height: 400px;
+  margin-inline: 2rem;
+  padding: 1rem;
+  border-radius: 10px;
 }
 
 .add-page-visual p {

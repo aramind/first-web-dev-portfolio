@@ -6,6 +6,10 @@ import Button from "../components/Button";
 import TableDetail from "../components/TableDetail";
 import ErrorMessage from "../components/ErrorMessage";
 import PieChart from "../components/PieChart";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const initialTodaysRecord = {
   sleep: 0,
@@ -58,14 +62,6 @@ const AddPage = ({ records, setRecords }) => {
     return `${Math.floor(minsRemaining / 60)} hr(s) and ${Math.floor(
       minsRemaining % 60
     )} min(s)`;
-  };
-
-  const getRemainingHrs = () => {
-    const totalHrs = labels.reduce(
-      (total, activity) => total + todaysRecord[activity],
-      0
-    );
-    return 24 - totalHrs;
   };
 
   const tds = [];
@@ -150,7 +146,7 @@ const AddPage = ({ records, setRecords }) => {
           </div>
         </div>
 
-        {/* <div
+        <div
           id="add-page-table"
           className="add-page-visual"
         >
@@ -170,13 +166,13 @@ const AddPage = ({ records, setRecords }) => {
               />
             ))}
           </div>
-        </div> */}
-        {/* <div
+        </div>
+        <div
           id="add-page-chart"
           className="add-page-visual"
         >
-
-        </div> */}
+          <PieChart todaysRecord={todaysRecord} />
+        </div>
       </div>
 
       <div className="add-page__status">
