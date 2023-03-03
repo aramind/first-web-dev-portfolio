@@ -1,0 +1,25 @@
+.page--chart {
+  max-height: calc(100vh - 80px);
+  transform: translateY(100px);
+}
+
+.message {
+  text-align: center;
+}
+
+.message p {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+
+#btn--upgrade {
+  height: 100%;
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
+
+  background-image: linear-gradient(180deg, #4ab07e, #2b80b9);
+  border: none;
+  cursor: pointer;
+
+  font-size: 1.5rem;
+}

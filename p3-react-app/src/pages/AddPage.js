@@ -4,6 +4,8 @@ import AddPageInputForm from "../components/AddPageInputForm";
 import DropdownList from "../components/DropdownList";
 import Button from "../components/Button";
 import TableDetail from "../components/TableDetail";
+import ErrorMessage from "../components/ErrorMessage";
+import PieChart from "../components/PieChart";
 
 const initialTodaysRecord = {
   sleep: 0,
@@ -30,73 +32,49 @@ const initialOptions = [
 const AddPage = ({ records, setRecords }) => {
   const [todaysRecord, setTodaysRecord] = useState(initialTodaysRecord);
   const [options, setOptions] = useState(initialOptions);
-  const [activity, setActivity] = useState(" ");
+  const [activity, setActivity] = useState("");
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
+  const [hasError, setHasError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(" ");
 
-  // const newRecord = {
-  //   activity: activity,
-  //   hours: hours,
-  //   minutes: minutes,
-  // };
+  const labels = [
+    "sleep",
+    "work",
+    "learn",
+    "self",
+    "social",
+    "play",
+    "fitness",
+    "others",
+  ];
 
   const getRemainingTime = () => {
-    let mins =
-      (24 -
-        todaysRecord.sleep -
-        todaysRecord.work -
-        todaysRecord.learn -
-        todaysRecord.self -
-        todaysRecord.social -
-        todaysRecord.play -
-        todaysRecord.fitness -
-        todaysRecord.others) *
-      60;
-    return `${Math.floor(mins / 60)} hr(s) and ${Math.floor(mins % 60)} min(s)`;
+    const totalHrs = labels.reduce(
+      (total, activity) => total + todaysRecord[activity],
+      0
+    );
+    const minsRemaining = (24 - totalHrs) * 60;
+    return `${Math.floor(minsRemaining / 60)} hr(s) and ${Math.floor(
+      minsRemaining % 60
+    )} min(s)`;
   };
 
-  const tds = [
-    {
-      label: "sleep",
-      hrs: `${(+todaysRecord.sleep).toFixed(1)}`,
-      percent: `${((todaysRecord.sleep / 24) * 100).toFixed(2)}`,
-    },
-    {
-      label: "work",
-      hrs: `${(+todaysRecord.work).toFixed(1)}`,
-      percent: `${((todaysRecord.work / 24) * 100).toFixed(2)}`,
-    },
-    {
-      label: "learn",
-      hrs: `${(+todaysRecord.learn).toFixed(1)}`,
-      percent: `${((todaysRecord.learn / 24) * 100).toFixed(2)}`,
-    },
-    {
-      label: "self",
-      hrs: `${(+todaysRecord.self).toFixed(1)}`,
-      percent: `${((todaysRecord.self / 24) * 100).toFixed(2)}`,
-    },
-    {
-      label: "social",
-      hrs: `${(+todaysRecord.social).toFixed(1)}`,
-      percent: `${((todaysRecord.social / 24) * 100).toFixed(2)}`,
-    },
-    {
-      label: "play",
-      hrs: `${(+todaysRecord.play).toFixed(1)}`,
-      percent: `${((todaysRecord.play / 24) * 100).toFixed(2)}`,
-    },
-    {
-      label: "fitness",
-      hrs: `${(+todaysRecord.fitness).toFixed(1)}`,
-      percent: `${((todaysRecord.fitness / 24) * 100).toFixed(2)}`,
-    },
-    {
-      label: "others",
-      hrs: `${(+todaysRecord.others).toFixed(1)}`,
-      percent: `${((todaysRecord.others / 24) * 100).toFixed(2)}`,
-    },
-  ];
+  const getRemainingHrs = () => {
+    const totalHrs = labels.reduce(
+      (total, activity) => total + todaysRecord[activity],
+      0
+    );
+    return 24 - totalHrs;
+  };
+
+  const tds = [];
+
+  for (const label of labels) {
+    const hrs = (+todaysRecord[label]).toFixed(1);
+    const percent = ((todaysRecord[label] / 24) * 100).toFixed(2);
+    tds.push({ label, hrs, percent });
+  }
 
   return (
     <div className="page add-page">
@@ -127,7 +105,6 @@ const AddPage = ({ records, setRecords }) => {
             label="Add"
             className="add-page__button"
             onClick={() => {
-              console.log("hey");
               setTodaysRecord((prevState) => ({
                 ...prevState,
                 [activity]:
@@ -139,7 +116,6 @@ const AddPage = ({ records, setRecords }) => {
             label="Subtract"
             className="add-page__button"
             onClick={() => {
-              console.log("hey");
               setTodaysRecord((prevState) => ({
                 ...prevState,
                 [activity]:
@@ -150,6 +126,7 @@ const AddPage = ({ records, setRecords }) => {
         </div>
       </div>
 
+      <ErrorMessage message={errorMsg} />
       <div className="add-page__visuals">
         <div
           id="add-page-table"
@@ -173,7 +150,7 @@ const AddPage = ({ records, setRecords }) => {
           </div>
         </div>
 
-        <div
+        {/* <div
           id="add-page-table"
           className="add-page-visual"
         >
@@ -193,11 +170,13 @@ const AddPage = ({ records, setRecords }) => {
               />
             ))}
           </div>
-        </div>
+        </div> */}
         {/* <div
           id="add-page-chart"
           className="add-page-visual"
-        ></div> */}
+        >
+
+        </div> */}
       </div>
 
       <div className="add-page__status">
