@@ -30,22 +30,15 @@ const initialOptions = [
 const AddPage = ({ records, setRecords }) => {
   const [todaysRecord, setTodaysRecord] = useState(initialTodaysRecord);
   const [options, setOptions] = useState(initialOptions);
-  const [newAct, setNewAct] = useState({});
   const [activity, setActivity] = useState(" ");
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
-  console.log("rendering");
-  console.log(activity);
-  console.log(hours);
-  console.log(minutes);
-  console.log(newAct);
-
-  const newRecord = {
-    activity: activity,
-    hours: hours,
-    minutes: minutes,
-  };
+  // const newRecord = {
+  //   activity: activity,
+  //   hours: hours,
+  //   minutes: minutes,
+  // };
 
   const getRemainingTime = () => {
     let mins =
@@ -59,7 +52,7 @@ const AddPage = ({ records, setRecords }) => {
         todaysRecord.fitness -
         todaysRecord.others) *
       60;
-    return `${Math.floor(mins / 60)} hr(s) and ${mins % 60} min(s)`;
+    return `${Math.floor(mins / 60)} hr(s) and ${Math.floor(mins % 60)} min(s)`;
   };
 
   const tds = [
@@ -135,7 +128,6 @@ const AddPage = ({ records, setRecords }) => {
             className="add-page__button"
             onClick={() => {
               console.log("hey");
-              setNewAct(newRecord);
               setTodaysRecord((prevState) => ({
                 ...prevState,
                 [activity]:
@@ -148,17 +140,12 @@ const AddPage = ({ records, setRecords }) => {
             className="add-page__button"
             onClick={() => {
               console.log("hey");
-              setNewAct(newRecord);
               setTodaysRecord((prevState) => ({
                 ...prevState,
                 [activity]:
                   prevState[activity] - Number(hours) - Number(minutes / 60),
               }));
             }}
-          />
-          <Button
-            label="Clear"
-            className="add-page__button"
           />
         </div>
       </div>
