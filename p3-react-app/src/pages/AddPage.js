@@ -58,15 +58,10 @@ const AddPage = () => {
     "others",
   ];
 
-  const getRemainingTime = () => {
-    const totalHrs = labels.reduce(
-      (total, activity) => total + todaysRecord[activity],
-      0
+  const remainingHrs = () => {
+    return Number(
+      labels.reduce((total, activity) => total + todaysRecord[activity], 0)
     );
-    const minsRemaining = (24 - totalHrs) * 60;
-    return `${Math.floor(minsRemaining / 60)} hr(s) and ${Math.floor(
-      minsRemaining % 60
-    )} min(s)`;
   };
 
   const tds = [];
@@ -76,6 +71,29 @@ const AddPage = () => {
     const percent = ((todaysRecord[label] / 24) * 100).toFixed(2);
     tds.push({ label, hrs, percent });
   }
+
+  const setAndSave = () => {
+    localStorage.setItem("records", JSON.stringify(todaysRecord));
+    setMinutes(0);
+    setHours(0);
+    setActivity("");
+  };
+
+  const handleAdd = () => {
+    setTodaysRecord((prevState) => ({
+      ...prevState,
+      [activity]: prevState[activity] + Number(hours) + Number(minutes / 60),
+    }));
+    setAndSave();
+  };
+
+  const handleSubtract = () => {
+    setTodaysRecord((prevState) => ({
+      ...prevState,
+      [activity]: prevState[activity] - Number(hours) - Number(minutes / 60),
+    }));
+    setAndSave();
+  };
 
   return (
     <div className="page add-page">
@@ -105,29 +123,12 @@ const AddPage = () => {
           <Button
             label="Add"
             className="add-page__button"
-            onClick={() => {
-              setTodaysRecord((prevState) => ({
-                ...prevState,
-                [activity]:
-                  prevState[activity] + Number(hours) + Number(minutes / 60),
-              }));
-              localStorage.setItem("records", JSON.stringify(todaysRecord));
-              setMinutes(0);
-              setHours(0);
-              setActivity("");
-            }}
+            onClick={handleAdd}
           />
           <Button
             label="Subtract"
             className="add-page__button"
-            onClick={() => {
-              setTodaysRecord((prevState) => ({
-                ...prevState,
-                [activity]:
-                  prevState[activity] - Number(hours) - Number(minutes / 60),
-              }));
-              localStorage.setItem("records", JSON.stringify(todaysRecord));
-            }}
+            onClick={handleSubtract}
           />
         </div>
       </div>
@@ -171,7 +172,10 @@ const AddPage = () => {
       </div>
 
       <div className="add-page__status">
-        <p>Remaining Time : {`${getRemainingTime()}`}</p>
+        <p>
+          Remaining Time : {Math.ceil(remainingHrs / 60)} and{" "}
+          {(remainingHrs * 60) % 60}
+        </p>
       </div>
 
       <div className="add-page__controls">
