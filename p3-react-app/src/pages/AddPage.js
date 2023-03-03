@@ -58,21 +58,7 @@ const AddPage = () => {
     "others",
   ];
 
-  const remainingHrs = () => {
-    return Number(
-      labels.reduce((total, activity) => total + todaysRecord[activity], 0)
-    );
-  };
-
-  const tds = [];
-
-  for (const label of labels) {
-    const hrs = (+todaysRecord[label]).toFixed(1);
-    const percent = ((todaysRecord[label] / 24) * 100).toFixed(2);
-    tds.push({ label, hrs, percent });
-  }
-
-  const setAndSave = () => {
+  const updateRecord = () => {
     localStorage.setItem("records", JSON.stringify(todaysRecord));
     setMinutes(0);
     setHours(0);
@@ -84,7 +70,7 @@ const AddPage = () => {
       ...prevState,
       [activity]: prevState[activity] + Number(hours) + Number(minutes / 60),
     }));
-    setAndSave();
+    updateRecord();
   };
 
   const handleSubtract = () => {
@@ -92,8 +78,39 @@ const AddPage = () => {
       ...prevState,
       [activity]: prevState[activity] - Number(hours) - Number(minutes / 60),
     }));
-    setAndSave();
+    updateRecord();
   };
+
+  const handleClear = () => {
+    localStorage.setItem("records", JSON.stringify(initialTodaysRecord));
+    setMinutes(0);
+    setHours(0);
+    setActivity("");
+  };
+  // const getRemainingTime = () => {
+  //   let totalHrs = labels.reduce(
+  //     (total, activity) => total + todaysRecord[activity],
+  //     0
+  //   );
+  //   let minsRemaining = (24 - totalHrs) * 60;
+  //   return `${Math.floor(minsRemaining / 60)} hr(s) and ${Math.floor(
+  //     minsRemaining % 60
+  //   )} min(s)`;
+  // };
+
+  let totalHrsRemaining =
+    24 - labels.reduce((total, activity) => total + todaysRecord[activity], 0);
+
+  console.log(totalHrsRemaining);
+  console.log(typeof totalHrsRemaining);
+
+  const tds = [];
+
+  for (const label of labels) {
+    const hrs = (+todaysRecord[label]).toFixed(1);
+    const percent = ((todaysRecord[label] / 24) * 100).toFixed(2);
+    tds.push({ label, hrs, percent });
+  }
 
   return (
     <div className="page add-page">
@@ -173,8 +190,8 @@ const AddPage = () => {
 
       <div className="add-page__status">
         <p>
-          Remaining Time : {Math.ceil(remainingHrs / 60)} and{" "}
-          {(remainingHrs * 60) % 60}
+          Remaining Time : {Math.floor(totalHrsRemaining)} hrs and{" "}
+          {((Number(totalHrsRemaining) * 60) % 60).toFixed(0)} mins
         </p>
       </div>
 
@@ -186,6 +203,7 @@ const AddPage = () => {
         <Button
           label="Clear"
           className="add-page__control add-page__control--clear"
+          onClick={handleClear}
         />
       </div>
     </div>
