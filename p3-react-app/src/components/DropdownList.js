@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./DropdownList.css";
-import { arrDown } from "../assets/images/arrow-down.png";
 
 // const Icon = () => {
 //   return (
