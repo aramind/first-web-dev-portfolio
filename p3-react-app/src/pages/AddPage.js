@@ -7,7 +7,9 @@ import TableDetail from "../components/TableDetail";
 import ErrorMessage from "../components/ErrorMessage";
 import PieChart from "../components/PieChart";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
+import BarChart from "../components/BarChart";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -33,8 +35,11 @@ const initialOptions = [
   { value: "others", label: "others" },
 ];
 
-const AddPage = ({ records, setRecords }) => {
-  const [todaysRecord, setTodaysRecord] = useState(initialTodaysRecord);
+const AddPage = () => {
+  // const [todaysRecord, setTodaysRecord] = useState(initialTodaysRecord);
+  const [todaysRecord, setTodaysRecord] = useState(
+    JSON.parse(localStorage.getItem("records")) || initialTodaysRecord
+  );
   const [options, setOptions] = useState(initialOptions);
   const [activity, setActivity] = useState("");
   const [hours, setHours] = useState(0);
@@ -106,6 +111,7 @@ const AddPage = ({ records, setRecords }) => {
                 [activity]:
                   prevState[activity] + Number(hours) + Number(minutes / 60),
               }));
+              localStorage.setItem("records", JSON.stringify(todaysRecord));
             }}
           />
           <Button
@@ -124,7 +130,7 @@ const AddPage = ({ records, setRecords }) => {
 
       <ErrorMessage message={errorMsg} />
       <div className="add-page__visuals">
-        <div
+        {/* <div
           id="add-page-table"
           className="add-page-visual"
         >
@@ -144,6 +150,12 @@ const AddPage = ({ records, setRecords }) => {
               />
             ))}
           </div>
+        </div> */}
+        <div
+          id="add-page-chart2"
+          className="add-page-visual"
+        >
+          <BarChart todaysRecord={todaysRecord} />
         </div>
 
         <div

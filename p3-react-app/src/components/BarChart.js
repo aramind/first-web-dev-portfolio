@@ -1,9 +1,9 @@
-import { Pie } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import React, { useState, useEffect } from "react";
 
-const PieChart = ({ todaysRecord }) => {
+const BarChart = ({ todaysRecord }) => {
   const [data, setData] = useState({
-    labels: [],
+    labels: Object.keys(todaysRecord),
     datasets: [
       {
         label: "time",
@@ -17,7 +17,6 @@ const PieChart = ({ todaysRecord }) => {
           "#fb6107",
           "#588157",
           "#abc4ff",
-          "#0fa3b1",
         ],
       },
     ],
@@ -39,7 +38,6 @@ const PieChart = ({ todaysRecord }) => {
             "#fb6107",
             "#588157",
             "#0fa3b1",
-            "#abc4ff",
           ],
         },
       ],
@@ -47,22 +45,17 @@ const PieChart = ({ todaysRecord }) => {
   }, [todaysRecord]);
 
   const options = {
-    responsive: true,
-    tooltips: {
-      callbacks: {
-        label: function (tooltipItem, data) {
-          const dataset = data.datasets[tooltipItem.datasetIndex];
-          const value = dataset.data[tooltipItem.index];
-          const percentage = ((value / 24) * 100).toFixed(2);
-          return `${data.labels[tooltipItem.index]}: ${percentage}%`;
-        },
+    mainAspectRatio: true,
+    scales: {
+      y: {
+        beginAtZero: true,
       },
     },
   };
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
-      <Pie
+    <div style={{}}>
+      <Bar
         data={data}
         options={options}
       />
@@ -70,4 +63,4 @@ const PieChart = ({ todaysRecord }) => {
   );
 };
 
-export default PieChart;
+export default BarChart;

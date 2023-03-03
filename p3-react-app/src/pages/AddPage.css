@@ -53,22 +53,16 @@
 }
 
 .add-page__visuals {
-  /* border: 1px solid black; */
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-
   gap: 2rem;
 }
 
 .add-page-visual {
   background-color: white;
   padding: 1rem;
-  width: 400px;
-  height: 400px;
-  margin-inline: 2rem;
-  padding: 1rem;
+  margin-inline: 0.5rem;
   border-radius: 10px;
 }
 
