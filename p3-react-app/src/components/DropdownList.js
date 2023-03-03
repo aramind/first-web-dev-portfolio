@@ -1,45 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import "./DropdownList.css";
 
+const reducer = (state, { type, payload }) => {
+  switch (type) {
+    case "SET_SHOW_MENU":
+      return { ...state, showMenu: payload };
+    case "SET_SELECTED_VALUE":
+      return { ...state, selectedValue: payload };
+    default:
+      return state;
+  }
+};
+
 const DropdownList = ({ placeHolder, options, onChange }) => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [state, dispatch] = useReducer(reducer, {
+    showMenu: false,
+    selectedValue: null,
+  });
 
   useEffect(() => {
-    const handler = () => setShowMenu(false);
+    const handler = () => dispatch({ type: "SET_SHOW_MENU", payload: false });
 
     window.addEventListener("click", handler);
 
     return () => {
       window.removeEventListener("click", handler);
     };
-  });
+  }, []);
 
   const handleInputClick = (e) => {
     e.stopPropagation();
-    setShowMenu(!showMenu);
+    dispatch({ type: "SET_SHOW_MENU", payload: !state.showMenu });
   };
 
   const getDisplay = () => {
-    if (selectedValue) {
-      return selectedValue.label;
+    if (state.selectedValue) {
+      return state.selectedValue.label;
     }
     return placeHolder;
   };
 
-  // handles the selection from the dropdown list
   const onItemClick = (option) => {
-    setSelectedValue(option);
-    setShowMenu(false);
+    dispatch({ type: "SET_SELECTED_VALUE", payload: option });
+    dispatch({ type: "SET_SHOW_MENU", payload: false });
     onChange(option);
   };
 
   const isSelected = (option) => {
-    if (!selectedValue) {
+    if (!state.selectedValue) {
       return false;
     }
 
-    return selectedValue.value === option.value;
+    return state.selectedValue.value === option.value;
   };
 
   return (
@@ -53,12 +65,14 @@ const DropdownList = ({ placeHolder, options, onChange }) => {
           <div className="dropdown-tool">V</div>
         </div>
       </div>
-      {showMenu && (
+      {state.showMenu && (
         <div className="dropdown-menu">
           {options.map((option, index) => (
             <div
               onClick={() => onItemClick(option)}
-              className={`dropdown-item ${isSelected(option) && "selected"}`}
+              className={`dropdown-item ${
+                isSelected(option) ? "selected" : ""
+              }`}
               key={`${option.value}-${index}`}
             >
               {option.label}
