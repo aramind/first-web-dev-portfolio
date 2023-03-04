@@ -227,7 +227,7 @@ const AddPage = () => {
     <div className="page add-page">
       <div className="add-page__inputs">
         <DropdownList
-          placeHolder="Select Activity . . ."
+          placeHolder="others"
           options={state.options}
           // onChange={(value) => setActivity(value.value)}
           onChange={handleActivityChange}
