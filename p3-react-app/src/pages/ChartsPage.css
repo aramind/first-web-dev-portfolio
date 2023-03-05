@@ -1,9 +1,12 @@
 .page--chart {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
 
   background-image: linear-gradient(180deg, #15664f, #1e4363);
-  transform: translateY(100px);
   color: #ddd;
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+  padding: 1rem;
 }
 
 .message {
@@ -37,6 +40,7 @@
 /* for individual chart container */
 .chart-card {
   width: 320px;
+  height: 450px;
   /* border: 1px solid red; */
   display: flex;
   flex-flow: column nowrap;
@@ -90,4 +94,28 @@ button {
 .close-button:hover {
   background-color: #e53935;
   transform: none;
+}
+
+#add-chart-btn {
+  width: 200px;
+  height: 50px;
+
+  transform: translateY(20%);
+}
+
+#add-chart-cont {
+  width: 320px;
+  height: 440px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 1rem;
+
+  cursor: pointer;
+}
+
+#add-chart-cont:hover {
+  border-color: goldenrod;
+  box-shadow: -1px 2px 5px goldenrod;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PieChart from "../components/PieChart";
 import "./ChartsPage.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -48,7 +48,18 @@ const ChartsPage = () => {
         {chartComponents.map((chartComponent, index) => (
           <div key={index}>{chartComponent}</div>
         ))}
-        <button onClick={addChart}>Add Chart</button>
+        <div
+          id="add-chart-cont"
+          onClick={addChart}
+        >
+          Add Chart
+          {/* <button
+            id="add-chart-btn"
+            onClick={addChart}
+          >
+            Add Chart
+          </button> */}
+        </div>
       </div>
       {/* UPGRADE TO PREMIUM PAGE */}
       {/* <div className="message">

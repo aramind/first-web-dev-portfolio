@@ -9,10 +9,11 @@ import BarChart from "../components/BarChart";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { DataContext } from "../contextprovider/DataContextProvider";
+import { v4 as uuidv4 } from "uuid";
 
 const ChartDisplay = ({ onClose }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const { pastRecords, addRecord } = useContext(DataContext);
+  const { pastRecords } = useContext(DataContext);
 
   const transformedObject = {
     sleep: 0,
@@ -28,8 +29,10 @@ const ChartDisplay = ({ onClose }) => {
   // const records = JSON.parse(localStorage.getItem("records"));
 
   console.log("from chartDisplay");
-  // console.log(pastRecords.logs);
-  const selectedRecord = pastRecords.logs.find(
+  console.log(typeof pastRecords);
+  console.log(pastRecords);
+
+  const selectedRecord = pastRecords.find(
     (record) => record.date === selectedDate.toISOString().slice(0, 10)
   );
 

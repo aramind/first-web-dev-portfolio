@@ -254,8 +254,29 @@ const AddPage = () => {
 
   const handleSave = (e) => {
     e.preventDefault();
-    console.group(pastRecords);
-    console.log(selectedDate);
+    // Check if remaining hours is zero
+    if (totalHrsRemaining === 0) {
+      // Create a new record object with the current date and activities from todaysRecord
+      const newRecord = {
+        date: selectedDate.toISOString().slice(0, 10),
+        activities: Object.keys(state.todaysRecord).map((activity) => ({
+          name: activity.toUpperCase(),
+          hours: state.todaysRecord[activity],
+        })),
+      };
+
+      // Updating the records data on context by adding the new record
+      addRecord(newRecord);
+      console.log(pastRecords);
+      console.log(pastRecords[0]);
+      console.log(newRecord);
+    } else {
+      inputHasError = true;
+      dispatch({
+        type: "SET_ERROR_MSG",
+        payload: { value: "Consume first all the remaining time" },
+      });
+    }
   };
 
   return (
