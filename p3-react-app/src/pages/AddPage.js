@@ -214,24 +214,39 @@ const AddPage = () => {
     }
   };
 
+  // const handleClear = () => {
+  //   let ans = "";
+  //   while (ans !== "n" && ans !== "y") {
+  //     ans = prompt(
+  //       "Are you sure you want to clear records for the current day? <y/n>"
+  //     );
+  //     ans.toLowerCase();
+  //   }
+  //   if (ans === "y") {
+  //     dispatch({ type: "RESET_FIELDS" });
+  //     localStorage.removeItem("records");
+  //     // dispatch({type: "SET_TODAYS_RECORD", payload: {value: }})
+  //     dispatch({
+  //       type: "SET_TODAYS_RECORD",
+  //       payload: { value: initialTodaysRecord },
+  //     });
+  //     setShowCleared(true);
+  //   } else return;
+  // };
+
   const handleClear = () => {
-    let ans = "";
-    while (ans !== "n" && ans !== "y") {
-      ans = prompt(
-        "Are you sure you want to clear records for the current day? <y/n>"
-      );
-      ans.toLowerCase();
-    }
-    if (ans === "y") {
+    const confirmed = window.confirm(
+      "Are you sure you want to clear records for the current day?"
+    );
+    if (confirmed) {
       dispatch({ type: "RESET_FIELDS" });
       localStorage.removeItem("records");
-      // dispatch({type: "SET_TODAYS_RECORD", payload: {value: }})
       dispatch({
         type: "SET_TODAYS_RECORD",
         payload: { value: initialTodaysRecord },
       });
       setShowCleared(true);
-    } else return;
+    }
   };
 
   const handleActivityChange = (value) => {
