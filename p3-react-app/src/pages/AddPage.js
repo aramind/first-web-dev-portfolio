@@ -252,50 +252,6 @@ const AddPage = () => {
     });
   };
 
-  // const handleSave = (e) => {
-  //   e.preventDefault();
-  //   // Check if remaining hours is zero
-  //   if (totalHrsRemaining === 0) {
-  //     // Create a new record object with the current date and activities from todaysRecord
-  //     const newRecord = {
-  //       date: selectedDate.toISOString().slice(0, 10),
-  //       activities: Object.keys(state.todaysRecord).map((activity) => ({
-  //         name: activity.toUpperCase(),
-  //         hours: state.todaysRecord[activity],
-  //       })),
-  //     };
-
-  //     // check for duplication
-  //     const duplicated = pastRecords.find(
-  //       (e) => (record) => record.date === newRecord.date
-  //     );
-
-  //     if (duplicated) {
-  //       console.log("duplication");
-  //       let ans = "";
-  //       while(ans !== 'y' || ans !== 'n'){
-  //         prompt(
-  //           `Data for ${newRecord.date} will be overwritten. Are you sure? <y/n>`
-  //         );
-  //       }
-  //       if(ans === 'y'){
-  //         setPastRecords(...pastRecords, )
-  //       }
-  //     }
-
-  //     // Updating the records data on context by adding the new record
-  //     setPastRecords([...pastRecords, newRecord]);
-  //     console.log(pastRecords.date);
-  //     console.log(pastRecords);
-  //   } else {
-  //     inputHasError = true;
-  //     dispatch({
-  //       type: "SET_ERROR_MSG",
-  //       payload: { value: "Consume first all the remaining time" },
-  //     });
-  //   }
-  // };
-
   const handleSave = (e) => {
     e.preventDefault();
 
@@ -326,6 +282,9 @@ const AddPage = () => {
           updatedRecords[existingRecordIndex] = newRecord;
           setPastRecords(updatedRecords);
         }
+
+        // Reset the inputs and summary table for the new day
+        handleClear();
       } else {
         // Add the new record to pastRecords
         setPastRecords([...pastRecords, newRecord]);
