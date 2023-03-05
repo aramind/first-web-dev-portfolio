@@ -13,6 +13,17 @@ import BarChart from "../components/BarChart";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const initialOptions = [
+  { value: "sleep", label: "sleep" },
+  { value: "work", label: "work" },
+  { value: "learn", label: "learn" },
+  { value: "self", label: "self" },
+  { value: "social", label: "social" },
+  { value: "play", label: "play" },
+  { value: "fitness", label: "fitness" },
+  { value: "others", label: "others" },
+];
+
 const initialTodaysRecord = {
   sleep: 0,
   work: 0,
@@ -24,22 +35,12 @@ const initialTodaysRecord = {
   others: 0,
 };
 
-const initialOptions = [
-  { value: "sleep", label: "sleep" },
-  { value: "work", label: "work" },
-  { value: "learn", label: "learn" },
-  { value: "self", label: "self" },
-  { value: "social", label: "social" },
-  { value: "play", label: "play" },
-  { value: "fitness", label: "fitness" },
-  { value: "others", label: "others" },
-];
 //start of refactoring
 const initialState = {
   todaysRecord:
     JSON.parse(localStorage.getItem("records")) || initialTodaysRecord,
   options: initialOptions,
-  activity: "others",
+  activity: initialOptions[0].label,
   hours: 0,
   minutes: 0,
   hasError: false,
@@ -56,8 +57,8 @@ const reducer = (state, { type, payload }) => {
       return { ...state, hours: payload.value };
     case "SET_MINUTES":
       return { ...state, minutes: payload.value };
-    case "SET_HASERROR":
-      return { ...state, hasError: payload.value };
+    // case "SET_HASERROR":
+    //   return { ...state, hasError: payload.value };
     case "SET_ERROR_MSG":
       return { ...state, errorMsg: payload.value };
     case "RESET_FIELDS":
@@ -67,8 +68,8 @@ const reducer = (state, { type, payload }) => {
         // activity: "",
         hours: 0,
         minutes: 0,
-        hasError: false,
-        errorMsg: "",
+        // hasError: false,
+        // errorMsg: "",
       };
     default:
       return state;
@@ -78,17 +79,13 @@ const reducer = (state, { type, payload }) => {
 const AddPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [showCleared, setShowCleared] = useState(false);
+  // const [hasError, setHasError] = useState(false);
 
-  console.log(`rendering...`);
-  console.log(state.todaysRecord);
   //start of refactoring
 
   useEffect(() => {
     localStorage.setItem("records", JSON.stringify(state.todaysRecord));
-  }, [state.todaysRecord, state.activity, state.hours, state.minutes]);
-
-  console.log(`rendering after...`);
-  console.log(state.todaysRecord);
+  }, [state.todaysRecord]);
 
   const labels = [
     "sleep",
@@ -120,30 +117,54 @@ const AddPage = () => {
     };
   };
 
+  let inputHasError = false;
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
     // validations
     if (
       !state.activity.trim() ||
       state.activity === "" ||
       state.activity === null
     ) {
-      console.log("error: no activity");
-      dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      // dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      inputHasError = true;
       dispatch({
         type: "SET_ERROR_MSG",
         payload: { value: "Activity cannot be blank" },
       });
+      console.log("im in a act validation dispatch");
       return;
     }
 
     if (state.hours === 0 && state.minutes === 0) {
-      console.log("error: value");
-      dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      inputHasError = true;
       dispatch({
         type: "SET_ERROR_MSG",
         payload: { value: "Duration cannot be blank" },
+      });
+      // dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      console.log("im in a hrs 0 validation dispatch");
+      return;
+    }
+
+    if (state.hours > 24 || state.minutes > 60) {
+      // dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      inputHasError = true;
+      dispatch({
+        type: "SET_ERROR_MSG",
+        payload: { value: "Invalid value for duration" },
+      });
+      console.log("im in a hrs > 24 validation dispatch");
+      return;
+    }
+
+    const totalDuration = state.hours + state.minutes / 60;
+    if (totalDuration > totalHrsRemaining) {
+      // dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      inputHasError = true;
+      dispatch({
+        type: "SET_ERROR_MSG",
+        payload: { value: "Duration exceeds remaining time" },
       });
       return;
     }
@@ -151,7 +172,8 @@ const AddPage = () => {
 
   const handleAdd = (e) => {
     handleFormSubmit(e);
-    if (!state.hasError) {
+    // console.log(`${state.hasError} from handle add`);
+    if (!inputHasError) {
       dispatch({
         type: "SET_TODAYS_RECORD",
         payload: {
@@ -169,7 +191,7 @@ const AddPage = () => {
 
   const handleSubtract = (e) => {
     handleFormSubmit(e);
-    if (!state.hasError) {
+    if (!inputHasError) {
       dispatch({
         type: "SET_TODAYS_RECORD",
         payload: {
@@ -227,7 +249,7 @@ const AddPage = () => {
     <div className="page add-page">
       <div className="add-page__inputs">
         <DropdownList
-          placeHolder="others"
+          placeHolder={state.options[0].label}
           options={state.options}
           // onChange={(value) => setActivity(value.value)}
           onChange={handleActivityChange}
@@ -262,8 +284,7 @@ const AddPage = () => {
           />
         </div>
       </div>
-
-      <ErrorMessage message={state.errorMsg} />
+      {<ErrorMessage errorMsg={state.errorMsg} />}
       <div className="add-page__visuals">
         <div
           id="add-page-chart2"
@@ -300,14 +321,12 @@ const AddPage = () => {
           <PieChart todaysRecord={state.todaysRecord} />
         </div>
       </div>
-
       <div className="add-page__status">
         <p>
           Remaining Time : {Math.floor(totalHrsRemaining)} hrs and{" "}
           {((Number(totalHrsRemaining) * 60) % 60).toFixed(0)} mins
         </p>
       </div>
-
       <div className="add-page__controls">
         <Button
           label="Save Record"
