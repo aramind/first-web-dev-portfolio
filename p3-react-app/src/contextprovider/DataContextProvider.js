@@ -319,12 +319,11 @@ const DataContextProvider = ({ children }) => {
     localStorage.setItem("pastRecords", JSON.stringify(pastRecords));
   }, [pastRecords]);
 
-  const addRecord = (record) => {
-    setPastRecords([...pastRecords, record]);
-    // console.log(typeof pastRecords);
-  };
+  // const addRecord = (record) => {
+  //   setPastRecords([...pastRecords, record]);
+  // };
 
-  const value = { pastRecords, addRecord };
+  const value = { pastRecords, setPastRecords };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };

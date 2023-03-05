@@ -86,7 +86,7 @@ const AddPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   // from context provider(s)
-  const { pastRecords, addRecord } = useContext(DataContext);
+  const { pastRecords, setPastRecords } = useContext(DataContext);
 
   //start of refactoring
 
@@ -252,8 +252,53 @@ const AddPage = () => {
     });
   };
 
+  // const handleSave = (e) => {
+  //   e.preventDefault();
+  //   // Check if remaining hours is zero
+  //   if (totalHrsRemaining === 0) {
+  //     // Create a new record object with the current date and activities from todaysRecord
+  //     const newRecord = {
+  //       date: selectedDate.toISOString().slice(0, 10),
+  //       activities: Object.keys(state.todaysRecord).map((activity) => ({
+  //         name: activity.toUpperCase(),
+  //         hours: state.todaysRecord[activity],
+  //       })),
+  //     };
+
+  //     // check for duplication
+  //     const duplicated = pastRecords.find(
+  //       (e) => (record) => record.date === newRecord.date
+  //     );
+
+  //     if (duplicated) {
+  //       console.log("duplication");
+  //       let ans = "";
+  //       while(ans !== 'y' || ans !== 'n'){
+  //         prompt(
+  //           `Data for ${newRecord.date} will be overwritten. Are you sure? <y/n>`
+  //         );
+  //       }
+  //       if(ans === 'y'){
+  //         setPastRecords(...pastRecords, )
+  //       }
+  //     }
+
+  //     // Updating the records data on context by adding the new record
+  //     setPastRecords([...pastRecords, newRecord]);
+  //     console.log(pastRecords.date);
+  //     console.log(pastRecords);
+  //   } else {
+  //     inputHasError = true;
+  //     dispatch({
+  //       type: "SET_ERROR_MSG",
+  //       payload: { value: "Consume first all the remaining time" },
+  //     });
+  //   }
+  // };
+
   const handleSave = (e) => {
     e.preventDefault();
+
     // Check if remaining hours is zero
     if (totalHrsRemaining === 0) {
       // Create a new record object with the current date and activities from todaysRecord
@@ -265,11 +310,26 @@ const AddPage = () => {
         })),
       };
 
-      // Updating the records data on context by adding the new record
-      addRecord(newRecord);
-      console.log(pastRecords);
-      console.log(pastRecords[0]);
-      console.log(newRecord);
+      // Check for duplication
+      const existingRecordIndex = pastRecords.findIndex(
+        (record) => record.date === newRecord.date
+      );
+
+      if (existingRecordIndex !== -1) {
+        const shouldOverwrite = window.confirm(
+          `Data for ${newRecord.date} already exists. Overwrite?`
+        );
+
+        if (shouldOverwrite) {
+          // Overwrite the existing record
+          const updatedRecords = [...pastRecords];
+          updatedRecords[existingRecordIndex] = newRecord;
+          setPastRecords(updatedRecords);
+        }
+      } else {
+        // Add the new record to pastRecords
+        setPastRecords([...pastRecords, newRecord]);
+      }
     } else {
       inputHasError = true;
       dispatch({
