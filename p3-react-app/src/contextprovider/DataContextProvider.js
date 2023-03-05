@@ -1,12 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
+import logs from "../data/logs.json";
 
 export const DataContext = createContext();
 
 const DataContextProvider = ({ children }) => {
-  const [pastRecords, setPastRecords] = useState([{ id: 110, initial: "mon" }]);
+  const [pastRecords, setPastRecords] = useState(logs);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("pastRecords")) || [];
+    console.log(logs);
+    const data = JSON.parse(localStorage.getItem("pastRecords")) || logs;
     setPastRecords(data);
   }, []);
 

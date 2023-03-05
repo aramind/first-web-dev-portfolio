@@ -24,3 +24,25 @@
 
   font-size: 1.5rem;
 }
+
+/* for individual chart container */
+.chart-container {
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  /* background-color: #4ab07e; */
+  width: 320px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+}
+
+.chart--pie {
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-inline: auto;
+}
