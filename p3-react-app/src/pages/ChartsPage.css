@@ -1,5 +1,7 @@
 .page--chart {
-  max-height: calc(100vh - 80px);
+  min-height: 100vh;
+
+  background-image: linear-gradient(180deg, #15664f, #1e4363);
   transform: translateY(100px);
   color: #ddd;
 }
@@ -28,13 +30,9 @@
 /* for individual chart container */
 .chart-container {
   margin: auto;
-  display: flex;
-  flex-flow: column nowrap;
-  /* background-color: #4ab07e; */
-  width: 320px;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
   padding: 0.25rem;
 }
 
@@ -45,4 +43,17 @@
   padding: 1rem;
   border-radius: 1rem;
   margin-inline: auto;
+}
+
+.date-details {
+  font-size: 1.2rem;
+}
+
+.chart-summary {
+  text-align: center;
+}
+
+button {
+  color: black;
+  padding: 0.15rem;
 }
