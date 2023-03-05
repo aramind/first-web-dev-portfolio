@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import "./ChartsPage.css";
+// import "./ChartsPage.css";
 import PieChart from "../components/PieChart";
-import "./ChartsPage.css";
+// import "./ChartsPage.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
@@ -13,66 +13,50 @@ import { DataContext } from "../contextprovider/DataContextProvider";
 const ChartDisplay = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { pastRecords, addRecord } = useContext(DataContext);
-  console.log(pastRecords);
 
-  const originalObject = {
-    date: "2023-02-24",
-    activities: [
-      {
-        name: "SLEEP",
-        hours: 6,
-      },
-      {
-        name: "WORK",
-        hours: 7,
-      },
-      {
-        name: "LEARN",
-        hours: 4,
-      },
-      {
-        name: "SELF",
-        hours: 1,
-      },
-      {
-        name: "SOCIAL",
-        hours: 2,
-      },
-      {
-        name: "PLAY",
-        hours: 1,
-      },
-      {
-        name: "FITNESS",
-        hours: 1,
-      },
-      {
-        name: "OTHERS",
-        hours: 2,
-      },
-    ],
+  const transformedObject = {
+    sleep: 0,
+    work: 0,
+    learn: 0,
+    self: 0,
+    social: 0,
+    play: 0,
+    fitness: 0,
+    others: 0,
   };
 
-  const transformedObject = originalObject.activities.reduce(
-    (acc, curr) => {
-      const { name, hours } = curr;
-      const transformedKey = name.toLowerCase();
-      acc[transformedKey] = hours;
-      return acc;
-    },
-    {
-      sleep: 0,
-      work: 0,
-      learn: 0,
-      self: 0,
-      social: 0,
-      play: 0,
-      fitness: 0,
-      others: 0,
-    }
+  // const records = JSON.parse(localStorage.getItem("records"));
+
+  console.log("from chartDisplay");
+  // console.log(pastRecords.logs);
+  const selectedRecord = pastRecords.logs.find(
+    (record) => record.date === selectedDate.toISOString().slice(0, 10)
   );
 
-  console.log(transformedObject); // Output: {sleep: 6, work: 7, learn: 4, self: 1, social: 2, play: 1, fitness: 1, others: 2}
+  if (selectedRecord) {
+    selectedRecord.activities.forEach(({ name, hours }) => {
+      const transformedKey = name.toLowerCase();
+      transformedObject[transformedKey] = hours;
+    });
+    console.log(transformedObject);
+  }
+
+  const totalHrs = Object.values(transformedObject).reduce(
+    (acc, curr) => acc + curr,
+    0
+  );
+
+  const percentageObject = {};
+  for (const key in transformedObject) {
+    const percentage = ((transformedObject[key] / totalHrs) * 100).toFixed(1);
+    percentageObject[key] = percentage;
+  }
+
+  const summaryText = Object.entries(percentageObject)
+    .map(([key, percentage]) => `${key}: ${percentage}%`)
+    .join(", ");
+
+  const dateDetails = selectedDate.toDateString();
 
   return (
     <div className="chart-container">
@@ -85,11 +69,17 @@ const ChartDisplay = () => {
           style={{ borderRadius: "3px", height: "3rem" }}
         />
       </div>
-      <div className="chart--pie">
-        <PieChart todaysRecord={transformedObject} />
-      </div>
-      <div className="date-details">Mon, Mar 3, 2023</div>
-      <div className="chart-summary">work(20%) sleep(15%)</div>
+      {selectedRecord ? (
+        <React.Fragment>
+          <div className="chart--pie">
+            <PieChart todaysRecord={transformedObject} />
+          </div>
+          <div className="date-details">{dateDetails}</div>
+          <div className="chart-summary">{summaryText}</div>
+        </React.Fragment>
+      ) : (
+        <div>No data available for the selected date.</div>
+      )}
     </div>
   );
 };

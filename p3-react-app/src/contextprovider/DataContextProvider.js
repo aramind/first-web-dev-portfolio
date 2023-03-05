@@ -7,7 +7,7 @@ const DataContextProvider = ({ children }) => {
   const [pastRecords, setPastRecords] = useState(logs);
 
   useEffect(() => {
-    console.log(logs);
+    // console.log(logs);
     const data = JSON.parse(localStorage.getItem("pastRecords")) || logs;
     setPastRecords(data);
   }, []);
