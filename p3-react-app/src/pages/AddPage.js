@@ -1,5 +1,5 @@
 import "./AddPage.css";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import AddPageInputForm from "../components/AddPageInputForm";
 import DropdownList from "../components/DropdownList";
 import Button from "../components/Button";
@@ -12,6 +12,7 @@ import { Doughnut } from "react-chartjs-2";
 import BarChart from "../components/BarChart";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { DataContext } from "../contextprovider/DataContextProvider";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -83,6 +84,9 @@ const AddPage = () => {
   const [showCleared, setShowCleared] = useState(false);
   // const [hasError, setHasError] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  // from context provider(s)
+  const { pastRecords, addRecord } = useContext(DataContext);
 
   //start of refactoring
 
@@ -248,10 +252,12 @@ const AddPage = () => {
     });
   };
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
+    console.group(pastRecords);
     console.log(selectedDate);
-    console.log(selectedDate.toISOString());
   };
+
   return (
     <div className="page add-page">
       <div className="add-page__inputs">
