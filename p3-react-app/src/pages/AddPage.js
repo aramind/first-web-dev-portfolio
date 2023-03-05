@@ -10,6 +10,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import BarChart from "../components/BarChart";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -60,7 +62,7 @@ const reducer = (state, { type, payload }) => {
     // case "SET_HASERROR":
     //   return { ...state, hasError: payload.value };
     case "SET_ERROR_MSG":
-      return { ...state, errorMsg: payload.value };
+      return { ...state, errorMsg: `Error: ${payload.value}` };
     case "RESET_FIELDS":
       return {
         ...state,
@@ -69,7 +71,7 @@ const reducer = (state, { type, payload }) => {
         hours: 0,
         minutes: 0,
         // hasError: false,
-        // errorMsg: "",
+        errorMsg: "",
       };
     default:
       return state;
@@ -80,6 +82,7 @@ const AddPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [showCleared, setShowCleared] = useState(false);
   // const [hasError, setHasError] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   //start of refactoring
 
@@ -245,6 +248,10 @@ const AddPage = () => {
     });
   };
 
+  const handleSave = () => {
+    console.log(selectedDate);
+    console.log(selectedDate.toISOString());
+  };
   return (
     <div className="page add-page">
       <div className="add-page__inputs">
@@ -286,12 +293,12 @@ const AddPage = () => {
       </div>
       {<ErrorMessage errorMsg={state.errorMsg} />}
       <div className="add-page__visuals">
-        <div
+        {/* <div
           id="add-page-chart2"
           className="add-page-visual"
         >
           <BarChart todaysRecord={state.todaysRecord} />
-        </div>
+        </div> */}
 
         <div
           id="add-page-table"
@@ -328,9 +335,20 @@ const AddPage = () => {
         </p>
       </div>
       <div className="add-page__controls">
+        <div className="date-picker">
+          <p>Select a date</p>
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            dateFormat="yyyy-MM-dd"
+            id="date-picker-comp"
+            style={{ borderRadius: "3px", height: "3rem" }}
+          />
+        </div>
         <Button
           label="Save Record"
           className="add-page__control add-page__control--save"
+          onClick={handleSave}
         />
         <Button
           label="Clear"
