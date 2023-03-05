@@ -29,7 +29,7 @@ const HomePage = () => {
           Here's a quote to inspire you for the day:
         </p>
         <div
-          onClick={() => setToggle((prevToggle) => !prevToggle)}
+          onMouseLeave={() => setToggle((prevToggle) => !prevToggle)}
           className="quote"
         >
           <p className="quote__text">{quote}</p>

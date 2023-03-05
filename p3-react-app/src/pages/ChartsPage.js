@@ -15,7 +15,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const ChartsPage = () => {
   const [numCharts, setNumCharts] = useState(1);
 
-  const handleRemoveChart = (index) => removeChart(index);
+  // const handleRemoveChart = (index) => removeChart(index);
 
   const [chartComponents, setChartComponents] = useState([
     <ChartDisplay onClose={() => handleRemoveChart(0)} />,
@@ -34,12 +34,13 @@ const ChartsPage = () => {
     }
   };
 
-  const removeChart = (indexToRemove) => {
+  const handleRemoveChart = (indexToRemove) => {
     const newChartComponents = chartComponents.filter(
       (_, index) => index !== indexToRemove
     );
     setChartComponents(newChartComponents);
-    setNumCharts((prevNum) => prevNum - 1);
+    // setNumCharts((prevNum) => prevNum - 1);
+    setNumCharts(newChartComponents.length);
   };
 
   return (
