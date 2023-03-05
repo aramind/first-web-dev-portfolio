@@ -10,7 +10,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { DataContext } from "../contextprovider/DataContextProvider";
 
-const ChartDisplay = () => {
+const ChartDisplay = ({ onClose }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { pastRecords, addRecord } = useContext(DataContext);
 
@@ -59,22 +59,30 @@ const ChartDisplay = () => {
   const dateDetails = selectedDate.toDateString();
 
   return (
-    <div className="chart-container">
-      <div className="date-picker">
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          dateFormat="yyyy-MM-dd"
-          id="date-picker-comp"
-          style={{ borderRadius: "3px", height: "3rem" }}
-        />
+    <div className="chart-card">
+      <div className="chart-header">
+        <div className="date-picker">
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            dateFormat="yyyy-MM-dd"
+            id="date-picker-comp"
+            style={{ borderRadius: "3px", height: "3rem" }}
+          />
+        </div>
+        <button
+          className="close-button"
+          onClick={onClose}
+        >
+          X
+        </button>
       </div>
+      <div className="date-details">{dateDetails}</div>
       {selectedRecord ? (
         <React.Fragment>
           <div className="chart--pie">
             <PieChart todaysRecord={transformedObject} />
           </div>
-          <div className="date-details">{dateDetails}</div>
           <div className="chart-summary">{summaryText}</div>
         </React.Fragment>
       ) : (
