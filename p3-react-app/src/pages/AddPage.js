@@ -177,6 +177,74 @@ const AddPage = () => {
     }
   };
 
+  // sorry to repeat this long block of codes, kahit super liit lang diff ng validation sana for add and subtract
+  // naubusan na po ng oras :)
+
+  const handleFormSubmitForSubtract = (e) => {
+    e.preventDefault();
+    // validations
+    if (
+      !state.activity.trim() ||
+      state.activity === "" ||
+      state.activity === null
+    ) {
+      // dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      inputHasError = true;
+      dispatch({
+        type: "SET_ERROR_MSG",
+        payload: { value: "Activity cannot be blank" },
+      });
+      console.log("im in a act validation dispatch");
+      return;
+    }
+
+    if (state.hours === 0 && state.minutes === 0) {
+      inputHasError = true;
+      dispatch({
+        type: "SET_ERROR_MSG",
+        payload: { value: "Duration cannot be blank" },
+      });
+      // dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      console.log("im in a hrs 0 validation dispatch");
+      return;
+    }
+
+    if (state.hours > 24 || state.minutes > 60) {
+      // dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      inputHasError = true;
+      dispatch({
+        type: "SET_ERROR_MSG",
+        payload: { value: "Invalid value for duration" },
+      });
+      console.log("im in a hrs > 24 validation dispatch");
+      return;
+    }
+
+    const totalDuration = state.hours + state.minutes / 60;
+    if (totalDuration > totalHrsRemaining) {
+      // dispatch({ type: "SET_HASERROR", payload: { value: true } });
+      inputHasError = true;
+      dispatch({
+        type: "SET_ERROR_MSG",
+        payload: { value: "Duration exceeds remaining time" },
+      });
+      return;
+    }
+
+    const currentHours = state.todaysRecord[state.activity];
+    const hoursToSubtract = state.hours + state.minutes / 60;
+    if (hoursToSubtract > currentHours) {
+      inputHasError = true;
+      dispatch({
+        type: "SET_ERROR_MSG",
+        payload: {
+          value: `Cannot subtract more than the current hours for ${state.activity}`,
+        },
+      });
+      return;
+    }
+  };
+
   const handleAdd = (e) => {
     handleFormSubmit(e);
     // console.log(`${state.hasError} from handle add`);
@@ -197,7 +265,7 @@ const AddPage = () => {
   };
 
   const handleSubtract = (e) => {
-    handleFormSubmit(e);
+    handleFormSubmitForSubtract(e);
     if (!inputHasError) {
       dispatch({
         type: "SET_TODAYS_RECORD",
