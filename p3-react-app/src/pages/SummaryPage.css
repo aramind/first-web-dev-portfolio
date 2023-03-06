@@ -5,6 +5,8 @@
   display: flex;
   justify-content: flex-start;
   gap: 2rem;
+
+  background-image: linear-gradient(180deg, #15664f, #1e4363);
 }
 
 .page--summary__user-info {
