@@ -119,3 +119,9 @@ button {
   border-color: goldenrod;
   box-shadow: -1px 2px 5px goldenrod;
 }
+
+@media (max-width: 768px) {
+  .charts-container {
+    margin-top: 90px;
+  }
+}

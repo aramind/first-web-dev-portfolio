@@ -44,3 +44,51 @@
 }
 
 /* TEST */
+@media (max-width: 768px) {
+  .page--home {
+    padding: 0.2rem;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+    color: #eee;
+  }
+
+  .page--home__text {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-inline: 2rem;
+
+    margin-top: 90px;
+  }
+
+  .page--home__greet {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .quote {
+    margin: 0.5rem auto;
+    max-width: 90%;
+    font-size: 1.5rem;
+    font-style: italic;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .quote__text {
+    text-align: center;
+  }
+
+  .quote__auth {
+    font-size: 1rem;
+    text-align: right;
+    padding-right: 1.5rem;
+  }
+
+  .quote:hover {
+    cursor: pointer;
+    background-image: linear-gradient(135deg, #e0f0e8, #6ec6e9cc);
+    color: #000;
+  }
+}

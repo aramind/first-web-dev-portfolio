@@ -19,15 +19,9 @@
   margin-inline: 1rem;
 }
 
-.nav__link:hover {
-  color: #00ffff;
-  padding-inline: 0;
-  border-bottom: 2px solid #00ffff;
-}
-
-.nav__link:visited {
+/* .nav__link:visited {
   text-decoration: blue;
-}
+} */
 
 .nav__link--logo {
   color: #ddd;
@@ -39,4 +33,12 @@
 .nav__links {
   display: flex;
   gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .nav__link:hover {
+    color: #00ffff;
+    padding-inline: 0;
+    border-bottom: 2px solid #00ffff;
+  }
 }

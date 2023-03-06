@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div className="page page--home">
       <div className="page--home__text">
-        <p className="page--home__greet">Hi User! 👋</p>
+        <p className="page--home__greet">Hello! 👋</p>
         <p className="page--home__msg">Hope you're having a good day so far!</p>
         <p className="page--home__msg">
           Take a moment to reflect on your goals and priorities each day.
@@ -30,6 +30,7 @@ const HomePage = () => {
         </p>
         <div
           onMouseLeave={() => setToggle((prevToggle) => !prevToggle)}
+          onClick={() => setToggle((prevToggle) => !prevToggle)}
           className="quote"
         >
           <p className="quote__text">{quote}</p>

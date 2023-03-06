@@ -1,4 +1,3 @@
-import "./AddPage.css";
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import AddPageInputForm from "../components/AddPageInputForm";
 import DropdownList from "../components/DropdownList";
@@ -13,6 +12,7 @@ import BarChart from "../components/BarChart";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { DataContext } from "../contextprovider/DataContextProvider";
+import "./AddPage.css";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -175,50 +175,6 @@ const AddPage = () => {
 
   const handleFormSubmitForSubtract = (e) => {
     e.preventDefault();
-    // if (
-    //   !state.activity.trim() ||
-    //   state.activity === "" ||
-    //   state.activity === null
-    // ) {
-    //   inputHasError = true;
-    //   dispatch({
-    //     type: "SET_ERROR_MSG",
-    //     payload: { value: "Activity cannot be blank" },
-    //   });
-    //   console.log("im in a act validation dispatch");
-    //   return;
-    // }
-
-    // if (state.hours === 0 && state.minutes === 0) {
-    //   inputHasError = true;
-    //   dispatch({
-    //     type: "SET_ERROR_MSG",
-    //     payload: { value: "Duration cannot be blank" },
-    //   });
-    //   console.log("im in a hrs 0 validation dispatch");
-    //   return;
-    // }
-
-    // if (state.hours > 24 || state.minutes > 60) {
-    //   inputHasError = true;
-    //   dispatch({
-    //     type: "SET_ERROR_MSG",
-    //     payload: { value: "Invalid value for duration" },
-    //   });
-    //   console.log("im in a hrs > 24 validation dispatch");
-    //   return;
-    // }
-
-    // const totalDuration = state.hours + state.minutes / 60;
-    // if (totalDuration > totalHrsRemaining) {
-    //   inputHasError = true;
-    //   dispatch({
-    //     type: "SET_ERROR_MSG",
-    //     payload: { value: "Duration exceeds remaining time" },
-    //   });
-    //   return;
-    // }
-
     const currentHours = state.todaysRecord[state.activity];
     const hoursToSubtract = state.hours + state.minutes / 60;
     if (hoursToSubtract > currentHours) {
@@ -270,26 +226,6 @@ const AddPage = () => {
       dispatch({ type: "RESET_FIELDS" });
     }
   };
-
-  // const handleClear = () => {
-  //   let ans = "";
-  //   while (ans !== "n" && ans !== "y") {
-  //     ans = prompt(
-  //       "Are you sure you want to clear records for the current day? <y/n>"
-  //     );
-  //     ans.toLowerCase();
-  //   }
-  //   if (ans === "y") {
-  //     dispatch({ type: "RESET_FIELDS" });
-  //     localStorage.removeItem("records");
-  //     // dispatch({type: "SET_TODAYS_RECORD", payload: {value: }})
-  //     dispatch({
-  //       type: "SET_TODAYS_RECORD",
-  //       payload: { value: initialTodaysRecord },
-  //     });
-  //     setShowCleared(true);
-  //   } else return;
-  // };
 
   const handleClear = () => {
     const confirmed = window.confirm(
@@ -371,108 +307,112 @@ const AddPage = () => {
   };
 
   return (
-    <div className="page add-page">
-      <div className="add-page__inputs">
-        <DropdownList
-          placeHolder={state.options[0].label}
-          options={state.options}
-          // onChange={(value) => setActivity(value.value)}
-          onChange={handleActivityChange}
-        />
-
-        <AddPageInputForm
-          className="add-page__input input--hr"
-          max={24}
-          label="hrs and"
-          value={state.hours}
-          // onChange={(e) => setHours(e.target.value)}
-          onChange={handleHoursChange}
-        />
-        <AddPageInputForm
-          className="add-page__input input--min"
-          max={60}
-          label="mins"
-          value={state.minutes}
-          onChange={handleMinuteChange}
-        />
-
-        <div className="add-page__buttons">
-          <Button
-            label="Add"
-            className="add-page__button"
-            onClick={handleAdd}
+    <div>
+      <div className="page add-page">
+        <div className="add-page__inputs">
+          <DropdownList
+            placeHolder={state.options[0].label}
+            options={state.options}
+            // onChange={(value) => setActivity(value.value)}
+            onChange={handleActivityChange}
           />
-          <Button
-            label="Subtract"
-            className="add-page__button"
-            onClick={handleSubtract}
+
+          <AddPageInputForm
+            className="add-page__input input--hr"
+            max={24}
+            label="hrs and"
+            value={state.hours}
+            // onChange={(e) => setHours(e.target.value)}
+            onChange={handleHoursChange}
           />
+          <AddPageInputForm
+            className="add-page__input input--min"
+            max={60}
+            label="mins"
+            value={state.minutes}
+            onChange={handleMinuteChange}
+          />
+
+          <div className="add-page__buttons">
+            <Button
+              label="Add"
+              className="add-page__button"
+              onClick={handleAdd}
+            />
+            <Button
+              label="Subtract"
+              className="add-page__button"
+              onClick={handleSubtract}
+            />
+          </div>
         </div>
-      </div>
-      {<ErrorMessage errorMsg={state.errorMsg} />}
-      <div className="add-page__visuals">
-        {/* <div
+        {<ErrorMessage errorMsg={state.errorMsg} />}
+        <div className="add-page__visuals">
+          {/* <div
           id="add-page-chart2"
           className="add-page-visual"
         >
           <BarChart todaysRecord={state.todaysRecord} />
         </div> */}
 
-        <div
-          id="add-page-table"
-          className="add-page-visual"
-        >
-          <p className="table-title">Summary for Today</p>
-          <div className="table-head">
-            <p>Activity</p>
-            <p>Total (hrs)</p>
-            <p>% of the Day</p>
+          <div
+            id="add-page-table"
+            className="add-page-visual"
+          >
+            <p className="table-title">Summary for Today</p>
+            <div className="table-head">
+              <p>Activity</p>
+              <p>Total (hrs)</p>
+              <p>% of the Day</p>
+            </div>
+            <div className="table-details">
+              {tds.map((e, index) => (
+                <TableDetail
+                  key={index}
+                  label={e.label}
+                  hrs={e.hrs}
+                  percent={e.percent}
+                />
+              ))}
+            </div>
           </div>
-          <div className="table-details">
-            {tds.map((e, index) => (
-              <TableDetail
-                key={index}
-                label={e.label}
-                hrs={e.hrs}
-                percent={e.percent}
+          <div
+            id="add-page-chart"
+            className="add-page-visual"
+          >
+            <PieChart todaysRecord={state.todaysRecord} />
+          </div>
+        </div>
+        <div className="add-page__status">
+          <p>
+            Remaining Time : {Math.floor(totalHrsRemaining)} hrs and{" "}
+            {((Number(totalHrsRemaining) * 60) % 60).toFixed(0)} mins
+          </p>
+        </div>
+        <div className="add-page__controls">
+          <div className="date-picker">
+            <p>Select a date</p>
+            <div id="date-picker">
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                dateFormat="yyyy-MM-dd"
+                id="date-picker-comp"
+                timeZone="Asia/Manila"
               />
-            ))}
+            </div>
           </div>
-        </div>
-        <div
-          id="add-page-chart"
-          className="add-page-visual"
-        >
-          <PieChart todaysRecord={state.todaysRecord} />
-        </div>
-      </div>
-      <div className="add-page__status">
-        <p>
-          Remaining Time : {Math.floor(totalHrsRemaining)} hrs and{" "}
-          {((Number(totalHrsRemaining) * 60) % 60).toFixed(0)} mins
-        </p>
-      </div>
-      <div className="add-page__controls">
-        <div className="date-picker">
-          <p>Select a date</p>
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-            dateFormat="yyyy-MM-dd"
-            id="date-picker-comp"
-            timeZone="Asia/Manila"
+          <Button
+            label="Save Record"
+            className="add-page__control add-page__control--save"
+            onClick={handleSave}
+          />
+          <Button
+            label="Clear"
+            className="add-page__control add-page__control--clear"
+            onClick={handleClear}
           />
         </div>
-        <Button
-          label="Save Record"
-          className="add-page__control add-page__control--save"
-          onClick={handleSave}
-        />
-        <Button
-          label="Clear"
-          className="add-page__control add-page__control--clear"
-          onClick={handleClear}
-        />
       </div>
     </div>
   );

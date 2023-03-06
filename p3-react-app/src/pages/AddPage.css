@@ -103,8 +103,14 @@
   /* background-color: green; */
 }
 
-#date-picker-comp .react-datepicker__input-container input {
+#date-picker-comp .react-datepicker__input-container {
   text-align: center;
   border-radius: 5px;
   height: 50px;
+}
+
+@media (max-width: 768px) {
+  .add-page {
+    margin-top: 90px;
+  }
 }

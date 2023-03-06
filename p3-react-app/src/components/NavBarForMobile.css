@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Mobile version */
+@media (max-width: 768px) {
+  .nav__links {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background-image: linear-gradient(180deg, #15664f, #1e4363);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 999;
+
+    gap: 1rem;
+  }
+
+  .nav__links.show {
+    opacity: 1;
+    visibility: visible;
+
+    position: fixed;
+  }
+
+  .nav__menu {
+    display: block;
+    position: relative;
+    z-index: 1000;
+    cursor: pointer;
+    margin-right: 15px;
+  }
+
+  .nav__menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #ddd;
+    border-radius: 3px;
+    z-index: 1;
+    transform-origin: 4px 0px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+      opacity 0.55s ease;
+  }
+
+  .nav__menu span:first-child {
+    transform-origin: 0% 0%;
+  }
+
+  .nav__menu span:last-child {
+    transform-origin: 0% 100%;
+  }
+
+  .nav__menu.active span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background-color: #ddd;
+  }
+
+  .nav__menu.active span:nth-last-child(2) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+  }
+
+  .nav__menu.active span:last-child {
+    transform: rotate(-45deg) translate(0, -1px);
+    background-color: #ddd;
+  }
+
+  .nav__logo--ss {
+    position: fixed;
+    color: #ddd;
+    width: 100%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
+    height: 80px;
+    width: 100%;
+    /* background-color: red; */
+    /* background-color: #15664f; */
+    background-image: linear-gradient(180deg, #15664f, #30616d);
+
+    /* border-bottom: 1px solid #333; */
+  }
+
+  .nav__link {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    padding: 1rem;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nav__link--logo {
+    /* display: none; */
+    padding-bottom: 1rem;
+  }
+
+  .nav__link:hover {
+    text-decoration: none;
+  }
+}
+
+.nav__icon {
+  position: fixed;
+  top: 30px;
+  right: 10px;
+}
