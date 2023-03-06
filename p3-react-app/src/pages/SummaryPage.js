@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { DataContext } from "../contextprovider/DataContextProvider";
 
 const SummaryPage = () => {
+  const [range, setRange] = useState("week");
   // from context provider(s)
   const { pastRecords, setPastRecords } = useContext(DataContext);
 
@@ -27,8 +28,15 @@ const SummaryPage = () => {
     <div className="page page--summary">
       <div className="page--summary__user-info">
         <div className="card__user-info">
-          <p className="card__greet">Hi User!</p>
-          <p className="card__greet--subtext">Here is your summary...</p>
+          <p>Date:</p>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
+          <p className="card__greet">Hi!</p>
+          <p className="card__greet--subtext">
+            Here is your {range}ly summary...
+          </p>
         </div>
 
         {/* <div className="card__user-info--subcard"></div> */}
@@ -36,30 +44,26 @@ const SummaryPage = () => {
         <div className="card__options">
           <button
             className="card__option"
-            // onClick={handleDisplayDaily}
-          >
-            Daily
-          </button>
-          <button
-            className="card__option"
-            // onClick={handleDisplayWeekly}
+            onClick={() => setRange("week")}
           >
             Weekly
           </button>
           <button
             className="card__option"
-            // onClick={handleDisplayMonthly}
+            onClick={() => setRange("month")}
           >
             Monthly
+          </button>
+          <button
+            className="card__option"
+            onClick={() => setRange("quarter")}
+          >
+            Quarterly
           </button>
         </div>
       </div>
 
       <div className="page--summary__cards">
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-        />
         {categories.map((category) => (
           <Card
             key={category}
@@ -67,6 +71,7 @@ const SummaryPage = () => {
             category={category}
             startDate={startDate}
             setStartDate={setStartDate}
+            range={range}
           />
         ))}
       </div>

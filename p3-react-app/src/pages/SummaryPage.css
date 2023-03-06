@@ -67,8 +67,9 @@
   /* background-color: #5f59df; */
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: center;
+  align-items: flex-start;
 
   gap: 2rem;
 }

@@ -1,8 +1,9 @@
+import "./Card.css";
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Card = ({ logs, category, startDate, setStartDate }) => {
+const Card = ({ logs, category, startDate, setStartDate, range }) => {
   const [totalHours, setTotalHours] = useState(0);
   const [averageHours, setAverageHours] = useState(0);
   const [percentage, setPercentage] = useState(0);
@@ -11,16 +12,29 @@ const Card = ({ logs, category, startDate, setStartDate }) => {
   const [averageHoursPrev, setAverageHoursPrev] = useState(0);
   const [percentagePrev, setPercentagePrev] = useState(0);
 
+  const getRangeNumber = (range) => {
+    switch (range) {
+      case "week":
+        return 7;
+      case "month":
+        return 30;
+      case "quarter":
+        return 90;
+      default:
+        return 7;
+    }
+  };
+
   useEffect(() => {
-    const sevenDaysAgo = new Date(
-      startDate.getTime() - 7 * 24 * 60 * 60 * 1000
+    const daysAgoInRange = new Date(
+      startDate.getTime() - getRangeNumber(range) * 24 * 60 * 60 * 1000
     );
 
     let total = 0;
     let count = 0;
     logs.forEach((log) => {
       const date = new Date(log.date);
-      if (date >= sevenDaysAgo && date <= startDate) {
+      if (date >= daysAgoInRange && date <= startDate) {
         log.activities.forEach((activity) => {
           if (activity.name === category) {
             total += activity.hours;
@@ -31,8 +45,8 @@ const Card = ({ logs, category, startDate, setStartDate }) => {
     });
 
     const average = count > 0 ? total / count : 0;
-    const totalHoursInSevenDays = 24 * 7;
-    const percentage = total > 0 ? (total / totalHoursInSevenDays) * 100 : 0;
+    const totalHoursInRange = 24 * getRangeNumber(range);
+    const percentage = total > 0 ? (total / totalHoursInRange) * 100 : 0;
 
     setTotalHours(total);
     setAverageHours(average);
@@ -40,15 +54,15 @@ const Card = ({ logs, category, startDate, setStartDate }) => {
 
     //
 
-    const fourteenDaysAgo = new Date(
-      startDate.getTime() - 14 * 24 * 60 * 60 * 1000
+    const daysAgoInRangePrev = new Date(
+      startDate.getTime() - 2 * getRangeNumber(range) * 24 * 60 * 60 * 1000
     );
 
     let totalPrev = 0;
     let countPrev = 0;
     logs.forEach((log) => {
       const date = new Date(log.date);
-      if (date >= fourteenDaysAgo && date <= sevenDaysAgo) {
+      if (date >= daysAgoInRangePrev && date <= daysAgoInRange) {
         log.activities.forEach((activity) => {
           if (activity.name === category) {
             totalPrev += activity.hours;
@@ -59,9 +73,8 @@ const Card = ({ logs, category, startDate, setStartDate }) => {
     });
 
     const averagePrev = countPrev > 0 ? totalPrev / countPrev : 0;
-    const totalHoursIn14Days = 24 * 7;
     const percentagePrev =
-      totalPrev > 0 ? (totalPrev / totalHoursIn14Days) * 100 : 0;
+      totalPrev > 0 ? (totalPrev / totalHoursInRange) * 100 : 0;
 
     setTotalHours(total);
     setAverageHours(average);
@@ -69,7 +82,7 @@ const Card = ({ logs, category, startDate, setStartDate }) => {
     setTotalHoursPrev(totalPrev);
     setAverageHoursPrev(averagePrev);
     setPercentagePrev(percentagePrev);
-  }, [startDate, logs, category]);
+  }, [startDate, logs, category, range]);
 
   return (
     <div className="card">
@@ -88,8 +101,8 @@ const Card = ({ logs, category, startDate, setStartDate }) => {
         <p className="card__label">%</p>
       </div>
       <div className="card_previous">
-        Last week: {totalHoursPrev.toFixed(1)} - {averageHoursPrev.toFixed(1)} -{" "}
-        {percentagePrev.toFixed(1)}%
+        Prev. {range}: {totalHoursPrev.toFixed(1)} -{" "}
+        {averageHoursPrev.toFixed(1)} - {percentagePrev.toFixed(1)}%
       </div>
     </div>
   );

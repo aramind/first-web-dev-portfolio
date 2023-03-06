@@ -403,7 +403,7 @@ const AddPage = () => {
             onChange={(date) => setSelectedDate(date)}
             dateFormat="yyyy-MM-dd"
             id="date-picker-comp"
-            style={{ borderRadius: "3px", height: "3rem" }}
+            timeZone="Asia/Manila"
           />
         </div>
         <Button
