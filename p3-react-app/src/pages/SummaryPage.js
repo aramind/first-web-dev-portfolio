@@ -1,36 +1,27 @@
 import "./SummaryPage.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SummaryCard from "../components/SummaryCard";
+import Card from "../components/Card";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { DataContext } from "../contextprovider/DataContextProvider";
 
-const labels = [
-  "sleep",
-  "work",
-  "learn",
-  "self",
-  "social",
-  "play",
-  "h&fitness",
-  "others",
-];
+const SummaryPage = () => {
+  // from context provider(s)
+  const { pastRecords, setPastRecords } = useContext(DataContext);
 
-const initialState = {
-  dailySummary: [],
-  weeklySummary: [],
-  monthlySummary: [],
-};
+  // Get a unique list of activity categories
+  const categories = pastRecords.reduce((acc, log) => {
+    log.activities.forEach((activity) => {
+      if (!acc.includes(activity.name.toUpperCase())) {
+        acc.push(activity.name);
+      }
+    });
+    return acc;
+  }, []);
 
-const SummaryPage = ({ records, setRecords }) => {
-  const [range, setRange] = useState("");
-
-  const handleDisplayDaily = () => {
-    setRange("Day");
-  };
-  const handleDisplayWeekly = () => {
-    setRange("Week");
-  };
-  const handleDisplayMonthly = () => {
-    setRange("Month");
-  };
+  console.log(categories);
+  const [startDate, setStartDate] = useState(new Date());
 
   return (
     <div className="page page--summary">
@@ -45,29 +36,37 @@ const SummaryPage = ({ records, setRecords }) => {
         <div className="card__options">
           <button
             className="card__option"
-            onClick={handleDisplayDaily}
+            // onClick={handleDisplayDaily}
           >
             Daily
           </button>
           <button
             className="card__option"
-            onClick={handleDisplayWeekly}
+            // onClick={handleDisplayWeekly}
           >
             Weekly
           </button>
           <button
             className="card__option"
-            onClick={handleDisplayMonthly}
+            // onClick={handleDisplayMonthly}
           >
             Monthly
           </button>
         </div>
       </div>
+
       <div className="page--summary__cards">
-        {labels.map((label) => (
-          <SummaryCard
-            label={label}
-            range={range}
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+        />
+        {categories.map((category) => (
+          <Card
+            key={category}
+            logs={pastRecords}
+            category={category}
+            startDate={startDate}
+            setStartDate={setStartDate}
           />
         ))}
       </div>
