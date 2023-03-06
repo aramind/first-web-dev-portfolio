@@ -11,6 +11,28 @@ const Card = ({ logs, category, startDate, setStartDate, range }) => {
   const [totalHoursPrev, setTotalHoursPrev] = useState(0);
   const [averageHoursPrev, setAverageHoursPrev] = useState(0);
   const [percentagePrev, setPercentagePrev] = useState(0);
+  const [isBouncing, setIsBouncing] = useState(true);
+
+  const randomBGcolors = [
+    "#6a040f",
+    "#14213d",
+    "#16697a",
+    "#e01772",
+    "#55a630",
+    "#6411ad",
+    "#2d3142",
+    "#d90368",
+    "#3185fc",
+    "#d90429",
+    "#006d77",
+    "#344e41",
+    "#01161e",
+    "#e36414",
+    "5F0F40",
+    "9A031E",
+  ];
+  const randomColor =
+    randomBGcolors[Math.floor(Math.random() * randomBGcolors.length)];
 
   const getRangeNumber = (range) => {
     switch (range) {
@@ -84,8 +106,18 @@ const Card = ({ logs, category, startDate, setStartDate, range }) => {
     setPercentagePrev(percentagePrev);
   }, [startDate, logs, category, range]);
 
+  const randomNumber = Math.floor(Math.random() * 5);
+
+  let bounceClass = `bounce${randomNumber}`;
+  console.log(bounceClass);
   return (
-    <div className="card">
+    <div
+      className={`card ${bounceClass}`}
+      style={{
+        backgroundColor:
+          randomBGcolors[Math.floor(Math.random() * randomBGcolors.length)],
+      }}
+    >
       <div className="card__head">
         <p className="card__title">{category}</p>
         {/* <p className="card__dots">. . .</p> */}
@@ -104,6 +136,7 @@ const Card = ({ logs, category, startDate, setStartDate, range }) => {
         Prev. {range}: {totalHoursPrev.toFixed(1)} -{" "}
         {averageHoursPrev.toFixed(1)} - {percentagePrev.toFixed(1)}%
       </div>
+      {/* <button className="card-btn">View Trend in Chart</button> */}
     </div>
   );
 };

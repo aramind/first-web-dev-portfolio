@@ -1,6 +1,6 @@
 import "./SummaryPage.css";
 import React, { useContext, useState } from "react";
-import SummaryCard from "../components/SummaryCard";
+// import SummaryCard from "../components/SummaryCard";
 import Card from "../components/Card";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -32,6 +32,7 @@ const SummaryPage = () => {
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
+            timeZone="Asia/Manila"
           />
           <p className="card__greet">Hi!</p>
           <p className="card__greet--subtext">

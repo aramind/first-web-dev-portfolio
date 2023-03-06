@@ -21,6 +21,8 @@
 
   padding: 1.5rem;
   position: relative;
+
+  box-shadow: -3px 7px 15px #222;
 }
 
 .card__greet {
