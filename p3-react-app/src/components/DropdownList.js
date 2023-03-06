@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import "./DropdownList.css";
+import { FiChevronDown } from "react-icons/fi";
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
@@ -62,7 +63,9 @@ const DropdownList = ({ placeHolder, options, onChange }) => {
       >
         <div className="dropdown-selected-value">{getDisplay()}</div>
         <div className="dropdown-tools">
-          <div className="dropdown-tool">V</div>
+          <div className="dropdown-tool">
+            <FiChevronDown />
+          </div>
         </div>
       </div>
       {state.showMenu && (

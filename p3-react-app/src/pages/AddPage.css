@@ -109,6 +109,15 @@
   height: 50px;
 }
 
+.dropdown-tool {
+  /* background-color: red; */
+  padding-right: 0;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .add-page {
     margin-top: 90px;
