@@ -26,39 +26,44 @@ const ChartDisplay = ({ onClose }) => {
     others: 0,
   };
 
-  // const records = JSON.parse(localStorage.getItem("records"));
-
-  console.log("from chartDisplay");
-  console.log(typeof pastRecords);
-  console.log(pastRecords);
-
+  // searches for the records stores in the local storage
+  // based on the date selected
   const selectedRecord = pastRecords.find(
     (record) => record.date === selectedDate.toISOString().slice(0, 10)
   );
 
+  // converts the format of the data fetched from the local storage to the format
+  // the chart needs
   if (selectedRecord) {
     selectedRecord.activities.forEach(({ name, hours }) => {
       const transformedKey = name.toLowerCase();
       transformedObject[transformedKey] = hours;
     });
-    console.log(transformedObject);
+    // console.log(transformedObject);
   }
 
+  // computes for the total hours stored in one record fetched from the local storage
+  // all records was set to 24 hrs before saving but just to be sure since the computations
+  // of percentages depends on this
   const totalHrs = Object.values(transformedObject).reduce(
     (acc, curr) => acc + curr,
     0
   );
 
+  // gets the percentage of each activity since the data fetched from the records
+  // has no percentage, only the number of hours
   const percentageObject = {};
   for (const key in transformedObject) {
     const percentage = ((transformedObject[key] / totalHrs) * 100).toFixed(1);
     percentageObject[key] = percentage;
   }
 
+  // creates the summary details to be displayed below each chart
   const summaryText = Object.entries(percentageObject)
     .map(([key, percentage]) => `${key}: ${percentage}%`)
     .join(", ");
 
+  // converts the date object on the selected date to the format needed to be displayed
   const dateDetails = selectedDate.toDateString();
 
   return (

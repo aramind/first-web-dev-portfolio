@@ -1,0 +1,20 @@
+.page--blog {
+  margin: auto;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-80px);
+  color: #ddd;
+  font-size: 1.5rem;
+}
+
+.page--blog a {
+  text-decoration: none;
+  color: aqua;
+}
+
+.page--blog a:hover {
+  text-decoration: underline;
+  color: aquamarine;
+}

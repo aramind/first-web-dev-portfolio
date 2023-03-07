@@ -58,6 +58,8 @@ const AddPage = () => {
     "others",
   ];
 
+  // computes for the remaining time in a day
+  // will be used for validating of the add, subtract, and save record buttons
   const getRemainingTime = () => {
     const totalHrs = labels.reduce(
       (total, activity) => total + todaysRecord[activity],
@@ -69,6 +71,7 @@ const AddPage = () => {
     )} min(s)`;
   };
 
+  // handles the filling out of the field in the summary table
   const tds = [];
 
   for (const label of labels) {
@@ -133,6 +136,7 @@ const AddPage = () => {
       </div>
 
       <ErrorMessage message={errorMsg} />
+
       <div className="add-page__visuals">
         <div
           id="add-page-chart2"

@@ -296,6 +296,10 @@ const AddPage = () => {
       } else {
         // Add the new record to pastRecords
         setPastRecords([...pastRecords, newRecord]);
+        dispatch({
+          type: "SET_ERROR_MSG",
+          payload: { value: "Record saved successfully!" },
+        });
       }
     } else {
       inputHasError = true;
@@ -354,7 +358,40 @@ const AddPage = () => {
         >
           <BarChart todaysRecord={state.todaysRecord} />
         </div> */}
-
+          <div className="date-picker">
+            <div className="date-display date-display__day">
+              {
+                selectedDate
+                  .toLocaleDateString("en-PH", {
+                    weekday: "short",
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })
+                  .split(",")[0]
+              }
+            </div>
+            <div className="date-display date-display__date">
+              {selectedDate
+                .toLocaleDateString("en-PH", {
+                  weekday: "short",
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })
+                .substring(5)}
+            </div>
+            <p className="text-for-dPicker">Select a date</p>
+            <div id="date-picker">
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                dateFormat="yyyy-MM-dd"
+                id="date-picker-comp"
+                timeZone="Asia/Manila"
+              />
+            </div>
+          </div>
           <div
             id="add-page-table"
             className="add-page-visual"
@@ -390,18 +427,6 @@ const AddPage = () => {
           </p>
         </div>
         <div className="add-page__controls">
-          <div className="date-picker">
-            <p>Select a date</p>
-            <div id="date-picker">
-              <DatePicker
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-                dateFormat="yyyy-MM-dd"
-                id="date-picker-comp"
-                timeZone="Asia/Manila"
-              />
-            </div>
-          </div>
           <Button
             label="Save Record"
             className="add-page__control add-page__control--save"

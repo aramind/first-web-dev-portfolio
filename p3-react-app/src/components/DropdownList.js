@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import "./DropdownList.css";
 import { FiChevronDown } from "react-icons/fi";
 
+// reducer function
 const reducer = (state, { type, payload }) => {
   switch (type) {
     case "SET_SHOW_MENU":

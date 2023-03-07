@@ -6,6 +6,8 @@ import NavigationBar from "../components/NavigationBar";
 const MainLayout = () => {
   const [isMobile, setIsMobile] = useState(false);
 
+  // adding the event listener enabling the switching of navbars for different
+  // screen sizes
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px");
     setIsMobile(mediaQuery.matches);
@@ -15,10 +17,6 @@ const MainLayout = () => {
     };
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
-
-    // return () => {
-    //   mediaQuery.removeEventListener(handleMediaQueryChange);
-    // };
   }, []);
 
   return (

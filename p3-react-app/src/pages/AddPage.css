@@ -63,6 +63,30 @@
   gap: 2rem;
 }
 
+.date-display {
+  font-size: 3rem;
+}
+
+.date-display__date {
+  font-size: 2rem;
+  margin-bottom: 4rem;
+}
+.date-picker {
+  /* border: 1px solid red; */
+  height: 100%;
+  padding-inline: 2rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  color: #ddd;
+  border-radius: 2rem;
+}
+
+.text-for-dPicker {
+  color: #ddd;
+}
+
 .add-page-visual {
   background-color: white;
   padding: 1rem;
@@ -89,18 +113,6 @@
   margin-inline: auto;
   margin-top: 1rem;
   color: #ddd;
-}
-
-.date-picker {
-  height: 100%;
-  padding-inline: 2rem;
-
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: flex-start;
-  color: #ddd;
-  border-radius: 2rem;
-  /* background-color: green; */
 }
 
 #date-picker-comp .react-datepicker__input-container {

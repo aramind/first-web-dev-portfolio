@@ -309,12 +309,15 @@ const DataContextProvider = ({ children }) => {
     return Array.isArray(data) ? data : [data];
   });
 
+  // fetches the records stored in the local storage when the app starts
   useEffect(() => {
     console.log(logs);
     const data = JSON.parse(localStorage.getItem("pastRecords")) || logs;
     setPastRecords(data);
   }, []);
 
+  // updates the records stored in the local storage whenever pastRecords
+  // changes inside the app
   useEffect(() => {
     localStorage.setItem("pastRecords", JSON.stringify(pastRecords));
   }, [pastRecords]);

@@ -11,7 +11,7 @@ const SummaryPage = () => {
   // from context provider(s)
   const { pastRecords, setPastRecords } = useContext(DataContext);
 
-  // Get a unique list of activity categories
+  //gets the list of activity categories
   const categories = pastRecords.reduce((acc, log) => {
     log.activities.forEach((activity) => {
       if (!acc.includes(activity.name.toUpperCase())) {
@@ -21,7 +21,7 @@ const SummaryPage = () => {
     return acc;
   }, []);
 
-  console.log(categories);
+  // console.log(categories);
   const [startDate, setStartDate] = useState(new Date());
 
   return (

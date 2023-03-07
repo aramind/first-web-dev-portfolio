@@ -21,6 +21,7 @@ const ChartsPage = () => {
     <ChartDisplay onClose={() => handleRemoveChart(0)} />,
   ]);
 
+  // creates a new chart to be displayed
   const addChart = () => {
     if (numCharts < 366) {
       const newChartComponents = [
@@ -34,6 +35,7 @@ const ChartsPage = () => {
     }
   };
 
+  // removes the chart displayed
   const removeChart = (indexToRemove) => {
     const newChartComponents = chartComponents.filter(
       (_, index) => index !== indexToRemove

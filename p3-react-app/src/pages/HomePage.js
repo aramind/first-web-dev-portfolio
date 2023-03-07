@@ -7,6 +7,7 @@ const HomePage = () => {
   const [author, setAuthor] = useState("");
   const [toggle, setToggle] = useState(false);
 
+  // fetches a quote from the quote json file for every render of this page
   useEffect(() => {
     const randomQuote =
       quotesData.quotes[Math.floor(Math.random() * quotesData.quotes.length)];

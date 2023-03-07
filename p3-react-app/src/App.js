@@ -8,6 +8,7 @@ import SummaryPage from "./pages/SummaryPage";
 import AddPage from "./pages/AddPage";
 import ChartsPage from "./pages/ChartsPage";
 import DataContextProvider from "./contextprovider/DataContextProvider";
+import Blog from "./pages/Blog";
 
 // Router
 const router = createBrowserRouter([
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
         errorElement: <NotFound />,
       },
       { path: "add", element: <AddPage />, errorElement: <NotFound /> },
+      { path: "blog", element: <Blog />, errorElement: <NotFound /> },
     ],
   },
 ]);

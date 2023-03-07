@@ -11,7 +11,6 @@ const Card = ({ logs, category, startDate, setStartDate, range }) => {
   const [totalHoursPrev, setTotalHoursPrev] = useState(0);
   const [averageHoursPrev, setAverageHoursPrev] = useState(0);
   const [percentagePrev, setPercentagePrev] = useState(0);
-  const [isBouncing, setIsBouncing] = useState(true);
 
   const randomBGcolors = [
     "#6a040f",
@@ -31,9 +30,12 @@ const Card = ({ logs, category, startDate, setStartDate, range }) => {
     "5F0F40",
     "9A031E",
   ];
+
   const randomColor =
     randomBGcolors[Math.floor(Math.random() * randomBGcolors.length)];
 
+  // sets the number of days depending on the range accepted from the parent component
+  // will be used on the computation of total, average, and percents to be displayed
   const getRangeNumber = (range) => {
     switch (range) {
       case "week":
@@ -47,7 +49,10 @@ const Card = ({ logs, category, startDate, setStartDate, range }) => {
     }
   };
 
+  // recomputes the different values to be displayed as the page
+  // renders and rerenders at each change of range
   useEffect(() => {
+    // handles the computation of different values depending on the range selected
     const daysAgoInRange = new Date(
       startDate.getTime() - getRangeNumber(range) * 24 * 60 * 60 * 1000
     );
@@ -74,8 +79,8 @@ const Card = ({ logs, category, startDate, setStartDate, range }) => {
     setAverageHours(average);
     setPercentage(percentage);
 
-    //
-
+    // handles the computation of different values depending on the range selected
+    // for the previous week, month, or quarter
     const daysAgoInRangePrev = new Date(
       startDate.getTime() - 2 * getRangeNumber(range) * 24 * 60 * 60 * 1000
     );
@@ -110,6 +115,7 @@ const Card = ({ logs, category, startDate, setStartDate, range }) => {
 
   let bounceClass = `bounce${randomNumber}`;
   console.log(bounceClass);
+
   return (
     <div
       className={`card ${bounceClass}`}
