@@ -20,7 +20,7 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, visibility 0.3s;
-    z-index: 999;
+    z-index: 99999;
 
     gap: 1rem;
   }
