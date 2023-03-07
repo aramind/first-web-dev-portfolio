@@ -12,3 +12,20 @@
   font-size: 2rem;
   height: 100%;
 }
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .add-page-input-form {
+    width: 250px;
+  }
+
+  .add-page__input {
+    width: 100px;
+    font-size: 1.8rem;
+    border-radius: 0.5rem;
+  }
+
+  .add-page-input-form__label {
+    font-size: 1.5rem;
+  }
+}

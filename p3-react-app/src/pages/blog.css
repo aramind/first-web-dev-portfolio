@@ -19,3 +19,14 @@
   text-decoration: underline;
   color: aquamarine;
 }
+
+@media (max-width: 768px) {
+  .page--blog {
+    margin: auto;
+    width: 80%;
+    color: #ddd;
+    font-size: 1rem;
+    text-align: center;
+    /* background-color: red; */
+  }
+}
