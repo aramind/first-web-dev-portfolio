@@ -4,14 +4,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(-80px);
   color: #ddd;
   font-size: 1.5rem;
+  /* background-color: red; */
 }
 
 .page--blog a {
   text-decoration: none;
   color: aqua;
+  transform: translateY(-80px);
 }
 
 .page--blog a:hover {
