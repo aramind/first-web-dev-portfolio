@@ -38,7 +38,7 @@ const initialTodaysRecord = {
   others: 0,
 };
 
-//start of refactoring
+// initial state for useReducer
 const initialState = {
   todaysRecord:
     JSON.parse(localStorage.getItem("records")) || initialTodaysRecord,
@@ -78,22 +78,22 @@ const reducer = (state, { type, payload }) => {
       return state;
   }
 };
-// end of refactoring
+
 const AddPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [showCleared, setShowCleared] = useState(false);
-  // const [hasError, setHasError] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   // from context provider(s)
   const { pastRecords, setPastRecords } = useContext(DataContext);
 
-  //start of refactoring
-
+  // updates the copy of todays record on local storage
+  // at each renders of this page
   useEffect(() => {
     localStorage.setItem("records", JSON.stringify(state.todaysRecord));
   }, [state.todaysRecord]);
 
+  // labels for the chart and table
   const labels = [
     "sleep",
     "work",
@@ -105,18 +105,21 @@ const AddPage = () => {
     "others",
   ];
 
+  // computes for the total hours remaining of the current day
   let totalHrsRemaining =
     24 -
     labels.reduce((total, activity) => total + state.todaysRecord[activity], 0);
 
   const tds = [];
 
+  // populates the summary table with the numerical data from todays current record
   for (const label of labels) {
     const hrs = (+state.todaysRecord[label]).toFixed(1);
     const percent = ((state.todaysRecord[label] / 24) * 100).toFixed(2);
     tds.push({ label, hrs, percent });
   }
 
+  // updates todays record state
   const updateTodaysRecord = (prevState, activity, hours, minutes) => {
     return {
       ...prevState,
@@ -124,10 +127,10 @@ const AddPage = () => {
     };
   };
 
+  // input validations to be used by the add and subtract buttons
   let inputHasError = false;
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // validations
     if (
       !state.activity.trim() ||
       state.activity === "" ||
@@ -173,6 +176,7 @@ const AddPage = () => {
     }
   };
 
+  // additional input validation of the subtract button
   const handleFormSubmitForSubtract = (e) => {
     e.preventDefault();
     const currentHours = state.todaysRecord[state.activity];
@@ -189,6 +193,8 @@ const AddPage = () => {
     }
   };
 
+  // handler for the onclick of add button
+  // adds the inputted hours and minutes to todays record for the activity selected
   const handleAdd = (e) => {
     handleFormSubmit(e);
     // console.log(`${state.hasError} from handle add`);
@@ -208,6 +214,8 @@ const AddPage = () => {
     }
   };
 
+  // handler for the onclick of subtract button
+  // subtracts the inputted hours and minutes to todays record for the activity selected
   const handleSubtract = (e) => {
     handleFormSubmitForSubtract(e);
     handleFormSubmit(e);
@@ -227,6 +235,9 @@ const AddPage = () => {
     }
   };
 
+  // handler for the onclick of the clear button
+  // clears the summary table
+  // also called whenever there will be a successful saving of todaysRecord to pastRecords
   const handleClear = () => {
     const confirmed = window.confirm(
       "Are you sure you want to clear records for the current day?"
@@ -242,10 +253,12 @@ const AddPage = () => {
     }
   };
 
+  // handles the updating of activity state via the dropdown component
   const handleActivityChange = (value) => {
     dispatch({ type: "SET_ACTIVITY", payload: { value: value.value } });
   };
 
+  // handles the updating of the hours state via the input form for hours
   const handleHoursChange = (e) => {
     dispatch({
       type: "SET_HOURS",
@@ -253,6 +266,7 @@ const AddPage = () => {
     });
   };
 
+  // handles the updating of the minutes state via the input form for minutes
   const handleMinuteChange = (e) => {
     dispatch({
       type: "SET_MINUTES",
@@ -260,6 +274,10 @@ const AddPage = () => {
     });
   };
 
+  // handler for save record button
+  // adds the finished 24 hrs record to the past record on the local storage
+  // via a method through the context provider, since the context provider
+  // serves as the gatekeeper to the past records data stored on local storage
   const handleSave = (e) => {
     e.preventDefault();
 
@@ -279,6 +297,7 @@ const AddPage = () => {
         (record) => record.date === newRecord.date
       );
 
+      // confirmation to overwrite if there's existing record for that date
       if (existingRecordIndex !== -1) {
         const shouldOverwrite = window.confirm(
           `Data for ${newRecord.date} already exists. Overwrite?`

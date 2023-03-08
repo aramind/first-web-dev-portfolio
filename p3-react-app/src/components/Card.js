@@ -12,6 +12,8 @@ const Card = ({ logs, category, startDate, setStartDate, range }) => {
   const [averageHoursPrev, setAverageHoursPrev] = useState(0);
   const [percentagePrev, setPercentagePrev] = useState(0);
 
+  // pool of colors where each card component will select randomly
+  // every time each card will be rendered
   const randomBGcolors = [
     "#6a040f",
     "#14213d",
