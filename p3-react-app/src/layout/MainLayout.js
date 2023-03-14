@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import NavBarForMobile from "../components/NavBarForMobile";
 import NavigationBar from "../components/NavigationBar";
 
 const MainLayout = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const location = useLocation();
 
   // adding the event listener enabling the switching of navbars for different
   // screen sizes
