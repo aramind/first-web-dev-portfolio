@@ -58,8 +58,20 @@ const ChartDisplay = ({ onClose }) => {
     percentageObject[key] = percentage;
   }
 
+  // converts the percentageObject to array of key value pairs then sort it
+  // in descending order
+  const sortedInArrays = Object.entries(percentageObject).sort(
+    (a, b) => parseFloat(b[1]) - parseFloat(a[1])
+  );
+
+  // converts back the sortedInArray to object with key value pairs
+  const sortedPercentageObject = sortedInArrays.reduce(
+    (obj, [key, value]) => ({ ...obj, [key]: value }),
+    {}
+  );
+
   // creates the summary details to be displayed below each chart
-  const summaryText = Object.entries(percentageObject)
+  const summaryText = Object.entries(sortedPercentageObject)
     .map(([key, percentage]) => `${key}: ${percentage}%`)
     .join(", ");
 
