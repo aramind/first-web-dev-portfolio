@@ -297,7 +297,11 @@ const AddPage = () => {
   // serves as the gatekeeper to the past records data stored on local storage
   const handleSave = (e) => {
     e.preventDefault();
-
+    let currentDate = selectedDate.toLocaleDateString("en-PH", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
     // Check if remaining hours is zero
     if (totalHrsRemaining === 0) {
       // Create a new record object with the current date and activities from todaysRecord
@@ -325,14 +329,19 @@ const AddPage = () => {
           const updatedRecords = [...pastRecords];
           updatedRecords[existingRecordIndex] = newRecord;
           setPastRecords(updatedRecords);
-        }
 
-        // Reset the inputs and summary table for the new day
-        handleClear();
+          alert(`Record for ${currentDate} successfully saved!`);
+
+          // Reset the inputs and summary table for the new day
+          doHardClear();
+        }
       } else {
         // Add the new record to pastRecords
         setPastRecords([...pastRecords, newRecord]);
-        alert("Record saved successfully!");
+        alert(`Record for ${currentDate} successfully saved!`);
+
+        // Reset the inputs and summary table for the new day
+        doHardClear();
         // dispatch({
         //   type: "SET_ERROR_MSG",
         //   payload: { value: "Record saved successfully!" },
