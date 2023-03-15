@@ -146,11 +146,21 @@ const AddPage = () => {
       return;
     }
 
+    if (isNaN(state.hours) || isNaN(state.minutes)) {
+      inputHasError = true;
+      dispatch({
+        type: "SET_ERROR_MSG",
+        payload: { value: "Duration must be a number" },
+      });
+      console.log("im in a hrs 0 validation dispatch");
+      return;
+    }
+
     if (state.hours === 0 && state.minutes === 0) {
       inputHasError = true;
       dispatch({
         type: "SET_ERROR_MSG",
-        payload: { value: "Duration cannot be blank" },
+        payload: { value: "Duration cannot be zero/null" },
       });
       console.log("im in a hrs 0 validation dispatch");
       return;
