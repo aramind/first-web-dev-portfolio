@@ -82,6 +82,7 @@ const reducer = (state, { type, payload }) => {
 const AddPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [showCleared, setShowCleared] = useState(false);
+
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   // from context provider(s)
@@ -127,7 +128,7 @@ const AddPage = () => {
     };
   };
 
-  // input validations to be used by the add and subtract buttons
+  // input validations COMMON ot add and subtract buttons
   let inputHasError = false;
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -164,7 +165,11 @@ const AddPage = () => {
       console.log("im in a hrs > 24 validation dispatch");
       return;
     }
+  };
 
+  // additional input validation for the add button only
+  const handleFormSubmitForAdd = (e) => {
+    e.preventDefault();
     const totalDuration = state.hours + state.minutes / 60;
     if (totalDuration > totalHrsRemaining) {
       inputHasError = true;
@@ -197,6 +202,7 @@ const AddPage = () => {
   // adds the inputted hours and minutes to todays record for the activity selected
   const handleAdd = (e) => {
     handleFormSubmit(e);
+    handleFormSubmitForAdd(e);
     // console.log(`${state.hasError} from handle add`);
     if (!inputHasError) {
       dispatch({
@@ -251,6 +257,17 @@ const AddPage = () => {
       });
       setShowCleared(true);
     }
+  };
+
+  // clears the fields without confirmation
+  const doHardClear = () => {
+    dispatch({ type: "RESET_FIELDS" });
+    localStorage.removeItem("records");
+    dispatch({
+      type: "SET_TODAYS_RECORD",
+      payload: { value: initialTodaysRecord },
+    });
+    setShowCleared(true);
   };
 
   // handles the updating of activity state via the dropdown component
@@ -315,10 +332,11 @@ const AddPage = () => {
       } else {
         // Add the new record to pastRecords
         setPastRecords([...pastRecords, newRecord]);
-        dispatch({
-          type: "SET_ERROR_MSG",
-          payload: { value: "Record saved successfully!" },
-        });
+        alert("Record saved successfully!");
+        // dispatch({
+        //   type: "SET_ERROR_MSG",
+        //   payload: { value: "Record saved successfully!" },
+        // });
       }
     } else {
       inputHasError = true;
@@ -328,6 +346,26 @@ const AddPage = () => {
       });
     }
   };
+
+  const handleDateChange = (date) => {
+    const confirmed = window.confirm(
+      "Changing date will reset all fields.\nEntries for the current date (if there's any) will be lost.\nDo you wish to continue?"
+    );
+    if (confirmed) {
+      doHardClear();
+      setSelectedDate(date);
+    }
+  };
+  useEffect(() => {
+    // const confirmed = window.confirm(
+    //   "Changing date will reset all fields.\nEntries for the current date (if there's any) will be lost.\nDo you wish to continue?"
+    // );
+    // if (confirmed) {
+    //   doHardClear();
+    // } else {
+    //   setSelectedDate(prevSelectedDate);
+    // }
+  }, [selectedDate]);
 
   return (
     <div>
@@ -404,7 +442,11 @@ const AddPage = () => {
             <div id="date-picker">
               <DatePicker
                 selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
+                onChange={
+                  (date) => handleDateChange(date)
+                  // setPrevSelectedDate(selectedDate);
+                  // setSelectedDate(date);
+                }
                 dateFormat="yyyy-MM-dd"
                 id="date-picker-comp"
                 timeZone="Asia/Manila"
@@ -415,7 +457,14 @@ const AddPage = () => {
             id="add-page-table"
             className="add-page-visual"
           >
-            <p className="table-title">Summary for Today</p>
+            <p className="table-title">
+              Summary for{" "}
+              {selectedDate.toLocaleDateString("en-PH", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </p>
             <div className="table-head">
               <p>Activity</p>
               <p>Total (hrs)</p>
