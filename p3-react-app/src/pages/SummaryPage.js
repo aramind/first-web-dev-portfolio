@@ -65,16 +65,28 @@ const SummaryPage = () => {
       </div>
 
       <div className="page--summary__cards">
-        {categories.map((category) => (
-          <Card
-            key={category}
-            logs={pastRecords}
-            category={category}
-            startDate={startDate}
-            setStartDate={setStartDate}
-            range={range}
-          />
-        ))}
+        {pastRecords.length > 0 ? (
+          categories.map((category) => (
+            <Card
+              key={category}
+              logs={pastRecords}
+              category={category}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              range={range}
+            />
+          ))
+        ) : (
+          <p
+            style={{
+              color: "gold",
+              fontSize: "2rem",
+              paddingTop: "1rem",
+            }}
+          >
+            No saved records yet.
+          </p>
+        )}
       </div>
     </div>
   );
