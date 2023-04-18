@@ -25,6 +25,10 @@ const NavBarLinks = () => {
         direction="row"
         gap={2}
         alignItems="center"
+        sx={{
+          flexGrow: 1,
+          display: { xs: "none", md: "flex" },
+        }}
       >
         {linkNames.map((item) => (
           <NavBarLink
