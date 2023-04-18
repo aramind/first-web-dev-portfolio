@@ -88,7 +88,7 @@ const NavBar = () => {
           <Button
             color="inherit"
             startIcon={<Lock />}
-            onClick={() => dispatch({ type: "UPDATE_USER", payload: user })}
+            onClick={() => dispatch({ type: "OPEN_LOGIN" })}
           >
             Login / Register
           </Button>

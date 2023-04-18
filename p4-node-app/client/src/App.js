@@ -1,10 +1,11 @@
 import "./App.css";
-import { ThemeProvider, createTheme } from "@mui/material";
 import NavBar from "./components/navbar/NavBar";
+import Login from "./components/user/Login";
 
 function App() {
   return (
     <>
+      <Login />
       <NavBar />
     </>
   );
