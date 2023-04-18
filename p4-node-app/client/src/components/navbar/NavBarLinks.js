@@ -1,7 +1,15 @@
 import React from "react";
 import { Avatar, Box, IconButton, Link, Stack, Tooltip } from "@mui/material";
 import { useValue } from "../../context/ContextProvider";
+import NavBarLink from "./NavBarLink";
 
+const linkNames = [
+  { name: "Home", to: "/" },
+  { name: "Add Record", to: "/" },
+  { name: "Charts", to: "/" },
+  { name: "Summary", to: "/" },
+  { name: "Read", to: "/" },
+];
 const NavBarLinks = () => {
   const {
     state: { currentUser },
@@ -18,37 +26,12 @@ const NavBarLinks = () => {
         gap={2}
         alignItems="center"
       >
-        <Link
-          color="inherit"
-          underline="none"
-          href="/"
-        >
-          Home
-        </Link>
-        <Link
-          color="inherit"
-          href="/"
-        >
-          Add Record
-        </Link>
-        <Link
-          color="inherit"
-          href="/"
-        >
-          Charts
-        </Link>
-        <Link
-          color="inherit"
-          href="/"
-        >
-          Summary
-        </Link>
-        <Link
-          color="inherit"
-          href="/"
-        >
-          Read
-        </Link>
+        {linkNames.map((item) => (
+          <NavBarLink
+            name={item.name}
+            to={item.to}
+          ></NavBarLink>
+        ))}
       </Stack>
       <Tooltip title={currentUser ? currentUser.name : "User"}>
         <IconButton>
