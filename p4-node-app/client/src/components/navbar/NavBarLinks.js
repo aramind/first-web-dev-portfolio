@@ -35,6 +35,7 @@ const NavBarLinks = () => {
       >
         {linkNames.map((item) => (
           <NavBarLink
+            key={`navbarLink_${item.name}`}
             name={item.name}
             to={item.to}
           ></NavBarLink>
