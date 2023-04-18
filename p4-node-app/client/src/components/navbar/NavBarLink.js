@@ -7,6 +7,14 @@ const NavBarLink = ({ name, to }) => {
       color="inherit"
       underline="none"
       href={to}
+      fontSize="20px"
+      px={1}
+      sx={{
+        "&:hover": {
+          color: "red", //TODO: finalize the color
+          textDecoration: "underline",
+        },
+      }}
     >
       {name}
     </Link>

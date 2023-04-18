@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, IconButton, Link, Stack, Tooltip } from "@mui/material";
+import { Avatar, IconButton, Stack, Tooltip } from "@mui/material";
 import { useValue } from "../../context/ContextProvider";
 import NavBarLink from "./NavBarLink";
 
