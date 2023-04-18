@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -6,7 +7,9 @@ import {
   DialogContentText,
   DialogTitle,
   IconButton,
+  Link,
   TextField,
+  Typography,
 } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
@@ -25,6 +28,7 @@ const Login = () => {
 
   // ** references
   const nameRef = useRef();
+  const userNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -54,18 +58,31 @@ const Login = () => {
               Please fill your information in the fields below:
             </DialogContentText>
             {isRegister && (
-              <TextField
-                autoFocus
-                margin="normal"
-                variant="standard"
-                id="name"
-                label="Name"
-                type="text"
-                fullWidth
-                inputRef={nameRef}
-                inputProps={{ minLength: 2 }}
-                required
-              />
+              <>
+                <TextField
+                  autoFocus
+                  margin="normal"
+                  variant="standard"
+                  id="name"
+                  label="Name"
+                  type="text"
+                  fullWidth
+                  inputRef={nameRef}
+                  inputProps={{ minLength: 3 }}
+                  required
+                />
+                <TextField
+                  margin="normal"
+                  variant="standard"
+                  id="username"
+                  label="Username"
+                  type="text"
+                  fullWidth
+                  inputRef={userNameRef}
+                  inputProps={{ minLength: 3 }}
+                  required
+                />
+              </>
             )}
             <TextField
               autoFocus={!isRegister}
@@ -86,7 +103,22 @@ const Login = () => {
                 label="Confirm Password"
               />
             )}
+            <Box mt={1}>
+              {isRegister ? (
+                <Typography fontSize="0.8rem">
+                  By registering you are accepting our{" "}
+                  <Link sx={{ cursor: "pointer" }}>
+                    Terms of Use and Policy
+                  </Link>
+                </Typography>
+              ) : (
+                <Typography fontSize="0.8rem">
+                  <Link sx={{ cursor: "pointer" }}>Forgot Password?</Link>
+                </Typography>
+              )}
+            </Box>
           </DialogContent>
+
           <DialogActions sx={{ px: "19px" }}>
             <Button
               type="submit"
