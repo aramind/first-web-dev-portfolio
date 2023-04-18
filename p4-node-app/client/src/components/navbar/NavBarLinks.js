@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, IconButton, Stack, Tooltip } from "@mui/material";
 import { useValue } from "../../context/ContextProvider";
 import NavBarLink from "./NavBarLink";
+import UserMenu from "../user/UserMenu";
 
 const linkNames = [
   { name: "Home", to: "/" },
@@ -15,6 +16,7 @@ const NavBarLinks = () => {
     state: { currentUser },
   } = useValue();
 
+  const [anchorUserMenu, setAnchorUserMenu] = useState(null);
   return (
     <Stack
       direction="row"
@@ -39,7 +41,7 @@ const NavBarLinks = () => {
         ))}
       </Stack>
       <Tooltip title={currentUser ? currentUser.name : "User"}>
-        <IconButton>
+        <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
           <Avatar
             src={currentUser?.photoURL}
             alt={currentUser?.name}
@@ -48,6 +50,7 @@ const NavBarLinks = () => {
           </Avatar>
         </IconButton>
       </Tooltip>
+      <UserMenu {...{ anchorUserMenu, setAnchorUserMenu }} />
     </Stack>
   );
 };
