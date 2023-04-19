@@ -8,9 +8,20 @@ const WelcomeBackPage = () => {
   } = useValue();
 
   return (
-    <Box>
+    <Box
+      alignItems={"center"}
+      width="100vw"
+    >
       <Toolbar sx={{ marginBottom: "10px" }} />
-      {`Welcome Back ${currentUser.name}`}
+      <Box
+        minHeight={"20vh"}
+        height={{ md: "40vh" }}
+        width={{ sx: "100vw", md: "60vw" }}
+        backgroundColor="lightblue"
+        sx={{ marginInline: "auto", my: "30px" }}
+      >
+        welcome back
+      </Box>
     </Box>
   );
 };
