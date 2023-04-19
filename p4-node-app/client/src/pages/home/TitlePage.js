@@ -1,7 +1,6 @@
 import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import muiTheme from "../../muiTheme";
 
 const TitlePage = () => {
   return (

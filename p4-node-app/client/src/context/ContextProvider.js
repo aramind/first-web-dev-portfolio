@@ -3,7 +3,7 @@ import reducer from "./reducer";
 
 const initialState = {
   // currentUser: null,
-  currentUser: { name: "Dummy" },
+  currentUser: { name: "Dummy Account" },
   openLogin: false,
 };
 
