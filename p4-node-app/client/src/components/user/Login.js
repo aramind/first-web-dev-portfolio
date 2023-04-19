@@ -16,10 +16,14 @@ import { useValue } from "../../context/ContextProvider";
 import { Send } from "@mui/icons-material";
 import PasswordField from "./PasswordField";
 
+// testing only
+import photoURL from "../../profile.jpg";
+const user = { name: "Robin Mon", photoURL };
+
 const Login = () => {
   // ** states
   const {
-    state: { openLogin },
+    state: { openLogin, currentUser },
     dispatch,
   } = useValue();
   // * sets what modal will show (login or register)
@@ -124,6 +128,7 @@ const Login = () => {
               type="submit"
               variant="contained"
               endIcon={<Send />}
+              onClick={() => dispatch({ type: "UPDATE_USER", payload: user })} //TODO : to remove
             >
               {isRegister ? "Register" : "Login"}
             </Button>
