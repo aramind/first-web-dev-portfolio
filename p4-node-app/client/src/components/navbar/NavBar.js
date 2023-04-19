@@ -24,7 +24,11 @@ const NavBar = () => {
   return (
     <AppBar
       elevation={5}
-      sx={{ boxShadow: "0px 4px 4px #185E54" }}
+      sx={{
+        boxShadow: `${currentUser ? "0px 4px 4px #185E54" : "none"}`,
+        backgroundColor: `${currentUser ? "primary.main" : "transparent"}`,
+      }}
+      // backgroundColor={!currentUser ? "transparent" : "primary.main"}
     >
       <Toolbar
         // disableGutters
@@ -40,53 +44,56 @@ const NavBar = () => {
           }}
         >
           {/* <PendingActionsOutlined /> */}
-          <Link
-            color="inherit"
-            underline="none"
-            to="/" //TODO: check this props
-            sx={{
-              "&:hover": {
-                color: muiTheme.palette.hovercolor.text, //TODO: finalize the color
-                textDecoration: "none",
-                cursor: "pointer",
-              },
-            }}
-          >
-            <Typography
-              variant="h6"
-              component={"h1"}
-              noWrap
-              fontSize={"2rem"}
-              fontFamily={"prompt"}
-              fontWeight={"bold"}
-              py={"0"}
-              sx={{
-                flexGrow: 1,
-                display: { xs: "none", md: "flex" },
-              }}
-            >
-              MONitime
-            </Typography>
-            <Typography
-              variant="h6"
-              component={"h1"}
-              noWrap
-              fontSize={"2.5rem"}
-              fontFamily={"prompt"}
-              fontWeight={"bold"}
-              py={"0"}
-              sx={{
-                flexGrow: 1,
-                display: { xs: "flex", md: "none" },
-              }}
-            >
-              M
-            </Typography>
-          </Link>
+          {currentUser && (
+            <>
+              <Link
+                color="inherit"
+                underline="none"
+                to="/" //TODO: check this props
+                sx={{
+                  "&:hover": {
+                    color: muiTheme.palette.hovercolor.text, //TODO: finalize the color
+                    textDecoration: "none",
+                    cursor: "pointer",
+                  },
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  component={"h1"}
+                  noWrap
+                  fontSize={"2rem"}
+                  fontFamily={"prompt"}
+                  fontWeight={"bold"}
+                  py={"0"}
+                  sx={{
+                    flexGrow: 1,
+                    display: { xs: "none", md: "flex" },
+                  }}
+                >
+                  MONitime
+                </Typography>
+                <Typography
+                  variant="h6"
+                  component={"h1"}
+                  noWrap
+                  fontSize={"2.5rem"}
+                  fontFamily={"prompt"}
+                  fontWeight={"bold"}
+                  py={"0"}
+                  sx={{
+                    flexGrow: 1,
+                    display: { xs: "flex", md: "none" },
+                  }}
+                >
+                  M
+                </Typography>
+              </Link>
+            </>
+          )}
         </Stack>
         {!currentUser ? (
           <Button
-            color="inherit"
             startIcon={<Lock />}
             onClick={() => dispatch({ type: "OPEN_LOGIN" })}
           >

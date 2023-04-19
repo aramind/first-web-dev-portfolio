@@ -29,7 +29,13 @@ const TitlePage = () => {
             sx={{
               fontFamily: "Prompt",
               fontWeight: "bold",
-              fontSize: { xs: "5rem", sm: "7rem", md: "8rem", xl: "10rem" },
+              fontSize: {
+                xs: "5rem",
+                sm: "7rem",
+                md: "8rem",
+                lg: "9rem",
+                xl: "10rem",
+              },
             }}
           >
             MONitime
