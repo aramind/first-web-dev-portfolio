@@ -12,7 +12,7 @@ const TitlePage = () => {
         // backgroundImage: " linear-gradient(180deg, #15664f, #1c4c5e)",
       }}
     >
-      <Toolbar sx={{ marginBottom: "10px" }} />
+      {/* <Toolbar sx={{ marginBottom: "10px" }} />  */}
       <Box sx={{ flex: "1" }}>
         <Stack
           height="100%"

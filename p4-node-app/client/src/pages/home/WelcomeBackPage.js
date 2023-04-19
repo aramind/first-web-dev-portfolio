@@ -3,6 +3,7 @@ import React from "react";
 import { useValue } from "../../context/ContextProvider";
 import muiTheme from "../../muiTheme";
 import SideBar from "../../components/sidebar/SideBar";
+import DatePickerComponent from "../../components/DatePickerComponent";
 // import WavingHandOutlinedIcon from "@mui/icons-material/WavingHandOutlined";
 
 const TextTypography = styled(Typography)({
@@ -86,13 +87,9 @@ const WelcomeBackPage = () => {
         </Box>
         {/* TImepicker -- summary -- chart */}
         <Stack>
-          {/* TODO: place Date, and Date Picker */}
-          {/* TODO: place Summary Table */}
-          {/* TODO: place Chart */}
           <Box
             height={"300px"}
             width={"100%"}
-            backgroundColor="lightblue"
             my={2}
             sx={{
               display: "flex",
@@ -105,18 +102,21 @@ const WelcomeBackPage = () => {
               textAlign="center"
               minWidth="200px"
             >
-              Date Picker
+              {/* TODO: place Date, and Date Picker */}
+              <DatePickerComponent focused={false} />
             </Box>
             <Box
               textAlign="center"
               minWidth="200px"
             >
+              {/* TODO: place Summary Table */}
               Summary Table
             </Box>
             <Box
               textAlign="center"
               minWidth="200px"
             >
+              {/* TODO: place Chart */}
               Chart
             </Box>
           </Box>
