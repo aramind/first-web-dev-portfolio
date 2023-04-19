@@ -11,7 +11,7 @@ import { Lock } from "@mui/icons-material";
 import photoURL from "../../profile.jpg";
 import { useValue } from "../../context/ContextProvider";
 import NavBarLinks from "./NavBarLinks";
-import { theme } from "../../muiTheme";
+import muiTheme from "../../muiTheme";
 
 // testing only
 const user = { name: "testUser", photoURL };
@@ -46,7 +46,7 @@ const NavBar = () => {
             to="/" //TODO: check this props
             sx={{
               "&:hover": {
-                color: theme.palette.hovercolor.text, //TODO: finalize the color
+                color: muiTheme.palette.hovercolor.text, //TODO: finalize the color
                 textDecoration: "none",
                 cursor: "pointer",
               },

@@ -1,10 +1,8 @@
 import { Link } from "@mui/material";
 import React from "react";
-import { theme } from "../../muiTheme";
+import muiTheme from "../../muiTheme";
 
 const NavBarLink = ({ name, to }) => {
-
-  
   return (
     <Link
       color="inherit"
@@ -14,7 +12,7 @@ const NavBarLink = ({ name, to }) => {
       px={1}
       sx={{
         "&:hover": {
-          color: theme.palette.hovercolor.text, //TODO: finalize the color
+          color: muiTheme.palette.hovercolor.text, //TODO: finalize the color
           textDecoration: "underline",
         },
       }}

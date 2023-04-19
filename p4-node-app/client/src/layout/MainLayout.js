@@ -8,9 +8,9 @@ const MainLayout = () => {
   return (
     <>
       <Login />
-      <NavBar sx={{ position: "fixed" }} />
+      <NavBar sx={{ position: "fixed", marginBottom: "10px" }} />
       <div>
-        <Toolbar sx={{ marginBottom: "10px" }}></Toolbar>
+        {/* <Toolbar sx={{ marginBottom: "10px" }}></Toolbar> */}
         <Outlet />
       </div>
     </>
