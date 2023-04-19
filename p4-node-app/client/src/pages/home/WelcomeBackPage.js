@@ -1,9 +1,10 @@
 import { Box, Stack, Toolbar, Typography, styled } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import muiTheme from "../../muiTheme";
 import SideBar from "../../components/sidebar/SideBar";
 import DatePickerComponent from "../../components/DatePickerComponent";
+import { format } from "date-fns-tz";
 // import WavingHandOutlinedIcon from "@mui/icons-material/WavingHandOutlined";
 
 const TextTypography = styled(Typography)({
@@ -15,6 +16,11 @@ const WelcomeBackPage = () => {
   const {
     state: { currentUser },
   } = useValue();
+
+  // date selected
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const formattedDate = format(selectedDate, "E MMM d, yyyy");
 
   return (
     <Box
@@ -86,7 +92,12 @@ const WelcomeBackPage = () => {
           </TextTypography>
         </Box>
         {/* TImepicker -- summary -- chart */}
-        <Stack>
+        <Stack
+          direction={"column"}
+          marginInline="auto"
+        >
+          {/* TODO:FIX -- center and enlarge this */}
+
           <Box
             height={"300px"}
             width={"100%"}
@@ -102,8 +113,26 @@ const WelcomeBackPage = () => {
               textAlign="center"
               minWidth="200px"
             >
+              <Box
+                my={"1rem"}
+                width={"100%"}
+                sx={{
+                  display: "flex",
+                  justifyContent: "left",
+                  alignItems: "center",
+                  // border: "1px solid red",
+                  px: "5px",
+                }}
+              >
+                <Typography variant="h5">{formattedDate}</Typography>
+              </Box>
               {/* TODO: place Date, and Date Picker */}
-              <DatePickerComponent focused={false} />
+
+              <DatePickerComponent
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                focused={false}
+              />
             </Box>
             <Box
               textAlign="center"
