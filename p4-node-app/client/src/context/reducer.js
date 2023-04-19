@@ -7,6 +7,7 @@ const reducer = (state, action) => {
     case "CLOSE_LOGIN":
       return { ...state, openLogin: false };
 
+    // for
     // for logging and loggin out via the icon on the navbar
     case "UPDATE_USER":
       return { ...state, currentUser: action.payload };

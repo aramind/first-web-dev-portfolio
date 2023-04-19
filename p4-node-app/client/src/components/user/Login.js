@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
-import { Password, Send } from "@mui/icons-material";
+import { Send } from "@mui/icons-material";
 import PasswordField from "./PasswordField";
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
     dispatch,
   } = useValue();
   // * sets what modal will show (login or register)
-  const [title, setTitle] = useState("Login");
+  // const [title, setTitle] = useState("Login");
   const [isRegister, setIsRegister] = useState("false");
 
   // ** references
@@ -133,7 +133,11 @@ const Login = () => {
           sx={{ justifyContent: "center", p: "5px 24px", fontSize: "smaller" }}
         >
           {isRegister ? `Already have an account?` : `First time user?`}
-          <Button onClick={() => setIsRegister(!isRegister)}>
+          <Button
+            onClick={() => {
+              setIsRegister(!isRegister);
+            }}
+          >
             {isRegister ? `Login` : `Register`}
           </Button>
         </DialogActions>

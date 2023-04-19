@@ -7,7 +7,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Lock, PendingActionsOutlined } from "@mui/icons-material";
+import { Lock } from "@mui/icons-material";
 import photoURL from "../../profile.jpg";
 import { useValue } from "../../context/ContextProvider";
 import NavBarLinks from "./NavBarLinks";

@@ -3,6 +3,8 @@ import React from "react";
 import { theme } from "../../muiTheme";
 
 const NavBarLink = ({ name, to }) => {
+
+  
   return (
     <Link
       color="inherit"
