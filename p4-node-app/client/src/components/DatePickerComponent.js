@@ -9,23 +9,14 @@ const DatePickerComponent = ({ selectedDate, setSelectedDate, focused }) => {
     setSelectedDate(date);
   };
 
+  console.log(selectedDate);
+
   return (
     <>
       <DatePicker
         label={"Select Date"}
         value={selectedDate}
         onChange={handleDateChange}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="outlined"
-            fullWidth
-            style={{
-              borderColor: muiTheme.palette.primary.main,
-              justifyContent: "left",
-            }}
-          />
-        )}
         format="MM/dd/yyyy"
         disableFuture={true}
         maxDate={new Date()}

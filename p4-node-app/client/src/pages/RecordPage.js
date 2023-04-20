@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   Box,
+  LinearProgress,
   Stack,
   TextField,
   Toolbar,
@@ -52,9 +53,29 @@ const RecordPage = () => {
     "others",
   ];
 
-  const [selectedActivity, setSelectedActivity] = useState();
+  const [selectedActivity, setSelectedActivity] = useState(null);
 
+  // hrs and minutes
+  const [hrs, setHrs] = useState(null);
+  const [mins, setMins] = useState(null);
+
+  const genArrOfDigits = (n) => {
+    const arr = [];
+    for (let i = 1; i <= n; i++) {
+      arr.push(i.toString());
+    }
+    return arr;
+  };
+
+  // const hrsArray = genArrOfDigits(24);
+  // const minsArray = genArrOfDigits(60);
+
+  // for progress bar
+  let hoursRemaining = 23;
+  const completedPercent = ((24 - hoursRemaining) / 24) * 100;
   console.log(selectedActivity);
+  console.log(hrs);
+  console.log(mins);
 
   return (
     <Box
@@ -86,9 +107,14 @@ const RecordPage = () => {
       >
         {/* Container for the Date picker with date */}
         <Box
-          textAlign="center"
           minWidth="300px"
-          alignItems={"center"}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "stretch",
+            justifyContent: "start",
+            gap: "1rem",
+          }}
           // sx={{ gap: "rem", border: "1px solid red" }}
         >
           <Box
@@ -103,23 +129,16 @@ const RecordPage = () => {
               color: muiTheme.palette.primary.main,
             }}
           >
-            <Typography
-              mb={1}
-              variant="h5"
-            >
-              {formattedDate}
-            </Typography>
+            <Typography variant="h4">{formattedDate}</Typography>
           </Box>
-          {/* TODO: place Date, and Date Picker */}
-
+          {/* TODO:(minor) make the date picker occupy the whole width of the parent */}
           <Box
-            my={"1rem"}
             width={"100%"}
             sx={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "start",
               alignItems: "center",
-
+              minWidth: "300px",
               // border: "1px solid red",
               color: muiTheme.palette.primary.main,
             }}
@@ -136,7 +155,7 @@ const RecordPage = () => {
             onChange={(event, newValue) => {
               setSelectedActivity(newValue);
             }}
-            id="controllable-states-demo"
+            id="select-avtivity"
             options={activities}
             sx={{ width: 300 }}
             renderInput={(params) => (
@@ -146,7 +165,72 @@ const RecordPage = () => {
               />
             )}
           />
+          {/* hrs and minutes */}
+          <Stack
+            direction={"row"}
+            maxWidth={"300px"}
+            gap={2}
+          >
+            {/* for hrs */}
+            <Autocomplete
+              value={hrs}
+              onChange={(event, newValue) => {
+                setHrs(newValue);
+              }}
+              id="select-hrs"
+              options={genArrOfDigits(24)}
+              sx={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Hrs"
+                />
+              )}
+            />
+            {/* for mins */}
+            <Autocomplete
+              value={mins}
+              onChange={(event, newValue) => {
+                setMins(newValue);
+              }}
+              id="select-mins"
+              options={genArrOfDigits(60)}
+              sx={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Mins"
+                />
+              )}
+            />
+          </Stack>
+          {/* Progress Bar */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              variant="body1"
+              fontSize={"1.2rem"}
+              color="primary"
+              gutterBottom
+            >
+              {hoursRemaining} hrs remaining
+            </Typography>
+            <Box sx={{ width: "100%", mr: 1 }}>
+              <LinearProgress
+                variant="determinate"
+                value={completedPercent}
+                sx={{ height: "10px" }}
+              />
+            </Box>
+          </Box>
         </Box>
+
         {/*TODO: Summary Table */}
         <Box
           width="300px"
