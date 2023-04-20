@@ -1,15 +1,60 @@
-import { Box, Stack, Toolbar, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Stack,
+  TextField,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import SideBar from "../components/sidebar/SideBar";
 import muiTheme from "../muiTheme";
 import DatePickerComponent from "../components/DatePickerComponent";
 import { format } from "date-fns-tz";
+import Dropdown from "../components/form-record/Dropdown";
+import {
+  FitnessCenter,
+  Hotel,
+  MenuBook,
+  MoreVert,
+  People,
+  SelfImprovement,
+  VideogameAsset,
+  WorkHistory,
+} from "@mui/icons-material";
 
 const RecordPage = () => {
   // date selected
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const formattedDate = format(selectedDate, "E MMM d, yyyy");
+
+  // select activities dropdown
+  const activityIcons = [
+    { label: "sleep", icon: <Hotel /> },
+    { label: "work", icon: <WorkHistory /> },
+    { label: "learn", icon: <MenuBook /> },
+    { label: "self", icon: <SelfImprovement /> },
+    { label: "social", icon: <People /> },
+    { label: "play", icon: <VideogameAsset /> },
+    { label: "fitness", icon: <FitnessCenter /> },
+    { label: "others", icon: <MoreVert /> },
+  ];
+
+  const activities = [
+    "sleep",
+    "work",
+    "learn",
+    "self",
+    "social",
+    "play",
+    "fitness",
+    "others",
+  ];
+
+  const [selectedActivity, setSelectedActivity] = useState();
+
+  console.log(selectedActivity);
 
   return (
     <Box
@@ -85,6 +130,22 @@ const RecordPage = () => {
               focused={false}
             />
           </Box>
+          {/* ACTIVITY DROP DOWN */}
+          <Autocomplete
+            value={selectedActivity}
+            onChange={(event, newValue) => {
+              setSelectedActivity(newValue);
+            }}
+            id="controllable-states-demo"
+            options={activities}
+            sx={{ width: 300 }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Choose Activity"
+              />
+            )}
+          />
         </Box>
         {/*TODO: Summary Table */}
         <Box
