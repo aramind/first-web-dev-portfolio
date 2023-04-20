@@ -83,10 +83,18 @@ const RecordPage = () => {
 
   return (
     <Box
-      alignItems={"center"}
+      // alignItems={"center"}
       width="100%"
       display={"flex"}
       flexDirection={"column"}
+      sx={{
+        margin: "0 auto",
+        // border: "1px solid green",
+        [muiTheme.breakpoints.up("md")]: {
+          width: { md: "95%", lg: "90%", xl: "50%" },
+          // display: { md: "flex" },
+        },
+      }}
     >
       <Toolbar sx={{ marginBottom: "10px" }} />
       {/* TODO: to remove once final na */}
@@ -96,9 +104,10 @@ const RecordPage = () => {
         width="100%"
         gap="1rem"
         sx={{
+          margin: "0 auto",
           // border: "1px solid green",
           [muiTheme.breakpoints.up("md")]: {
-            width: { md: "95%", lg: "90%", xl: "70%" },
+            // width: { md: "95%", lg: "90%", xl: "70%" },
             display: { md: "flex" },
           },
         }}
@@ -329,6 +338,15 @@ const RecordPage = () => {
       </Box>
 
       {/* END */}
+      <Box
+        // sx={{ border: "1px solid red" }}
+        px={4}
+        py={1}
+        mb={4}
+      >
+        <Typography mb={1}>What to do next?</Typography>
+        <SideBar />
+      </Box>
     </Box>
   );
 };
