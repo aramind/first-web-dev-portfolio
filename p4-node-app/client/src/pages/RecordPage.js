@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   Box,
+  Button,
   LinearProgress,
   Stack,
   TextField,
@@ -229,6 +230,25 @@ const RecordPage = () => {
               />
             </Box>
           </Box>
+          {/* Buttons */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            sx={{ width: "100%" }}
+          >
+            <Button
+              fullWidth
+              variant="contained"
+            >
+              Add
+            </Button>
+            <Button
+              fullWidth
+              variant="contained"
+            >
+              Subtract
+            </Button>
+          </Stack>
         </Box>
 
         {/*TODO: Summary Table */}
@@ -248,9 +268,26 @@ const RecordPage = () => {
           chart
         </Box>
       </Box>
-      <Stack>
-        {/*TODO: save record button */}
-        {/*TODO: reset button */}
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={2}
+        sx={{ width: "100%", border: "1px solid red" }}
+        justifyContent={"end"}
+      >
+        <Button
+          size="large"
+          variant="contained"
+          sx={{ minWidth: "200px", py: "0.5rem" }}
+        >
+          Save
+        </Button>
+        <Button
+          size="large"
+          variant="contained"
+          sx={{ minWidth: "200px", py: "0.5rem" }}
+        >
+          Reset
+        </Button>
       </Stack>
       <Box
         // sx={{ border: "1px solid red" }}
