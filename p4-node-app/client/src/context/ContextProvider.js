@@ -5,6 +5,7 @@ const initialState = {
   // currentUser: null,
   currentUser: { name: "Dummy Account" },
   openLogin: false,
+  selectedDate: new Date(),
 };
 
 const Context = createContext(initialState);

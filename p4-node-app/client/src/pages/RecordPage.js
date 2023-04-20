@@ -11,9 +11,9 @@ import {
 import React, { useState } from "react";
 import SideBar from "../components/sidebar/SideBar";
 import muiTheme from "../muiTheme";
-import DatePickerComponent from "../components/DatePickerComponent";
-import { format } from "date-fns-tz";
-import Dropdown from "../components/form-record/Dropdown";
+// import DatePickerComponent from "../components/DatePickerComponent";
+// import { format } from "date-fns-tz";
+// import Dropdown from "../components/form-record/Dropdown";
 import {
   FitnessCenter,
   Hotel,
@@ -21,17 +21,21 @@ import {
   MoreVert,
   People,
   RestartAltOutlined,
-  Save,
   SaveOutlined,
   SelfImprovement,
   VideogameAsset,
   WorkHistory,
 } from "@mui/icons-material";
+import { DatePicker } from "@mui/x-date-pickers";
+import { format } from "date-fns-tz";
+import { useValue } from "../context/ContextProvider";
 
 const RecordPage = () => {
   // date selected
-
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const {
+    state: { selectedDate },
+    dispatch,
+  } = useValue();
   const formattedDate = format(selectedDate, "E MMM d, yyyy");
 
   // select activities dropdown
@@ -81,6 +85,13 @@ const RecordPage = () => {
   console.log(hrs);
   console.log(mins);
 
+  // handers
+
+  const handleDatePickerChange = (date) => {
+    dispatch({ type: "UPDATE_DATESELECTED", payload: date });
+  };
+
+  console.log("DATE SELECTED", selectedDate);
   return (
     <Box
       // alignItems={"center"}
@@ -150,10 +161,15 @@ const RecordPage = () => {
               color: muiTheme.palette.primary.main,
             }}
           >
-            <DatePickerComponent
-              selectedDate={selectedDate}
-              setSelectedDate={setSelectedDate}
-              focused={false}
+            <DatePicker
+              label={"Select Date"}
+              value={selectedDate}
+              onChange={handleDatePickerChange}
+              format="MM/dd/yyyy"
+              disableFuture={true}
+              maxDate={new Date()}
+              inputFormat="MM/dd/yyyy"
+              timeZone="Asia/Manila"
             />
           </Box>
           {/* ACTIVITY DROP DOWN */}
@@ -162,7 +178,7 @@ const RecordPage = () => {
             onChange={(event, newValue) => {
               setSelectedActivity(newValue);
             }}
-            id="select-avtivity"
+            id="select-activity"
             options={activities}
             sx={{ width: 300 }}
             renderInput={(params) => (
