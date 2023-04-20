@@ -6,10 +6,10 @@ import UserMenu from "../user/UserMenu";
 
 const linkNames = [
   { name: "Home", to: "/" },
-  { name: "Add Record", to: "/" },
-  { name: "Charts", to: "/" },
-  { name: "Summary", to: "/" },
-  { name: "Read", to: "/" },
+  { name: "Record", to: "/record" },
+  { name: "Charts", to: "/charts" },
+  { name: "Summary", to: "/summary   " },
+  // { name: "Read", to: "/read        " },
 ];
 const NavBarLinks = () => {
   const {

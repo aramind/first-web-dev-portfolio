@@ -122,6 +122,7 @@ const WelcomeBackPage = () => {
                   alignItems: "center",
                   // border: "1px solid red",
                   px: "5px",
+                  color: muiTheme.palette.primary.main,
                 }}
               >
                 <Typography variant="h5">{formattedDate}</Typography>

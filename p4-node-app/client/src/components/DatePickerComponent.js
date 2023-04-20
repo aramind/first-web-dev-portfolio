@@ -12,6 +12,7 @@ const DatePickerComponent = ({ selectedDate, setSelectedDate, focused }) => {
   return (
     <>
       <DatePicker
+        label={"Select Date"}
         value={selectedDate}
         onChange={handleDateChange}
         renderInput={(params) => (
@@ -21,9 +22,7 @@ const DatePickerComponent = ({ selectedDate, setSelectedDate, focused }) => {
             fullWidth
             style={{
               borderColor: muiTheme.palette.primary.main,
-            }}
-            InputLabelProps={{
-              placeholder: "Select Date",
+              justifyContent: "left",
             }}
           />
         )}
