@@ -20,6 +20,9 @@ import {
   MenuBook,
   MoreVert,
   People,
+  RestartAltOutlined,
+  Save,
+  SaveOutlined,
   SelfImprovement,
   VideogameAsset,
   WorkHistory,
@@ -88,36 +91,30 @@ const RecordPage = () => {
       <Toolbar sx={{ marginBottom: "10px" }} />
       {/* TODO: to remove once final na */}
       <Typography>Record</Typography>
-      {/*TODO: Form Fields */}
+      {/* for main content */}
       <Box
+        width="100%"
+        gap="1rem"
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          flexWrap: "wrap",
-          gap: "1rem",
-          width: "95%", // default width for extra-small screens
-          // for medium and larger screens
+          // border: "1px solid green",
           [muiTheme.breakpoints.up("md")]: {
-            width: { md: "90%", lg: "90%", xl: "70%" },
-            gap: { md: "1rem", lg: "2rem", xl: "4rem" },
-            // justifyContent: "space-between",
+            width: { md: "95%", lg: "90%", xl: "70%" },
+            display: { md: "flex" },
           },
         }}
-        // border={"1px solid red"}
       >
-        {/* Container for the Date picker with date */}
-        <Box
-          minWidth="300px"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "stretch",
-            justifyContent: "start",
-            gap: "1rem",
-          }}
-          // sx={{ gap: "rem", border: "1px solid red" }}
+        <Stack
+          flex={1}
+          gap={2}
+          alignItems="center"
+          sx={
+            {
+              // border: "1px solid red",
+            }
+          }
         >
+          {/* container for form fields */}
+          {/* date display */}
           <Box
             my={"1rem"}
             width={"100%"}
@@ -130,16 +127,16 @@ const RecordPage = () => {
               color: muiTheme.palette.primary.main,
             }}
           >
-            <Typography variant="h4">{formattedDate}</Typography>
+            <Typography variant="h5">{formattedDate}</Typography>
           </Box>
+          {/* date picker */}
           {/* TODO:(minor) make the date picker occupy the whole width of the parent */}
           <Box
             width={"100%"}
             sx={{
               display: "flex",
-              justifyContent: "start",
               alignItems: "center",
-              minWidth: "300px",
+              justifyContent: "center",
               // border: "1px solid red",
               color: muiTheme.palette.primary.main,
             }}
@@ -207,6 +204,8 @@ const RecordPage = () => {
           </Stack>
           {/* Progress Bar */}
           <Box
+            width="100%"
+            px={1}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -226,12 +225,13 @@ const RecordPage = () => {
               <LinearProgress
                 variant="determinate"
                 value={completedPercent}
-                sx={{ height: "10px" }}
+                sx={{ height: "15px" }}
               />
             </Box>
           </Box>
           {/* Buttons */}
           <Stack
+            px={1}
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
             sx={{ width: "100%" }}
@@ -249,55 +249,86 @@ const RecordPage = () => {
               Subtract
             </Button>
           </Stack>
-        </Box>
+        </Stack>
 
-        {/*TODO: Summary Table */}
+        {/* BOX 2 */}
         <Box
-          width="300px"
-          height="300px"
-          sx={{ backgroundColor: "blue" }}
+          flex={3}
+          sx={
+            {
+              // border: "1px solid blue",
+            }
+          }
         >
-          SummaryTable
-        </Box>
-        {/*TODO: Charts */}
-        <Box
-          width="300px"
-          height="300px"
-          backgroundColor="blue"
-        >
-          chart
+          {/* Summary and chart */}
+          <Box
+            sx={{
+              // border: "1px solid blue",
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "1rem",
+            }}
+          >
+            <Box
+              width="500px"
+              height="400px"
+              sx={{ backgroundColor: "blue" }}
+            >
+              Summary
+            </Box>
+            <Box
+              width="300px"
+              height="400px"
+              sx={{ backgroundColor: "blue" }}
+            >
+              chart
+            </Box>
+          </Box>
+          {/* text info */}
+          <Stack
+            px={1}
+            my={1}
+          >
+            <Typography variant="caption">
+              Save/Archived selected date's record to database? - SAVE
+            </Typography>
+
+            <Typography variant="caption">
+              Reset selected date's records? - RESET
+            </Typography>
+          </Stack>
+          {/* save and clear */}
+          <Stack
+            px={1}
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            sx={{ width: "100%" }}
+          >
+            <Button
+              fullWidth
+              variant="contained"
+              size="large"
+              endIcon={<SaveOutlined />}
+              sx={{ py: "1rem" }}
+            >
+              Save
+            </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              size="large"
+              endIcon={<RestartAltOutlined />}
+              sx={{ py: "1rem" }}
+            >
+              Reset
+            </Button>
+          </Stack>
         </Box>
       </Box>
-      <Stack
-        direction={{ xs: "column", sm: "row" }}
-        spacing={2}
-        sx={{ width: "100%", border: "1px solid red" }}
-        justifyContent={"end"}
-      >
-        <Button
-          size="large"
-          variant="contained"
-          sx={{ minWidth: "200px", py: "0.5rem" }}
-        >
-          Save
-        </Button>
-        <Button
-          size="large"
-          variant="contained"
-          sx={{ minWidth: "200px", py: "0.5rem" }}
-        >
-          Reset
-        </Button>
-      </Stack>
-      <Box
-        // sx={{ border: "1px solid red" }}
-        px={4}
-        py={1}
-        mb={4}
-      >
-        <Typography mb={1}>What to do next?</Typography>
-        <SideBar />
-      </Box>
+
+      {/* END */}
     </Box>
   );
 };
