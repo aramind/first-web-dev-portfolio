@@ -25,7 +25,7 @@ const SummaryPage = () => {
       flexDirection={"column"}
       sx={{
         margin: "0 auto",
-        border: "1px solid green",
+        // border: "1px solid green",
         [muiTheme.breakpoints.up("md")]: {
           width: { md: "98%", lg: "96%", xl: "60%" },
         },

@@ -51,34 +51,32 @@ const SummaryCard = ({ title }) => {
       <CardContent>
         <SummaryCardContent
           variant="h5"
-          fs="24px"
+          fs="28px"
           fstyle="Prompt"
           content={["11.0", "8.0", "32.2%"]}
         />
-        <SummaryCardContent
-          variant="body1"
-          fs="16px"
-          ff="Prompt"
-          content={["Tot(hrs)", "Ave(hrs)", "%"]}
-        />
-        <Stack
-          direction="row"
-          width="100%"
-          justifyContent="space-around"
+        <Box mb={2}>
+          <SummaryCardContent
+            variant="body1"
+            fs="14px"
+            ff="Prompt"
+            content={["Tot(hrs)", "Ave(hrs)", "%"]}
+          />
+        </Box>
+        <Typography
+          variant="body2"
+          mt={1}
         >
-          <Typography variant="body1">Tot(hrs)</Typography>
-          <Typography>Ave(hrs)</Typography>
-          <Typography>%</Typography>
-        </Stack>
-        <Stack
-          direction="row"
-          width="100%"
-          justifyContent="space-around"
-        >
-          <Typography>11</Typography>
-          <Typography>7</Typography>
-          <Typography>34.2%</Typography>
-        </Stack>
+          Prev. week
+        </Typography>
+        <Box mb={1}>
+          <SummaryCardContent
+            variant="body1"
+            fs="14px"
+            ff="Prompt"
+            content={["8.0", "9.5", "22.5%"]}
+          />
+        </Box>
       </CardContent>
     </Card>
   );
