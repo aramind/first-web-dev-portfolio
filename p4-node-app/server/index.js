@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
 const testActivityCreationRouter = require("./routes/testActivityCreationRouter");
-
+const userRouter = require("./routes/userRouter");
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
@@ -26,7 +26,9 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/add", testActivityCreationRouter);
+app.use("/add", testActivityCreationRouter); //TODO: for testing only;to be remove before passing
+
+app.use("/register", userRouter);
 app.use("/", (req, res) => res.json({ message: "Welcome to our API" }));
 app.use((req, res) =>
   res.status(404).json({ success: false, message: "Not Found" })
