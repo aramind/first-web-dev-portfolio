@@ -45,6 +45,11 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // testing of loading
+    dispatch({ type: "START_LOADING" });
+    setTimeout(() => {
+      dispatch({ type: "END_LOADING" });
+    }, 3000);
     // testing Notification
     const password = passwordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
