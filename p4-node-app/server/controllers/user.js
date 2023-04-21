@@ -50,12 +50,16 @@ const userController = {
         isActive: true,
       });
       const { _id: id, photoURL } = user;
-      const token = jwt.sign({ id, name, photoURL }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        { id, name, username, photoURL },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
       res.status(201).json({
         success: true,
-        result: { id, name, email: user.email, photoURL, token },
+        result: { id, name, username, email: user.email, photoURL, token },
       });
     } catch (error) {
       console.log(error);
@@ -95,13 +99,24 @@ const userController = {
           message: "Invalid credentials",
         });
       } else {
-        const { _id: id, name, photoURL } = existedUser;
-        const token = jwt.sign({ id, name, photoURL }, process.env.JWT_SECRET, {
-          expiresIn: "1h",
-        });
+        const { _id: id, name, username, photoURL } = existedUser;
+        const token = jwt.sign(
+          { id, name, username, photoURL },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: "1h",
+          }
+        );
         res.status(200).json({
           success: true,
-          result: { id, name, email: emailLowerCase, photoURL, token },
+          result: {
+            id,
+            name,
+            username,
+            email: emailLowerCase,
+            photoURL,
+            token,
+          },
         });
       }
     } catch (error) {

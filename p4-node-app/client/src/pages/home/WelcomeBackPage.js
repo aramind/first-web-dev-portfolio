@@ -56,7 +56,7 @@ const WelcomeBackPage = () => {
             // textAlign={"center"}
             fontSize="2rem"
           >
-            Hi {currentUser.name}! 👋
+            Hi {currentUser.username}! 👋
           </TextTypography>
           <TextTypography>Hope you're having a good day so far!</TextTypography>
           <TextTypography>
