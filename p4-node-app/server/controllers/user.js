@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
 const userController = {
   register: async (req, res) => {
@@ -14,24 +15,26 @@ const userController = {
         });
 
       // checking if email already exists
-      const emailLowerCase = email.toLowerCase();
-      const existedUser = await User.findOne({ email: emailLowerCase });
-      if (existedUser)
-        res.status(400).json({
-          success: false,
-          message: "User already exists!",
-        });
-
       // checking if username was already taken
+      const emailLowerCase = email.toLowerCase();
       const usernameLowerCase = username.toLowerCase();
-      const existedUserName = await User.findOne({
-        username: usernameLowerCase,
+      const existedUser = await User.findOne({
+        $or: [{ email: emailLowerCase }, { username: usernameLowerCase }],
       });
-      if (existedUserName)
-        res.status(400).json({
-          success: false,
-          message: "Username already taken!",
-        });
+
+      if (existedUser) {
+        if (existedUser.email === emailLowerCase) {
+          return res.status(400).json({
+            success: false,
+            message: "User already exists with this email address",
+          });
+        } else if (existedUser.username === usernameLowerCase) {
+          return res.status(400).json({
+            success: false,
+            message: "Username already taken",
+          });
+        }
+      }
 
       // hashing and storing the password
       const hashedPassword = await bcrypt.hash(password, 12);
@@ -47,15 +50,15 @@ const userController = {
         isActive: true,
       });
       const { _id: id, photoURL } = user;
-      const token = jwt.sign({ id, name, photURL }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ id, name, photoURL }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
       res.status(201).json({
         success: true,
-        message: { id, name, email: user.email, photoRUL, token },
+        result: { id, name, email: user.email, photoURL, token },
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.status(500).json({
         success: false,
         message: "Something went wrong! Try again later",

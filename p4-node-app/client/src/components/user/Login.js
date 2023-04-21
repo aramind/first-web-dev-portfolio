@@ -15,10 +15,7 @@ import React, { useRef, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import { Close, Send } from "@mui/icons-material";
 import PasswordField from "./PasswordField";
-
-// testing only
-// import photoURL from "../../profile.jpg";
-// const user = { name: "Robin Mon", photoURL };
+import { register } from "../../actions/user";
 
 const Login = () => {
   // ** states
@@ -45,24 +42,28 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // testing of loading
-    dispatch({ type: "START_LOADING" });
-    setTimeout(() => {
-      dispatch({ type: "END_LOADING" });
-    }, 3000);
-    // testing Notification
+    const email = emailRef.current.value;
     const password = passwordRef.current.value;
+
+    // send login request if it is not register and return
+    const name = nameRef.current.value;
+    const username = userNameRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
-    if (password !== confirmPassword) {
-      dispatch({
+    if (password !== confirmPassword)
+      return dispatch({
         type: "UPDATE_ALERT",
         payload: {
           open: true,
           severity: "error",
-          message: "Passwords do not match",
+          message: "Password and Confirm password do not match",
         },
       });
-    }
+    // sending register request
+    console.log(name);
+    console.log(username);
+    console.log(email);
+    console.log(password);
+    register({ name, username, email, password }, dispatch);
   };
 
   return (
