@@ -33,38 +33,27 @@ const SummaryPage = () => {
     >
       <Toolbar sx={{ marginBottom: "10px" }} />
       {/* TODO: to remove once final na */}
-      <Typography>Summary Page</Typography>
+      {/* <Typography>Summary Page</Typography> */}
       {/* for main content */}
       <Box
         width="100%"
-        gap="1rem"
+        // gap="1rem"
+
         sx={{
-          margin: "0 auto",
+          margin: "10px auto",
           // border: "1px solid green",
           [muiTheme.breakpoints.up("sm")]: {
             display: { sm: "flex" },
           },
         }}
       >
-        {/* <Box
-          // flexBasis={1}
-          width="100%"
-          sx={{
-            border: "1px solid red",
-            marginInline: "auto",
-            display: "flex",
-            justifyContent: "center",
-          }}
-
-        > */}
         <Box
-          // flex={4}
+          mb={2}
+          mx={1}
           sx={{
             // border: "1px solid red",
             display: "flex",
             justifyContent: "center",
-            flexWrap: "wrap",
-            gap: "1rem",
           }}
         >
           <Header />
