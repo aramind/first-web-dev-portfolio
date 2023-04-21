@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logs from "../data/logs.json";
 import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import muiTheme from "../muiTheme";
+
 import Header from "../components/summary-page-components/Header";
 import SummaryCard from "../components/summary-page-components/SummaryCard";
 

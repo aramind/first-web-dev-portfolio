@@ -21,7 +21,17 @@ const Header = () => {
     state: { selectedDate },
     dispatch,
   } = useValue();
-  const formattedDate = format(selectedDate, "E MMM d, yyyy");
+  const formattedDateForHeader = format(selectedDate, "MMM d, yyyy");
+
+  const dateToString = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return month + day + year;
+  };
+
+  const todayInString = dateToString(new Date());
+  const selectedDateInString = dateToString(selectedDate);
 
   // handlers
   const handleDatePickerChange = (date) => {
@@ -51,7 +61,7 @@ const Header = () => {
               margin: "0 auto",
               height: "100px",
               width: "100px",
-              display: { xs: "none", md: "block" },
+              display: { xs: "none", md: "flex" },
             }}
           >
             RM
@@ -65,7 +75,13 @@ const Header = () => {
               margin="0.5rem 0"
               variant="body1"
             >
-              Here is your summary for the last year from today!
+              Here is your summary for the last year from{" "}
+              <span>
+                {todayInString === selectedDateInString
+                  ? "today"
+                  : formattedDateForHeader}
+              </span>
+              !
             </Typography>
           </Box>
           <Box mt={3}>
