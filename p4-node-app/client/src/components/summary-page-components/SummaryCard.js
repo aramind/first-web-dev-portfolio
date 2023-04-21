@@ -36,7 +36,13 @@ const SummaryCard = ({ title }) => {
 
   console.log(randomColor);
   return (
-    <Card sx={{ width: "250px", height: "180px", borderRadius: "20px" }}>
+    <Card
+      sx={{
+        width: { xs: "340px", sm: "250px" },
+        height: "180px",
+        borderRadius: "20px",
+      }}
+    >
       <Box
         height="40px"
         sx={{
