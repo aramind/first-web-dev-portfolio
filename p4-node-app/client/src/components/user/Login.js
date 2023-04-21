@@ -11,7 +11,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import { Close, Send, TryRounded } from "@mui/icons-material";
 import PasswordField from "./PasswordField";
@@ -64,6 +64,7 @@ const Login = () => {
       });
     }
   };
+
   return (
     <Dialog
       open={openLogin}
