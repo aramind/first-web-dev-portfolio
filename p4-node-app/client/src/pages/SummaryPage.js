@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import logs from "../data/logs.json";
-import { Box, Toolbar, Typography } from "@mui/material";
+import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import muiTheme from "../muiTheme";
 import Header from "../components/summary-page-components/Header";
 import SummaryCard from "../components/summary-page-components/SummaryCard";
 
 const SummaryPage = () => {
+  // TODO: to replace
+  const activityNames = [
+    "SLEEP",
+    "WORK",
+    "LEARN",
+    "SELF",
+    "SOCIAL",
+    "PLAY",
+    "FITNESS",
+    "OTHERS",
+  ];
   return (
     <Box
       // alignItems={"center"}
@@ -16,7 +27,7 @@ const SummaryPage = () => {
         margin: "0 auto",
         border: "1px solid green",
         [muiTheme.breakpoints.up("md")]: {
-          width: { md: "95%", lg: "90%", xl: "50%" },
+          width: { md: "98%", lg: "96%", xl: "60%" },
         },
       }}
     >
@@ -25,22 +36,53 @@ const SummaryPage = () => {
       <Typography>Summary Page</Typography>
       {/* for main content */}
       <Box
-        p={1}
+        width="100%"
+        gap="1rem"
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "start",
-          flexWrap: "wrap",
-          flexDirection: "row",
-          gap: "5px",
+          margin: "0 auto",
+          // border: "1px solid green",
+          [muiTheme.breakpoints.up("sm")]: {
+            display: { sm: "flex" },
+          },
         }}
       >
-        <Header />
+        {/* <Box
+          // flexBasis={1}
+          width="100%"
+          sx={{
+            border: "1px solid red",
+            marginInline: "auto",
+            display: "flex",
+            justifyContent: "center",
+          }}
+
+        > */}
         <Box
-          backgroundColor="green"
-          width={{ xs: "95vw", md: "60vw", xl: "60vw" }}
+          // flex={4}
+          sx={{
+            // border: "1px solid red",
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "1rem",
+          }}
         >
-          <SummaryCard />
+          <Header />
+          {/* </Box> */}
+        </Box>
+        <Box
+          // flex={4}
+          sx={{
+            // border: "1px solid red",
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "1rem",
+          }}
+        >
+          {activityNames.map((title) => (
+            <SummaryCard title={title} />
+          ))}
         </Box>
       </Box>
     </Box>

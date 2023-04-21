@@ -18,6 +18,7 @@ const DatePickerComponent = ({ selectedDate, setSelectedDate, focused }) => {
         value={selectedDate}
         onChange={handleDateChange}
         format="MM/dd/yyyy"
+        eq53
         disableFuture={true}
         maxDate={new Date()}
         inputFormat="MM/dd/yyyy"

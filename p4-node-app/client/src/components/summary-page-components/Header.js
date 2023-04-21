@@ -15,13 +15,13 @@ const Header = () => {
   // TODO: remove this once implemented na
   const user = "Robin";
   return (
-    <Box width="300px">
+    <Box>
       <Card
         sx={{
           border: "1px solid gray",
           borderRadius: "20px",
-          height: "410px",
-          width: "250px",
+          height: { xs: "300px", md: "420px" },
+          width: { xs: "300px", md: "250px" },
           position: "relative",
         }}
       >

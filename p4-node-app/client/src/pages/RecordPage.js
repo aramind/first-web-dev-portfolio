@@ -170,6 +170,7 @@ const RecordPage = () => {
               maxDate={new Date()}
               inputFormat="MM/dd/yyyy"
               timeZone="Asia/Manila"
+              autoFocus
             />
           </Box>
           {/* ACTIVITY DROP DOWN */}
