@@ -3,10 +3,12 @@ import Login from "../components/user/Login";
 import NavBar from "../components/navbar/NavBar";
 import { Outlet } from "react-router-dom";
 import { Toolbar } from "@mui/material";
+import Notification from "../components/Notification";
 
 const MainLayout = () => {
   return (
     <>
+      <Notification />
       <Login />
       <NavBar sx={{ position: "fixed", marginBottom: "10px" }} />
       <div>

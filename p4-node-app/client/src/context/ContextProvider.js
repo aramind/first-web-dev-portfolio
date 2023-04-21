@@ -5,6 +5,7 @@ const initialState = {
   // currentUser: null,
   currentUser: { name: "Dummy Account" },
   openLogin: false,
+  alert: { open: false, severity: "info", message: "" },
   selectedDate: new Date(),
 };
 
