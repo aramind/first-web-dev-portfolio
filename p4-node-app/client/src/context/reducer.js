@@ -18,6 +18,7 @@ const reducer = (state, action) => {
 
     // for logging and loggin out via the icon on the navbar
     case "UPDATE_USER":
+      localStorage.setItem("currentUser", JSON.stringify(action.payload));
       return { ...state, currentUser: action.payload };
 
     // for selectedDate
