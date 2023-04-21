@@ -89,20 +89,21 @@ const userController = {
         existedUser.password
       );
 
-      if (!correctPassword)
+      if (!correctPassword) {
         res.status(400).json({
           success: false,
           message: "Invalid credentials",
         });
-
-      const { _id: id, name, photoURL } = existedUser;
-      const token = jwt.sign({ id, name, photoURL }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
-      res.status(200).json({
-        success: true,
-        result: { id, name, email: emailLowerCase, photoURL, token },
-      });
+      } else {
+        const { _id: id, name, photoURL } = existedUser;
+        const token = jwt.sign({ id, name, photoURL }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+        res.status(200).json({
+          success: true,
+          result: { id, name, email: emailLowerCase, photoURL, token },
+        });
+      }
     } catch (error) {
       console.log(error);
       res.status(500).json({

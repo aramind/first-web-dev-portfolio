@@ -48,7 +48,7 @@ const Login = () => {
     // send login request if it is not register and return
     if (!isRegister) return login({ email, password }, dispatch);
 
-    // start of the the case that it is register
+    // handles the case for register
     const name = nameRef.current.value;
     const username = userNameRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
@@ -62,10 +62,10 @@ const Login = () => {
         },
       });
     // sending register request
-    console.log(name);
-    console.log(username);
-    console.log(email);
-    console.log(password);
+    // console.log(name);
+    // console.log(username);
+    // console.log(email);
+    // console.log(password);
     register({ name, username, email, password }, dispatch);
   };
 
