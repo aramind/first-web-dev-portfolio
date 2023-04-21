@@ -28,8 +28,7 @@ export const register = async (user, dispatch) => {
         payload: {
           open: true,
           severity: "error",
-          message:
-            "This username is already taken, please choose a different one",
+          message: "Username already taken",
         },
       });
     } else {
@@ -39,5 +38,19 @@ export const register = async (user, dispatch) => {
       });
     }
   }
+  dispatch({ type: "END_LOADING" });
+};
+
+// LOG IN
+export const login = async (user, dispatch) => {
+  dispatch({ type: "START_LOADING" });
+
+  // SEND REQUEST WITH FETCH
+  const result = await fetchData({ url: url + "/login", body: user }, dispatch);
+  if (result) {
+    dispatch({ type: "UPDATE_USER", payload: result });
+    dispatch({ type: "CLOSE_LOGIN" });
+  }
+
   dispatch({ type: "END_LOADING" });
 };

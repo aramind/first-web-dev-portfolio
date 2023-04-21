@@ -58,7 +58,53 @@ const userController = {
         result: { id, name, email: user.email, photoURL, token },
       });
     } catch (error) {
-      // console.log(error);
+      console.log(error);
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong! Try again later",
+      });
+    }
+  },
+
+  // LOGIN
+  login: async (req, res) => {
+    try {
+      const { email, password } = req.body;
+
+      // checking if email already exists
+      // checking if username was already taken
+      const emailLowerCase = email.toLowerCase();
+      const existedUser = await User.findOne({ email: emailLowerCase });
+
+      if (!existedUser) {
+        return res.status(404).json({
+          success: false,
+          message: "User does not exist",
+        });
+      }
+
+      // hashing and storing the password
+      const correctPassword = await bcrypt.compare(
+        password,
+        existedUser.password
+      );
+
+      if (!correctPassword)
+        res.status(400).json({
+          success: false,
+          message: "Invalid credentials",
+        });
+
+      const { _id: id, name, photoURL } = existedUser;
+      const token = jwt.sign({ id, name, photoURL }, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
+      res.status(200).json({
+        success: true,
+        result: { id, name, email: emailLowerCase, photoURL, token },
+      });
+    } catch (error) {
+      console.log(error);
       res.status(500).json({
         success: false,
         message: "Something went wrong! Try again later",

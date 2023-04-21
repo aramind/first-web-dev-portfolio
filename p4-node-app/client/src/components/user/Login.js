@@ -15,7 +15,7 @@ import React, { useRef, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import { Close, Send } from "@mui/icons-material";
 import PasswordField from "./PasswordField";
-import { register } from "../../actions/user";
+import { login, register } from "../../actions/user";
 
 const Login = () => {
   // ** states
@@ -46,6 +46,9 @@ const Login = () => {
     const password = passwordRef.current.value;
 
     // send login request if it is not register and return
+    if (!isRegister) return login({ email, password }, dispatch);
+
+    // start of the the case that it is register
     const name = nameRef.current.value;
     const username = userNameRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
