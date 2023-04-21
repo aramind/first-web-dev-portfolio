@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
+const mongoose = require("mongoose");
 const testActivityCreationRouter = require("./routes/testActivityCreationRouter");
 
 dotenv.config();
@@ -34,6 +35,7 @@ app.use((req, res) =>
 const startServer = async () => {
   try {
     // connect to mongoDB
+    await mongoose.connect(process.env.MONGO_CONNECT);
     app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
   } catch (error) {
     console.log(error);

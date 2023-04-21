@@ -13,6 +13,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.1.5",
-    "mongodb": "4.1"
+    "mongodb": "4.1",
+    "mongoose": "^7.0.4"
   }
 }
