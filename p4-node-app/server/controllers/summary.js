@@ -5,7 +5,6 @@ const Record = require("../models/Record");
 const handleError = require("./utils/errorCatchers");
 
 const summaryController = {
-  // GET localhost:5000/record/
   getSummary: async (req, res) => {
     try {
       // get the user id from the decoded token
@@ -58,6 +57,97 @@ const summaryController = {
           to,
           total_hours: totalHours,
           activity_totals: activityTotals,
+        },
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  },
+  //get summary by interval
+  getSummaryInterval: async (req, res) => {
+    try {
+      // get the user id from the decoded token
+      const { id } = req.user;
+
+      // get the reference date and interval from the query params
+      const { ref: referenceDate, interval } = req.query;
+
+      // calculate the start and end dates
+      const days = +interval;
+      const startDate = new Date(referenceDate);
+      const endDate = new Date(referenceDate);
+      startDate.setDate(startDate.getDate() - (days - 1));
+
+      // find all the records fo the user between the dates
+      const records = await Record.find({
+        owner: id,
+        date: { $gte: startDate, $lte: endDate },
+      });
+
+      // calculate the total hours spent on each activity and the total number of hours on the interval
+      let totalHours = 0;
+      const activityTotals = {};
+      records.forEach((record) => {
+        record.activities.forEach((act) => {
+          if (act.name in activityTotals) {
+            activityTotals[act.name] += parseFloat(act.hours_spent);
+          } else {
+            activityTotals[act.name] = parseFloat(act.hours_spent);
+          }
+          totalHours += parseFloat(act.hours_spent);
+        });
+      });
+      // calculate the precentage of each activity to the total number of hours
+      const activityPercentages = {};
+      Object.entries(activityTotals).forEach(([name, hours]) => {
+        activityPercentages[name] = ((hours / totalHours) * 100).toFixed(2);
+      });
+
+      // find the previous interval
+
+      const previousStartDate = new Date(startDate);
+      const previousEndDate = new Date(startDate);
+      previousStartDate.setDate(previousStartDate.getDate() - days);
+      previousEndDate.setDate(previousEndDate.getDate() - 1);
+
+      // find all the records of the user between the prev start and end
+      const previousRecords = await Record.find({
+        owner: id,
+        date: { $gte: previousStartDate, $lte: previousEndDate },
+      });
+
+      // calculate the total hrs spent on each
+      let prevTotalHours = 0;
+      const prevActivityTotals = {};
+      previousRecords.forEach((record) => {
+        record.activities.forEach((act) => {
+          if (act.name in prevActivityTotals) {
+            prevActivityTotals[act.name] += parseFloat(act.hours_spent);
+          } else {
+            prevActivityTotals[act.name] = parseFloat(act.hours_spent);
+          }
+          prevTotalHours += parseFloat(act.hours_spent);
+        });
+      });
+      // calculate the precentage of each activity to the total number of hours
+      const prevActivityPercentages = {};
+      Object.entries(prevActivityTotals).forEach(([name, hours]) => {
+        prevActivityPercentages[name] = ((hours / totalHours) * 100).toFixed(2);
+      });
+
+      // output
+      res.status(200).json({
+        success: true,
+        message: "Successfully computed",
+        summaryInterval: {
+          startDate,
+          endDate,
+          totalHours,
+          activityPercentages,
+          previousStartDate,
+          previousEndDate,
+          prevTotalHours,
+          prevActivityPercentages,
         },
       });
     } catch (error) {
