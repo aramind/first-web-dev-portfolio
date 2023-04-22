@@ -34,7 +34,6 @@ const SummaryCard = ({ title }) => {
   const randomColor =
     randomBGcolors[Math.floor(Math.random() * randomBGcolors.length)];
 
-  console.log(randomColor);
   return (
     <Card
       sx={{

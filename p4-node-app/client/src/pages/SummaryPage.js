@@ -71,7 +71,10 @@ const SummaryPage = () => {
           }}
         >
           {activityNames.map((title) => (
-            <SummaryCard title={title} />
+            <SummaryCard
+              key={title}
+              title={title}
+            />
           ))}
         </Box>
       </Box>
