@@ -127,6 +127,36 @@ const userController = {
       });
     }
   },
+  // UPDATING PROFILE
+  updateProfile: async (req, res) => {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.user.id,
+        { ...req.body, last_modified: new Date() },
+        {
+          new: true,
+        }
+      );
+      const { _id: id, name, username, photoURL } = updatedUser;
+
+      const token = jwt.sign(
+        { id, name, username, photoURL },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
+      res
+        .status(200)
+        .json({ success: true, result: { name, username, photoURL, token } });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong! Try again later",
+      });
+    }
+  },
 };
 
 module.exports = userController;

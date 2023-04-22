@@ -8,13 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { Lock } from "@mui/icons-material";
-import photoURL from "../../profile.jpg";
 import { useValue } from "../../context/ContextProvider";
 import NavBarLinks from "./NavBarLinks";
 import muiTheme from "../../muiTheme";
-
-// testing only
-const user = { name: "testUser", photoURL };
 
 const NavBar = () => {
   const {

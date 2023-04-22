@@ -15,7 +15,11 @@ const reducer = (state, action) => {
     // for  alert
     case "UPDATE_ALERT":
       return { ...state, alert: action.payload };
-
+    // for  updating profile
+    case "UPDATE_PROFILE": {
+      console.log("from reducer", action.payload);
+      return { ...state, profile: action.payload };
+    }
     // for logging and loggin out via the icon on the navbar
     case "UPDATE_USER":
       localStorage.setItem("currentUser", JSON.stringify(action.payload));
