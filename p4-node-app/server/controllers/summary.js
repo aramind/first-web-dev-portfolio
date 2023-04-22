@@ -97,6 +97,12 @@ const summaryController = {
           totalHours += parseFloat(act.hours_spent);
         });
       });
+      // calculate the averages
+      const activityAverages = {};
+      Object.entries(activityTotals).forEach(([name, hours]) => {
+        activityAverages[name] = (hours / days).toFixed(2);
+      });
+
       // calculate the precentage of each activity to the total number of hours
       const activityPercentages = {};
       Object.entries(activityTotals).forEach(([name, hours]) => {
@@ -129,6 +135,13 @@ const summaryController = {
           prevTotalHours += parseFloat(act.hours_spent);
         });
       });
+
+      // calculate the averages
+      const prevActivityAverages = {};
+      Object.entries(prevActivityTotals).forEach(([name, hours]) => {
+        prevActivityAverages[name] = (hours / days).toFixed(2);
+      });
+
       // calculate the precentage of each activity to the total number of hours
       const prevActivityPercentages = {};
       Object.entries(prevActivityTotals).forEach(([name, hours]) => {
@@ -143,10 +156,12 @@ const summaryController = {
           startDate,
           endDate,
           totalHours,
+          activityAverages,
           activityPercentages,
           previousStartDate,
           previousEndDate,
           prevTotalHours,
+          prevActivityAverages,
           prevActivityPercentages,
         },
       });
