@@ -7,6 +7,7 @@ const testActivityCreationRouter = require("./routes/testActivityCreationRouter"
 const userRouter = require("./routes/userRouter");
 const recordRouter = require("./routes/recordRouter");
 const summaryRouter = require("./routes/summaryRouter");
+const quoteRouter = require("./routes/quoteRouter");
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -35,6 +36,7 @@ app.use("/add", testActivityCreationRouter); //TODO: for testing only;to be remo
 
 app.use("/record", recordRouter);
 app.use("/summary", summaryRouter);
+app.use("/quote", quoteRouter);
 app.use("/", userRouter);
 
 app.use((req, res) =>

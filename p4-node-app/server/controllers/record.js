@@ -130,7 +130,9 @@ const recordController = {
           saveRecord,
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      handleError(res, error);
+    }
   },
 };
 
