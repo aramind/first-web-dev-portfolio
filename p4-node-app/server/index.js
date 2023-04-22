@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const testActivityCreationRouter = require("./routes/testActivityCreationRouter");
 const userRouter = require("./routes/userRouter");
 const recordRouter = require("./routes/recordRouter");
+const summaryRouter = require("./routes/summaryRouter");
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/add", testActivityCreationRouter); //TODO: for testing only;to be remove before passing
 
 app.use("/record", recordRouter);
+app.use("/summary", summaryRouter);
 app.use("/", userRouter);
 
 app.use((req, res) =>
