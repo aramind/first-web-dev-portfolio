@@ -7,7 +7,10 @@ const handleError = require("./utils/errorCatchers");
 const recordController = {
   saveRecord: async (req, res) => {
     try {
-      const { label, owner, activities } = req.body;
+      // extract the label, and activities from the body
+      const { label, activities } = req.body;
+      // extract the owner(user id) from the token
+      const owner = req.user.id;
 
       console.log(req.body);
       // Create activity objects
@@ -17,6 +20,7 @@ const recordController = {
       // create a record object
       const newRecord = new Record({
         label,
+        date: new Date(label),
         owner,
         activities: activityObjs,
         last_modified: new Date(),
@@ -80,6 +84,53 @@ const recordController = {
     } catch (error) {
       handleError(res, error);
     }
+  },
+
+  // PUT localhost:5000/record/
+  updateRecord: async (req, res) => {
+    try {
+      // extract the label, and activities from the body
+      const { label, activities } = req.body;
+      // extract the owner(user id) from the token
+      const owner = req.user.id;
+
+      // check if record exists
+      const existingRecord = await Record.findOne({ label, owner });
+
+      // if record, exists, update its data
+      if (existingRecord) {
+        existingRecord.activities = activities.map((act) => {
+          return { name: act.name, hours_spent: act.hours_spent };
+        });
+        existingRecord.last_modified = new Date();
+        const updatedRecord = await existingRecord.save();
+        return res.status(200).json({
+          success: true,
+          message: "Record successfully updated",
+          record: updatedRecord,
+        });
+      } else {
+        const activityObjs = activities.map((act) => {
+          return { name: act.name, hours_spent: act.hours_spent };
+        });
+        // create a record object
+        const newRecord = new Record({
+          label,
+          date: new Date(label),
+          owner,
+          activities: activityObjs,
+          last_modified: new Date(),
+        });
+        // save the record object to database
+        const saveRecord = await newRecord.save();
+
+        res.status(201).json({
+          success: true,
+          message: "New record saved",
+          saveRecord,
+        });
+      }
+    } catch (error) {}
   },
 };
 
