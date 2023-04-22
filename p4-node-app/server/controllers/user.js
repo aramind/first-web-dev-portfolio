@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const handleError = require("./utils/errorCatchers");
 
 const userController = {
   register: async (req, res) => {
@@ -62,11 +63,7 @@ const userController = {
         result: { id, name, username, email: user.email, photoURL, token },
       });
     } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        success: false,
-        message: "Something went wrong! Try again later",
-      });
+      handleError(res, error);
     }
   },
 
@@ -120,11 +117,7 @@ const userController = {
         });
       }
     } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        success: false,
-        message: "Something went wrong! Try again later",
-      });
+      handleError(res, error);
     }
   },
   // UPDATING PROFILE
@@ -150,11 +143,7 @@ const userController = {
         .status(200)
         .json({ success: true, result: { name, username, photoURL, token } });
     } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        success: false,
-        message: "Something went wrong! Try again later",
-      });
+      handleError(res, error);
     }
   },
 };
