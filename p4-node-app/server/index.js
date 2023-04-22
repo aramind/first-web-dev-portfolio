@@ -5,6 +5,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const testActivityCreationRouter = require("./routes/testActivityCreationRouter");
 const userRouter = require("./routes/userRouter");
+const recordRouter = require("./routes/recordRouter");
+
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
@@ -30,8 +32,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/add", testActivityCreationRouter); //TODO: for testing only;to be remove before passing
 
+app.use("/record", recordRouter);
 app.use("/", userRouter);
-app.use("/", (req, res) => res.json({ message: "Welcome to our API" }));
+
 app.use((req, res) =>
   res.status(404).json({ success: false, message: "Not Found" })
 );

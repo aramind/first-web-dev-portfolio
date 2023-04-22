@@ -9,6 +9,7 @@ const recordSchema = new mongoose.Schema({
   label: {
     type: String,
     required: true,
+    unique: true,
   },
   last_modified: { type: Date, required: true },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
