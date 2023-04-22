@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const testActivityCreationRouter = require("./routes/testActivityCreationRouter");
 const userRouter = require("./routes/userRouter");
@@ -8,6 +9,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+app.use(cors());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", process.env.CLIENT_URL);
