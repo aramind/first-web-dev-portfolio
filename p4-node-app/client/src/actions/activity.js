@@ -13,17 +13,21 @@ export const updateActivityRecord = async (
   const timezone = "Asia/Manila";
   const zonedDate = utcToZonedTime(date, timezone);
   const label = format(zonedDate, "yyyy-MM-dd");
-  console.log("DATE", date);
-  console.log("LABEL", label);
+  // console.log("DATE", date);
+  // console.log("LABEL", label);
   // console.log("LABEL", label);
   console.log(`${url}/${label}`);
   const totalSeconds = parseInt(hrs * 3600) + parseInt(+mins * 60);
-  console.log(totalSeconds);
+  console.log(-totalSeconds);
+
   fetchData({
     url: `${url}/${label}`,
     method: "POST",
     token: token,
-    body: { name: activity, seconds_spent: totalSeconds },
+    body: {
+      name: activity,
+      seconds_spent: `${operation === "add" ? totalSeconds : -totalSeconds}`,
+    },
   });
   dispatch({ type: "END_LOADING" });
   // return result;

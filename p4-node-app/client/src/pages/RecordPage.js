@@ -59,7 +59,7 @@ const RecordPage = () => {
   // console.log(currentUser);
 
   // handlers
-  const handleAdd = async (operation) => {
+  const handleAddAndSubtract = async (operation) => {
     console.log(selectedDate);
     let content = {
       date: selectedDate,
@@ -252,13 +252,14 @@ const RecordPage = () => {
             <Button
               fullWidth
               variant="contained"
-              onClick={handleAdd}
+              onClick={() => handleAddAndSubtract("add")}
             >
               Add
             </Button>
             <Button
               fullWidth
               variant="contained"
+              onClick={() => handleAddAndSubtract("sub")}
             >
               Subtract
             </Button>

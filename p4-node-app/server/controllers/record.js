@@ -21,7 +21,17 @@ const recordController = {
           (total, activity) => +total + +activity.seconds_spent,
           0
         );
-        if (+totalSecondsSpent + +seconds_spent > 86400) {
+        const newTotalSecondsSpent =
+          parseInt(totalSecondsSpent) + parseInt(seconds_spent);
+
+        if (newTotalSecondsSpent < 0) {
+          res.status(400).json({
+            success: false,
+            message: "Total hours spent cannot be negative",
+            result: null,
+          });
+          return;
+        } else if (newTotalSecondsSpent > 86400) {
           res.status(400).json({
             success: false,
             message: "Total hours spent cannot exceed 24",
