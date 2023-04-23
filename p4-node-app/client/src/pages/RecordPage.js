@@ -14,21 +14,20 @@ import muiTheme from "../muiTheme";
 // import DatePickerComponent from "../components/DatePickerComponent";
 // import { format } from "date-fns-tz";
 // import Dropdown from "../components/form-record/Dropdown";
-import {
-  DeleteOutlineOutlined,
-  RestartAltOutlined,
-  SaveOutlined,
-} from "@mui/icons-material";
+import { DeleteOutlineOutlined, RestartAltOutlined } from "@mui/icons-material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns-tz";
 import { useValue } from "../context/ContextProvider";
-import { updateActivityRecord } from "../actions/activity";
+import {
+  getRecordForSelectedDate,
+  updateActivityRecord,
+} from "../actions/activity";
 
 const RecordPage = () => {
   // * Global states from Context provider
   // date selected
   const {
-    state: { selectedDate, activityNames, currentUser, todaysRecord },
+    state: { selectedDate, activityNames, currentUser, recordForSelectedDate },
     dispatch,
   } = useValue();
   const formattedDate = format(selectedDate, "E MMM d, yyyy");
@@ -38,6 +37,34 @@ const RecordPage = () => {
   // hrs and minutes
   const [hrs, setHrs] = useState(null);
   const [mins, setMins] = useState(null);
+
+  useEffect(() => {
+    console.log(selectedDate);
+    let content = {
+      date: selectedDate,
+    };
+    console.log(currentUser);
+    if (currentUser) {
+      const token = currentUser.token;
+      getRecordForSelectedDate(token, content, dispatch);
+    }
+  }, []);
+
+  useEffect(() => {
+    async function retrieve() {
+      console.log(selectedDate);
+      let content = {
+        date: selectedDate,
+      };
+      if (currentUser) {
+        const token = currentUser.token;
+        let record = await getRecordForSelectedDate(token, content, dispatch);
+        console.log("RECREC", record);
+        dispatch({ type: "UPDATE_RECORDFORSELECTEDDATE", payload: record });
+      }
+    }
+    retrieve();
+  }, [selectedDate, currentUser, dispatch]);
 
   const genArrOfDigits = (n) => {
     const arr = [];
@@ -59,6 +86,9 @@ const RecordPage = () => {
   // console.log(currentUser);
 
   // handlers
+  const handleDelete = () => {
+    console.log("FROM STATE", recordForSelectedDate);
+  };
   const handleAddAndSubtract = async (operation) => {
     console.log(selectedDate);
     let content = {
@@ -71,9 +101,6 @@ const RecordPage = () => {
     const token = currentUser.token;
     updateActivityRecord(token, content, dispatch);
   };
-
-  // TODO:
-  const handleSubtract = () => {};
 
   const handleDatePickerChange = (date) => {
     dispatch({ type: "UPDATE_DATESELECTED", payload: date });
@@ -336,6 +363,7 @@ const RecordPage = () => {
               size="large"
               endIcon={<DeleteOutlineOutlined />}
               sx={{ py: "1rem" }}
+              onClick={handleDelete}
             >
               Delete
             </Button>

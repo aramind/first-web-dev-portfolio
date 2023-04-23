@@ -26,9 +26,9 @@ const reducer = (state, action) => {
       return { ...state, currentUser: action.payload };
 
     // for updating todays record on local storage
-    case "UPDATE_TODAYSRECORD":
+    case "UPDATE_RECORDFORSELECTEDDATE":
       // localStorage.setItem("todaysRecord", JSON.stringify(action.payload));
-      return { ...state, todaysRecord: action.payload };
+      return { ...state, recordForSelectedDate: action.payload };
     // for selectedDate
     case "UPDATE_DATESELECTED":
       return { ...state, selectedDate: action.payload };

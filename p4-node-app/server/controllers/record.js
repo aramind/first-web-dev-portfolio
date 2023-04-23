@@ -139,7 +139,7 @@ const recordController = {
       if (!record) {
         return res.status(404).json({
           success: false,
-          message: "Record not found",
+          message: "No record created for the selected date.",
         });
       }
 
