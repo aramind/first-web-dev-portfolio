@@ -18,6 +18,13 @@ const fetchData = async (
     }
     console.log(data.result);
     console.log("calling...");
+
+    if (data.success) {
+      dispatch({
+        type: "UPDATE_ALERT",
+        payload: { open: true, severity: "success", message: data.message },
+      });
+    }
     return data.result;
   } catch (error) {
     dispatch({

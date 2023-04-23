@@ -20,15 +20,18 @@ export const updateActivityRecord = async (
   const totalSeconds = parseInt(hrs * 3600) + parseInt(+mins * 60);
   console.log(-totalSeconds);
 
-  fetchData({
-    url: `${url}/${label}`,
-    method: "POST",
-    token: token,
-    body: {
-      name: activity,
-      seconds_spent: `${operation === "add" ? totalSeconds : -totalSeconds}`,
+  fetchData(
+    {
+      url: `${url}/${label}`,
+      method: "POST",
+      token: token,
+      body: {
+        name: activity,
+        seconds_spent: `${operation === "add" ? totalSeconds : -totalSeconds}`,
+      },
     },
-  });
+    dispatch
+  );
   dispatch({ type: "END_LOADING" });
   // return result;
 };

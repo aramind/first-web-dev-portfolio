@@ -106,6 +106,7 @@ const userController = {
         );
         res.status(200).json({
           success: true,
+          message: `Welcome back ${existedUser.username}`,
           result: {
             id,
             name,
