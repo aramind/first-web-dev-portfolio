@@ -8,61 +8,33 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../components/sidebar/SideBar";
 import muiTheme from "../muiTheme";
 // import DatePickerComponent from "../components/DatePickerComponent";
 // import { format } from "date-fns-tz";
 // import Dropdown from "../components/form-record/Dropdown";
 import {
-  FitnessCenter,
-  Hotel,
-  MenuBook,
-  MoreVert,
-  People,
+  DeleteOutlineOutlined,
   RestartAltOutlined,
   SaveOutlined,
-  SelfImprovement,
-  VideogameAsset,
-  WorkHistory,
 } from "@mui/icons-material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns-tz";
 import { useValue } from "../context/ContextProvider";
+import { updateActivityRecord } from "../actions/activity";
 
 const RecordPage = () => {
+  // * Global states from Context provider
   // date selected
   const {
-    state: { selectedDate },
+    state: { selectedDate, activityNames, currentUser, todaysRecord },
     dispatch,
   } = useValue();
   const formattedDate = format(selectedDate, "E MMM d, yyyy");
 
-  // select activities dropdown
-  const activityIcons = [
-    { label: "sleep", icon: <Hotel /> },
-    { label: "work", icon: <WorkHistory /> },
-    { label: "learn", icon: <MenuBook /> },
-    { label: "self", icon: <SelfImprovement /> },
-    { label: "social", icon: <People /> },
-    { label: "play", icon: <VideogameAsset /> },
-    { label: "fitness", icon: <FitnessCenter /> },
-    { label: "others", icon: <MoreVert /> },
-  ];
-
-  const activities = [
-    "sleep",
-    "work",
-    "learn",
-    "self",
-    "social",
-    "play",
-    "fitness",
-    "others",
-  ];
-
+  // * Local states
   const [selectedActivity, setSelectedActivity] = useState(null);
-
   // hrs and minutes
   const [hrs, setHrs] = useState(null);
   const [mins, setMins] = useState(null);
@@ -81,17 +53,32 @@ const RecordPage = () => {
   // for progress bar
   let hoursRemaining = 23;
   const completedPercent = ((24 - hoursRemaining) / 24) * 100;
-  console.log(selectedActivity);
-  console.log(hrs);
-  console.log(mins);
+  // console.log(selectedActivity);
+  // console.log(hrs);
+  // console.log(mins);
+  // console.log(currentUser);
 
-  // handers
+  // handlers
+  const handleAdd = async (operation) => {
+    console.log(selectedDate);
+    let content = {
+      date: selectedDate,
+      activity: selectedActivity,
+      hrs: hrs,
+      mins: mins,
+      operation,
+    };
+    const token = currentUser.token;
+    updateActivityRecord(token, content, dispatch);
+  };
+
+  // TODO:
+  const handleSubtract = () => {};
 
   const handleDatePickerChange = (date) => {
     dispatch({ type: "UPDATE_DATESELECTED", payload: date });
   };
 
-  console.log("DATE SELECTED", selectedDate);
   return (
     <Box
       // alignItems={"center"}
@@ -180,7 +167,7 @@ const RecordPage = () => {
               setSelectedActivity(newValue);
             }}
             id="select-activity"
-            options={activities}
+            options={activityNames}
             sx={{ width: 300 }}
             renderInput={(params) => (
               <TextField
@@ -265,6 +252,7 @@ const RecordPage = () => {
             <Button
               fullWidth
               variant="contained"
+              onClick={handleAdd}
             >
               Add
             </Button>
@@ -318,11 +306,11 @@ const RecordPage = () => {
             my={1}
           >
             <Typography variant="caption">
-              Save/Archived selected date's record to database? - SAVE
+              Reset all entries for selected date to zero? - RESET
             </Typography>
 
             <Typography variant="caption">
-              Reset selected date's records? - RESET
+              Delete all records for selected date? - DELETE
             </Typography>
           </Stack>
           {/* save and clear */}
@@ -336,19 +324,19 @@ const RecordPage = () => {
               fullWidth
               variant="contained"
               size="large"
-              endIcon={<SaveOutlined />}
+              endIcon={<RestartAltOutlined />}
               sx={{ py: "1rem" }}
             >
-              Save
+              Reset
             </Button>
             <Button
               fullWidth
               variant="contained"
               size="large"
-              endIcon={<RestartAltOutlined />}
+              endIcon={<DeleteOutlineOutlined />}
               sx={{ py: "1rem" }}
             >
-              Reset
+              Delete
             </Button>
           </Stack>
         </Box>

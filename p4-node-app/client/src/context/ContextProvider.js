@@ -9,7 +9,20 @@ const initialState = {
   alert: { open: false, severity: "info", message: "" },
   profile: { open: false, file: null, photoURL: "" },
   selectedDate: new Date(),
+  recordForSelectedDate: null,
+  activityNames: [
+    "sleep",
+    "work",
+    "learn",
+    "self",
+    "social",
+    "play",
+    "fitness",
+    "others",
+  ],
 };
+
+// const testRecord = { sleep: "2", learn: "3" };
 
 const Context = createContext(initialState);
 
@@ -23,6 +36,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser) {
+      // console.log(currentUser);
       dispatch({ type: "UPDATE_USER", payload: currentUser });
     }
   }, []);

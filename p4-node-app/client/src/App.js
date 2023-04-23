@@ -7,8 +7,9 @@ import RecordPage from "./pages/RecordPage";
 import ChartsPage from "./pages/ChartsPage";
 import SummaryPage from "./pages/SummaryPage";
 import ReadingsPage from "./pages/ReadingsPage";
-import { Login } from "@mui/icons-material";
-import NavBar from "./components/navbar/NavBar";
+import { useValue } from "./context/ContextProvider";
+import { useEffect } from "react";
+import { apiGetRecordByLabel } from "./actions/activity";
 
 // Router
 const router = createBrowserRouter([

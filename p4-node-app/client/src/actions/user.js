@@ -99,7 +99,7 @@ export const updateProfile = async (currentUser, updatedFields, dispatch) => {
           message: "Your profile has been updated successfully",
         },
       });
-      console.log("ON USERJS", result.photoURL);
+      // console.log("ON USERJS", result.photoURL);
       dispatch({
         type: "UPDATE_PROFILE",
         payload: { open: false, file: null, photoURL: result.photoURL },

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const activitySchema = new mongoose.Schema({
   name: { type: String, required: true },
-  hours_spent: { type: String, required: true },
+  seconds_spent: { type: String, required: true },
 });
 
 const recordSchema = new mongoose.Schema({

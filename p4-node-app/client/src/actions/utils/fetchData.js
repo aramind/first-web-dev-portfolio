@@ -1,5 +1,5 @@
 const fetchData = async (
-  { url, method = "POST", token = "", body = "null" },
+  { url, method = "POST", token = "", body = null },
   dispatch
 ) => {
   const headers = token
@@ -10,13 +10,14 @@ const fetchData = async (
   try {
     const response = await fetch(url, { method, headers, ...body });
     const data = await response.json();
-
+    console.log("Data", data);
     if (!data.success) {
       if (response.status === 401)
         dispatch({ type: "UPDATE_USER", payload: null });
       throw new Error(data.message);
     }
     console.log(data.result);
+    console.log("calling...");
     return data.result;
   } catch (error) {
     dispatch({

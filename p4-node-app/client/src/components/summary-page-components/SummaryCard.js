@@ -1,13 +1,4 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  Stack,
-  Typography,
-  alpha,
-} from "@mui/material";
+import { Box, Card, CardContent, Typography, alpha } from "@mui/material";
 import React from "react";
 import SummaryCardContent from "./SummaryCardContent";
 

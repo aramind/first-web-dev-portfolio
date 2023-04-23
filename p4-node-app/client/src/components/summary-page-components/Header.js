@@ -5,14 +5,11 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Typography,
 } from "@mui/material";
 import React from "react";
-import cardImage from "./sample-card-image.jpg";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns-tz";
-import muiTheme from "../../muiTheme";
 import { useValue } from "../../context/ContextProvider";
 
 const Header = () => {
@@ -37,8 +34,6 @@ const Header = () => {
   const handleDatePickerChange = (date) => {
     dispatch({ type: "UPDATE_DATESELECTED", payload: date });
   };
-  // TODO: remove this once implemented na
-  const user = "Robin";
   return (
     <Box>
       <Card
@@ -70,7 +65,7 @@ const Header = () => {
         <CardContent>
           <Box>
             {/* TODO: fix the wordings */}
-            <Typography variant="h4">Hi {user}</Typography>
+            <Typography variant="h4">Hi {"HARD CODED"}</Typography>
             <Typography
               margin="0.5rem 0"
               variant="body1"

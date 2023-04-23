@@ -13,9 +13,9 @@ const summaryController = {
       // get the start and end dates from the query params
       const { from, to } = req.query;
 
-      console.log("TO/FROM", to + "/" + from);
-      console.log(new Date(from).toString());
-      console.log(new Date(to).toString());
+      // console.log("TO/FROM", to + "/" + from);
+      // console.log(new Date(from).toString());
+      // console.log(new Date(to).toString());
       // check if the start date is earlier than the end date
       if (new Date(from) >= new Date(to)) {
         return res.status(400).json({

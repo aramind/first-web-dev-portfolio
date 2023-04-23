@@ -31,7 +31,7 @@ const WelcomeBackPage = () => {
     dispatch({ type: "UPDATE_DATESELECTED", payload: date });
   };
 
-  console.log("from WBP", selectedDate);
+  // console.log("from WBP", selectedDate);
   return (
     <Box
       alignItems={"center"}

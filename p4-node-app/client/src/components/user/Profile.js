@@ -49,7 +49,7 @@ const Profile = () => {
     );
   };
 
-  console.log(profile.open);
+  // console.log(profile.open);
   return (
     <Dialog
       open={profile.open}
