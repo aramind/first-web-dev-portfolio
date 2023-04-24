@@ -24,6 +24,7 @@ import {
 } from "../actions/activity";
 import SummaryPage from "./SummaryPage";
 import SummaryTable from "../components/summary-table/SummaryTable";
+import ChartDisplay from "../components/charts/ChartDisplay";
 
 const RecordPage = () => {
   // * Global states from Context provider
@@ -316,19 +317,22 @@ const RecordPage = () => {
             }}
           >
             <Box
-              width="500px"
-              height="400px"
+              width="400px"
+              height="350px"
               // sx={{ backgroundColor: "blue" }}
             >
-              {/* TODO */}
               <SummaryTable />
             </Box>
             <Box
               width="300px"
-              height="400px"
-              sx={{ backgroundColor: "blue" }}
+              height="350px"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                // backgroundColor: "blue",
+              }}
             >
-              chart
+              {recordForSelectedDate && <ChartDisplay showSummary={false} />}
             </Box>
           </Box>
           {/* text info */}

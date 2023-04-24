@@ -6,8 +6,9 @@ import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { v4 as uuidv4 } from "uuid";
 import { useValue } from "../../context/ContextProvider";
+import PieChart from "./PieChart";
 
-const ChartDisplay = ({ onClose }) => {
+const ChartDisplay = ({ onClose, showSummary }) => {
   const {
     state: { recordForSelectedDate, selectedDate },
     dispatch,
@@ -65,37 +66,12 @@ const ChartDisplay = ({ onClose }) => {
     .join(", ");
 
   return (
-    <div className="chart-card">
-      {summaryText}
-      <div className="chart-header">
-        <div className="date-picker">
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-            dateFormat="yyyy-MM-dd"
-            id="date-picker-comp"
-            style={{ borderRadius: "3px", height: "3rem" }}
-          />
-        </div>
-        <button
-          className="close-button"
-          onClick={onClose}
-        >
-          X
-        </button>
+    <>
+      <div className="chart--pie">
+        <PieChart todaysRecord={transformedObject} />
       </div>
-      <div className="date-details">{dateDetails}</div>
-      {selectedRecord ? (
-        <React.Fragment>
-          <div className="chart--pie">
-            <PieChart todaysRecord={transformedObject} />
-          </div>
-          <div className="chart-summary">{summaryText}</div>
-        </React.Fragment>
-      ) : (
-        <div>No data available for the selected date.</div>
-      )}
-    </div>
+      {showSummary && <div className="chart-summary">{summaryText}</div>}
+    </>
   );
 };
 
