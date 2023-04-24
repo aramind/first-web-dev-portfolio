@@ -16,6 +16,10 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
     setAnchorUserMenu(null);
   };
 
+  const handleLogout = () => {
+    dispatch({ type: "UPDATE_USER", payload: null });
+  };
+
   return (
     <>
       <Menu
@@ -47,9 +51,7 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem
-          onClick={() => dispatch({ type: "UPDATE_USER", payload: null })}
-        >
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

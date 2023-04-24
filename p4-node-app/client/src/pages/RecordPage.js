@@ -20,12 +20,14 @@ import { format } from "date-fns-tz";
 import { useValue } from "../context/ContextProvider";
 import {
   getRecordForSelectedDate,
+  removeRecordForSelectedDate,
   updateActivityRecord,
 } from "../actions/activity";
 import SummaryPage from "./SummaryPage";
 import SummaryTable from "../components/summary-table/SummaryTable";
 import ChartDisplay from "../components/charts/ChartDisplay";
 import getTotalTimeInSeconds from "../util-functions/getTotalTimeInSeconds";
+import ConfirmationDialog from "../components/ConfirmationDialog";
 
 const RecordPage = () => {
   // * Global states from Context provider
@@ -41,6 +43,7 @@ const RecordPage = () => {
   // hrs and minutes
   const [hrs, setHrs] = useState(null);
   const [mins, setMins] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     // console.log(selectedDate);
@@ -96,15 +99,27 @@ const RecordPage = () => {
   console.log("TIME REMAINING:", remainingTimeString);
 
   const completedPercent = ((24 - hoursRemaining) / 24) * 100;
-  // console.log(selectedActivity);
-  // console.log(hrs);
-  // console.log(mins);
-  // console.log(currentUser);
 
   // handlers
+
   const handleDelete = () => {
-    console.log("FROM STATE", recordForSelectedDate);
+    setOpenDialog(true);
   };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+  const handleConfirmDelete = () => {
+    console.log("FROM STATE", recordForSelectedDate);
+    console.log(selectedDate);
+    let content = {
+      date: selectedDate,
+    };
+    const token = currentUser.token;
+    removeRecordForSelectedDate(token, content, dispatch);
+    handleCloseDialog();
+  };
+
   const handleAddAndSubtract = async (operation) => {
     console.log(selectedDate);
     let content = {
@@ -409,16 +424,23 @@ const RecordPage = () => {
               >
                 Reset
               </Button>
-              <Button
-                fullWidth
-                variant="contained"
-                size="large"
-                endIcon={<DeleteOutlineOutlined />}
-                sx={{ py: "1rem" }}
-                onClick={handleDelete}
-              >
-                Delete
-              </Button>
+              <>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  size="large"
+                  endIcon={<DeleteOutlineOutlined />}
+                  sx={{ py: "1rem" }}
+                  onClick={handleDelete}
+                >
+                  Delete Record
+                </Button>
+                <ConfirmationDialog
+                  open={openDialog}
+                  handleClose={handleCloseDialog}
+                  handleConfirm={handleConfirmDelete}
+                />
+              </>
             </Stack>
           </Box>
         </Box>
