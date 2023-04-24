@@ -40,11 +40,11 @@ const summaryController = {
       records.forEach((record) => {
         record.activities.forEach((activity) => {
           if (activity.name in activityTotals) {
-            activityTotals[activity.name] += parseFloat(activity.hours_spent);
+            activityTotals[activity.name] += parseFloat(activity.seconds_spent);
           } else {
-            activityTotals[activity.name] = parseFloat(activity.hours_spent);
+            activityTotals[activity.name] = parseFloat(activity.seconds_spent);
           }
-          totalHours += parseFloat(activity.hours_spent);
+          totalHours += parseFloat(activity.seconds_spent);
         });
       });
 
@@ -85,28 +85,30 @@ const summaryController = {
       });
 
       // calculate the total hours spent on each activity and the total number of hours on the interval
-      let totalHours = 0;
+      let totalSeconds = 0;
       const activityTotals = {};
       records.forEach((record) => {
         record.activities.forEach((act) => {
           if (act.name in activityTotals) {
-            activityTotals[act.name] += parseFloat(act.hours_spent);
+            activityTotals[act.name] += Number(act.seconds_spent);
           } else {
-            activityTotals[act.name] = parseFloat(act.hours_spent);
+            activityTotals[act.name] = Number(act.seconds_spent);
           }
-          totalHours += parseFloat(act.hours_spent);
+          totalSeconds += Number(act.seconds_spent);
         });
       });
+
+      console.log("CHECK1", totalSeconds);
       // calculate the averages
       const activityAverages = {};
-      Object.entries(activityTotals).forEach(([name, hours]) => {
-        activityAverages[name] = (hours / days).toFixed(2);
+      Object.entries(activityTotals).forEach(([name, seconds]) => {
+        activityAverages[name] = (seconds / (days * 24 * 3600)).toFixed(2);
       });
 
       // calculate the precentage of each activity to the total number of hours
       const activityPercentages = {};
-      Object.entries(activityTotals).forEach(([name, hours]) => {
-        activityPercentages[name] = ((hours / totalHours) * 100).toFixed(2);
+      Object.entries(activityTotals).forEach(([name, seconds]) => {
+        activityPercentages[name] = ((seconds / totalSeconds) * 100).toFixed(2);
       });
 
       // find the previous interval
@@ -123,29 +125,32 @@ const summaryController = {
       });
 
       // calculate the total hrs spent on each
-      let prevTotalHours = 0;
+      let prevTotalSeconds = 0;
       const prevActivityTotals = {};
       previousRecords.forEach((record) => {
         record.activities.forEach((act) => {
           if (act.name in prevActivityTotals) {
-            prevActivityTotals[act.name] += parseFloat(act.hours_spent);
+            prevActivityTotals[act.name] += parseFloat(act.seconds_spent);
           } else {
-            prevActivityTotals[act.name] = parseFloat(act.hours_spent);
+            prevActivityTotals[act.name] = parseFloat(act.seconds_spent);
           }
-          prevTotalHours += parseFloat(act.hours_spent);
+          prevTotalSeconds += parseFloat(act.seconds_spent);
         });
       });
 
       // calculate the averages
       const prevActivityAverages = {};
-      Object.entries(prevActivityTotals).forEach(([name, hours]) => {
-        prevActivityAverages[name] = (hours / days).toFixed(2);
+      Object.entries(prevActivityTotals).forEach(([name, seconds]) => {
+        prevActivityAverages[name] = (seconds / (days * 24 * 3600)).toFixed(2);
       });
 
       // calculate the precentage of each activity to the total number of hours
       const prevActivityPercentages = {};
-      Object.entries(prevActivityTotals).forEach(([name, hours]) => {
-        prevActivityPercentages[name] = ((hours / totalHours) * 100).toFixed(2);
+      Object.entries(prevActivityTotals).forEach(([name, seconds]) => {
+        prevActivityPercentages[name] = (
+          (seconds / totalSeconds) *
+          100
+        ).toFixed(2);
       });
 
       // output
@@ -155,12 +160,12 @@ const summaryController = {
         summaryInterval: {
           startDate,
           endDate,
-          totalHours,
+          totalSeconds,
           activityAverages,
           activityPercentages,
           previousStartDate,
           previousEndDate,
-          prevTotalHours,
+          prevTotalSeconds,
           prevActivityAverages,
           prevActivityPercentages,
         },

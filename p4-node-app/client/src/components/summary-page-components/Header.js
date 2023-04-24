@@ -11,15 +11,17 @@ import React from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns-tz";
 import { useValue } from "../../context/ContextProvider";
+import muiTheme from "../../muiTheme";
 
 const Header = () => {
   // date selected
   const {
-    state: { selectedDate },
+    state: { selectedDate, currentUser },
     dispatch,
   } = useValue();
   const formattedDateForHeader = format(selectedDate, "MMM d, yyyy");
 
+  // local states
   const dateToString = (date) => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -38,7 +40,7 @@ const Header = () => {
     <Box>
       <Card
         sx={{
-          border: "1px solid gray",
+          border: "2px solid green",
           borderRadius: "20px",
           height: { xs: "280px", md: "420px" },
           width: { xs: "340px", md: "250px" },
@@ -52,25 +54,29 @@ const Header = () => {
           pt={2}
         >
           <Avatar
+            src={currentUser?.photoURL}
             sx={{
               margin: "0 auto",
               height: "100px",
               width: "100px",
               display: { xs: "none", md: "flex" },
             }}
-          >
-            RM
-          </Avatar>
+          />
         </Box>
         <CardContent>
           <Box>
             {/* TODO: fix the wordings */}
-            <Typography variant="h4">Hi {"HARD CODED"}</Typography>
+            <Typography
+              variant="h4"
+              color="primary"
+            >
+              Hi {currentUser?.username}!👋
+            </Typography>
             <Typography
               margin="0.5rem 0"
               variant="body1"
             >
-              Here is your summary for the last year from{" "}
+              Here is your summary from{" "}
               <span>
                 {todayInString === selectedDateInString
                   ? "today"

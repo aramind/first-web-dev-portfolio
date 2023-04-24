@@ -42,7 +42,7 @@ const SummaryCard = ({ title }) => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h6">{title}</Typography>
+        <Typography variant="h6">{title.toUpperCase()}</Typography>
       </Box>
       <CardContent>
         <SummaryCardContent

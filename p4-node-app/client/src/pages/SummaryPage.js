@@ -4,19 +4,16 @@ import muiTheme from "../muiTheme";
 
 import Header from "../components/summary-page-components/Header";
 import SummaryCard from "../components/summary-page-components/SummaryCard";
+import { useValue } from "../context/ContextProvider";
 
 const SummaryPage = () => {
-  // TODO: to replace
-  const activityNames = [
-    "SLEEP",
-    "WORK",
-    "LEARN",
-    "SELF",
-    "SOCIAL",
-    "PLAY",
-    "FITNESS",
-    "OTHERS",
-  ];
+  // global states
+  const {
+    state: { activityNames, recordForSelectedDate, alert, loading },
+    dispatch,
+  } = useValue();
+
+  // local states
   return (
     <Box
       // alignItems={"center"}
