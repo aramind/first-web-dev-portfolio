@@ -32,6 +32,10 @@ const reducer = (state, action) => {
     // for selectedDate
     case "UPDATE_DATESELECTED":
       return { ...state, selectedDate: action.payload };
+
+    // dark mode
+    case "TOGGLE_DARK_MODE":
+      return { ...state, darkMode: !state.darkMode };
     default:
       throw new Error("No matched action");
   }

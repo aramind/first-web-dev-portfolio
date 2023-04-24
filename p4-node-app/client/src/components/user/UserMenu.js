@@ -1,5 +1,5 @@
 import { AccountCircle, Logout, Settings } from "@mui/icons-material";
-import { ListItemIcon, Menu, MenuItem } from "@mui/material";
+import { ListItemIcon, Menu, MenuItem, Switch } from "@mui/material";
 import React from "react";
 import { useValue } from "../../context/ContextProvider";
 import useCheckToken from "../../hooks/useCheckToken";
@@ -60,6 +60,12 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <Switch fontSize="small" />
+          </ListItemIcon>
+          Dark Mode
         </MenuItem>
       </Menu>
       <Profile />

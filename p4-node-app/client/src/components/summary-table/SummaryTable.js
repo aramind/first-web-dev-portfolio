@@ -119,5 +119,3 @@ const SummaryTable = () => {
 };
 
 export default SummaryTable;
-
-// TODO: CONTINUE 400AM Apr 24

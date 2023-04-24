@@ -20,6 +20,7 @@ const initialState = {
     "fitness",
     "others",
   ],
+  darkMode: false,
 };
 
 // const testRecord = { sleep: "2", learn: "3" };

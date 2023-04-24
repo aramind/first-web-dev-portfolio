@@ -47,7 +47,7 @@ const RecordPage = () => {
   const [mins, setMins] = useState(null);
   const [openDialogDelete, setOpenDialogDelete] = useState(false);
   const [openDialogReset, setOpenDialogReset] = useState(false);
-
+  const [refresh, setRefreshed] = useState(false);
   useEffect(() => {
     // console.log(selectedDate);
     window.scrollTo(0, 0);
@@ -74,7 +74,7 @@ const RecordPage = () => {
       }
     }
     retrieve();
-  }, [selectedDate, currentUser, dispatch]);
+  }, [selectedDate, currentUser, dispatch, refresh]);
   const genArrOfDigits = (n) => {
     const arr = [];
     for (let i = 0; i <= n; i++) {
@@ -124,6 +124,7 @@ const RecordPage = () => {
     const token = currentUser.token;
     removeRecordForSelectedDate(token, content, dispatch);
     handleCloseDialogDelete();
+    setRefreshed((pv) => !pv);
   };
 
   // RESET
@@ -143,6 +144,7 @@ const RecordPage = () => {
     const token = currentUser.token;
     resetRecordForSelectedDate(token, content, dispatch);
     handleCloseDialogReset();
+    setRefreshed((pv) => !pv);
   };
 
   const handleAddAndSubtract = async (operation) => {
@@ -156,6 +158,7 @@ const RecordPage = () => {
     };
     const token = currentUser.token;
     updateActivityRecord(token, content, dispatch);
+    setRefreshed((pv) => !pv);
   };
 
   const handleDatePickerChange = (date) => {
