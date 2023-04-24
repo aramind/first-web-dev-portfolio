@@ -14,13 +14,28 @@
 // }
 
 function getActivityPercentage(record, activityName) {
+  console.log("HEHE", record);
   const activity = record.activities.find(
     (activity) => activity.name === activityName
   );
+
+  if (!activity)
+    return {
+      name: activityName,
+      seconds_spent: 0,
+      percentage: 0,
+    };
   const totalSecondsSpent = record.activities.reduce(
     (total, activity) => +total + +activity.seconds_spent,
     0
   );
+  if (!activity) {
+    return {
+      name: activityName,
+      seconds_spent: 0,
+      percentage: "0%",
+    };
+  }
   const percentage = (
     (activity.seconds_spent / totalSecondsSpent) *
     100

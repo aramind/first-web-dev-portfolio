@@ -22,6 +22,8 @@ import {
   getRecordForSelectedDate,
   updateActivityRecord,
 } from "../actions/activity";
+import SummaryPage from "./SummaryPage";
+import SummaryTable from "../components/summary-table/SummaryTable";
 
 const RecordPage = () => {
   // * Global states from Context provider
@@ -316,9 +318,10 @@ const RecordPage = () => {
             <Box
               width="500px"
               height="400px"
-              sx={{ backgroundColor: "blue" }}
+              // sx={{ backgroundColor: "blue" }}
             >
-              Summary
+              {/* TODO */}
+              <SummaryTable />
             </Box>
             <Box
               width="300px"
