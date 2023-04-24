@@ -4,6 +4,9 @@ import muiTheme from "../../muiTheme";
 import SideBar from "../../components/sidebar/SideBar";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns-tz";
+import SummaryTable from "../../components/summary-table/SummaryTable";
+import ChartDisplay from "../../components/charts/ChartDisplay";
+import MiniRecord from "../../components/MiniRecord";
 // import WavingHandOutlinedIcon from "@mui/icons-material/WavingHandOutlined";
 
 const TextTypography = styled(Typography)({
@@ -21,7 +24,7 @@ const WelcomeBackPage = () => {
   // const formattedDate = format(selectedDate, "E MMM d, yyyy");
   // date selected
   const {
-    state: { selectedDate },
+    state: { selectedDate, recordForSelectedDate },
     dispatch,
   } = useValue();
   const formattedDate = format(selectedDate, "E MMM d, yyyy");
@@ -101,12 +104,13 @@ const WelcomeBackPage = () => {
             Let's make the most of our time ⏱️ and stay productive! 🚀💪💯
           </TextTypography>
         </Box>
+        <MiniRecord />
         {/* TImepicker -- summary -- chart */}
-        <Stack
+        {/* <Stack
           direction={"column"}
           marginInline="auto"
         >
-          {/* TODO:FIX -- center and enlarge this */}
+         
 
           <Box
             height={"300px"}
@@ -130,14 +134,13 @@ const WelcomeBackPage = () => {
                   display: "flex",
                   justifyContent: "left",
                   alignItems: "center",
-                  // border: "1px solid red",
+
                   px: "5px",
                   color: muiTheme.palette.primary.main,
                 }}
               >
                 <Typography variant="h5">{formattedDate}</Typography>
               </Box>
-              {/* TODO: place Date, and Date Picker */}
 
               <DatePicker
                 label={"Select Date"}
@@ -154,20 +157,17 @@ const WelcomeBackPage = () => {
               textAlign="center"
               minWidth="200px"
             >
-              {/* TODO: place Summary Table */}
-              Summary Table
+              <SummaryTable />
             </Box>
             <Box
               textAlign="center"
               minWidth="200px"
             >
-              {/* TODO: place Chart */}
-              Chart
+              {recordForSelectedDate && <ChartDisplay showSummary={false} />}
             </Box>
           </Box>
-        </Stack>
+        </Stack> */}
         <Box
-          // sx={{ border: "1px solid red" }}
           px={4}
           py={1}
           mb={4}
