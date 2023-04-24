@@ -144,11 +144,12 @@ const RecordPage = () => {
           flex={1}
           gap={2}
           alignItems="center"
-          sx={
-            {
-              // border: "1px solid red",
-            }
-          }
+          p={2}
+          m={1}
+          sx={{
+            border: "1px solid green",
+            borderRadius: "10px",
+          }}
         >
           {/* container for form fields */}
           {/* date display */}
@@ -246,7 +247,7 @@ const RecordPage = () => {
             />
           </Stack>
           {/* Progress Bar */}
-          <Box
+          {/* <Box
             width="100%"
             px={1}
             sx={{
@@ -271,7 +272,7 @@ const RecordPage = () => {
                 sx={{ height: "15px" }}
               />
             </Box>
-          </Box>
+          </Box> */}
           {/* Buttons */}
           <Stack
             px={1}
@@ -307,6 +308,7 @@ const RecordPage = () => {
         >
           {/* Summary and chart */}
           <Box
+            mb={2}
             sx={{
               // border: "1px solid blue",
               display: "flex",
@@ -336,7 +338,7 @@ const RecordPage = () => {
             </Box>
           </Box>
           {/* text info */}
-          <Stack
+          {/* <Stack
             px={1}
             my={1}
           >
@@ -347,9 +349,9 @@ const RecordPage = () => {
             <Typography variant="caption">
               Delete all records for selected date? - DELETE
             </Typography>
-          </Stack>
+          </Stack> */}
           {/* save and clear */}
-          <Stack
+          {/* <Stack
             px={1}
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
@@ -374,7 +376,33 @@ const RecordPage = () => {
             >
               Delete
             </Button>
-          </Stack>
+          </Stack> */}
+          <Box
+            width="100%"
+            px={{ xs: 2, sm: 10, md: 12, lg: 15 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              variant="body1"
+              fontSize={"1.2rem"}
+              color="primary"
+              gutterBottom
+            >
+              {hoursRemaining} hrs remaining
+            </Typography>
+            <Box sx={{ width: "100%", mr: 1 }}>
+              <LinearProgress
+                variant="determinate"
+                value={completedPercent}
+                sx={{ height: "25px" }}
+              />
+            </Box>
+          </Box>
         </Box>
       </Box>
 
