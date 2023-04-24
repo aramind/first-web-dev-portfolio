@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Typography, alpha } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import SummaryCardContent from "./SummaryCardContent";
 
 const randomBGcolors = [
@@ -21,9 +21,41 @@ const randomBGcolors = [
   "#9A031E",
 ];
 
-const SummaryCard = ({ title }) => {
+const SummaryCard = ({ title, result }) => {
   const randomColor =
     randomBGcolors[Math.floor(Math.random() * randomBGcolors.length)];
+
+  // content = [tot, ave, percent]
+  // content2 = [tot, ave, percent]
+
+  const {
+    totalSecondsPerActivity,
+    activityAverages,
+    activityPercentages,
+    totalSecondsPerActivityPrev,
+    prevActivityAverages,
+    prevActivityPercentages,
+  } = result;
+
+  // extracting the data depending on the title
+  const act = title.toLowerCase().split();
+  const total = [totalSecondsPerActivity[act] || 0];
+  const ave = [activityAverages[act] || 0];
+  const percent = [activityPercentages[act] || 0];
+  const prevTotal = [totalSecondsPerActivityPrev[act] || 0];
+  const prevAve = [prevActivityAverages[act] || 0];
+  const prevPercent = [prevActivityPercentages[act] || 0];
+
+  const current = [
+    (+total / 3600).toFixed(2),
+    (+ave / 3600).toFixed(2),
+    `${+percent}%`,
+  ];
+  const prev = [
+    (+prevTotal / 3600).toFixed(2),
+    (+prevAve / 3600).toFixed(2),
+    `${+prevPercent}%`,
+  ];
 
   return (
     <Card
@@ -45,11 +77,12 @@ const SummaryCard = ({ title }) => {
         <Typography variant="h6">{title.toUpperCase()}</Typography>
       </Box>
       <CardContent>
+        {/* tot - ave - percent for each act */}
         <SummaryCardContent
           variant="h5"
           fs="28px"
           fstyle="Prompt"
-          content={["11.0", "8.0", "32.2%"]}
+          content={current}
         />
         <Box mb={2}>
           <SummaryCardContent
@@ -66,11 +99,12 @@ const SummaryCard = ({ title }) => {
           Prev. week
         </Typography>
         <Box mb={1}>
+          {/* prev tot - ave - percent for each act  */}
           <SummaryCardContent
             variant="body1"
             fs="14px"
             ff="Prompt"
-            content={["8.0", "9.5", "22.5%"]}
+            content={prev}
           />
         </Box>
       </CardContent>

@@ -11,10 +11,10 @@ import React from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns-tz";
 import { useValue } from "../../context/ContextProvider";
-import muiTheme from "../../muiTheme";
 
-const Header = () => {
+const Header = ({ interval, setInterval }) => {
   // date selected
+
   const {
     state: { selectedDate, currentUser },
     dispatch,
@@ -107,10 +107,30 @@ const Header = () => {
               flexWrap: "wrap",
             }}
           >
-            <Button size="small">Week</Button>
-            <Button size="small">Month</Button>
-            <Button size="small">Quarter</Button>
-            <Button size="small">Year</Button>
+            <Button
+              size="small"
+              onClick={() => setInterval(7)}
+            >
+              Week
+            </Button>
+            <Button
+              size="small"
+              onClick={() => setInterval(30)}
+            >
+              Month
+            </Button>
+            <Button
+              size="small"
+              onClick={() => setInterval(120)}
+            >
+              Quarter
+            </Button>
+            <Button
+              size="small"
+              onClick={() => setInterval(365)}
+            >
+              Year
+            </Button>
           </Box>
         </CardActions>
       </Card>

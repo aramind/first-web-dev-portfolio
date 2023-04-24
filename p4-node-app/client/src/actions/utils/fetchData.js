@@ -17,7 +17,7 @@ const fetchData = async (
       throw new Error(data.message);
     }
     console.log("SAME?", data.result);
-    console.log("calling...");
+    console.log("calling fetchData...");
 
     if (data.success) {
       dispatch({

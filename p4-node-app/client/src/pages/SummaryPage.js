@@ -1,19 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Toolbar } from "@mui/material";
 import muiTheme from "../muiTheme";
 
 import Header from "../components/summary-page-components/Header";
 import SummaryCard from "../components/summary-page-components/SummaryCard";
 import { useValue } from "../context/ContextProvider";
+import { format, utcToZonedTime } from "date-fns-tz";
+import { getSummaryForInterval } from "../actions/summary";
 
 const SummaryPage = () => {
   // global states
   const {
-    state: { activityNames, recordForSelectedDate, alert, loading },
+    state: { selectedDate, currentUser, activityNames },
     dispatch,
   } = useValue();
-
+  const [interval, setInterval] = useState(7);
   // local states
+  const [result, setResult] = useState({});
+
+  useEffect(() => {
+    if (currentUser && currentUser.token) {
+      getSummaryForInterval(
+        currentUser.token,
+        { date: selectedDate, interval },
+        dispatch
+      )
+        .then((result) => {
+          setResult(result);
+          console.log("RESULT", result);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [interval, currentUser]);
+
+  console.log("RESULT", result);
+
   return (
     <Box
       // alignItems={"center"}
@@ -53,26 +76,32 @@ const SummaryPage = () => {
             justifyContent: "center",
           }}
         >
-          <Header />
+          <Header
+            interval={interval}
+            setInterval={setInterval}
+          />
           {/* </Box> */}
         </Box>
-        <Box
-          // flex={4}
-          sx={{
-            // border: "1px solid red",
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: "1rem",
-          }}
-        >
-          {activityNames.map((title) => (
-            <SummaryCard
-              key={title}
-              title={title}
-            />
-          ))}
-        </Box>
+        {Object.keys(result).length > 0 && (
+          <Box
+            // flex={4}
+            sx={{
+              // border: "1px solid red",
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "1rem",
+            }}
+          >
+            {activityNames.map((title) => (
+              <SummaryCard
+                key={title}
+                title={title}
+                result={result}
+              />
+            ))}
+          </Box>
+        )}
       </Box>
     </Box>
   );

@@ -65,6 +65,7 @@ const summaryController = {
   },
   //get summary by interval
   getSummaryInterval: async (req, res) => {
+    console.log("calling get summary");
     try {
       // get the user id from the decoded token
       const { id } = req.user;
@@ -96,6 +97,12 @@ const summaryController = {
           }
           totalSeconds += Number(act.seconds_spent);
         });
+      });
+
+      // calculate the total seconds spent on each activity
+      const totalSecondsPerActivity = {};
+      Object.entries(activityTotals).forEach(([name, seconds]) => {
+        totalSecondsPerActivity[name] = seconds;
       });
 
       console.log("CHECK1", totalSeconds);
@@ -138,6 +145,12 @@ const summaryController = {
         });
       });
 
+      // calculate the total seconds spent on each activity
+      const totalSecondsPerActivityPrev = {};
+      Object.entries(prevActivityTotals).forEach(([name, seconds]) => {
+        totalSecondsPerActivityPrev[name] = seconds;
+      });
+
       // calculate the averages
       const prevActivityAverages = {};
       Object.entries(prevActivityTotals).forEach(([name, seconds]) => {
@@ -157,15 +170,17 @@ const summaryController = {
       res.status(200).json({
         success: true,
         message: "Successfully computed",
-        summaryInterval: {
+        result: {
           startDate,
           endDate,
           totalSeconds,
+          totalSecondsPerActivity,
           activityAverages,
           activityPercentages,
           previousStartDate,
           previousEndDate,
           prevTotalSeconds,
+          totalSecondsPerActivityPrev,
           prevActivityAverages,
           prevActivityPercentages,
         },
