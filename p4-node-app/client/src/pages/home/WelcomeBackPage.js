@@ -50,6 +50,7 @@ const WelcomeBackPage = () => {
           height={{ md: "40vh" }}
           width={{ sx: "100vw", md: "80vw", lg: "60vw" }}
           backgroundColor="lightblue"
+          borderRadius="10px"
           sx={{ marginInline: "auto", my: "30px" }}
         >
           {/* TODO: put a hero image in this box */}

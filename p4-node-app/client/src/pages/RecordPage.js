@@ -69,7 +69,7 @@ const RecordPage = () => {
   }, [selectedDate, currentUser, dispatch]);
   const genArrOfDigits = (n) => {
     const arr = [];
-    for (let i = 1; i <= n; i++) {
+    for (let i = 0; i <= n; i++) {
       arr.push(i.toString());
     }
     return arr;
@@ -288,7 +288,8 @@ const RecordPage = () => {
           </Box> */}
           {/* Buttons */}
           <Stack
-            px={1}
+            marginTop={3}
+            marginBottom={2}
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
             sx={{ width: "100%" }}
@@ -304,6 +305,7 @@ const RecordPage = () => {
               fullWidth
               variant="contained"
               onClick={() => handleAddAndSubtract("sub")}
+              sx={{ paddingY: "1rem" }}
             >
               Subtract
             </Button>
