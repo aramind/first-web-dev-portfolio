@@ -43,7 +43,7 @@ function getActivityPercentage(record, activityName) {
   return {
     name: activity.name,
     seconds_spent: activity.seconds_spent,
-    percentage: `${percentage}%`,
+    percentage: isNaN(percentage) ? 0 : `${percentage}%`,
   };
 }
 

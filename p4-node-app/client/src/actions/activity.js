@@ -72,3 +72,21 @@ export const removeRecordForSelectedDate = async (
   console.log("FROM RRFSD", result);
   return result;
 };
+
+export const resetRecordForSelectedDate = async (token, { date }, dispatch) => {
+  dispatch({ type: "START_LOADING" });
+  const timezone = "Asia/Manila";
+  const zonedDate = utcToZonedTime(date, timezone);
+  const label = format(zonedDate, "yyyy-MM-dd");
+  const result = fetchData(
+    {
+      url: `${url}/${label}`,
+      method: "PUT",
+      token: token,
+    },
+    dispatch
+  );
+  dispatch({ type: "END_LOADING" });
+  console.log("FROM rRFSD", result);
+  return result;
+};

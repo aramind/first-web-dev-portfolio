@@ -8,24 +8,24 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-const ConfirmationDialog = ({ open, handleClose, handleConfirm }) => {
+const ConfirmationResetDialog = ({ open, handleClose, handleConfirm }) => {
   return (
     <Dialog
       open={open}
       onClose={handleClose}
     >
-      <DialogTitle>Confirm deletion</DialogTitle>
+      <DialogTitle>Confirm Reset</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Are you sure you want to delete this record?
+          Are you sure you want to reset records for the selected date?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleConfirm}>Delete</Button>
+        <Button onClick={handleConfirm}>Reset</Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default ConfirmationDialog;
+export default ConfirmationResetDialog;

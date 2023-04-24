@@ -180,7 +180,7 @@ const recordController = {
     console.log("called UPDATE /:label from FE");
     try {
       // extract the label, and activities from the body
-      const { label, activities } = req.body;
+      const { label } = req.body;
       // extract the owner(user id) from the token
       const owner = req.user.id;
 
@@ -218,6 +218,32 @@ const recordController = {
           success: true,
           message: "New record saved",
           result: saveRecord,
+        });
+      }
+    } catch (error) {
+      handleError(res, error);
+    }
+  },
+
+  resetRecord: async (req, res) => {
+    try {
+      console.log("called PUT /:label from FE");
+      const { label } = req.params;
+      const owner = req.user.id;
+
+      // Find existing record for the given label
+      const existingRecord = await Record.findOne({ label, owner });
+
+      if (existingRecord) {
+        existingRecord.activities.forEach((activity) => {
+          activity.seconds_spent = 0;
+        });
+        existingRecord.last_modified = new Date();
+        const updatedRecord = await existingRecord.save();
+        return res.status(200).json({
+          success: true,
+          message: "Reset successful",
+          result: updatedRecord,
         });
       }
     } catch (error) {

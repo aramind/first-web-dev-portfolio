@@ -21,13 +21,15 @@ import { useValue } from "../context/ContextProvider";
 import {
   getRecordForSelectedDate,
   removeRecordForSelectedDate,
+  resetRecordForSelectedDate,
   updateActivityRecord,
 } from "../actions/activity";
 import SummaryPage from "./SummaryPage";
 import SummaryTable from "../components/summary-table/SummaryTable";
 import ChartDisplay from "../components/charts/ChartDisplay";
 import getTotalTimeInSeconds from "../util-functions/getTotalTimeInSeconds";
-import ConfirmationDialog from "../components/ConfirmationDialog";
+import ConfirmationDeleteDialog from "../components/ConfirmationDeleteDialog";
+import ConfirmationResetDialog from "../components/CofirmationResetDialog";
 
 const RecordPage = () => {
   // * Global states from Context provider
@@ -43,7 +45,8 @@ const RecordPage = () => {
   // hrs and minutes
   const [hrs, setHrs] = useState(null);
   const [mins, setMins] = useState(null);
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openDialogDelete, setOpenDialogDelete] = useState(false);
+  const [openDialogReset, setOpenDialogReset] = useState(false);
 
   useEffect(() => {
     // console.log(selectedDate);
@@ -103,12 +106,13 @@ const RecordPage = () => {
   // handlers
 
   const handleDelete = () => {
-    setOpenDialog(true);
+    setOpenDialogDelete(true);
   };
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
+  const handleCloseDialogDelete = () => {
+    setOpenDialogDelete(false);
   };
+
   const handleConfirmDelete = () => {
     console.log("FROM STATE", recordForSelectedDate);
     console.log(selectedDate);
@@ -117,7 +121,26 @@ const RecordPage = () => {
     };
     const token = currentUser.token;
     removeRecordForSelectedDate(token, content, dispatch);
-    handleCloseDialog();
+    handleCloseDialogDelete();
+  };
+
+  // RESET
+  const handleReset = () => {
+    setOpenDialogReset(true);
+  };
+
+  const handleCloseDialogReset = () => {
+    setOpenDialogReset(false);
+  };
+  const handleConfirmReset = () => {
+    console.log("FROM STATE", recordForSelectedDate);
+    console.log(selectedDate);
+    let content = {
+      date: selectedDate,
+    };
+    const token = currentUser.token;
+    resetRecordForSelectedDate(token, content, dispatch);
+    handleCloseDialogReset();
   };
 
   const handleAddAndSubtract = async (operation) => {
@@ -153,9 +176,6 @@ const RecordPage = () => {
       }}
     >
       <Toolbar sx={{ marginBottom: "10px" }} />
-      {/* TODO: to remove once final na */}
-      <Typography>Record</Typography>
-      {/* for main content */}
       <Box
         width="100%"
         gap="1rem"
@@ -415,15 +435,23 @@ const RecordPage = () => {
               spacing={2}
               sx={{ width: "100%" }}
             >
-              <Button
-                fullWidth
-                variant="contained"
-                size="large"
-                endIcon={<RestartAltOutlined />}
-                sx={{ py: "1rem" }}
-              >
-                Reset
-              </Button>
+              <>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  size="large"
+                  endIcon={<RestartAltOutlined />}
+                  sx={{ py: "1rem" }}
+                  onClick={handleReset}
+                >
+                  Reset
+                </Button>
+                <ConfirmationResetDialog
+                  open={openDialogReset}
+                  handleClose={handleCloseDialogReset}
+                  handleConfirm={handleConfirmReset}
+                />
+              </>
               <>
                 <Button
                   fullWidth
@@ -435,9 +463,9 @@ const RecordPage = () => {
                 >
                   Delete Record
                 </Button>
-                <ConfirmationDialog
-                  open={openDialog}
-                  handleClose={handleCloseDialog}
+                <ConfirmationDeleteDialog
+                  open={openDialogDelete}
+                  handleClose={handleCloseDialogDelete}
                   handleConfirm={handleConfirmDelete}
                 />
               </>
