@@ -60,7 +60,7 @@ const RecordPage = () => {
       const token = currentUser.token;
       getRecordForSelectedDate(token, content, dispatch);
     }
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     async function retrieve() {

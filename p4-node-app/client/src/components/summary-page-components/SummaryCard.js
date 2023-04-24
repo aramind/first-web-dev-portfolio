@@ -47,13 +47,13 @@ const SummaryCard = ({ title, result }) => {
   const prevPercent = [prevActivityPercentages[act] || 0];
 
   const current = [
-    (+total / 3600).toFixed(2),
-    (+ave / 3600).toFixed(2),
+    (+total / 3600).toFixed(1),
+    (+ave / 3600).toFixed(1),
     `${+percent}%`,
   ];
   const prev = [
-    (+prevTotal / 3600).toFixed(2),
-    (+prevAve / 3600).toFixed(2),
+    (+prevTotal / 3600).toFixed(1),
+    (+prevAve / 3600).toFixed(1),
     `${+prevPercent}%`,
   ];
 
