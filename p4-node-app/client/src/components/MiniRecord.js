@@ -113,7 +113,7 @@ const MiniRecord = () => {
       display={"flex"}
       flexDirection={"column"}
       sx={{
-        margin: "0 auto",
+        margin: "20px auto",
         // border: "1px solid green",
         [muiTheme.breakpoints.up("md")]: {
           width: { md: "95%", lg: "90%", xl: "50%" },
@@ -121,9 +121,16 @@ const MiniRecord = () => {
         },
       }}
     >
-      <Toolbar sx={{ marginBottom: "10px" }} />
-      {/* TODO: to remove once final na */}
-      <Typography>Record</Typography>
+      <Box
+        marginBottom="1rem"
+        // sx={{ border: "1px solid red" }}
+      >
+        <LinearProgress
+          variant="determinate"
+          value={completedPercent}
+          sx={{ height: "3px", width: "105%", marginLeft: "-20px" }}
+        />
+      </Box>
       {/* for main content */}
       <Box
         width="100%"
@@ -185,7 +192,7 @@ const MiniRecord = () => {
               maxDate={new Date()}
               inputFormat="MM/dd/yyyy"
               timeZone="Asia/Manila"
-              autoFocus
+              // autoFocus
             />
           </Box>
         </Stack>
@@ -259,6 +266,16 @@ const MiniRecord = () => {
             </Box>
           </Box>
         </Box>
+      </Box>
+      <Box
+        marginTop="2rem"
+        // sx={{ border: "1px solid red" }}
+      >
+        <LinearProgress
+          variant="determinate"
+          value={completedPercent}
+          sx={{ height: "3px", width: "105%", marginLeft: "-20px" }}
+        />
       </Box>
     </Box>
   );
