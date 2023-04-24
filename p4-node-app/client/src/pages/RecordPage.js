@@ -50,6 +50,8 @@ const RecordPage = () => {
 
   useEffect(() => {
     // console.log(selectedDate);
+    window.scrollTo(0, 0);
+
     let content = {
       date: selectedDate,
     };

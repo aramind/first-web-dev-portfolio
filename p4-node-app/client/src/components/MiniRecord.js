@@ -25,6 +25,7 @@ import {
 import SummaryTable from "../components/summary-table/SummaryTable";
 import ChartDisplay from "../components/charts/ChartDisplay";
 import getTotalTimeInSeconds from "../util-functions/getTotalTimeInSeconds";
+import { useNavigate } from "react-router-dom";
 
 const MiniRecord = () => {
   // * Global states from Context provider
@@ -40,7 +41,7 @@ const MiniRecord = () => {
   // hrs and minutes
   const [hrs, setHrs] = useState(null);
   const [mins, setMins] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     // console.log(selectedDate);
     let content = {
@@ -236,7 +237,26 @@ const MiniRecord = () => {
                 // backgroundColor: "blue",
               }}
             >
-              {recordForSelectedDate && <ChartDisplay showSummary={false} />}
+              {recordForSelectedDate ? (
+                <ChartDisplay showSummary={false} />
+              ) : (
+                <Box
+                  height={"100%"}
+                  width="100%"
+                  // sx={{ border: "1px solid red" }}
+                >
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    sx={{ marginTop: "-2rem", height: "5rem" }}
+                    onClick={() => {
+                      navigate("/record");
+                    }}
+                  >
+                    Add Record
+                  </Button>
+                </Box>
+              )}
             </Box>
           </Box>
           <Box

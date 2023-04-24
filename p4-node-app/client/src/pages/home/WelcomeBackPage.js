@@ -50,15 +50,15 @@ const WelcomeBackPage = () => {
           height={{ md: "40vh" }}
           width={{ sx: "100vw", md: "80vw", lg: "60vw" }}
           backgroundColor="lightblue"
-          borderRadius="10px"
-          sx={{ marginInline: "auto", my: "30px" }}
+          sx={{ marginInline: "auto", my: "10px" }}
         >
           {/* TODO: put a hero image in this box */}
         </Box>
         <Box px={4}>
           <TextTypography
             // textAlign={"center"}
-            fontSize="2rem"
+            fontSize="3rem"
+            color="primary.main"
           >
             Hi {currentUser.username}! 👋
           </TextTypography>
