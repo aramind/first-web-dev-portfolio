@@ -298,6 +298,7 @@ const RecordPage = () => {
               fullWidth
               variant="contained"
               onClick={() => handleAddAndSubtract("add")}
+              sx={{ paddingY: "1rem" }}
             >
               Add
             </Button>
@@ -352,49 +353,9 @@ const RecordPage = () => {
               {recordForSelectedDate && <ChartDisplay showSummary={false} />}
             </Box>
           </Box>
-          {/* text info */}
-          {/* <Stack
-            px={1}
-            my={1}
-          >
-            <Typography variant="caption">
-              Reset all entries for selected date to zero? - RESET
-            </Typography>
-
-            <Typography variant="caption">
-              Delete all records for selected date? - DELETE
-            </Typography>
-          </Stack> */}
-          {/* save and clear */}
-          {/* <Stack
-            px={1}
-            direction={{ xs: "column", sm: "row" }}
-            spacing={2}
-            sx={{ width: "100%" }}
-          >
-            <Button
-              fullWidth
-              variant="contained"
-              size="large"
-              endIcon={<RestartAltOutlined />}
-              sx={{ py: "1rem" }}
-            >
-              Reset
-            </Button>
-            <Button
-              fullWidth
-              variant="contained"
-              size="large"
-              endIcon={<DeleteOutlineOutlined />}
-              sx={{ py: "1rem" }}
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
-          </Stack> */}
           <Box
             width="100%"
-            px={{ xs: 2, sm: 10, md: 12, lg: 15 }}
+            px={5}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -418,9 +379,61 @@ const RecordPage = () => {
               />
             </Box>
           </Box>
+          {/* text info */}
+          <Box px={{ xs: "5px", sm: "10px", md: "2rem" }}>
+            <Stack
+              px={1}
+              my={1}
+            >
+              <Typography variant="caption">
+                Reset all entries for selected date to zero? - RESET
+              </Typography>
+
+              <Typography variant="caption">
+                Delete all records for selected date? - DELETE
+              </Typography>
+            </Stack>
+            {/* save and clear */}
+            <Stack
+              px={1}
+              direction={{ xs: "column", sm: "row" }}
+              spacing={2}
+              sx={{ width: "100%" }}
+            >
+              <Button
+                fullWidth
+                variant="contained"
+                size="large"
+                endIcon={<RestartAltOutlined />}
+                sx={{ py: "1rem" }}
+              >
+                Reset
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                size="large"
+                endIcon={<DeleteOutlineOutlined />}
+                sx={{ py: "1rem" }}
+                onClick={handleDelete}
+              >
+                Delete
+              </Button>
+            </Stack>
+          </Box>
         </Box>
       </Box>
-
+      <Box
+        marginY="1rem"
+        px="8px"
+        // sx={{ border: "1px solid red" }}
+      >
+        <LinearProgress
+          variant="determinate"
+          value={completedPercent}
+          sx={{ height: "3px", width: "100%" }}
+        />
+      </Box>
       {/* END */}
       <Box
         // sx={{ border: "1px solid red" }}
