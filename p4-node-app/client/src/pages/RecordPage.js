@@ -25,6 +25,7 @@ import {
 import SummaryPage from "./SummaryPage";
 import SummaryTable from "../components/summary-table/SummaryTable";
 import ChartDisplay from "../components/charts/ChartDisplay";
+import getTotalTimeInSeconds from "../util-functions/getTotalTimeInSeconds";
 
 const RecordPage = () => {
   // * Global states from Context provider
@@ -42,11 +43,11 @@ const RecordPage = () => {
   const [mins, setMins] = useState(null);
 
   useEffect(() => {
-    console.log(selectedDate);
+    // console.log(selectedDate);
     let content = {
       date: selectedDate,
     };
-    console.log(currentUser);
+    // console.log(currentUser);
     if (currentUser) {
       const token = currentUser.token;
       getRecordForSelectedDate(token, content, dispatch);
@@ -55,20 +56,17 @@ const RecordPage = () => {
 
   useEffect(() => {
     async function retrieve() {
-      console.log(selectedDate);
       let content = {
         date: selectedDate,
       };
       if (currentUser) {
         const token = currentUser.token;
         let record = await getRecordForSelectedDate(token, content, dispatch);
-        console.log("RECREC", record);
         dispatch({ type: "UPDATE_RECORDFORSELECTEDDATE", payload: record });
       }
     }
     retrieve();
   }, [selectedDate, currentUser, dispatch]);
-
   const genArrOfDigits = (n) => {
     const arr = [];
     for (let i = 1; i <= n; i++) {
@@ -81,7 +79,22 @@ const RecordPage = () => {
   // const minsArray = genArrOfDigits(60);
 
   // for progress bar
-  let hoursRemaining = 23;
+  let totalTimeInSeconds = recordForSelectedDate
+    ? getTotalTimeInSeconds(recordForSelectedDate)
+    : 0;
+  let hoursRemaining = 24 - Math.floor(totalTimeInSeconds / 3600);
+  let minutesRemaining = Math.round((totalTimeInSeconds % 3600) / 60);
+
+  let remainingTimeString = "";
+  if (hoursRemaining > 0) {
+    remainingTimeString = hoursRemaining + " hrs";
+  }
+  if (minutesRemaining > 0) {
+    remainingTimeString += " " + minutesRemaining + " mins";
+  }
+
+  console.log("TIME REMAINING:", remainingTimeString);
+
   const completedPercent = ((24 - hoursRemaining) / 24) * 100;
   // console.log(selectedActivity);
   // console.log(hrs);
@@ -393,7 +406,7 @@ const RecordPage = () => {
               color="primary"
               gutterBottom
             >
-              {hoursRemaining} hrs remaining
+              {remainingTimeString} remaining
             </Typography>
             <Box sx={{ width: "100%", mr: 1 }}>
               <LinearProgress
