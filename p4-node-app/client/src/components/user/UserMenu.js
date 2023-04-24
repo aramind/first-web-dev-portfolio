@@ -4,6 +4,7 @@ import React from "react";
 import { useValue } from "../../context/ContextProvider";
 import useCheckToken from "../../hooks/useCheckToken";
 import Profile from "./Profile";
+import { useNavigate } from "react-router-dom";
 
 const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   useCheckToken();
@@ -12,11 +13,14 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
     dispatch,
   } = useValue();
 
+  let navigate = useNavigate();
+
   const handleCloseUserMenu = () => {
     setAnchorUserMenu(null);
   };
 
   const handleLogout = () => {
+    navigate("/");
     dispatch({ type: "UPDATE_USER", payload: null });
   };
 
