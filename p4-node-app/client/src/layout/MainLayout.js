@@ -14,7 +14,7 @@ const MainLayout = () => {
   } = useValue();
   return (
     <>
-      {notYetModal && <NotYetModal title={"Update Record"} />}
+      {notYetModal.open && <NotYetModal title={"Update Record"} />}
       <NavigationSpeedDial />
       <Loading />
       <Notification />

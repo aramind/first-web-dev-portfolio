@@ -51,7 +51,10 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            dispatch({ type: "OPEN_NOTYET_MODAL" });
+            dispatch({
+              type: "UPDATE_NOTYET_MODAL",
+              payload: { open: true, title: "User Settings" },
+            });
           }}
         >
           <ListItemIcon>

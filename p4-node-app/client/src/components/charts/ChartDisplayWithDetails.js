@@ -218,7 +218,10 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
                     variant="contained"
                     size="small"
                     onClick={() => {
-                      dispatch({ type: "OPEN_NOTYET_MODAL" });
+                      dispatch({
+                        type: "UPDATE_NOTYET_MODAL",
+                        payload: { open: true, title: "Update Record" },
+                      });
                     }}
                   >
                     Update Record

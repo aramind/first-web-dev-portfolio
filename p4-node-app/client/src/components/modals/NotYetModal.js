@@ -13,7 +13,7 @@ import {
 import { Close } from "@mui/icons-material";
 import gcashLogo from "../../resources/images/gcash.png";
 
-const NotYetModal = ({ title }) => {
+const NotYetModal = () => {
   const {
     state: { notYetModal },
     dispatch,
@@ -21,21 +21,22 @@ const NotYetModal = ({ title }) => {
 
   const handleClose = () => {
     dispatch({
-      type: "CLOSE_NOTYET_MODAL",
+      type: "UPDATE_NOTYET_MODAL",
+      payload: { open: false, title: "Update Record" },
     });
   };
 
   // console.log(profile.open);
   return (
     <Dialog
-      open={notYetModal}
+      open={notYetModal.open}
       onClose={handleClose}
       sx={{
         padding: "2rem",
       }}
     >
       <DialogTitle>
-        {title}
+        {notYetModal.title}
         <IconButton
           sx={{
             position: "absolute",

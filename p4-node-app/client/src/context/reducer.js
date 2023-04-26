@@ -44,8 +44,8 @@ const reducer = (state, action) => {
       return { ...state, addRecordModal: false };
 
     // for add record modal
-    case "OPEN_NOTYET_MODAL":
-      return { ...state, notYetModal: true };
+    case "UPDATE_NOTYET_MODAL":
+      return { ...state, notYetModal: action.payload };
     // for add record modal
     case "CLOSE_NOTYET_MODAL":
       return { ...state, notYetModal: false };
