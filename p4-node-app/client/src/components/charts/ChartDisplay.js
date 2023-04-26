@@ -28,7 +28,7 @@ const ChartDisplay = ({ onClose, showSummary, record }) => {
 
   // converts the format of the data fetched  to the format
   // the chart needs
-  console.log("in Cdisplay", record.activities);
+  // console.log("in Cdisplay", record.activities);
   record.activities.forEach((activity) => {
     const { name, seconds_spent } = activity;
     transformedObject[name] = Number(seconds_spent) / 3600;

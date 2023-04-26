@@ -116,7 +116,6 @@ const RecordPage = () => {
   };
 
   const handleConfirmDelete = () => {
-    console.log("FROM STATE", recordForSelectedDate);
     console.log(selectedDate);
     let content = {
       date: selectedDate,
@@ -136,8 +135,6 @@ const RecordPage = () => {
     setOpenDialogReset(false);
   };
   const handleConfirmReset = () => {
-    console.log("FROM STATE", recordForSelectedDate);
-    console.log(selectedDate);
     let content = {
       date: selectedDate,
     };

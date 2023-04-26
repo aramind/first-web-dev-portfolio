@@ -119,3 +119,97 @@ export const updateProfile = async (currentUser, updatedFields, dispatch) => {
 
   dispatch({ type: "END_LOADING" });
 };
+
+// Deactivate user
+export const deactivateUser = async (currentUser, content, dispatch) => {
+  dispatch({ type: "START_LOADING" });
+
+  const token = currentUser.token;
+  console.log("TOKKK", token);
+  try {
+    const result = await fetchData(
+      {
+        url: url + "/deactivate",
+        method: "DELETE",
+        body: null,
+        token: currentUser.token,
+      },
+      dispatch
+    );
+
+    if (result) {
+      console.log("DEACTIVATED NA NGA BA? isActive=", result.isActive);
+      const updatedUser = { ...currentUser, isActive: result.isActive };
+      dispatch({
+        type: "UPDATE_USER",
+        payload: updatedUser,
+      });
+      dispatch({
+        type: "UPDATE_ALERT",
+        payload: {
+          open: true,
+          severity: "success",
+          message: result.message,
+        },
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: "UPDATE_ALERT",
+      payload: {
+        open: true,
+        severity: "error",
+        message: error.message,
+      },
+    });
+    console.log(error);
+  }
+
+  dispatch({ type: "END_LOADING" });
+};
+
+// Deactivate user
+export const reactivateUser = async (currentUser, content, dispatch) => {
+  dispatch({ type: "START_LOADING" });
+
+  let body = currentUser;
+  try {
+    const result = await fetchData(
+      {
+        url: url + "/reactivate",
+        method: "PATCH",
+        body,
+        token: currentUser.token,
+      },
+      dispatch
+    );
+
+    if (result) {
+      const updatedUser = { ...currentUser, ...result.isActive };
+      dispatch({
+        type: "UPDATE_USER",
+        payload: updatedUser,
+      });
+      dispatch({
+        type: "UPDATE_ALERT",
+        payload: {
+          open: true,
+          severity: "success",
+          message: result.message,
+        },
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: "UPDATE_ALERT",
+      payload: {
+        open: true,
+        severity: "error",
+        message: error.message,
+      },
+    });
+    console.log(error);
+  }
+
+  dispatch({ type: "END_LOADING" });
+};

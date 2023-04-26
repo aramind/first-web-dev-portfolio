@@ -6,5 +6,8 @@ const auth = require("../middleware/auth");
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.patch("/update-profile", auth, userController.updateProfile);
+// SOFT DELETION
+router.delete("/deactivate", auth, userController.deactivateUser);
+router.patch("/reactivate", auth, userController.reactivateUser);
 
 module.exports = router;

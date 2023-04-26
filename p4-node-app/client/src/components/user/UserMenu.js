@@ -56,8 +56,8 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
         <MenuItem
           onClick={() => {
             dispatch({
-              type: "UPDATE_NOTYET_MODAL",
-              payload: { open: true, title: "User Settings" },
+              type: "TOGGLE_USER_SETTINGS_MODAL",
+              payload: { open: true },
             });
           }}
         >

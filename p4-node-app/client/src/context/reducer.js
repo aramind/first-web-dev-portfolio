@@ -59,6 +59,13 @@ const reducer = (state, action) => {
         ...state,
         closingModalIsOpen: action.payload,
       };
+    // closing modal
+
+    case "TOGGLE_USER_SETTINGS_MODAL":
+      return {
+        ...state,
+        userSettingsModal: action.payload,
+      };
 
     default:
       throw new Error("No matched action");

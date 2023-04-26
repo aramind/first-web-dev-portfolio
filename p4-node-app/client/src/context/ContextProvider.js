@@ -14,6 +14,7 @@ const initialState = {
   recordForSelectedDate: null,
   addRecordModal: false,
   closingModalIsOpen: { open: false },
+  userSettingsModal: { open: true },
   activityNames: [
     "sleep",
     "work",

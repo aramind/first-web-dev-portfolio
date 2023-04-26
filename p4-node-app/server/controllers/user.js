@@ -52,7 +52,7 @@ const userController = {
       });
       const { _id: id, photoURL } = user;
       const token = jwt.sign(
-        { id, name, username, photoURL },
+        { id, name, username, photoURL, isActive },
         process.env.JWT_SECRET,
         {
           expiresIn: "1h",
@@ -60,7 +60,15 @@ const userController = {
       );
       res.status(201).json({
         success: true,
-        result: { id, name, username, email: user.email, photoURL, token },
+        result: {
+          id,
+          name,
+          username,
+          email: user.email,
+          photoURL,
+          token,
+          isActive,
+        },
       });
     } catch (error) {
       handleError(res, error);
@@ -96,9 +104,9 @@ const userController = {
           message: "Invalid credentials",
         });
       } else {
-        const { _id: id, name, username, photoURL } = existedUser;
+        const { _id: id, name, username, photoURL, isActive } = existedUser;
         const token = jwt.sign(
-          { id, name, username, photoURL },
+          { id, name, username, photoURL, isActive },
           process.env.JWT_SECRET,
           {
             expiresIn: "1h",
@@ -114,6 +122,7 @@ const userController = {
             email: emailLowerCase,
             photoURL,
             token,
+            isActive,
           },
         });
       }
@@ -134,7 +143,7 @@ const userController = {
       const { _id: id, name, username, photoURL } = updatedUser;
 
       const token = jwt.sign(
-        { id, name, username, photoURL },
+        { id, name, username, photoURL, isActive },
         process.env.JWT_SECRET,
         {
           expiresIn: "1h",
@@ -143,6 +152,63 @@ const userController = {
       res
         .status(200)
         .json({ success: true, result: { name, username, photoURL, token } });
+    } catch (error) {
+      handleError(res, error);
+    }
+  },
+  // DEACTIVATE
+  deactivateUser: async (req, res) => {
+    console.log("FROM CONTROLLER", req);
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.user.id,
+        { ...req.body, isActive: false },
+        {
+          new: true,
+        }
+      );
+      const { _id: id, name, username, photoURL, isActive } = updatedUser;
+
+      const token = jwt.sign(
+        { id, name, username, photoURL, isActive },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
+      res.status(200).json({
+        success: true,
+        message: "Account successfully deactivated",
+        result: { name, username, photoURL, token, isActive },
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  },
+  // REACTIVATE
+  reactivateUser: async (req, res) => {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.user.id,
+        { ...req.body, isActive: true },
+        {
+          new: true,
+        }
+      );
+      const { _id: id, name, username, photoURL, isActive } = updatedUser;
+
+      const token = jwt.sign(
+        { id, name, username, photoURL, isActive },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
+      res.status(200).json({
+        success: true,
+        message: "Account successfully reactivated",
+        result: { name, username, photoURL, token, isActive },
+      });
     } catch (error) {
       handleError(res, error);
     }

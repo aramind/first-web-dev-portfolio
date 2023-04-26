@@ -1,18 +1,14 @@
 import React from "react";
 import { useValue } from "../../context/ContextProvider";
 import {
-  Box,
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Divider,
   IconButton,
-  Link,
   Typography,
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
-import gcashLogo from "../../resources/images/gcash.png";
 
 const NotYetModal = () => {
   const {

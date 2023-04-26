@@ -14,7 +14,6 @@
 // }
 
 function getActivityPercentage(record, activityName) {
-  console.log("HEHE", record);
   const activity = record.activities.find(
     (activity) => activity.name === activityName
   );

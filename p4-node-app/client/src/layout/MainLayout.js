@@ -8,16 +8,18 @@ import NavigationSpeedDial from "../components/speedDials/NavigationSpeedDial";
 import { useValue } from "../context/ContextProvider";
 import NotYetModal from "../components/modals/NotYetModal";
 import ClosingModal from "../components/modals/ClosingModal";
+import UserSettingsModal from "../components/modals/UserSettingsModal";
 
 const MainLayout = () => {
   const {
-    state: { notYetModal, currentUser, closingModalIsOpen },
+    state: { notYetModal, currentUser, closingModalIsOpen, userSettingsModal },
   } = useValue();
   return (
     <>
       {closingModalIsOpen.open && <ClosingModal />}
       {notYetModal.open && <NotYetModal title={"Update Record"} />}
       {currentUser && <NavigationSpeedDial />}
+      {userSettingsModal.open && <UserSettingsModal />}
       <Loading />
       <Notification />
       <Login />
