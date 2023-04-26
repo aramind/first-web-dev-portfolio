@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import ConfirmDeactivateDialog from "../confirmDialogs/ConfirmDeactivateDialog";
-import { deactivateUser } from "../../actions/user";
+import { deactivateUser, reactivateUser } from "../../actions/user";
 
 const UserSettingsModal = () => {
   const {
@@ -46,7 +46,11 @@ const UserSettingsModal = () => {
   const handleConfirmDeactivate = () => {
     let content = {};
     try {
-      deactivateUser(currentUser, content, dispatch);
+      if (currentUser.isActive) {
+        deactivateUser(currentUser, content, dispatch);
+      } else {
+        reactivateUser(currentUser, content, dispatch);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -82,7 +86,7 @@ const UserSettingsModal = () => {
           variant="outlined"
           onClick={handleDeactivate}
         >
-          Deactivate Account
+          {currentUser.isActive ? "Deactivate Account" : "Reactivate Account"}
         </Button>
         <ConfirmDeactivateDialog
           open={openDialogDeactivate}

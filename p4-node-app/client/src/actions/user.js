@@ -124,8 +124,6 @@ export const updateProfile = async (currentUser, updatedFields, dispatch) => {
 export const deactivateUser = async (currentUser, content, dispatch) => {
   dispatch({ type: "START_LOADING" });
 
-  const token = currentUser.token;
-  console.log("TOKKK", token);
   try {
     const result = await fetchData(
       {
@@ -138,7 +136,7 @@ export const deactivateUser = async (currentUser, content, dispatch) => {
     );
 
     if (result) {
-      console.log("DEACTIVATED NA NGA BA? isActive=", result.isActive);
+      // console.log("DEACTIVATED NA NGA BA? isActive=", result.isActive);
       const updatedUser = { ...currentUser, isActive: result.isActive };
       dispatch({
         type: "UPDATE_USER",
@@ -172,20 +170,19 @@ export const deactivateUser = async (currentUser, content, dispatch) => {
 export const reactivateUser = async (currentUser, content, dispatch) => {
   dispatch({ type: "START_LOADING" });
 
-  let body = currentUser;
   try {
     const result = await fetchData(
       {
         url: url + "/reactivate",
         method: "PATCH",
-        body,
+        body: null,
         token: currentUser.token,
       },
       dispatch
     );
 
     if (result) {
-      const updatedUser = { ...currentUser, ...result.isActive };
+      const updatedUser = { ...currentUser, isActive: result.isActive };
       dispatch({
         type: "UPDATE_USER",
         payload: updatedUser,
