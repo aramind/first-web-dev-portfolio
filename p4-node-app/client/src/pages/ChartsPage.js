@@ -79,8 +79,14 @@ const ChartsPage = () => {
           </Box>
         </>
       </Box>
-      <Box mt={2}>
-        <SideBar />
+      <Box
+        // sx={{ border: "1px solid red" }}
+        px={4}
+        py={1}
+        mb={4}
+      >
+        <Typography mb={1}>What to do next?</Typography>
+        <SideBar show={[1, 1, null, 1]} />
       </Box>
     </Box>
   );

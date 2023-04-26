@@ -2,30 +2,43 @@ import { List } from "@mui/material";
 import React from "react";
 import {
   AddCircleOutlineOutlined,
-  MenuBookOutlined,
+  HomeOutlined,
   QueryStatsOutlined,
   SummarizeOutlined,
 } from "@mui/icons-material";
 import SideItem from "./SideItem";
 
-const SideBar = () => {
+const SideBar = ({ show }) => {
   return (
     <List>
-      <SideItem
-        icon={<AddCircleOutlineOutlined />}
-        text="Update daily record"
-        to="/record"
-      />
-      <SideItem
-        icon={<QueryStatsOutlined />}
-        text="Compare charts and see trends"
-        to="/charts"
-      />
-      <SideItem
-        icon={<SummarizeOutlined />}
-        text="View summaries"
-        to="/summary"
-      />
+      {show[0] && (
+        <SideItem
+          icon={<HomeOutlined />}
+          text="Go back to home page"
+          to="/"
+        />
+      )}
+      {show[1] && (
+        <SideItem
+          icon={<AddCircleOutlineOutlined />}
+          text="Update daily record"
+          to="/record"
+        />
+      )}
+      {show[2] && (
+        <SideItem
+          icon={<QueryStatsOutlined />}
+          text="Compare charts and see trends"
+          to="/charts"
+        />
+      )}
+      {show[3] && (
+        <SideItem
+          icon={<SummarizeOutlined />}
+          text="View summaries"
+          to="/summary"
+        />
+      )}
     </List>
   );
 };

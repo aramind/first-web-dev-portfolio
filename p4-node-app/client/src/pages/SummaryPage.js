@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Toolbar } from "@mui/material";
+import { Box, Toolbar, Typography } from "@mui/material";
 import muiTheme from "../muiTheme";
 
 import Header from "../components/summary-page-components/Header";
@@ -7,6 +7,7 @@ import SummaryCard from "../components/summary-page-components/SummaryCard";
 import { useValue } from "../context/ContextProvider";
 import { format, utcToZonedTime } from "date-fns-tz";
 import { getSummaryForInterval } from "../actions/summary";
+import SideBar from "../components/sidebar/SideBar";
 
 const SummaryPage = () => {
   // global states
@@ -102,6 +103,15 @@ const SummaryPage = () => {
             ))}
           </Box>
         )}
+      </Box>
+      <Box
+        // sx={{ border: "1px solid red" }}
+        px={4}
+        py={1}
+        mb={4}
+      >
+        <Typography mb={1}>What to do next?</Typography>
+        <SideBar show={[1, 1, 1, null]} />
       </Box>
     </Box>
   );

@@ -188,7 +188,7 @@ const WelcomeBackPage = () => {
           mb={4}
         >
           <Typography mb={1}>What to do next?</Typography>
-          <SideBar />
+          <SideBar show={[null, 1, 1, 1]} />
         </Box>
       </Stack>
     </Box>

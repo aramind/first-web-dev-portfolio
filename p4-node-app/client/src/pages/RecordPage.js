@@ -502,7 +502,7 @@ const RecordPage = () => {
         mb={4}
       >
         <Typography mb={1}>What to do next?</Typography>
-        <SideBar />
+        <SideBar show={[1, null, 1, 1]} />
       </Box>
     </Box>
   );
