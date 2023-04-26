@@ -9,12 +9,18 @@ import ChartDisplay from "../../components/charts/ChartDisplay";
 import MiniRecord from "../../components/MiniRecord";
 // import WavingHandOutlinedIcon from "@mui/icons-material/WavingHandOutlined";
 // hero images
+import heroImage1 from "../../resources/images/hero/hero-image-1.webp";
+import heroImage2 from "../../resources/images/hero/hero-image-2.webp";
+import heroImage3 from "../../resources/images/hero/hero-image-3.png";
 
 const TextTypography = styled(Typography)({
   // textAlign: "center",
   fontFamily: "Prompt",
   padding: "0.1rem 0",
 });
+
+const heroImages = [heroImage1, heroImage2, heroImage3];
+
 const WelcomeBackPage = () => {
   const {
     state: { currentUser },
@@ -47,11 +53,18 @@ const WelcomeBackPage = () => {
 
       <Stack direction={"column"}>
         <Box
-          minHeight={"20vh"}
-          height={{ md: "40vh" }}
-          width={{ sx: "100vw", md: "80vw", lg: "60vw" }}
+          height={{ md: "50vh" }}
+          width={{ md: "80vw", lg: "60vw" }}
           backgroundColor="lightblue"
-          sx={{ marginInline: "auto", my: "10px" }}
+          sx={{
+            marginInline: "auto",
+            my: "10px",
+            backgroundImage: `url(${
+              heroImages[Math.floor(Math.random() * 3)]
+            })`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
           {/* TODO: put a hero image in this box */}
         </Box>
