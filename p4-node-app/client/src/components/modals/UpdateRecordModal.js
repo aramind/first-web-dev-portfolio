@@ -175,6 +175,15 @@ const UpdateRecordModal = ({ date }) => {
         margin: "0 auto",
       }}
     >
+      <Typography
+        px={4}
+        sx={{ fontFamily: "Prompt" }}
+        textAlign="center"
+        color="#555"
+      >
+        Edits are automatically saved. Just click the (x) button or click
+        outside to exit.
+      </Typography>
       <Box
         width="100%"
         sx={{
@@ -438,17 +447,6 @@ const UpdateRecordModal = ({ date }) => {
         </Stack>
 
         {/* BOX 2 */}
-      </Box>
-      <Box
-        marginY="1rem"
-        px="8px"
-        // sx={{ border: "1px solid red" }}
-      >
-        <LinearProgress
-          variant="determinate"
-          value={completedPercent}
-          sx={{ height: "3px", width: "100%" }}
-        />
       </Box>
       {/* END */}
     </Box>

@@ -68,12 +68,6 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
           </ListItemIcon>
           Logout
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Switch fontSize="small" />
-          </ListItemIcon>
-          Dark Mode
-        </MenuItem>
       </Menu>
       <Profile />
     </>
