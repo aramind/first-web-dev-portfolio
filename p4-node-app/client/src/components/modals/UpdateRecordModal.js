@@ -173,23 +173,12 @@ const UpdateRecordModal = ({ date }) => {
       flexDirection={"column"}
       sx={{
         margin: "0 auto",
-        // border: "1px solid green",
-        [muiTheme.breakpoints.up("md")]: {
-          width: { md: "95%", lg: "90%", xl: "50%" },
-          // display: { md: "flex" },
-        },
       }}
     >
       <Box
         width="100%"
-        gap="1rem"
         sx={{
           margin: "0 auto",
-          // border: "1px solid green",
-          [muiTheme.breakpoints.up("md")]: {
-            // width: { md: "95%", lg: "90%", xl: "70%" },
-            display: { md: "flex" },
-          },
         }}
       >
         <Stack
@@ -197,11 +186,6 @@ const UpdateRecordModal = ({ date }) => {
           gap={2}
           alignItems="center"
           p={2}
-          m={1}
-          sx={{
-            border: "1px solid green",
-            borderRadius: "10px",
-          }}
         >
           {/* container for form fields */}
           {/* date display */}
