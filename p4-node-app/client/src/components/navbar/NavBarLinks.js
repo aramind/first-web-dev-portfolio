@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Avatar, IconButton, Stack, Tooltip } from "@mui/material";
+import {
+  Avatar,
+  IconButton,
+  ListItemIcon,
+  MenuItem,
+  Stack,
+  Switch,
+  Tooltip,
+} from "@mui/material";
 import { useValue } from "../../context/ContextProvider";
 import NavBarLink from "./NavBarLink";
 import UserMenu from "../user/UserMenu";
@@ -41,6 +49,12 @@ const NavBarLinks = () => {
           ></NavBarLink>
         ))}
       </Stack>
+      <MenuItem>
+        <ListItemIcon>
+          <Switch fontSize="small" />
+        </ListItemIcon>
+        Dark Mode
+      </MenuItem>
       <Tooltip title={currentUser ? currentUser.name : "User"}>
         <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
           <Avatar

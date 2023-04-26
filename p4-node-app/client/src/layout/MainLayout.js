@@ -10,12 +10,12 @@ import NotYetModal from "../components/modals/NotYetModal";
 
 const MainLayout = () => {
   const {
-    state: { notYetModal },
+    state: { notYetModal, currentUser },
   } = useValue();
   return (
     <>
       {notYetModal.open && <NotYetModal title={"Update Record"} />}
-      <NavigationSpeedDial />
+      {currentUser && <NavigationSpeedDial />}
       <Loading />
       <Notification />
       <Login />
