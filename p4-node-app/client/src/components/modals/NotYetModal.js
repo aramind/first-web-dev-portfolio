@@ -51,17 +51,11 @@ const NotYetModal = () => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          <Typography>
-            Sorry...not yet implemented. Devs run out of funds.😔
+          <Typography color="red">
+            Sorry...feature not yet implemented. Devs run out of funds.😔
           </Typography>
-          <Typography>Give Support?</Typography>
-          <div className="flex-left">
-            {/* <img
-              src={gcashLogo}
-              alt="gcash logo"
-            />{" "} */}
-            Send Gcash: 098282734283472
-          </div>
+          <Typography color="red">Give Support?</Typography>
+          <Typography color="red">Send Gcash: 098282734283472</Typography>
         </DialogContentText>
       </DialogContent>
     </Dialog>

@@ -7,10 +7,12 @@ import {
   Stack,
   Switch,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { useValue } from "../../context/ContextProvider";
 import NavBarLink from "./NavBarLink";
 import UserMenu from "../user/UserMenu";
+import { Brightness4, DarkModeSharp } from "@mui/icons-material";
 
 const linkNames = [
   { name: "Home", to: "/" },
@@ -22,7 +24,11 @@ const linkNames = [
 const NavBarLinks = () => {
   const {
     state: { currentUser },
+    dispatch,
   } = useValue();
+
+  // local states
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
   return (
@@ -49,12 +55,7 @@ const NavBarLinks = () => {
           ></NavBarLink>
         ))}
       </Stack>
-      <MenuItem>
-        <ListItemIcon>
-          <Switch fontSize="small" />
-        </ListItemIcon>
-        Dark Mode
-      </MenuItem>
+
       <Tooltip title={currentUser ? currentUser.name : "User"}>
         <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
           <Avatar
@@ -65,6 +66,29 @@ const NavBarLinks = () => {
           </Avatar>
         </IconButton>
       </Tooltip>
+      <Stack ml="-10px">
+        <Switch
+          onChange={() => {
+            dispatch({
+              type: "UPDATE_NOTYET_MODAL",
+              payload: { open: true, title: "Dark Mode" },
+            });
+          }}
+          fontSize="small"
+          sx={{
+            "& .MuiSwitch-thumb": {
+              backgroundColor: "lightblue",
+            },
+          }}
+        />
+
+        <Typography
+          fontSize="0.7rem"
+          mt="-10px"
+        >
+          Dark Mode
+        </Typography>
+      </Stack>
       <UserMenu {...{ anchorUserMenu, setAnchorUserMenu }} />
     </Stack>
   );

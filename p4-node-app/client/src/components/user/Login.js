@@ -143,7 +143,17 @@ const Login = () => {
                 </Typography>
               ) : (
                 <Typography fontSize="0.8rem">
-                  <Link sx={{ cursor: "pointer" }}>Forgot Password?</Link>
+                  <Link
+                    onClick={() => {
+                      dispatch({
+                        type: "UPDATE_NOTYET_MODAL",
+                        payload: { open: true, title: "Forgot password?" },
+                      });
+                    }}
+                    sx={{ cursor: "pointer" }}
+                  >
+                    Forgot Password?
+                  </Link>
                 </Typography>
               )}
             </Box>
