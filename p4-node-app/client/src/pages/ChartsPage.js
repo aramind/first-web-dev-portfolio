@@ -43,6 +43,8 @@ const ChartsPage = () => {
           flexDirection: "row",
           flexWrap: "wrap",
           gap: "2rem",
+          justifyContent: "center",
+          alignItems: "start",
         }}
       >
         <>

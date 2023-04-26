@@ -225,6 +225,7 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
                 onClick={() => {
                   navigate("/record");
                 }}
+                disabled //disabled muna kasi what I want is modal sana ang pag add and hindi redirect to records page,
               >
                 Add Record
               </Button>
