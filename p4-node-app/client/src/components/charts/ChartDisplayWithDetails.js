@@ -213,20 +213,6 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
                     {completedPercent}% completed
                   </Typography>
                 </Box>
-                <Box>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    onClick={() => {
-                      dispatch({
-                        type: "UPDATE_NOTYET_MODAL",
-                        payload: { open: true, title: "Update Record" },
-                      });
-                    }}
-                  >
-                    Update Record
-                  </Button>
-                </Box>
               </>
             ) : (
               <>
