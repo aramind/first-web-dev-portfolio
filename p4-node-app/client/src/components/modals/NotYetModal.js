@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Divider,
   IconButton,
   Link,
   Typography,
@@ -51,11 +52,12 @@ const NotYetModal = () => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          <Typography color="red">
+          <Typography color="error">
             Sorry...feature not yet implemented. Devs run out of funds.😔
           </Typography>
-          <Typography color="red">Give Support?</Typography>
-          <Typography color="red">Send Gcash: 098282734283472</Typography>
+          <br></br>
+          <Typography color="error">Give Support?</Typography>
+          <Typography color="error">Send Gcash: 098282734283472</Typography>
         </DialogContentText>
       </DialogContent>
     </Dialog>
