@@ -53,6 +53,13 @@ const reducer = (state, action) => {
     // dark mode
     case "TOGGLE_DARK_MODE":
       return { ...state, darkMode: !state.darkMode };
+    // closing modal
+    case "TOGGLE_CLOSING_MODAL":
+      return {
+        ...state,
+        closingModalIsOpen: action.payload,
+      };
+
     default:
       throw new Error("No matched action");
   }

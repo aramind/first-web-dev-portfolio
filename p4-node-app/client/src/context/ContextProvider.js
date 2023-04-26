@@ -13,6 +13,7 @@ const initialState = {
   notYetModal: { open: false, title: "Title" },
   recordForSelectedDate: null,
   addRecordModal: false,
+  closingModalIsOpen: { open: false },
   activityNames: [
     "sleep",
     "work",

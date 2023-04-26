@@ -22,6 +22,10 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const handleLogout = () => {
     navigate("/");
     dispatch({ type: "UPDATE_USER", payload: null });
+    dispatch({
+      type: "TOGGLE_CLOSING_MODAL",
+      payload: { open: true },
+    });
   };
 
   return (
