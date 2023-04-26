@@ -23,12 +23,13 @@ import ChartDisplay from "./ChartDisplay";
 import getTotalTimeInSeconds from "../../util-functions/getTotalTimeInSeconds";
 import { useNavigate } from "react-router-dom";
 import { CancelOutlined, Close } from "@mui/icons-material";
+import AddRecordModal from "./ModalWrapper";
+import ModalWrapper from "./ModalWrapper";
 
 const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
   // * Global states from Context provider
-  // date selected
   const {
-    state: { currentUser },
+    state: { currentUser, addRecordModal },
     dispatch,
   } = useValue();
 
@@ -94,147 +95,155 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
   // TROUBLESHOOTING CONSOLE LOGS
   console.log("FROM CDWD", chartRecord);
   return (
-    <Box
-      width="320px"
-      height="480px"
-      display="flex"
-      flexDirection="column"
-      position="relative"
-      justifyContent={"center"}
-      activites={"center"}
-      border="1px solid"
-      borderColor={muiTheme.palette.primary.main}
-      borderRadius="10px"
-      p={2}
-    >
-      {/* date picker */}
-      {/* TODO:(minor) make the date picker occupy the whole width of the parent */}
+    <>
       <Box
-        width={"100%"}
-        height="100px"
-        p={1}
-        sx={{
-          display: "flex",
-          alignItems: "start",
-          justifyContent: "space-between",
-          // border: "3px solid red",
-        }}
+        width="320px"
+        height="480px"
+        display="flex"
+        flexDirection="column"
+        position="relative"
+        justifyContent={"center"}
+        activites={"center"}
+        border="1px solid"
+        borderColor={muiTheme.palette.primary.main}
+        borderRadius="10px"
+        p={2}
       >
-        <>
-          <Box
-            width="2.5rem"
-            // backgroundColor="yellow"
-            height="100%"
-            display="flex"
-            alignItems="start"
-            justifyContent="end"
-            sx={{
-              position: "absolute",
-              top: "4px",
-              right: "4px",
-            }}
-          >
-            <CancelOutlined
-              color="primary"
-              onClick={onClose}
-              // fontSize="small"
-              sx={{
-                "&:hover": {
-                  color: muiTheme.palette.hovercolor.text, //TODO: finalize the color
-                  textDecoration: "none",
-                  cursor: "pointer",
-                },
-              }}
-            />
-          </Box>
-
-          <Box>
-            <DatePicker
-              label={"Select Date"}
-              value={dateForChart}
-              onChange={handleDatePickerChange}
-              format="MM/dd/yyyy"
-              disableFuture={true}
-              maxDate={new Date()}
-              inputFormat="MM/dd/yyyy"
-              timeZone="Asia/Manila"
-              // autoFocus}
-            />
-          </Box>
-        </>
-      </Box>
-      <Box
-        px={1}
-        flex={1}
-      >
+        {/* date picker */}
+        {/* TODO:(minor) make the date picker occupy the whole width of the parent */}
         <Box
-          width="100%"
-          // height="300px"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          flexDirection="column"
-          gap={1}
-          // sx={{ border: "1px solid red", backgroundColor: "red" }}
+          width={"100%"}
+          height="100px"
+          p={1}
+          sx={{
+            display: "flex",
+            alignItems: "start",
+            justifyContent: "space-between",
+            // border: "3px solid red",
+          }}
         >
-          {chartRecord ? (
-            <>
-              <ChartDisplay
-                showSummary={true}
-                record={chartRecord}
-              />
-              <Box
-                width="100%"
-                // backgroundColor="red"
+          <>
+            <Box
+              width="2.5rem"
+              // backgroundColor="yellow"
+              height="100%"
+              display="flex"
+              alignItems="start"
+              justifyContent="end"
+              sx={{
+                position: "absolute",
+                top: "4px",
+                right: "4px",
+              }}
+            >
+              <CancelOutlined
+                color="primary"
+                onClick={onClose}
+                // fontSize="small"
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  "&:hover": {
+                    color: muiTheme.palette.hovercolor.text, //TODO: finalize the color
+                    textDecoration: "none",
+                    cursor: "pointer",
+                  },
                 }}
-              >
+              />
+            </Box>
+
+            <Box>
+              <DatePicker
+                label={"Select Date"}
+                value={dateForChart}
+                onChange={handleDatePickerChange}
+                format="MM/dd/yyyy"
+                disableFuture={true}
+                maxDate={new Date()}
+                inputFormat="MM/dd/yyyy"
+                timeZone="Asia/Manila"
+                // autoFocus}
+              />
+            </Box>
+          </>
+        </Box>
+        <Box
+          px={1}
+          flex={1}
+        >
+          <Box
+            width="100%"
+            // height="300px"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            gap={1}
+            // sx={{ border: "1px solid red", backgroundColor: "red" }}
+          >
+            {chartRecord ? (
+              <>
+                <ChartDisplay
+                  showSummary={true}
+                  record={chartRecord}
+                />
                 <Box
-                  backgroundColor="gray"
-                  sx={{ width: "100%" }}
+                  width="100%"
+                  // backgroundColor="red"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  <LinearProgress
-                    variant="determinate"
-                    value={completedPercent}
-                    sx={{ height: "10px" }}
-                  />
+                  <Box
+                    backgroundColor="gray"
+                    sx={{ width: "100%" }}
+                  >
+                    <LinearProgress
+                      variant="determinate"
+                      value={completedPercent}
+                      sx={{ height: "10px" }}
+                    />
+                  </Box>
+                  <Typography
+                    fontSize="0.8rem"
+                    color="primary"
+                    gutterBottom
+                  >
+                    {completedPercent}% completed
+                  </Typography>
                 </Box>
+              </>
+            ) : (
+              <>
                 <Typography
-                  fontSize="0.8rem"
-                  color="primary"
-                  gutterBottom
+                  fontSize="12px"
+                  textAlign="center"
                 >
-                  {completedPercent}% completed
+                  No data available for the selected date
                 </Typography>
-              </Box>
-            </>
-          ) : (
-            <>
-              <Typography
-                fontSize="12px"
-                textAlign="center"
-              >
-                No data available for the selected date
-              </Typography>
-              <Button
-                // width="200px"
-                variant="contained"
-                onClick={() => {
-                  navigate("/record");
-                }}
-                disabled //disabled muna kasi what I want is modal sana ang pag add and hindi redirect to records page,
-              >
-                Add Record
-              </Button>
-            </>
-          )}
+                <Button
+                  // width="200px"
+                  variant="contained"
+                  // onClick={() => {
+                  //   navigate("/record");
+                  // }}
+                  onClick={() => {
+                    dispatch({
+                      type: "OPEN_ADD_RECORD_MODAL",
+                    });
+                  }}
+                  // disabled //disabled muna kasi what I want is modal sana ang pag add and hindi redirect to records page,
+                >
+                  Add Record
+                </Button>
+              </>
+            )}
+          </Box>
         </Box>
       </Box>
-    </Box>
+      <ModalWrapper />
+    </>
   );
 };
 // END

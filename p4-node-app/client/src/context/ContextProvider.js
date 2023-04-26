@@ -7,9 +7,11 @@ const initialState = {
   openLogin: false,
   loading: false,
   alert: { open: false, severity: "info", message: "" },
+  minorAlert: { open: false, severity: "info", message: "" },
   profile: { open: false, file: null, photoURL: "" },
   selectedDate: new Date(),
   recordForSelectedDate: null,
+  addRecordModal: false,
   activityNames: [
     "sleep",
     "work",

@@ -15,6 +15,9 @@ const reducer = (state, action) => {
     // for  alert
     case "UPDATE_ALERT":
       return { ...state, alert: action.payload };
+    // for  minor alert
+    case "UPDATE_MINOR_ALERT":
+      return { ...state, minorAlert: action.payload };
     // for  updating profile
     case "UPDATE_PROFILE": {
       console.log("from reducer", action.payload);
@@ -33,6 +36,12 @@ const reducer = (state, action) => {
     case "UPDATE_DATESELECTED":
       return { ...state, selectedDate: action.payload };
 
+    // for add record modal
+    case "OPEN_ADD_RECORD_MODAL":
+      return { ...state, addRecordModal: true };
+    // for add record modal
+    case "CLOSE_ADD_RECORD_MODAL":
+      return { ...state, addRecordModal: false };
     // dark mode
     case "TOGGLE_DARK_MODE":
       return { ...state, darkMode: !state.darkMode };
