@@ -136,6 +136,7 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
           >
             <CancelOutlined
               color="primary"
+              onClick={onClose}
               // fontSize="small"
               sx={{
                 "&:hover": {

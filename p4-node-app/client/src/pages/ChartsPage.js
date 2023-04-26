@@ -10,10 +10,7 @@ const ChartsPage = () => {
   // local states
   const [charts, setCharts] = useState([]);
   const addChart = () => {
-    setCharts([
-      ...charts,
-      { chart: <ChartDisplayWithDetails />, chartid: uuidv4() },
-    ]);
+    setCharts([...charts, { id: uuidv4() }]);
   };
 
   const removeChart = (id) => {
@@ -48,7 +45,12 @@ const ChartsPage = () => {
         }}
       >
         <>
-          {charts.map((chartObj) => chartObj.chart)}
+          {charts.map((chart) => (
+            <ChartDisplayWithDetails
+              key={chart.id}
+              onClose={() => removeChart(chart.id)}
+            />
+          ))}
           <Box
             width="320px"
             height="480px"
