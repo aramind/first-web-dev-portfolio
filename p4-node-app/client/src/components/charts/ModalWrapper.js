@@ -17,7 +17,7 @@ import { updateProfile } from "../../actions/user";
 import RecordPage from "../../pages/RecordPage";
 import UpdateRecordModal from "../modals/UpdateRecordModal";
 
-const ModalWrapper = () => {
+const ModalWrapper = ({ date }) => {
   const {
     state: { addRecordModal },
     dispatch,
@@ -51,7 +51,7 @@ const ModalWrapper = () => {
         </IconButton>
       </DialogTitle>
       <Box>
-        <UpdateRecordModal />
+        <UpdateRecordModal date={date} />
       </Box>
     </Dialog>
   );

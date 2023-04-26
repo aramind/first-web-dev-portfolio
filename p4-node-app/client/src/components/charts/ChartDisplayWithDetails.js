@@ -29,7 +29,7 @@ import ModalWrapper from "./ModalWrapper";
 const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
   // * Global states from Context provider
   const {
-    state: { currentUser, addRecordModal },
+    state: { currentUser, recordForSelectedDate },
     dispatch,
   } = useValue();
 
@@ -67,7 +67,7 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
       }
     }
     retrieve();
-  }, [dateForChart, currentUser, dispatch]);
+  }, [dateForChart, currentUser, dispatch, recordForSelectedDate]);
 
   // for progress bar
   let totalTimeInSeconds = chartRecord ? getTotalTimeInSeconds(chartRecord) : 0;
@@ -252,7 +252,7 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
           </Box>
         </Box>
       </Box>
-      <ModalWrapper />
+      <ModalWrapper date={dateForChart} />
     </>
   );
 };

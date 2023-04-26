@@ -29,14 +29,14 @@ import ChartDisplay from "../charts/ChartDisplay";
 import ConfirmationResetDialog from "../CofirmationResetDialog";
 import ConfirmationDeleteDialog from "../ConfirmationDeleteDialog";
 
-const UpdateRecordModal = () => {
+const UpdateRecordModal = ({ date }) => {
   // * Global states from Context provider
   // date selected
   const {
     state: { selectedDate, activityNames, currentUser, recordForSelectedDate },
     dispatch,
   } = useValue();
-  const formattedDate = format(selectedDate, "E MMM d, yyyy");
+  // const formattedDate = format(selectedDate, "E MMM d, yyyy");
 
   // * Local states
   const [selectedActivity, setSelectedActivity] = useState(null);
@@ -46,9 +46,11 @@ const UpdateRecordModal = () => {
   const [openDialogDelete, setOpenDialogDelete] = useState(false);
   const [openDialogReset, setOpenDialogReset] = useState(false);
   const [refresh, setRefreshed] = useState(false);
+
   useEffect(() => {
     // console.log(selectedDate);
-    window.scrollTo(0, 0);
+
+    dispatch({ type: "UPDATE_DATESELECTED", payload: date });
 
     let content = {
       date: selectedDate,
@@ -216,7 +218,7 @@ const UpdateRecordModal = () => {
               color: muiTheme.palette.primary.main,
             }}
           >
-            <Typography variant="h5">{formattedDate}</Typography>
+            {/* <Typography variant="h5">{formattedDate}</Typography> */}
           </Box>
           {/* date picker */}
           {/* TODO:(minor) make the date picker occupy the whole width of the parent */}
