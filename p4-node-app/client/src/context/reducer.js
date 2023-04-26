@@ -42,6 +42,14 @@ const reducer = (state, action) => {
     // for add record modal
     case "CLOSE_ADD_RECORD_MODAL":
       return { ...state, addRecordModal: false };
+
+    // for add record modal
+    case "OPEN_NOTYET_MODAL":
+      return { ...state, notYetModal: true };
+    // for add record modal
+    case "CLOSE_NOTYET_MODAL":
+      return { ...state, notYetModal: false };
+
     // dark mode
     case "TOGGLE_DARK_MODE":
       return { ...state, darkMode: !state.darkMode };

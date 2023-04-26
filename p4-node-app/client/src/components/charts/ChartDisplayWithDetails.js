@@ -98,7 +98,7 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
     <>
       <Box
         width="320px"
-        height="480px"
+        height="500px"
         display="flex"
         flexDirection="column"
         position="relative"
@@ -213,6 +213,17 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
                     {completedPercent}% completed
                   </Typography>
                 </Box>
+                <Box>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => {
+                      dispatch({ type: "OPEN_NOTYET_MODAL" });
+                    }}
+                  >
+                    Update Record
+                  </Button>
+                </Box>
               </>
             ) : (
               <>
@@ -233,7 +244,6 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
                       type: "OPEN_ADD_RECORD_MODAL",
                     });
                   }}
-                  // disabled //disabled muna kasi what I want is modal sana ang pag add and hindi redirect to records page,
                 >
                   Add Record
                 </Button>

@@ -5,8 +5,14 @@ import { v4 as uuidv4 } from "uuid";
 import muiTheme from "../muiTheme";
 
 import chartImage from "../resources/images/img-pie-chart.png";
+import NotYetModal from "../components/modals/NotYetModal";
+import { useValue } from "../context/ContextProvider";
 
 const ChartsPage = () => {
+  // globalStates
+  const {
+    state: { notYetModal },
+  } = useValue();
   // local states
   const [charts, setCharts] = useState([]);
   const addChart = () => {
@@ -60,7 +66,6 @@ const ChartsPage = () => {
               fullWidth
               id="add-chart-button"
               variant="outlined"
-              borderRadius="10px"
               p={2}
               sx={{ height: "100%" }}
               onClick={addChart}
@@ -74,6 +79,7 @@ const ChartsPage = () => {
               </Stack>
             </Button>
           </Box>
+          {notYetModal && <NotYetModal title={"Update Record"} />}
         </>
       </Box>
     </Box>

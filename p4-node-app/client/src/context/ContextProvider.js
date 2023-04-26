@@ -10,6 +10,7 @@ const initialState = {
   minorAlert: { open: false, severity: "info", message: "" },
   profile: { open: false, file: null, photoURL: "" },
   selectedDate: new Date(),
+  notYetModal: false,
   recordForSelectedDate: null,
   addRecordModal: false,
   activityNames: [

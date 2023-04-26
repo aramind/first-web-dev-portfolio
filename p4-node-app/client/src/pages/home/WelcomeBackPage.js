@@ -8,6 +8,7 @@ import SummaryTable from "../../components/summary-table/SummaryTable";
 import ChartDisplay from "../../components/charts/ChartDisplay";
 import MiniRecord from "../../components/MiniRecord";
 // import WavingHandOutlinedIcon from "@mui/icons-material/WavingHandOutlined";
+// hero images
 
 const TextTypography = styled(Typography)({
   // textAlign: "center",

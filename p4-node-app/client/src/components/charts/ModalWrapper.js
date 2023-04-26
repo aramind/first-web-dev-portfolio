@@ -34,6 +34,7 @@ const ModalWrapper = () => {
     <Dialog
       open={addRecordModal}
       onClose={handleClose}
+      fullWidth
     >
       <DialogTitle>
         Update Record
