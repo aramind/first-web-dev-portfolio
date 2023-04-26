@@ -14,18 +14,17 @@ const SideBar = () => {
       <SideItem
         icon={<AddCircleOutlineOutlined />}
         text="Update daily record"
+        to="/record"
       />
       <SideItem
         icon={<QueryStatsOutlined />}
         text="Compare charts and see trends"
+        to="/charts"
       />
       <SideItem
         icon={<SummarizeOutlined />}
         text="View summaries"
-      />
-      <SideItem
-        icon={<MenuBookOutlined />}
-        text="Do some readings"
+        to="/summary"
       />
     </List>
   );

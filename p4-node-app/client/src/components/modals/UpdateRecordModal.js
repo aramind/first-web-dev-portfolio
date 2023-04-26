@@ -180,7 +180,6 @@ const UpdateRecordModal = ({ date }) => {
         },
       }}
     >
-      <Toolbar sx={{ marginBottom: "10px" }} />
       <Box
         width="100%"
         gap="1rem"

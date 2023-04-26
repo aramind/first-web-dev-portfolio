@@ -5,10 +5,16 @@ import { Outlet } from "react-router-dom";
 import Notification from "../components/Notification";
 import Loading from "../components/Loading";
 import NavigationSpeedDial from "../components/speedDials/NavigationSpeedDial";
+import { useValue } from "../context/ContextProvider";
+import NotYetModal from "../components/modals/NotYetModal";
 
 const MainLayout = () => {
+  const {
+    state: { notYetModal },
+  } = useValue();
   return (
     <>
+      {notYetModal && <NotYetModal title={"Update Record"} />}
       <NavigationSpeedDial />
       <Loading />
       <Notification />

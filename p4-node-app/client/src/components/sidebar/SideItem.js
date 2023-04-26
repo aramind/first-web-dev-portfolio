@@ -8,7 +8,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import muiTheme from "../../muiTheme";
 
-const SideItem = ({ icon, text }) => {
+const SideItem = ({ icon, text, to }) => {
   return (
     <ListItem sx={{ margin: "-1rem 0" }}>
       <ListItemIcon
@@ -26,7 +26,7 @@ const SideItem = ({ icon, text }) => {
           fontSize="0.8rem"
           sx={{ marginLeft: "-1rem" }}
         >
-          <Link>{text}</Link>
+          <Link to={to}>{text}</Link>
         </Typography>
       </ListItemText>
     </ListItem>

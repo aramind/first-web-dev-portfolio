@@ -7,12 +7,10 @@ import muiTheme from "../muiTheme";
 import chartImage from "../resources/images/img-pie-chart.png";
 import NotYetModal from "../components/modals/NotYetModal";
 import { useValue } from "../context/ContextProvider";
+import SideBar from "../components/sidebar/SideBar";
 
 const ChartsPage = () => {
   // globalStates
-  const {
-    state: { notYetModal },
-  } = useValue();
   // local states
   const [charts, setCharts] = useState([]);
   const addChart = () => {
@@ -79,8 +77,10 @@ const ChartsPage = () => {
               </Stack>
             </Button>
           </Box>
-          {notYetModal && <NotYetModal title={"Update Record"} />}
         </>
+      </Box>
+      <Box mt={2}>
+        <SideBar />
       </Box>
     </Box>
   );

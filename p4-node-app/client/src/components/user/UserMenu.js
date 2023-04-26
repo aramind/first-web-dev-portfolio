@@ -49,7 +49,11 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
           </ListItemIcon>
           Profile
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            dispatch({ type: "OPEN_NOTYET_MODAL" });
+          }}
+        >
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
