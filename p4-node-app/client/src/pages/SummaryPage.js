@@ -8,6 +8,7 @@ import { useValue } from "../context/ContextProvider";
 import { format, utcToZonedTime } from "date-fns-tz";
 import { getSummaryForInterval } from "../actions/summary";
 import SideBar from "../components/sidebar/SideBar";
+import Deactivated from "./Deactivated";
 
 const SummaryPage = () => {
   // global states
@@ -39,81 +40,87 @@ const SummaryPage = () => {
   console.log("RESULT", result);
 
   return (
-    <Box
-      // alignItems={"center"}
-      width="100%"
-      display={"flex"}
-      flexDirection={"column"}
-      sx={{
-        margin: "0 auto",
-        // border: "1px solid green",
-        [muiTheme.breakpoints.up("md")]: {
-          width: { md: "98%", lg: "96%", xl: "60%" },
-        },
-      }}
-    >
-      <Toolbar sx={{ marginBottom: "10px" }} />
-      {/* TODO: to remove once final na */}
-      {/* <Typography>Summary Page</Typography> */}
-      {/* for main content */}
-      <Box
-        width="100%"
-        // gap="1rem"
-
-        sx={{
-          margin: "10px auto",
-          // border: "1px solid green",
-          [muiTheme.breakpoints.up("sm")]: {
-            display: { sm: "flex" },
-          },
-        }}
-      >
+    <>
+      {currentUser?.isActive ? (
         <Box
-          mb={2}
-          mx={1}
+          // alignItems={"center"}
+          width="100%"
+          display={"flex"}
+          flexDirection={"column"}
           sx={{
-            // border: "1px solid red",
-            display: "flex",
-            justifyContent: "center",
+            margin: "0 auto",
+            // border: "1px solid green",
+            [muiTheme.breakpoints.up("md")]: {
+              width: { md: "98%", lg: "96%", xl: "60%" },
+            },
           }}
         >
-          <Header
-            interval={interval}
-            setInterval={setInterval}
-          />
-          {/* </Box> */}
-        </Box>
-        {Object.keys(result).length > 0 && (
+          <Toolbar sx={{ marginBottom: "10px" }} />
+          {/* TODO: to remove once final na */}
+          {/* <Typography>Summary Page</Typography> */}
+          {/* for main content */}
           <Box
-            // flex={4}
+            width="100%"
+            // gap="1rem"
+
             sx={{
-              // border: "1px solid red",
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-              gap: "1rem",
+              margin: "10px auto",
+              // border: "1px solid green",
+              [muiTheme.breakpoints.up("sm")]: {
+                display: { sm: "flex" },
+              },
             }}
           >
-            {activityNames.map((title) => (
-              <SummaryCard
-                key={title}
-                title={title}
-                result={result}
+            <Box
+              mb={2}
+              mx={1}
+              sx={{
+                // border: "1px solid red",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Header
+                interval={interval}
+                setInterval={setInterval}
               />
-            ))}
+              {/* </Box> */}
+            </Box>
+            {Object.keys(result).length > 0 && (
+              <Box
+                // flex={4}
+                sx={{
+                  // border: "1px solid red",
+                  display: "flex",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                  gap: "1rem",
+                }}
+              >
+                {activityNames.map((title) => (
+                  <SummaryCard
+                    key={title}
+                    title={title}
+                    result={result}
+                  />
+                ))}
+              </Box>
+            )}
           </Box>
-        )}
-      </Box>
-      <Box
-        // sx={{ border: "1px solid red" }}
-        px={4}
-        py={1}
-        mb={4}
-      >
-        <Typography mb={1}>What to do next?</Typography>
-        <SideBar show={[1, 1, 1, null]} />
-      </Box>
-    </Box>
+          <Box
+            // sx={{ border: "1px solid red" }}
+            px={4}
+            py={1}
+            mb={4}
+          >
+            <Typography mb={1}>What to do next?</Typography>
+            <SideBar show={[1, 1, 1, null]} />
+          </Box>
+        </Box>
+      ) : (
+        <Deactivated />
+      )}
+    </>
   );
 };
 

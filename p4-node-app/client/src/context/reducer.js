@@ -67,6 +67,12 @@ const reducer = (state, action) => {
         userSettingsModal: action.payload,
       };
 
+    case "SET_ACCOUNT_STATUS":
+      return {
+        ...state,
+        userIsActive: action.payload,
+      };
+
     default:
       throw new Error("No matched action");
   }

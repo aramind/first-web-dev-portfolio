@@ -41,14 +41,16 @@ const UserSettingsModal = () => {
 
   const handleCloseDialogDeactivate = () => {
     setOpenDialogDeactivate(false);
+    dispatch({ type: "TOGGLE_USER_SETTINGS_MODAL", payload: { open: false } });
   };
 
   const handleConfirmDeactivate = () => {
     let content = {};
+    console.log(currentUser);
     try {
-      if (currentUser.isActive) {
+      if (currentUser?.isActive) {
         deactivateUser(currentUser, content, dispatch);
-      } else {
+      } else if (!currentUser?.isActive) {
         reactivateUser(currentUser, content, dispatch);
       }
     } catch (error) {
@@ -86,12 +88,13 @@ const UserSettingsModal = () => {
           variant="outlined"
           onClick={handleDeactivate}
         >
-          {currentUser.isActive ? "Deactivate Account" : "Reactivate Account"}
+          {currentUser?.isActive ? "Deactivate Account" : "Reactivate Account"}
         </Button>
         <ConfirmDeactivateDialog
           open={openDialogDeactivate}
           handleClose={handleCloseDialogDeactivate}
           handleConfirm={handleConfirmDeactivate}
+          action={currentUser?.isActive ? "deactivate" : "reactivate"}
         />
       </DialogContent>
     </Dialog>

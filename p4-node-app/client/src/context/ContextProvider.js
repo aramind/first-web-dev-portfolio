@@ -3,6 +3,7 @@ import reducer from "./reducer";
 
 const initialState = {
   // currentUser: null,
+  userIsActive: true,
   currentUser: null,
   openLogin: false,
   loading: false,
@@ -14,7 +15,7 @@ const initialState = {
   recordForSelectedDate: null,
   addRecordModal: false,
   closingModalIsOpen: { open: false },
-  userSettingsModal: { open: true },
+  userSettingsModal: { open: false },
   activityNames: [
     "sleep",
     "work",

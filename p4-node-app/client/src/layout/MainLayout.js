@@ -9,6 +9,7 @@ import { useValue } from "../context/ContextProvider";
 import NotYetModal from "../components/modals/NotYetModal";
 import ClosingModal from "../components/modals/ClosingModal";
 import UserSettingsModal from "../components/modals/UserSettingsModal";
+import { Box, Typography } from "@mui/material";
 
 const MainLayout = () => {
   const {
@@ -19,7 +20,9 @@ const MainLayout = () => {
       {closingModalIsOpen.open && <ClosingModal />}
       {notYetModal.open && <NotYetModal title={"Update Record"} />}
       {currentUser && <NavigationSpeedDial />}
-      {userSettingsModal.open && <UserSettingsModal />}
+      {(userSettingsModal.open || !currentUser?.isActive) && (
+        <UserSettingsModal />
+      )}
       <Loading />
       <Notification />
       <Login />

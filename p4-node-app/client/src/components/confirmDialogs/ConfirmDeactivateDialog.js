@@ -8,21 +8,26 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-const ConfirmDeactivateDialog = ({ open, handleClose, handleConfirm }) => {
+const ConfirmDeactivateDialog = ({
+  open,
+  handleClose,
+  handleConfirm,
+  action,
+}) => {
   return (
     <Dialog
       open={open}
       onClose={handleClose}
     >
-      <DialogTitle>Confirm deactivation</DialogTitle>
+      <DialogTitle>Confirm {action}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Are you sure you want to deactivate your account?
+          Are you sure you want to {action} your account?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleConfirm}>Deactivate Account</Button>
+        <Button onClick={handleConfirm}>{action}</Button>
       </DialogActions>
     </Dialog>
   );

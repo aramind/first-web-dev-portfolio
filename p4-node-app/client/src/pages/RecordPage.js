@@ -30,6 +30,7 @@ import ChartDisplay from "../components/charts/ChartDisplay";
 import getTotalTimeInSeconds from "../util-functions/getTotalTimeInSeconds";
 import ConfirmationDeleteDialog from "../components/ConfirmationDeleteDialog";
 import ConfirmationResetDialog from "../components/CofirmationResetDialog";
+import Deactivated from "./Deactivated";
 
 const RecordPage = () => {
   // * Global states from Context provider
@@ -163,141 +164,143 @@ const RecordPage = () => {
   };
 
   return (
-    <Box
-      // alignItems={"center"}
-      width="100%"
-      display={"flex"}
-      flexDirection={"column"}
-      sx={{
-        margin: "0 auto",
-        // border: "1px solid green",
-        [muiTheme.breakpoints.up("md")]: {
-          width: { md: "95%", lg: "90%", xl: "50%" },
-          // display: { md: "flex" },
-        },
-      }}
-    >
-      <Toolbar sx={{ marginBottom: "10px" }} />
-      <Box
-        width="100%"
-        gap="1rem"
-        sx={{
-          margin: "0 auto",
-          // border: "1px solid green",
-          [muiTheme.breakpoints.up("md")]: {
-            // width: { md: "95%", lg: "90%", xl: "70%" },
-            display: { md: "flex" },
-          },
-        }}
-      >
-        <Stack
-          flex={1}
-          gap={2}
-          alignItems="center"
-          p={2}
-          m={1}
+    <>
+      {currentUser?.isActive ? (
+        <Box
+          // alignItems={"center"}
+          width="100%"
+          display={"flex"}
+          flexDirection={"column"}
           sx={{
-            border: "1px solid green",
-            borderRadius: "10px",
+            margin: "0 auto",
+            // border: "1px solid green",
+            [muiTheme.breakpoints.up("md")]: {
+              width: { md: "95%", lg: "90%", xl: "50%" },
+              // display: { md: "flex" },
+            },
           }}
         >
-          {/* container for form fields */}
-          {/* date display */}
+          <Toolbar sx={{ marginBottom: "10px" }} />
           <Box
-            my={"1rem"}
-            width={"100%"}
+            width="100%"
+            gap="1rem"
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              margin: "0 auto",
+              // border: "1px solid green",
+              [muiTheme.breakpoints.up("md")]: {
+                // width: { md: "95%", lg: "90%", xl: "70%" },
+                display: { md: "flex" },
+              },
+            }}
+          >
+            <Stack
+              flex={1}
+              gap={2}
+              alignItems="center"
+              p={2}
+              m={1}
+              sx={{
+                border: "1px solid green",
+                borderRadius: "10px",
+              }}
+            >
+              {/* container for form fields */}
+              {/* date display */}
+              <Box
+                my={"1rem"}
+                width={"100%"}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
 
-              // border: "1px solid red",
-              color: muiTheme.palette.primary.main,
-            }}
-          >
-            <Typography variant="h5">{formattedDate}</Typography>
-          </Box>
-          {/* date picker */}
-          {/* TODO:(minor) make the date picker occupy the whole width of the parent */}
-          <Box
-            width={"100%"}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              // border: "1px solid red",
-              color: muiTheme.palette.primary.main,
-            }}
-          >
-            <DatePicker
-              label={"Select Date"}
-              value={selectedDate}
-              onChange={handleDatePickerChange}
-              format="MM/dd/yyyy"
-              disableFuture={true}
-              maxDate={new Date()}
-              inputFormat="MM/dd/yyyy"
-              timeZone="Asia/Manila"
-              autoFocus
-            />
-          </Box>
-          {/* ACTIVITY DROP DOWN */}
-          <Autocomplete
-            value={selectedActivity}
-            onChange={(event, newValue) => {
-              setSelectedActivity(newValue);
-            }}
-            id="select-activity"
-            options={activityNames}
-            sx={{ width: 300 }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Choose Activity"
+                  // border: "1px solid red",
+                  color: muiTheme.palette.primary.main,
+                }}
+              >
+                <Typography variant="h5">{formattedDate}</Typography>
+              </Box>
+              {/* date picker */}
+              {/* TODO:(minor) make the date picker occupy the whole width of the parent */}
+              <Box
+                width={"100%"}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  // border: "1px solid red",
+                  color: muiTheme.palette.primary.main,
+                }}
+              >
+                <DatePicker
+                  label={"Select Date"}
+                  value={selectedDate}
+                  onChange={handleDatePickerChange}
+                  format="MM/dd/yyyy"
+                  disableFuture={true}
+                  maxDate={new Date()}
+                  inputFormat="MM/dd/yyyy"
+                  timeZone="Asia/Manila"
+                  autoFocus
+                />
+              </Box>
+              {/* ACTIVITY DROP DOWN */}
+              <Autocomplete
+                value={selectedActivity}
+                onChange={(event, newValue) => {
+                  setSelectedActivity(newValue);
+                }}
+                id="select-activity"
+                options={activityNames}
+                sx={{ width: 300 }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Choose Activity"
+                  />
+                )}
               />
-            )}
-          />
-          {/* hrs and minutes */}
-          <Stack
-            direction={"row"}
-            maxWidth={"300px"}
-            gap={2}
-          >
-            {/* for hrs */}
-            <Autocomplete
-              value={hrs}
-              onChange={(event, newValue) => {
-                setHrs(newValue);
-              }}
-              id="select-hrs"
-              options={genArrOfDigits(24)}
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Hrs"
+              {/* hrs and minutes */}
+              <Stack
+                direction={"row"}
+                maxWidth={"300px"}
+                gap={2}
+              >
+                {/* for hrs */}
+                <Autocomplete
+                  value={hrs}
+                  onChange={(event, newValue) => {
+                    setHrs(newValue);
+                  }}
+                  id="select-hrs"
+                  options={genArrOfDigits(24)}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Hrs"
+                    />
+                  )}
                 />
-              )}
-            />
-            {/* for mins */}
-            <Autocomplete
-              value={mins}
-              onChange={(event, newValue) => {
-                setMins(newValue);
-              }}
-              id="select-mins"
-              options={genArrOfDigits(60)}
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Mins"
+                {/* for mins */}
+                <Autocomplete
+                  value={mins}
+                  onChange={(event, newValue) => {
+                    setMins(newValue);
+                  }}
+                  id="select-mins"
+                  options={genArrOfDigits(60)}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Mins"
+                    />
+                  )}
                 />
-              )}
-            />
-          </Stack>
-          {/* Progress Bar */}
-          {/* <Box
+              </Stack>
+              {/* Progress Bar */}
+              {/* <Box
             width="100%"
             px={1}
             sx={{
@@ -323,185 +326,189 @@ const RecordPage = () => {
               />
             </Box>
           </Box> */}
-          {/* Buttons */}
-          <Stack
-            marginTop={3}
-            marginBottom={2}
-            direction={{ xs: "column", sm: "row" }}
-            spacing={2}
-            sx={{ width: "100%" }}
-          >
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={() => handleAddAndSubtract("add")}
-              sx={{ paddingY: "1rem" }}
-            >
-              Add
-            </Button>
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={() => handleAddAndSubtract("sub")}
-              sx={{ paddingY: "1rem" }}
-            >
-              Subtract
-            </Button>
-          </Stack>
-        </Stack>
-
-        {/* BOX 2 */}
-        <Box
-          flex={3}
-          sx={
-            {
-              // border: "1px solid blue",
-            }
-          }
-        >
-          {/* Summary and chart */}
-          <Box
-            mb={2}
-            sx={{
-              // border: "1px solid blue",
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              gap: "1rem",
-            }}
-          >
-            <Box
-              width="400px"
-              height="350px"
-              // sx={{ backgroundColor: "blue" }}
-            >
-              <SummaryTable />
-            </Box>
-            <Box
-              width="300px"
-              height="350px"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                // backgroundColor: "blue",
-              }}
-            >
-              {recordForSelectedDate && (
-                <ChartDisplay
-                  showSummary={false}
-                  record={recordForSelectedDate}
-                />
-              )}
-            </Box>
-          </Box>
-          <Box
-            width="100%"
-            px={5}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              variant="body1"
-              fontSize={"1.2rem"}
-              color="primary"
-              gutterBottom
-            >
-              {remainingTimeString} remaining
-            </Typography>
-            <Box sx={{ width: "100%", mr: 1 }}>
-              <LinearProgress
-                variant="determinate"
-                value={completedPercent}
-                sx={{ height: "25px" }}
-              />
-            </Box>
-          </Box>
-          {/* text info */}
-          <Box px={{ xs: "5px", sm: "10px", md: "2rem" }}>
-            <Stack
-              px={1}
-              my={1}
-            >
-              <Typography variant="caption">
-                Reset all entries for selected date to zero? - RESET
-              </Typography>
-
-              <Typography variant="caption">
-                Delete all records for selected date? - DELETE
-              </Typography>
-            </Stack>
-            {/* save and clear */}
-            <Stack
-              px={1}
-              direction={{ xs: "column", sm: "row" }}
-              spacing={2}
-              sx={{ width: "100%" }}
-            >
-              <>
+              {/* Buttons */}
+              <Stack
+                marginTop={3}
+                marginBottom={2}
+                direction={{ xs: "column", sm: "row" }}
+                spacing={2}
+                sx={{ width: "100%" }}
+              >
                 <Button
                   fullWidth
                   variant="contained"
-                  size="large"
-                  endIcon={<RestartAltOutlined />}
-                  sx={{ py: "1rem" }}
-                  onClick={handleReset}
+                  onClick={() => handleAddAndSubtract("add")}
+                  sx={{ paddingY: "1rem" }}
                 >
-                  Reset
+                  Add
                 </Button>
-                <ConfirmationResetDialog
-                  open={openDialogReset}
-                  handleClose={handleCloseDialogReset}
-                  handleConfirm={handleConfirmReset}
-                />
-              </>
-              <>
                 <Button
                   fullWidth
                   variant="contained"
-                  size="large"
-                  endIcon={<DeleteOutlineOutlined />}
-                  sx={{ py: "1rem" }}
-                  onClick={handleDelete}
+                  onClick={() => handleAddAndSubtract("sub")}
+                  sx={{ paddingY: "1rem" }}
                 >
-                  Delete Record
+                  Subtract
                 </Button>
-                <ConfirmationDeleteDialog
-                  open={openDialogDelete}
-                  handleClose={handleCloseDialogDelete}
-                  handleConfirm={handleConfirmDelete}
-                />
-              </>
+              </Stack>
             </Stack>
+
+            {/* BOX 2 */}
+            <Box
+              flex={3}
+              sx={
+                {
+                  // border: "1px solid blue",
+                }
+              }
+            >
+              {/* Summary and chart */}
+              <Box
+                mb={2}
+                sx={{
+                  // border: "1px solid blue",
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: "1rem",
+                }}
+              >
+                <Box
+                  width="400px"
+                  height="350px"
+                  // sx={{ backgroundColor: "blue" }}
+                >
+                  <SummaryTable />
+                </Box>
+                <Box
+                  width="300px"
+                  height="350px"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    // backgroundColor: "blue",
+                  }}
+                >
+                  {recordForSelectedDate && (
+                    <ChartDisplay
+                      showSummary={false}
+                      record={recordForSelectedDate}
+                    />
+                  )}
+                </Box>
+              </Box>
+              <Box
+                width="100%"
+                px={5}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  fontSize={"1.2rem"}
+                  color="primary"
+                  gutterBottom
+                >
+                  {remainingTimeString} remaining
+                </Typography>
+                <Box sx={{ width: "100%", mr: 1 }}>
+                  <LinearProgress
+                    variant="determinate"
+                    value={completedPercent}
+                    sx={{ height: "25px" }}
+                  />
+                </Box>
+              </Box>
+              {/* text info */}
+              <Box px={{ xs: "5px", sm: "10px", md: "2rem" }}>
+                <Stack
+                  px={1}
+                  my={1}
+                >
+                  <Typography variant="caption">
+                    Reset all entries for selected date to zero? - RESET
+                  </Typography>
+
+                  <Typography variant="caption">
+                    Delete all records for selected date? - DELETE
+                  </Typography>
+                </Stack>
+                {/* save and clear */}
+                <Stack
+                  px={1}
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={2}
+                  sx={{ width: "100%" }}
+                >
+                  <>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      size="large"
+                      endIcon={<RestartAltOutlined />}
+                      sx={{ py: "1rem" }}
+                      onClick={handleReset}
+                    >
+                      Reset
+                    </Button>
+                    <ConfirmationResetDialog
+                      open={openDialogReset}
+                      handleClose={handleCloseDialogReset}
+                      handleConfirm={handleConfirmReset}
+                    />
+                  </>
+                  <>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      size="large"
+                      endIcon={<DeleteOutlineOutlined />}
+                      sx={{ py: "1rem" }}
+                      onClick={handleDelete}
+                    >
+                      Delete Record
+                    </Button>
+                    <ConfirmationDeleteDialog
+                      open={openDialogDelete}
+                      handleClose={handleCloseDialogDelete}
+                      handleConfirm={handleConfirmDelete}
+                    />
+                  </>
+                </Stack>
+              </Box>
+            </Box>
+          </Box>
+          <Box
+            marginY="1rem"
+            px="8px"
+            // sx={{ border: "1px solid red" }}
+          >
+            <LinearProgress
+              variant="determinate"
+              value={completedPercent}
+              sx={{ height: "3px", width: "100%" }}
+            />
+          </Box>
+          {/* END */}
+          <Box
+            // sx={{ border: "1px solid red" }}
+            px={4}
+            py={1}
+            mb={4}
+          >
+            <Typography mb={1}>What to do next?</Typography>
+            <SideBar show={[1, null, 1, 1]} />
           </Box>
         </Box>
-      </Box>
-      <Box
-        marginY="1rem"
-        px="8px"
-        // sx={{ border: "1px solid red" }}
-      >
-        <LinearProgress
-          variant="determinate"
-          value={completedPercent}
-          sx={{ height: "3px", width: "100%" }}
-        />
-      </Box>
-      {/* END */}
-      <Box
-        // sx={{ border: "1px solid red" }}
-        px={4}
-        py={1}
-        mb={4}
-      >
-        <Typography mb={1}>What to do next?</Typography>
-        <SideBar show={[1, null, 1, 1]} />
-      </Box>
-    </Box>
+      ) : (
+        <Deactivated />
+      )}
+    </>
   );
 };
 
