@@ -7,8 +7,11 @@ import {
   QueryStats,
   Summarize,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const NavigationSpeedDial = () => {
+  const navigate = useNavigate();
+
   return (
     <SpeedDial
       ariaLabel="Navigation speed dial"
@@ -18,18 +21,22 @@ const NavigationSpeedDial = () => {
       <SpeedDialAction
         icon={<Home />}
         tooltipTitle="Home"
+        onClick={() => navigate("/")}
       />
       <SpeedDialAction
         icon={<AddCircle />}
         tooltipTitle="Add Record"
+        onClick={() => navigate("/record")}
       />
       <SpeedDialAction
         icon={<QueryStats />}
         tooltipTitle="Charts"
+        onClick={() => navigate("/charts")}
       />
       <SpeedDialAction
         icon={<Summarize />}
         tooltipTitle="Summary"
+        onClick={() => navigate("/summary")}
       />
     </SpeedDial>
   );
