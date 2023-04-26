@@ -57,7 +57,7 @@ const ChartsPage = () => {
           ))}
           <Box
             width="320px"
-            height="480px"
+            height="500px"
             // borderRadius="10px" // sx={{ border: "1px solid red" }}
           >
             <Button
