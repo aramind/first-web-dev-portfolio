@@ -12,6 +12,7 @@ import MiniRecord from "../../components/MiniRecord";
 import heroImage1 from "../../resources/images/hero/hero-image-1.webp";
 import heroImage2 from "../../resources/images/hero/hero-image-2.webp";
 import heroImage3 from "../../resources/images/hero/hero-image-3.png";
+import Quote from "../../components/welcome-back-page/Quote";
 
 const TextTypography = styled(Typography)({
   // textAlign: "center",
@@ -26,20 +27,7 @@ const WelcomeBackPage = () => {
     state: { currentUser },
   } = useValue();
 
-  // date selected
-
-  // const formattedDate = format(selectedDate, "E MMM d, yyyy");
-  // date selected
-  const {
-    state: { selectedDate, recordForSelectedDate },
-    dispatch,
-  } = useValue();
-  const formattedDate = format(selectedDate, "E MMM d, yyyy");
-
   // handlers
-  const handleDatePickerChange = (date) => {
-    dispatch({ type: "UPDATE_DATESELECTED", payload: date });
-  };
 
   // console.log("from WBP", selectedDate);
   return (
@@ -96,24 +84,7 @@ const WelcomeBackPage = () => {
             margin="0 auto"
             width="80%"
           >
-            <Typography
-              textAlign={"center"}
-              fontStyle="italic"
-              paddingBottom={1}
-              fontFamily="Prompt"
-              fontSize="1.5rem"
-              color={muiTheme.palette.primary.dark}
-            >
-              Never leave till tomorrow that which you can do today
-            </Typography>
-            <Typography
-              fontStyle="italic"
-              textAlign={"right"}
-              paddingTop={1}
-              fontFamily="Prompt"
-            >
-              -- Benjamin Franklin
-            </Typography>
+            <Quote />
           </Box>
           <TextTypography>
             Let's make the most of our time ⏱️ and stay productive! 🚀💪💯
