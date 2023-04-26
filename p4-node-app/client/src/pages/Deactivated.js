@@ -1,31 +1,137 @@
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
+import { useValue } from "../context/ContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const Deactivated = () => {
+  const {
+    state: {},
+    dispatch,
+  } = useValue();
+
+  let navigate = useNavigate();
+  // handlers
+  const handleLogout = () => {
+    navigate("/");
+    dispatch({ type: "UPDATE_USER", payload: null });
+    dispatch({
+      type: "TOGGLE_CLOSING_MODAL",
+      payload: { open: true },
+    });
+  };
+
   return (
-    <Box
-      width="100vw"
-      height="100vh"
-      p="2rem"
+    <Dialog
+      open={true}
       sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        padding: "1rem",
       }}
     >
-      <Box width="60%">
-        <Typography
-          fontSize="1.2rem"
-          textAlign="center"
-          fontFamily="Prompt"
-        >
-          Your account has been deactivated. To reactivate your account and
-          regain access to our app's features and your past data, please
-          navigate to your user settings.
-        </Typography>
-      </Box>
-    </Box>
+      <DialogContent>
+        <DialogContentText>
+          <Typography
+            textAlign="center"
+            color="#333"
+            fontSize="1.2rem"
+            fontFamily="Prompt"
+          >
+            Your account has been deactivated.
+          </Typography>
+          <Typography
+            textAlign="center"
+            color="#333"
+            fontSize="1.2rem"
+            fontFamily="Prompt"
+          >
+            To reactivate your account and regain access to our app's features
+            and your past data, please enter the code sent to your email and
+            click reactivate.
+          </Typography>
+          <br></br>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "0 auto",
+              gap: "10px",
+            }}
+          >
+            <Button>Send Code</Button>
+            <TextField
+              size="small"
+              id="outlined-basic"
+              label="code"
+              variant="outlined"
+            />
+          </Box>
+          <br></br>
+        </DialogContentText>
+        <DialogActions>
+          <Button
+            sx={{ width: "120px" }}
+            variant="outlined"
+            onClick={() => {
+              dispatch({
+                type: "TOGGLE_USER_SETTINGS_MODAL",
+                payload: { open: true },
+              });
+            }}
+          >
+            Reactivate
+          </Button>
+          <Button
+            sx={{ width: "120px" }}
+            variant="outlined"
+            onClick={handleLogout}
+          >
+            Exit
+          </Button>
+        </DialogActions>
+      </DialogContent>
+    </Dialog>
   );
+
+  // return (
+  //   <Box
+  //     width="100vw"
+  //     height="100vh"
+  //     p="2rem"
+  //     sx={{
+  //       display: "flex",
+  //       justifyContent: "center",
+  //       alignItems: "center",
+  //     }}
+  //   >
+  //     <Box width="60%">
+  //       <Typography
+  //         fontSize="1.5rem"
+  //         textAlign="center"
+  //         fontFamily="Prompt"
+  //       >
+  //         Your account has been deactivated.
+  //       </Typography>
+  //       <Typography
+  //         fontSize="1.2rem"
+  //         textAlign="center"
+  //         fontFamily="Prompt"
+  //       >
+  //         To reactivate your account and regain access to our app's features and
+  //         your past data, please navigate to your user settings.
+  //       </Typography>
+  //     </Box>
+  //   </Box>
+  // );
 };
 
 export default Deactivated;
