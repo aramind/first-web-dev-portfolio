@@ -25,7 +25,7 @@ const Login = () => {
   } = useValue();
   // * sets what modal will show (login or register)
   // const [title, setTitle] = useState("Login");
-  const [isRegister, setIsRegister] = useState("false");
+  const [isRegister, setIsRegister] = useState(false);
 
   // ** references
   const nameRef = useRef();

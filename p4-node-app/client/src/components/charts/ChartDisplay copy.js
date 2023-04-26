@@ -7,11 +7,10 @@ import { Doughnut } from "react-chartjs-2";
 import { v4 as uuidv4 } from "uuid";
 import { useValue } from "../../context/ContextProvider";
 import PieChart from "./PieChart";
-import { Box, Typography } from "@mui/material";
 
-const ChartDisplay = ({ onClose, showSummary, record }) => {
+const ChartDisplay = ({ onClose, showSummary }) => {
   const {
-    state: { selectedDate },
+    state: { recordForSelectedDate, selectedDate },
     dispatch,
   } = useValue();
 
@@ -28,8 +27,7 @@ const ChartDisplay = ({ onClose, showSummary, record }) => {
 
   // converts the format of the data fetched  to the format
   // the chart needs
-  console.log("in Cdisplay", record.activities);
-  record.activities.forEach((activity) => {
+  recordForSelectedDate.activities.forEach((activity) => {
     const { name, seconds_spent } = activity;
     transformedObject[name] = Number(seconds_spent) / 3600;
   });
@@ -69,23 +67,10 @@ const ChartDisplay = ({ onClose, showSummary, record }) => {
 
   return (
     <>
-      <Box
-        width="100%"
-        // border="1px solid red"
-        display="flex"
-        justifyContent="center"
-      >
+      <div className="chart--pie">
         <PieChart todaysRecord={transformedObject} />
-      </Box>
-      {showSummary && (
-        <Typography
-          fontFamily="Prompt"
-          fontSize="0.8rem"
-          textAlign="center"
-        >
-          {summaryText}
-        </Typography>
-      )}
+      </div>
+      {showSummary && <div className="chart-summary">{summaryText}</div>}
     </>
   );
 };

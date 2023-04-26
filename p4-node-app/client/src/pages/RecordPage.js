@@ -390,7 +390,12 @@ const RecordPage = () => {
                 // backgroundColor: "blue",
               }}
             >
-              {recordForSelectedDate && <ChartDisplay showSummary={false} />}
+              {recordForSelectedDate && (
+                <ChartDisplay
+                  showSummary={false}
+                  record={recordForSelectedDate}
+                />
+              )}
             </Box>
           </Box>
           <Box

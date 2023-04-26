@@ -238,7 +238,10 @@ const MiniRecord = () => {
               }}
             >
               {recordForSelectedDate ? (
-                <ChartDisplay showSummary={false} />
+                <ChartDisplay
+                  showSummary={false}
+                  record={recordForSelectedDate}
+                />
               ) : (
                 <Box
                   height={"100%"}
