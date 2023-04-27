@@ -235,6 +235,12 @@ const recordController = {
           message: "Reset successful",
           result: updatedRecord,
         });
+      } else {
+        return res.status(400).json({
+          success: false,
+          message: "Reset can't be done for non-existing record",
+          result: null,
+        });
       }
     } catch (error) {
       handleError(res, error);
