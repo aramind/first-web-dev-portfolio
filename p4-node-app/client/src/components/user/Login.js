@@ -66,7 +66,7 @@ const Login = () => {
     // console.log(username);
     // console.log(email);
     // console.log(password);
-    register({ name, username, email, password }, dispatch);
+    register({ name, username, email, password, isActive: true }, dispatch);
   };
 
   return (

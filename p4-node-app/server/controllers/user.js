@@ -54,7 +54,7 @@ const userController = {
         settings: [],
         isActive: true,
       });
-      const { _id: id, photoURL } = user;
+      const { _id: id, photoURL, isActive } = user;
       const token = jwt.sign(
         { id, name, username, photoURL, isActive },
         process.env.JWT_SECRET,
@@ -153,7 +153,7 @@ const userController = {
           new: true,
         }
       );
-      const { _id: id, name, username, photoURL } = updatedUser;
+      const { _id: id, name, username, photoURL, isActive } = updatedUser;
 
       const token = jwt.sign(
         { id, name, username, photoURL, isActive },
