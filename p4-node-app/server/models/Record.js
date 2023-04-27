@@ -10,9 +10,13 @@ const recordSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  date: { type: Date, required: true },
+  date: { type: String, required: true },
   last_modified: { type: Date, required: true },
-  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   activities: [activitySchema],
 });
 
