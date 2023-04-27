@@ -1,10 +1,28 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
 const Record = require("../models/Record");
 const handleError = require("./utils/errorCatchers");
 
+// * Controller for any record-related action/requests
+
+// * (1) saveRecord
+// * - will handle the creation(if not yet existing),
+// *   and updating of a record given date
+// * - for the end point POST | record/:label
+// *   example: record/2023-04-12
+// * (2) getRecord
+// * - will handle the retrieval of record from db based on date sent as :label,
+// * - for the end point GET | record/:label
+// *   example: record/2023-04-22
+// * (3) deleteRecord
+// * - will handle the deletion of record from db based on date sent as :label,
+// * - for the end point DELETE | record/:label
+// *   example: record/2023-04-22
+// * (4) resetRecord
+// * - will handle the resetting of time spend on each activities on date specified and sent as :label,
+// * - for the end point PUT | record/:label
+// *   example: record/2023-04-22
+
 const recordController = {
+  // * (1) saveRecord
   saveRecord: async (req, res) => {
     try {
       console.log("called POST /:label from FE");
@@ -19,7 +37,8 @@ const recordController = {
       });
 
       if (existingRecord) {
-        // Check if hours_spent exceeds 24
+        // * Check if the addition/subtraction will result to
+        // * total hrs > 24 or a negative value
         const totalSecondsSpent = existingRecord.activities.reduce(
           (total, activity) => +total + +activity.seconds_spent,
           0
@@ -43,7 +62,7 @@ const recordController = {
           return;
         }
 
-        // Update existing activity or add new activity
+        // * Update existing activity or add new activity
         const activityIndex = existingRecord.activities.findIndex(
           (activity) => activity.name === name
         );
@@ -51,8 +70,8 @@ const recordController = {
           existingRecord.activities.push({ name, seconds_spent });
         } else {
           existingRecord.activities[activityIndex].seconds_spent =
-            parseInt(existingRecord.activities[activityIndex].seconds_spent) +
-            parseInt(seconds_spent);
+            parseFloat(existingRecord.activities[activityIndex].seconds_spent) +
+            parseFloat(seconds_spent);
         }
         existingRecord.last_modified = new Date();
 
@@ -63,8 +82,8 @@ const recordController = {
           result: updatedRecord,
         });
       } else {
-        // Check if hours_spent exceeds 24
-        if (parseInt(seconds_spent) > 86400) {
+        // * Check if hours_spent wll exceeds 24 if the addition push through
+        if (parseFloat(seconds_spent) > 86400) {
           res.status(400).json({
             success: false,
             message: "Hours spent cannot be greater than 24",
@@ -73,7 +92,7 @@ const recordController = {
           return;
         }
 
-        // Create a new record
+        // * Create a new record
         const newRecord = new Record({
           label: `${label}@${owner}`,
           owner,
@@ -92,6 +111,7 @@ const recordController = {
     }
   },
 
+  // * old implementation of saveRecord controller
   saveRecordOLD: async (req, res) => {
     try {
       console.log("called POST /:label from FE");
@@ -126,16 +146,15 @@ const recordController = {
     }
   },
 
-  // GET localhost:5000/record/:label
+  // * (2) getRecord
   getRecord: async (req, res) => {
     console.log("called GET /:label from FE");
     try {
-      // get the user id from the decoded token
-      const { id } = req.user;
-      const owner = id;
-      // get the label from the body
+      // * get the id and label from the req
+      const owner = req.user.id;
       const { label } = req.params;
-      // find the record from the DB given label and owner Id
+
+      // * find the record from the DB given label and owner
       const record = await Record.findOne({
         label: `${label}@${owner}`,
         owner,
@@ -148,32 +167,32 @@ const recordController = {
         });
       }
 
+      // * result
       res.status(200).json({
         success: true,
         message: "Record retrieved",
         result: record,
       });
-      // result
     } catch (error) {
       handleError(res, error);
     }
   },
 
-  // DELETE localhost:5000/record/:label
+  // * (3) deleteRecord
   deleteRecord: async (req, res) => {
     console.log("called DELETE /:label from FE");
     try {
-      // get the user id from the token
-      const { id } = req.user;
-      const owner = id;
-      // get the label from the body
+      // * get the id and label from the req
+      const owner = req.user.id;
       const { label } = req.params;
-      // delete the record from the DB given label and owner ID
+
+      // * delete the record from the DB given label and owner
       const deletedRecord = await Record.findOneAndDelete({
         label: `${label}@${owner}`,
         owner,
       });
 
+      // * handle result
       res.status(200).json({
         success: true,
         message: "Record deleted",
@@ -184,22 +203,21 @@ const recordController = {
     }
   },
 
-  // PUT localhost:5000/record/
+  // unused; moved the function of this to the saveRecord
   updateRecord: async (req, res) => {
     console.log("called UPDATE /:label from FE");
     try {
-      // extract the label, and activities from the body
+      // * get the id and label from the req
       const { label } = req.body;
-      // extract the owner(user id) from the token
       const owner = req.user.id;
 
-      // check if record exists
+      // * check if record exists
       const existingRecord = await Record.findOne({
         label: `${label}@${owner}`,
         owner,
       });
 
-      // if record, exists, update its data
+      // * if record, exists, update its data
       if (existingRecord) {
         existingRecord.activities = activities.map((act) => {
           return { name: act.name, hours_spent: act.hours_spent };
@@ -215,6 +233,7 @@ const recordController = {
         const activityObjs = activities.map((act) => {
           return { name: act.name, hours_spent: act.hours_spent };
         });
+
         // create a record object
         const newRecord = new Record({
           label: `${label}@${owner}`,
@@ -236,13 +255,15 @@ const recordController = {
     }
   },
 
+  // * (4) resetRecord
   resetRecord: async (req, res) => {
     try {
       console.log("called PUT /:label from FE");
+      // * get the id and label from the req
       const { label } = req.params;
       const owner = req.user.id;
 
-      // Find existing record for the given label
+      // * Find existing record for the given label
       const existingRecord = await Record.findOne({
         label: `${label}@${owner}`,
         owner,
@@ -258,6 +279,12 @@ const recordController = {
           success: true,
           message: "Reset successful",
           result: updatedRecord,
+        });
+      } else {
+        return res.status(400).json({
+          success: false,
+          message: "Reset cannot be done on non-existing data",
+          result: null,
         });
       }
     } catch (error) {
