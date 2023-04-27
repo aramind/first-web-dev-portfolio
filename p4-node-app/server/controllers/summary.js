@@ -4,13 +4,14 @@ const User = require("../models/User");
 const Record = require("../models/Record");
 const handleError = require("./utils/errorCatchers");
 
+// * decided not to include na muna since wala naman sa original ENDPOINTS presented
 const summaryController = {
   getSummary: async (req, res) => {
     try {
-      // get the user id from the decoded token
+      // * get the user id from the decoded token
       const { id } = req.user;
 
-      // get the start and end dates from the query params
+      // * get the start and end dates from the query params
       const { from, to } = req.query;
 
       // console.log("TO/FROM", to + "/" + from);
@@ -48,7 +49,7 @@ const summaryController = {
         });
       });
 
-      // return the documents
+      // result
       res.status(200).json({
         success: true,
         message: "Summary retrieved",
@@ -63,29 +64,33 @@ const summaryController = {
       handleError(res, error);
     }
   },
-  //get summary by interval
-  getSummaryInterval: async (req, res) => {
-    console.log("calling get summary");
-    try {
-      // get the user id from the decoded token
-      const { id } = req.user;
 
-      // get the reference date and interval from the query params
+  // * getSummaryInterval CONTROLLER
+  // * - will compute for the summary details given the interval
+  // * - for the end point GET | /summary/interval?ref={}&interval={}
+
+  // **NOTE: many repeated codes here :( but decided not to refactor and extract common logic
+  // * considering time, since max of twice lang naman (sa ngayon) kung na repeat man sila :)
+  getSummaryInterval: async (req, res) => {
+    // console.log("calling get summary");
+    try {
+      // * get the infos from decoded token and query params
+      const { id } = req.user;
       const { ref: referenceDate, interval } = req.query;
 
-      // calculate the start and end dates
+      // * calculate the start and end dates
       const days = +interval;
       const startDate = new Date(referenceDate);
       const endDate = new Date(referenceDate);
       startDate.setDate(startDate.getDate() - (days - 1));
 
-      // find all the records fo the user between the dates
+      // * find all the records of the user between the dates
       const records = await Record.find({
         owner: id,
         date: { $gte: startDate, $lte: endDate },
       });
 
-      // calculate the total hours spent on each activity and the total number of hours on the interval
+      // * calculate the total hours spent on each activity and the total number of hours on the interval
       let totalSeconds = 0;
       const activityTotals = {};
       records.forEach((record) => {
@@ -99,65 +104,65 @@ const summaryController = {
         });
       });
 
-      // calculate the total seconds spent on each activity
+      // * calculate the total seconds spent on each activity
       const totalSecondsPerActivity = {};
       Object.entries(activityTotals).forEach(([name, seconds]) => {
         totalSecondsPerActivity[name] = seconds;
       });
 
-      console.log("CHECK1", totalSeconds);
-      // calculate the averages
+      // console.log("CHECK1", totalSeconds);
+
+      // * calculate the averages for the interval selected
       const activityAverages = {};
       Object.entries(activityTotals).forEach(([name, seconds]) => {
         activityAverages[name] = (seconds / (days * 24 * 3600)).toFixed(2);
       });
 
-      // calculate the precentage of each activity to the total number of hours
+      // * calculate the precentage of each activity
       const activityPercentages = {};
       Object.entries(activityTotals).forEach(([name, seconds]) => {
         activityPercentages[name] = ((seconds / totalSeconds) * 100).toFixed(2);
       });
 
-      // find the previous interval
-
+      // * get the previous interval
       const previousStartDate = new Date(startDate);
       const previousEndDate = new Date(startDate);
       previousStartDate.setDate(previousStartDate.getDate() - days);
       previousEndDate.setDate(previousEndDate.getDate() - 1);
 
-      // find all the records of the user between the prev start and end
+      // * find all the records of the user between the prev start and end
       const previousRecords = await Record.find({
         owner: id,
         date: { $gte: previousStartDate, $lte: previousEndDate },
       });
 
-      // calculate the total hrs spent on each
+      // * calculate the total time spent on each act and the grand total for all
       let prevTotalSeconds = 0;
       const prevActivityTotals = {};
       previousRecords.forEach((record) => {
         record.activities.forEach((act) => {
           if (act.name in prevActivityTotals) {
-            prevActivityTotals[act.name] += parseFloat(act.seconds_spent);
+            prevActivityTotals[act.name] += Number(act.seconds_spent);
           } else {
-            prevActivityTotals[act.name] = parseFloat(act.seconds_spent);
+            prevActivityTotals[act.name] = Number(act.seconds_spent);
           }
-          prevTotalSeconds += parseFloat(act.seconds_spent);
+          prevTotalSeconds += Number(act.seconds_spent);
         });
       });
 
-      // calculate the total seconds spent on each activity
+      // * calculate the total seconds spent on each activity
       const totalSecondsPerActivityPrev = {};
       Object.entries(prevActivityTotals).forEach(([name, seconds]) => {
         totalSecondsPerActivityPrev[name] = seconds;
       });
 
-      // calculate the averages
+      // * calculate the averages
       const prevActivityAverages = {};
       Object.entries(prevActivityTotals).forEach(([name, seconds]) => {
         prevActivityAverages[name] = (seconds / (days * 24 * 3600)).toFixed(2);
       });
 
-      // calculate the precentage of each activity to the total number of hours
+      // * calculate the precentage of each activity to the total number of hours
       const prevActivityPercentages = {};
       Object.entries(prevActivityTotals).forEach(([name, seconds]) => {
         prevActivityPercentages[name] = (
@@ -166,10 +171,10 @@ const summaryController = {
         ).toFixed(2);
       });
 
-      // output
+      // * output
       res.status(200).json({
         success: true,
-        message: "Successfully computed",
+        message: "Successfully computed summaries for the chosen interval",
         result: {
           startDate,
           endDate,

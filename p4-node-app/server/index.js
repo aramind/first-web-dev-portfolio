@@ -9,25 +9,20 @@ const recordRouter = require("./routes/recordRouter");
 const summaryRouter = require("./routes/summaryRouter");
 const quoteRouter = require("./routes/quoteRouter");
 
+// env
 dotenv.config();
 const PORT = process.env.PORT || 5000;
+const CLIENT_URL = process.env.CLIENT_URL;
 
 const app = express();
-app.use(cors());
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", process.env.CLIENT_URL);
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With, Content-Type, Authorization"
-  );
-  next();
-});
-
+app.use(
+  cors({
+    origin: CLIENT_URL,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    headers: ["X-Requested-With", "Content-Type", "Authorization"],
+  })
+);
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
