@@ -4,7 +4,7 @@ const handleError = require("./utils/errorCatchers");
 const quoteController = {
   getRandomQuote: async (req, res) => {
     try {
-      // console.log("hehe");
+      // console.log("from random quote controller");
       const total = await Quote.countDocuments({});
       const randomIndex = Math.floor(Math.random() * total);
       const result = await Quote.findOne().skip(randomIndex);

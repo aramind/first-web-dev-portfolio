@@ -16,6 +16,7 @@ const CLIENT_URL = process.env.CLIENT_URL;
 
 const app = express();
 
+// * middlewares before the routes
 app.use(
   cors({
     origin: CLIENT_URL,
@@ -28,7 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/add", testActivityCreationRouter); //TODO: for testing only;to be remove before passing
-
 app.use("/record", recordRouter);
 app.use("/summary", summaryRouter);
 app.use("/quote", quoteRouter);
@@ -40,7 +40,7 @@ app.use((req, res) =>
 
 const startServer = async () => {
   try {
-    // connect to mongoDB
+    // * connect to mongoDB
     await mongoose.connect(process.env.MONGO_CONNECT);
     app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
   } catch (error) {

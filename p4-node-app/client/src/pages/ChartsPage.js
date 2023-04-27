@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import muiTheme from "../muiTheme";
 
 import chartImage from "../resources/images/img-pie-chart.png";
-import NotYetModal from "../components/modals/NotYetModal";
+
 import { useValue } from "../context/ContextProvider";
 import SideBar from "../components/sidebar/SideBar";
 import Deactivated from "./Deactivated";

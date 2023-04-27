@@ -8,14 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useValue } from "../../context/ContextProvider";
 import PieChart from "./PieChart";
 import { getRecordForSelectedDate } from "../../actions/activity";
-import {
-  Box,
-  Button,
-  IconButton,
-  LinearProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, LinearProgress, Typography } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import muiTheme from "../../muiTheme";
 import { format } from "date-fns-tz";
@@ -102,8 +95,7 @@ const ChartDisplayWithDetails = ({ onClose, showSummary }) => {
         display="flex"
         flexDirection="column"
         position="relative"
-        justifyContent={"center"}
-        activites={"center"}
+        justifyContent="center"
         border="1px solid"
         borderColor={muiTheme.palette.primary.main}
         borderRadius="10px"

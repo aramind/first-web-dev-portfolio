@@ -56,12 +56,9 @@ const WelcomeBackPage = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
-            >
-              {/* TODO: put a hero image in this box */}
-            </Box>
+            ></Box>
             <Box px={4}>
               <TextTypography
-                // textAlign={"center"}
                 fontSize="3rem"
                 color="primary.main"
               >
@@ -96,68 +93,6 @@ const WelcomeBackPage = () => {
               </TextTypography>
             </Box>
             <MiniRecord />
-            {/* TImepicker -- summary -- chart */}
-            {/* <Stack
-          direction={"column"}
-          marginInline="auto"
-        >
-         
-
-          <Box
-            height={"300px"}
-            width={"100%"}
-            my={2}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <Box
-              textAlign="center"
-              minWidth="200px"
-            >
-              <Box
-                my={"1rem"}
-                width={"100%"}
-                sx={{
-                  display: "flex",
-                  justifyContent: "left",
-                  alignItems: "center",
-
-                  px: "5px",
-                  color: muiTheme.palette.primary.main,
-                }}
-              >
-                <Typography variant="h5">{formattedDate}</Typography>
-              </Box>
-
-              <DatePicker
-                label={"Select Date"}
-                value={selectedDate}
-                onChange={handleDatePickerChange}
-                format="MM/dd/yyyy"
-                disableFuture={true}
-                maxDate={new Date()}
-                inputFormat="MM/dd/yyyy"
-                timeZone="Asia/Manila"
-              />
-            </Box>
-            <Box
-              textAlign="center"
-              minWidth="200px"
-            >
-              <SummaryTable />
-            </Box>
-            <Box
-              textAlign="center"
-              minWidth="200px"
-            >
-              {recordForSelectedDate && <ChartDisplay showSummary={false} />}
-            </Box>
-          </Box>
-        </Stack> */}
             <Box
               px={4}
               py={1}

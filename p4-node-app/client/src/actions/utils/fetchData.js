@@ -1,3 +1,8 @@
+// * fetchData
+//  - this is the one directly communicating with the backend
+//  - all request to server will pass through this
+//  - and all the response from the server will enter the client through this
+
 const fetchData = async (
   { url, method = "POST", token = "", body = null },
   dispatch
@@ -7,7 +12,7 @@ const fetchData = async (
     ? { "Content-Type": "application/json", authorization: `Bearer ${token}` }
     : { "Content-Type": "application/json" };
   body = body ? { body: JSON.stringify(body) } : {};
-  // console.log("HEADERSSSS", headers);
+  // console.log("HEADERS", headers);
   try {
     const response = await fetch(url, { method, headers, ...body });
     const data = await response.json();

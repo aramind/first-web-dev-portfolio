@@ -13,6 +13,7 @@ const useCheckToken = () => {
       const decodedToken = jwtDecode(currentUser.token);
       if (decodedToken.exp * 1000 < new Date().getTime())
         dispatch({ type: "UPDATE_USER", payload: null });
+      // TODO: make a modal asking user to continue session? if yes gives them another token if no log out
     }
   }, [currentUser, dispatch]);
 };

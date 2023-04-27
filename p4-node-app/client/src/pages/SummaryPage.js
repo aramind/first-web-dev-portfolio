@@ -19,6 +19,7 @@ const SummaryPage = () => {
   // local states
   const [result, setResult] = useState({});
   const intervals = { 7: "week", 30: "month", 120: "quarter", 365: "year" };
+
   useEffect(() => {
     if (currentUser && currentUser.token) {
       getSummaryForInterval(
@@ -27,8 +28,8 @@ const SummaryPage = () => {
         dispatch
       )
         .then((result) => {
-          setResult(result);
-          console.log("RESULT", result);
+          setResult(result || {});
+          // console.log("RESULT", result);
         })
         .catch((error) => {
           console.error(error);
@@ -67,9 +68,6 @@ const SummaryPage = () => {
               SUMMARY FOR PREVIOUS <b>{intervals[interval].toUpperCase()}</b>
             </Typography>
           </Box>
-          {/* TODO: to remove once final na */}
-          {/* <Typography>Summary Page</Typography> */}
-          {/* for main content */}
           <Box
             width="100%"
             // gap="1rem"
