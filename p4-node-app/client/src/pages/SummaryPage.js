@@ -5,7 +5,6 @@ import muiTheme from "../muiTheme";
 import Header from "../components/summary-page-components/Header";
 import SummaryCard from "../components/summary-page-components/SummaryCard";
 import { useValue } from "../context/ContextProvider";
-import { format, utcToZonedTime } from "date-fns-tz";
 import { getSummaryForInterval } from "../actions/summary";
 import SideBar from "../components/sidebar/SideBar";
 import Deactivated from "./Deactivated";
@@ -19,7 +18,7 @@ const SummaryPage = () => {
   const [interval, setInterval] = useState(7);
   // local states
   const [result, setResult] = useState({});
-
+  const intervals = { 7: "week", 30: "month", 120: "quarter", 365: "year" };
   useEffect(() => {
     if (currentUser && currentUser.token) {
       getSummaryForInterval(
@@ -56,6 +55,18 @@ const SummaryPage = () => {
           }}
         >
           <Toolbar sx={{ marginBottom: "10px" }} />
+          <Box
+            width="100%"
+            m={1}
+          >
+            <Typography
+              textAlign="center"
+              variant="h4"
+              fontFamily="Prompt"
+            >
+              SUMMARY FOR PREVIOUS <b>{intervals[interval].toUpperCase()}</b>
+            </Typography>
+          </Box>
           {/* TODO: to remove once final na */}
           {/* <Typography>Summary Page</Typography> */}
           {/* for main content */}
@@ -102,6 +113,7 @@ const SummaryPage = () => {
                     key={title}
                     title={title}
                     result={result}
+                    intervalName={intervals[interval]}
                   />
                 ))}
               </Box>

@@ -21,7 +21,7 @@ const randomBGcolors = [
   "#9A031E",
 ];
 
-const SummaryCard = ({ title, result }) => {
+const SummaryCard = ({ title, result, intervalName }) => {
   const randomColor =
     randomBGcolors[Math.floor(Math.random() * randomBGcolors.length)];
 
@@ -97,7 +97,7 @@ const SummaryCard = ({ title, result }) => {
           variant="body2"
           mt={1}
         >
-          Prev. week
+          Prev. {intervalName}
         </Typography>
         <Box mb={1}>
           {/* prev tot - ave - percent for each act  */}
