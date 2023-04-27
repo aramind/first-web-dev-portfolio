@@ -4,8 +4,10 @@ const User = require("../models/User");
 const Record = require("../models/Record");
 const handleError = require("./utils/errorCatchers");
 
-// * decided not to include na muna since wala naman sa original ENDPOINTS presented
+// * Controller for summary-page related requests and computations needed to be provided
+// * by the back end
 const summaryController = {
+  // * decided not to include na muna since wala naman sa original ENDPOINTS presented
   getSummary: async (req, res) => {
     try {
       // * get the user id from the decoded token
