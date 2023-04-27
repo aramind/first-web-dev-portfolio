@@ -46,21 +46,22 @@ const SummaryCard = ({ title, result }) => {
   const prevAve = [prevActivityAverages[act] || 0];
   const prevPercent = [prevActivityPercentages[act] || 0];
 
+  console.log(`${act}:${ave}`);
   const current = [
     (+total / 3600).toFixed(1),
-    (+ave / 3600).toFixed(1),
-    `${+percent}%`,
+    (+ave).toFixed(1),
+    (+percent).toFixed(1),
   ];
   const prev = [
     (+prevTotal / 3600).toFixed(1),
-    (+prevAve / 3600).toFixed(1),
-    `${+prevPercent}%`,
+    (+prevAve).toFixed(1),
+    (+prevPercent).toFixed(1),
   ];
 
   return (
     <Card
       sx={{
-        width: { xs: "340px", sm: "250px" },
+        width: { xs: "340px", sm: "240px" },
         height: "180px",
         borderRadius: "20px",
       }}
@@ -89,7 +90,7 @@ const SummaryCard = ({ title, result }) => {
             variant="body1"
             fs="14px"
             ff="Prompt"
-            content={["Tot(hrs)", "Ave(hrs)", "%"]}
+            content={["Tot(hrs)", "hrs/day", "%"]}
           />
         </Box>
         <Typography
