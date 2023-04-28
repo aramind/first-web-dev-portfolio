@@ -5,7 +5,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-<h3 align="center">MONitime</h3>
+
+<h1 align="center">MONitime</h1>
 
   <p align="center">
     A time tracking web app to help you track your time and optimize your life.
@@ -19,9 +20,9 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
-
 ![MONitime](./images-readme/home-page.png)
+
+## About The Project
 
 MONitime is a time monitoring app allowing users to track their daily activities
 and the time they spend on them. By logging, tracking, analyzing and summarizing
@@ -71,10 +72,12 @@ website.
    npm start
    ```
 4. Start the client by running the following command in the client folder
-   ```js
-   npm start
-   ```
-5. Open your web browser and navigate to http://localhost:3000 to see the
+
+```js
+ npm start
+```
+
+6. Open your web browser and navigate to http://localhost:3000 to see the
    application running.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -83,79 +86,143 @@ website.
 
 ## Usage
 
-### Account Registration and Login
+Use this space to show useful examples of how a project can be used. Additional
+screenshots, code examples and demos work well in this space. You may also link
+to more resources.
 
-To use the app, a user account is required. Users can register an account and
-use their credentials to log in.
-
-### Home Page
-
-On the home page, users can view their records for different dates, provided
-they have logged a record for that date.
-
-### Record Page
-
-Clicking the "ADD RECORD" button on the home page will redirect the user to the
-record page. Here, the user can add, update, and delete records. The following
-buttons are available for record management:
-
-    *ADD/SUBTRACT:* add or subtract a record for the selected date.
-    *RESET:* reset all entries of the user for the selected date to zero.
-    *DELETE RECORD:* delete all records of the user for the selected date.
-
-### Charts Page
-
-On the charts page, users can view their records logged for different dates to
-compare their time allotments.
-
-### Summary Page
-
-On the summary page, users can view calculated summaries depending on the
-interval they choose.
-
-### User Menu Options
-
-In the user menu, accessible by clicking the profile image, the following
-options are available:
-
-##### Update Profile Info:
-
-    - users can update their profile info, including their name, username, and profile image.
-
-##### Deactivate Account:
-
-    - users can deactivate their account if they no longer wish to use the app.
-
-##### Log Out:
-
-    - users can log out of the app to end their current session.
-
-## Screenshots
-
-![MONitime](./images-readme/home-page.png)
-![MONitime](./images-readme/login-page.jpg)
-![MONitime](./images-readme/landing-page.png)
-![MONitime](./images-readme/record-page.png)
-![MONitime](./images-readme/charts-page.png)
-![MONitime](./images-readme/summary-page.png)
-![MONitime](./images-readme/update-record.png)
-![MONitime](./images-readme/mobile-home-page.png)
-![MONitime](./images-readme/mobile-add-record-page.png)
-![MONitime](./images-readme/mobile-add-chart-page.png)
-![MONitime](./images-readme/mobile-update-page.png)
-![MONitime](./images-readme/mobile-update-profile-page.png)
-![MONitime](./images-readme/tablet-summary-page.png)
-![MONitime](./images-readme/closing-page.png)
+_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
+
+![MONitime](./images-readme/login-page.jpg)
+
+**Account Registration and Login** To use the app, a user account is required.
+Users can register an account and use their credentials to log in.
+
+![MONitime](./images-readme/landing-page.png)
+
+**Home Page:** On the home page, users can view their records for different
+dates, provided they have logged a record for that date.
+
+![MONitime](./images-readme/update-record.png)
+
+**Record Page:** Clicking the ADD RECORD button on the home page will redirect
+the user to the record page. Here, the user can add, update, and delete records.
+The following buttons are available for record management:
+
+- **ADD/SUBTRACT:** add or subtract a record for the selected date.
+- **RESET:** reset all entries of the user for the selected date to zero.
+- **DELETE RECORD:** delete all records of the user for the selected date.
+
+![MONitime](./images-readme/charts-page.png)
+
+**Charts Page:** On the charts page, users can view their records logged for
+different dates to compare their time allotments.
+
+![MONitime](./images-readme/summary-page.png) **Summary Page:** On the summary
+page, users can view calculated summaries depending on the interval they choose.
+
+![MONitime](./images-readme/update-profile-page.png)
+
+**User Menu Options:** In the user menu, accessible by clicking the profile
+image, the following options are available:
+
+- **Update Profile Info:** users can update their profile info, including their
+  name, username, and profile image.
+- **Deactivate Account:** users can deactivate their account if they no longer
+  wish to use the app.
+- **Log Out:** users can log out of the app to end their current session.
+
+![MONitime](./images-readme/closing-page.png)
 
 <!-- ROADMAP -->
 
 ## Future Plans
 
+- have a line chart to easily see trends for each activity in the past days
+- allow user to input their own category names for activities
+- allow user to selet a start and end date on the summary page
+
 ## Known Issues
 
+- if multiple notifications and alerts was triggered they were placed on top of
+  each other on the display
+- charts page don't store the charts selected at refresh of the page
+- user will be suddenly logged out when the token expires; no warning or option
+  to continue session yet
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- PROJECT SPECS -->
+
+## Project Specifications
+
+### MVP Features
+
+1. Time Logging/Tracking
+2. Trend Visualizaion
+3. Account-Based Usage
+4. Display Quote
+
+### User Stories
+
+**For Time Logging/Tracking:**
+
+- 1.1. (High Priority) As a user, I want to be able to input the amount of time
+  spent on each activity daily so that I can keep track of how I spend my time.
+- 1.2. (Low Priority) As a user, I want the app to store my inputted data for
+  processing, reviewing, and retrieving so that I can view my activity data
+  anytime and anywhere.
+
+**For Data Visualization:**
+
+- 2.1. (High Priority) As a user, I want the app to provide a summary that shows
+  the total time spent on each activity as a percentage of the day so that I can
+  get an overview of how I spend my time.
+- 2.2. (Low Priority) As a user, I want the data to be displayed as numerical
+  values or simple graphs, such as pie charts, bar graphs, or line charts, so
+  that I can easily understand and interpret the data.
+
+**For Account-Based Use:**
+
+- 3.1. (High Priority As a user, I want to use the app via an account.
+- 3.2. (Low Priority) As a user, I want to be able to manage my account.
+
+**For Display Quote:**
+
+- 3.3. (Low Priority As a user, I want the app to fetch quotes related to
+  productivity, time management, and balanced living that may help me stay
+  motivated and inspired.
+- 3.4. (High Priority) As a user, I want the app to display a random quote each
+  day or each time the app is opened so that I can be inspired and motivated to
+  make the most of my time.
+
+**For General:**
+
+- 4.1. (Medium Priority) As a user, I want my data to be stored in some form of
+  memory so that I can be able to view past records every time I will use the
+  app.
+- 4.2. (Low Priority) As a user, I want to be able to delete my data, one by one
+  from the oldest or entirely at once, so that I can remove any incorrect or
+  irrelevant information or to save memory.
+
+### API Endpoints
+
+|  #  | Action |                 URL                  |  HTTP Verb   |  CRUD  |                                                         Description                                                         |
+| :-: | :----: | :----------------------------------: | :----------: | :----: | :-------------------------------------------------------------------------------------------------------------------------: |
+|  1  |  Post  |            /record/:label            |     POST     | Create |                             Creates or updates a record for a given date specified on the label                             |
+|  2  |  Get   |            /record/:label            |     GET      |  Read  |                                                 Gets the list of pokemons.                                                  |
+|  3  |  Put   |            /record/:label            |     PUT      | Update |                           Resets the entries in record for a certain date specified in the label                            |
+|  4  | Delete |            /record/:label            |    DELETE    | Delete |                               Deletes a record for a specified date as specified on the label                               |
+|  5  | Delete |             /deactivate              | DELETE(SOFT) | Delete |                                     Prevents access of a user to his/her saved records                                      |
+|  6  | Update |             /reactivate              |    PATCH     | Update |                                   Allow a user to regain access to his/her saved records                                    |
+|  7  |  Post  |              /register               |     POST     | Create |                                                Create an account for a user                                                 |
+|  8  |  Post  |                /login                |     POST     | Create |                                            Sends a login attempt to use the app                                             |
+|  9  | Patch  |           /update-profile            |    PATCH     | Update |                                                     Update user profile                                                     |
+| 10  |  Get   | /summary/interval?ref={}&interval={} |     GET      |  Read  | Retrieves multiple records based on ref (date) and interval then then computes for the summary details to be sent to client |
+| 11  |  Get   |                /quote                |     GET      |  Read  |                     Retrieves a random quote to be displayed from the pool of quotes stored in th e app                     |
 
 <!-- CONTRIBUTING -->
 
