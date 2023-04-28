@@ -24,11 +24,11 @@
 
 ## About The Project
 
-MONitime is a time monitoring app allowing users to track their daily activities
-and the time they spend on them. By logging, tracking, analyzing and summarizing
-the data, the app help users become more productive and efficient by identifying
-areas where they need to adjust their time allocation depending on their
-personal goals and target.
+MONitime is a time monitoring app that allows users to track their daily
+activities and the time they spend on them. By logging, tracking, analyzing, and
+summarizing the data, the app helps users become more productive and efficient
+by identifying areas where they need to adjust their time allocation according
+to their personal goals and targets.
 
 ### Built With
 
