@@ -5,10 +5,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="">
-    <img src="images-readme/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
 <h3 align="center">MONitime</h3>
 
   <p align="center">
@@ -24,6 +20,8 @@
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
+
+![MONitime](./images-readme/home-page.png)
 
 MONitime is a time monitoring app allowing users to track their daily activities
 and the time they spend on them. By logging, tracking, analyzing and summarizing
