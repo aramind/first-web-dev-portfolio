@@ -73,24 +73,16 @@ website.
    ```
 4. Start the client by running the following command in the client folder
 
-```js
- npm start
-```
+   ```js
+   npm start
+   ```
 
-6. Open your web browser and navigate to http://localhost:3000 to see the
+5. Open your web browser and navigate to http://localhost:3000 to see the
    application running.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional
-screenshots, code examples and demos work well in this space. You may also link
-to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -136,22 +128,6 @@ image, the following options are available:
 - **Log Out:** users can log out of the app to end their current session.
 
 ![MONitime](./images-readme/closing-page.png)
-
-<!-- ROADMAP -->
-
-## Future Plans
-
-- have a line chart to easily see trends for each activity in the past days
-- allow user to input their own category names for activities
-- allow user to selet a start and end date on the summary page
-
-## Known Issues
-
-- if multiple notifications and alerts was triggered they were placed on top of
-  each other on the display
-- charts page don't store the charts selected at refresh of the page
-- user will be suddenly logged out when the token expires; no warning or option
-  to continue session yet
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -208,7 +184,9 @@ image, the following options are available:
   from the oldest or entirely at once, so that I can remove any incorrect or
   irrelevant information or to save memory.
 
-### API Endpoints
+### BACKEND
+
+#### API Endpoints
 
 |  #  | Action |                 URL                  |  HTTP Verb   |  CRUD  |                                                         Description                                                         |
 | :-: | :----: | :----------------------------------: | :----------: | :----: | :-------------------------------------------------------------------------------------------------------------------------: |
@@ -223,6 +201,33 @@ image, the following options are available:
 |  9  | Patch  |           /update-profile            |    PATCH     | Update |                                                     Update user profile                                                     |
 | 10  |  Get   | /summary/interval?ref={}&interval={} |     GET      |  Read  | Retrieves multiple records based on ref (date) and interval then then computes for the summary details to be sent to client |
 | 11  |  Get   |                /quote                |     GET      |  Read  |                     Retrieves a random quote to be displayed from the pool of quotes stored in th e app                     |
+
+#### Data Models
+
+**User**
+`js { name: { type: String, required: true }, username: { type: String, required: true }, email: { type: String, required: true, unique: true }, password: { type: String, required: true }, photoURL: { type: String, default: "" }, time_created: { type: Date, required: true }, last_modified: { type: Date, required: true }, settings: { type: Array }, isActive: { type: Boolean, default: true }, } `
+
+**Activity**
+`js { name: { type: String, required: true }, seconds_spent: { type: String, required: true }, } `
+
+**Record**
+`js { label: { type: String, required: true, }, date: { type: Date, required: true, default: function () { const dateStr = this.label.split("@")[0]; return new Date(dateStr); }, }, last_modified: { type: Date, required: true }, owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, activities: [activitySchema], } `
+
+<!-- ROADMAP -->
+
+## Future Plans
+
+- have a line chart to easily see trends for each activity in the past days
+- allow user to input their own category names for activities
+- allow user to selet a start and end date on the summary page
+
+## Known Issues
+
+- if multiple notifications and alerts was triggered they were placed on top of
+  each other on the display
+- charts page don't store the charts selected at refresh of the page
+- user will be suddenly logged out when the token expires; no warning or option
+  to continue session yet
 
 <!-- CONTRIBUTING -->
 
@@ -251,27 +256,6 @@ create a pull request. You can also simply open an issue with the tag
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
-
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) -
-email@email_client.com
-
-Project Link:
-[https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [linkedin-shield]:
   https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
