@@ -84,8 +84,6 @@ website.
 
 <!-- USAGE EXAMPLES -->
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Usage
 
 ![MONitime](./images-readme/login-page.jpg)
@@ -205,13 +203,22 @@ image, the following options are available:
 #### Data Models
 
 **User**
-`js { name: { type: String, required: true }, username: { type: String, required: true }, email: { type: String, required: true, unique: true }, password: { type: String, required: true }, photoURL: { type: String, default: "" }, time_created: { type: Date, required: true }, last_modified: { type: Date, required: true }, settings: { type: Array }, isActive: { type: Boolean, default: true }, } `
+
+```js
+{ name: { type: String, required: true }, username: { type: String, required: true }, email: { type: String, required: true, unique: true }, password: { type: String, required: true }, photoURL: { type: String, default: "" }, time_created: { type: Date, required: true }, last_modified: { type: Date, required: true }, settings: { type: Array }, isActive: { type: Boolean, default: true }, }
+```
 
 **Activity**
-`js { name: { type: String, required: true }, seconds_spent: { type: String, required: true }, } `
+
+```js
+{ name: { type: String, required: true }, seconds_spent: { type: String, required: true }, }
+```
 
 **Record**
-`js { label: { type: String, required: true, }, date: { type: Date, required: true, default: function () { const dateStr = this.label.split("@")[0]; return new Date(dateStr); }, }, last_modified: { type: Date, required: true }, owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, activities: [activitySchema], } `
+
+```js
+{ label: { type: String, required: true, }, date: { type: Date, required: true, default: function () { const dateStr = this.label.split("@")[0]; return new Date(dateStr); }, }, last_modified: { type: Date, required: true }, owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, activities: [activitySchema], }
+```
 
 <!-- ROADMAP -->
 
